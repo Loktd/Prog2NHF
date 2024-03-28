@@ -1,0 +1,15 @@
+window_sizes 2560 1459 600 1950 1164 216
+
+diagrams
+  active  classdiagram_ref 128002 // Test
+    1953 1164 100 A0 0 0
+end
+show_stereotypes
+selected classrelation_ref 143618 // <composition>
+open
+  class_ref 134530 // Circuit
+  class_ref 134914 // Pin
+  class_ref 148226 // Queue
+  deploymentview_ref 134530 // Test
+end
+end
