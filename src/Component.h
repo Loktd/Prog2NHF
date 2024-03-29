@@ -2,24 +2,29 @@
 #define _COMPONENT_H
 
 
+template<class T> class Queue;
 class Pin;
 
 class Component {
-  private:
+  protected:
     bool canExecute;
 
 
   public:
+    void canExecute();
+
+    void addToActiveQueue(const Queue<Component> * & activeQueue);
+
     virtual void executeFunction() = 0;
 
     virtual ~Component();
 
 };
-class InPin_Component : public Component {
-  private:
+class InPin_Component : virtual public Component {
+  protected:
     int inPinCount;
 
-    Pin* inPins;
+    Pin * inPins;
 
     int activeInPins;
 
@@ -28,20 +33,20 @@ class InPin_Component : public Component {
     virtual ~InPin_Component();
 
 };
-class IOPin_Component : public InPin_Component, public OutPin_Component {
-  public:
-    virtual ~IOPin_Component();
-
-};
-class OutPin_Component : public Component {
-  private:
+class OutPin_Component : virtual public Component {
+  protected:
     int outPinCount;
 
-    Pin* outPins;
+    Pin * outPins;
 
 
   public:
     virtual ~OutPin_Component();
+
+};
+class IOPin_Component : public InPin_Component, public OutPin_Component {
+  public:
+    virtual ~IOPin_Component();
 
 };
 #endif

@@ -1,15 +1,27 @@
-window_sizes 2560 1459 600 1950 1164 216
+window_sizes 2560 1459 392 2158 1164 216
 
 diagrams
   active  classdiagram_ref 128002 // Test
-    1953 1164 100 A0 0 0
+    2149 1164 100 A0 444 0
 end
 show_stereotypes
-selected classrelation_ref 143618 // <composition>
 open
-  class_ref 134530 // Circuit
+  operation_ref 157570 // ~Circuit
+  operation_ref 167554 // canExecute
+  operation_ref 167682 // addToActiveQueue
+  operation_ref 148738 // executeFunction
+  operation_ref 148610 // ~Component
   class_ref 134914 // Pin
+  class_ref 141442 // InPin_Component
   class_ref 148226 // Queue
+  operation_ref 166530 // executeFunction
+  operation_ref 166658 // flipSignal
+  operation_ref 166274 // ~Source
+  class_ref 148738 // Lamp
+  operation_ref 165890 // executeFunction
+  operation_ref 165634 // ~Switch
+  operation_ref 167298 // ~Gate
+  operation_ref 167042 // executeFunction
   deploymentview_ref 134530 // Test
 end
 end

@@ -8,13 +8,13 @@
 void Circuit::reset() {
 }
 
-Circuit::Circuit(const std::ostream & outStream) {
+Circuit::Circuit(const std::ostream & outStream){
 }
 
-Circuit::Circuit(const Circuit & source) {
+Circuit::Circuit(const Circuit & source){
 }
 
-Circuit & Circuit::operator=(const Circuit & source) {
+void Circuit::setOutputStream(const std::ostream & os) {
 }
 
 void Circuit::configure(const std::string & fileName) {
@@ -38,6 +38,6 @@ void Circuit::readSourceStates() const {
 void Circuit::readSwitchStates() const {
 }
 
-Circuit::~Circuit() {
+Circuit::~Circuit(){
 }
 

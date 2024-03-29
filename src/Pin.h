@@ -7,16 +7,15 @@ class Component;
 class Pin {
   private:
     Signal ownedSignal;
+    Pin * connectedTo;
 
-    Pin* connectedTo;
-
-    Component* component;
+    Component * component;
 
 
   public:
-    Pin(const Signal & signal, const Pin* & connection, const Component* & component);
+    Pin(const Signal & signal, const Pin * & connection, const Component * & component);
 
-    void connectWith(const Pin* & other);
+    void connectWith(const Pin * & other);
 
     void sendOutSingal() const;
 

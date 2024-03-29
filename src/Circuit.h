@@ -18,13 +18,9 @@ class Circuit {
     std::ostream outputStream;
 
     Queue<Component> componentList;
-
     Queue<Source> sourceList;
-
     Queue<Switch> switchList;
-
     Queue<Lamp> lampList;
-
     void reset();
 
 
@@ -33,7 +29,9 @@ class Circuit {
 
     Circuit(const Circuit & source);
 
-    Circuit & operator=(const Circuit & source);
+    Circuit & operator =(const Circuit & source);
+
+    void setOutputStream(const std::ostream & os);
 
     void configure(const std::string & fileName);
 

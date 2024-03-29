@@ -1,6 +1,6 @@
 format 224
 "Plan"
-  revision 8
+  revision 11
   modified_by 2 "palin"
   cpp_root_dir "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\"
 
@@ -17,7 +17,7 @@ format 224
   
   sequencediagramsettings show_full_operations_definition no show_class_of_operation no write_horizontally yes instances_drawing_mode natural drawing_language uml draw_all_relations yes shadow yes gradient none show_stereotype_properties no show_class_context_mode no show_msg_context_mode no end
   
-  collaborationdiagramsettings show_full_operations_definition no show_class_of_operation no show_hierarchical_rank no write_horizontally yes instances_drawing_mode natural drawing_language uml package_name_in_tab no show_class_pack_context_mode no show_msg_context_mode no draw_all_relations yes shadow yes gradient none show_stereotype_properties no end
+  collaborationdiagramsettings show_full_operations_definition no show_class_of_operation no show_hierarchical_rank yes write_horizontally yes instances_drawing_mode natural drawing_language uml package_name_in_tab no show_class_pack_context_mode no show_msg_context_mode no draw_all_relations yes shadow yes gradient none show_stereotype_properties no end
   
   objectdiagramsettings write_horizontally yes package_name_in_tab no show_class_pack_context_mode no auto_label_position yes draw_all_relations yes shadow yes gradient none show_stereotype_properties no end
   
@@ -35,10 +35,10 @@ format 224
   activitydiagramsettings package_name_in_tab no show_context_mode no show_opaque_action_definition no auto_label_position yes write_label_horizontally no draw_all_relations yes shadow yes gradient none
    show_infonote yes drawing_language uml show_stereotype_properties no end
   
-  class_color yellow duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color transparent parameterpin_color white generalization_color black 
+  class_color white duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color white stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color white parameterpin_color white generalization_color black 
   dpi 96
   font_size 8
-  diagram_format A0
+  diagram_format 10000x10000
 
   image_root_dir ""
 
@@ -88,7 +88,6 @@ ${inlines}
       
       attribute 134530 "signal"
 	private explicit_type "bool"
-	multiplicity "1"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
 	java_decl ""
@@ -105,10 +104,10 @@ ${inlines}
 	  param in name "baseValue" explicit_type "bool"
 	multiplicity "0..1"
 	    defaultvalue "false"
-	cpp_decl "    ${comment}${inline}${typeprefix}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+${body}}
 "
 	
 	
@@ -124,7 +123,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -138,7 +137,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -152,7 +151,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -160,9 +159,6 @@ ${inlines}
 	
       end
 
-      classrelation 141570 // <composition>
-	relation_ref 141442 // <composition>
-      end
     end
 
     class 134530 "Circuit"
@@ -202,54 +198,40 @@ ${inlines}
 	MysqlColumn
       end
 
-      attribute 161666 "componentList"
-	private explicit_type "Queue<Component>"
-	multiplicity "1"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
+      classrelation 150274 // componentList (<directional composition>)
+	relation 149378 *-->
+	  stereotype "Queue"
+	  a role_name "componentList" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};"
+	    classrelation_ref 150274 // componentList (<directional composition>)
+	  b parent class_ref 134658 // Component
       end
 
-      attribute 162306 "sourceList"
-	private explicit_type "Queue<Source>"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
+      classrelation 150402 // sourceList (<directional composition>)
+	relation 149506 *-->
+	  stereotype "Queue"
+	  a role_name "sourceList" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};"
+	    classrelation_ref 150402 // sourceList (<directional composition>)
+	  b parent class_ref 148482 // Source
       end
 
-      attribute 162690 "switchList"
-	private explicit_type "Queue<Switch>"
-	multiplicity "1"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
+      classrelation 150530 // switchList (<directional composition>)
+	relation 149634 *-->
+	  stereotype "Queue"
+	  a role_name "switchList" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};"
+	    classrelation_ref 150530 // switchList (<directional composition>)
+	  b parent class_ref 148866 // Switch
       end
 
-      attribute 162434 "lampList"
-	private explicit_type "Queue<Lamp>"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
+      classrelation 150658 // lampList (<directional composition>)
+	relation 149762 *-->
+	  stereotype "Queue"
+	  a role_name "lampList" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};"
+	    classrelation_ref 150658 // lampList (<directional composition>)
+	  b parent class_ref 148738 // Lamp
       end
 
       operation 158338 "reset"
@@ -258,7 +240,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -272,10 +254,10 @@ ${inlines}
 	  param in name "outStream" explicit_type "std::ostream"
 	multiplicity "1"
 	    defaultvalue "std::cout"
-	cpp_decl "    ${comment}${inline}${typeprefix}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)}${throw}{
+${body}}
 "
 	
 	
@@ -288,10 +270,10 @@ ${inlines}
 	public explicit_return_type ""
 	nparams 1
 	  param in name "source" type class_ref 134530 // Circuit
-	cpp_decl "    ${comment}${inline}${typeprefix}${name}${(}const ${t0} & ${p0}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)}${throw}{
+${body}}
 "
 	
 	
@@ -299,14 +281,26 @@ ${inlines}
 	
       end
 
-      operation 157826 "operator="
-	public return_type class_ref 134530 // Circuit
+      operation 174210 "operator ="
+	preserve_cpp_body_indent public return_type class_ref 134530 // Circuit
 	nparams 1
 	  param in name "source" type class_ref 134530 // Circuit
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} & ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	
+	
+	
+	
+      end
+
+      operation 164866 "setOutputStream"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -322,7 +316,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -336,7 +330,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -352,7 +346,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -370,7 +364,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -384,28 +378,12 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
 	
 	
-      end
-
-      classrelation 143362 // <composition>
-	relation 142722 *---
-	  a role_name "" private
-	    classrelation_ref 143362 // <composition>
-	  b role_name "" private
-	    classrelation_ref 143490 // <composition>
-      end
-
-      classrelation 143618 // <composition>
-	relation 142850 *---
-	  a role_name "" private
-	    classrelation_ref 143618 // <composition>
-	  b role_name "" private
-	    classrelation_ref 143746 // <composition>
       end
 
       operation 157186 "readSourceStates"
@@ -414,7 +392,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -428,7 +406,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -439,16 +417,17 @@ ${inlines}
       operation 157570 "~Circuit"
 	public explicit_return_type ""
 	nparams 0
-	cpp_decl "    ${comment}${inline}${virtual}${typeprefix}${name}${(}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
 "
 	
 	
 	
 	
       end
+
     end
 
     class 134658 "Component"
@@ -465,8 +444,7 @@ ${inlines}
       mysql_decl ""
       
       attribute 141954 "canExecute"
-	private explicit_type "bool"
-	multiplicity "1"
+	protected explicit_type "bool"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
 	java_decl ""
@@ -475,6 +453,32 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+      end
+
+      operation 167554 "canExecute"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 167682 "addToActiveQueue"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "activeQueue" explicit_type "Queue<Component>"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
       end
 
       operation 148738 "executeFunction"
@@ -491,19 +495,15 @@ ${inlines}
       operation 148610 "~Component"
 	cpp_virtual public explicit_return_type ""
 	nparams 0
-	cpp_decl "    ${comment}${inline}${virtual}${typeprefix}${name}${(}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
 "
 	
 	
 	
 	
-      end
-
-      classrelation 143746 // <composition>
-	relation_ref 142850 // <composition>
       end
     end
 
@@ -520,41 +520,30 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
-      attribute 134658 "ownedSignal"
-	private type class_ref 134786 // Signal
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
+      classrelation 151042 // ownedSignal (<directional composition>)
+	relation 150146 *-->
+	  a role_name "ownedSignal" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};"
+	    classrelation_ref 151042 // ownedSignal (<directional composition>)
+	  b parent class_ref 134786 // Signal
       end
 
-      attribute 134786 "connectedTo"
-	private explicit_type "Pin*"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+      classrelation 151170 // connectedTo (<unidirectional association>)
+	relation 150274 --->
+	  a role_name "connectedTo" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
+	    classrelation_ref 151170 // connectedTo (<unidirectional association>)
+	  b parent class_ref 134914 // Pin
       end
 
-      attribute 134914 "component"
-	private explicit_type "Component*"
-	multiplicity "1"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+      classrelation 151298 // component (<unidirectional association>)
+	relation 150402 --->
+	  a role_name "component" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
+	    classrelation_ref 151298 // component (<unidirectional association>)
+	  b parent class_ref 134658 // Component
       end
 
       operation 135042 "Pin"
@@ -562,14 +551,14 @@ ${inlines}
 	nparams 3
 	  param in name "signal" type class_ref 134786 // Signal
 	multiplicity "1"
-	  param in name "connection" explicit_type "Pin*"
+	  param in name "connection" type class_ref 134914 // Pin
 	multiplicity "1"
-	  param in name "component" explicit_type "Component*"
+	  param in name "component" type class_ref 134658 // Component
 	multiplicity "1"
-	cpp_decl "    ${comment}${inline}${typeprefix}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} * & ${p1}${v1}, const ${t2} * & ${p2}${v2}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}, const ${t2} & ${p2}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} * & ${p1}, const ${t2} * & ${p2}${)}${throw}{
+${body}}
 "
 	
 	
@@ -580,12 +569,12 @@ ${inlines}
       operation 135170 "connectWith"
 	public explicit_return_type "void"
 	nparams 1
-	  param in name "other" explicit_type "Pin*"
+	  param in name "other" type class_ref 134914 // Pin
 	multiplicity "1"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -599,7 +588,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -615,7 +604,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -629,7 +618,7 @@ ${inlines}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -637,21 +626,6 @@ ${inlines}
 	
       end
 
-      classrelation 141442 // <composition>
-	relation 141442 *---
-	  a role_name "" private
-	    classrelation_ref 141442 // <composition>
-	  b role_name "" private
-	    classrelation_ref 141570 // <composition>
-      end
-
-      classrelation 142978 // <composition>
-	relation_ref 142466 // <composition>
-      end
-
-      classrelation 143234 // <composition>
-	relation_ref 142594 // <composition>
-      end
     end
 
     class 141442 "InPin_Component"
@@ -675,58 +649,54 @@ ${members}};
       explicit_switch_type ""
       mysql_decl ""
       
-      attribute 141698 "inPinCount"
-	private explicit_type "int"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 141442 "inPins"
-	private explicit_type "Pin*"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 148610 "activeInPins"
-	private explicit_type "int"
-	multiplicity "1"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
       classrelation 134530 // <generalisation>
 	relation 134530 ---|>
 	  a public
-	    cpp default "${type}"
+	    cpp virtual default "${type}"
 	    classrelation_ref 134530 // <generalisation>
 	  b parent class_ref 134658 // Component
+      end
+
+      attribute 141698 "inPinCount"
+	protected explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 157954 // inPins (<directional composition>)
+	relation 157058 *-->
+	  a role_name "inPins" protected
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 157954 // inPins (<directional composition>)
+	  b parent class_ref 134914 // Pin
+      end
+
+      attribute 148610 "activeInPins"
+	protected explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
       end
 
       operation 155266 "~InPin_Component"
 	cpp_virtual public explicit_return_type ""
 	nparams 0
-	cpp_decl "    ${comment}${inline}${virtual}${typeprefix}${name}${(}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
 "
 	
 	
@@ -734,13 +704,6 @@ ${members}};
 	
       end
 
-      classrelation 142850 // <composition>
-	relation 142466 *---
-	  a role_name "" private
-	    classrelation_ref 142850 // <composition>
-	  b role_name "" private
-	    classrelation_ref 142978 // <composition>
-      end
     end
 
     class 141570 "OutPin_Component"
@@ -756,45 +719,42 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
-      attribute 141826 "outPinCount"
-	private explicit_type "int"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 141570 "outPins"
-	private explicit_type "Pin*"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
       classrelation 134658 // <generalisation>
 	relation 134658 ---|>
 	  a public
-	    cpp default "${type}"
+	    cpp virtual default "${type}"
 	    classrelation_ref 134658 // <generalisation>
 	  b parent class_ref 134658 // Component
+      end
+
+      attribute 141826 "outPinCount"
+	protected explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 158082 // outPins (<directional composition>)
+	relation 157186 *-->
+	  a role_name "outPins" protected
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 158082 // outPins (<directional composition>)
+	  b parent class_ref 134914 // Pin
       end
 
       operation 155522 "~OutPin_Component"
 	cpp_virtual public explicit_return_type ""
 	nparams 0
-	cpp_decl "    ${comment}${inline}${virtual}${typeprefix}${name}${(}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
 "
 	
 	
@@ -802,13 +762,6 @@ ${inlines}
 	
       end
 
-      classrelation 143106 // <composition>
-	relation 142594 *---
-	  a role_name "" private
-	    classrelation_ref 143106 // <composition>
-	  b role_name "" private
-	    classrelation_ref 143234 // <composition>
-      end
     end
 
     class 141698 "IOPin_Component"
@@ -843,10 +796,10 @@ ${inlines}
       operation 155650 "~IOPin_Component"
 	cpp_virtual public explicit_return_type ""
 	nparams 0
-	cpp_decl "    ${comment}${inline}${virtual}${typeprefix}${name}${(}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
 "
 	
 	
@@ -881,19 +834,6 @@ ${members}};
       
       attribute 161794 "ownsMembers"
 	private explicit_type "bool"
-	multiplicity "1"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 161922 "queue"
-	private explicit_type "QueueMember<T>*"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
 	java_decl ""
@@ -910,10 +850,10 @@ ${members}};
 	  param in name "owner" explicit_type "bool"
 	multiplicity "1"
 	    defaultvalue "false"
-	cpp_decl "    ${comment}${inline}${typeprefix}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+${body}}
 "
 	
 	
@@ -926,10 +866,10 @@ ${members}};
 	cpp_inline public explicit_return_type ""
 	nparams 1
 	  param in name "source" type class_ref 148226 // Queue
-	cpp_decl "    ${comment}${inline}${typeprefix}${name}${(}const ${t0} & ${p0}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)}${throw}{
+${body}}
 "
 	
 	
@@ -937,14 +877,11 @@ ${members}};
 	
       end
 
-      operation 158210 "operator="
-	cpp_inline public return_type class_ref 148226 // Queue
+      operation 174466 "operator ="
+	preserve_cpp_body_indent cpp_inline public return_type class_ref 148226 // Queue
 	nparams 1
 	  param in name "source" type class_ref 148226 // Queue
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${typeprefix}${type} & ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	
 	
@@ -955,11 +892,11 @@ ${members}};
       operation 155778 "put"
 	cpp_inline public explicit_return_type "void"
 	nparams 1
-	  param in name "added" explicit_type "T*"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	  param in name "added" explicit_type "T"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -973,7 +910,7 @@ ${members}};
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -982,12 +919,12 @@ ${members}};
       end
 
       operation 155906 "get"
-	cpp_inline public explicit_return_type "T*"
+	cpp_inline public explicit_return_type "T"
 	nparams 0
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -998,10 +935,10 @@ ${members}};
       operation 156162 "~Queue"
 	cpp_inline public explicit_return_type ""
 	nparams 0
-	cpp_decl "    ${comment}${inline}${virtual}${typeprefix}${name}${(}${)}${volatile}${throw};
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
 "
 	
 	
@@ -1009,16 +946,13 @@ ${members}};
 	
       end
 
-      classrelation 142594 // <composition>
-	relation 142338 *---
-	  a role_name "" private
-	    classrelation_ref 142594 // <composition>
-	  b role_name "" private
-	    classrelation_ref 142722 // <composition>
-      end
-
-      classrelation 143490 // <composition>
-	relation_ref 142722 // <composition>
+      classrelation 158210 // queue (<directional composition>)
+	relation 157314 *-->
+	  a role_name "queue" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 158210 // queue (<directional composition>)
+	  b parent class_ref 148354 // QueueMember
       end
     end
 
@@ -1041,8 +975,8 @@ ${members}};
       mysql_decl ""
       
       attribute 162050 "nextMember"
-	public explicit_type "QueueMember<T>*"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+	public type class_ref 148354 // QueueMember
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	java_decl ""
 	php_decl ""
@@ -1053,8 +987,8 @@ ${members}};
       end
 
       attribute 162178 "pointingTo"
-	public explicit_type "T*"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+	public explicit_type "T"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	java_decl ""
 	php_decl ""
@@ -1062,10 +996,6 @@ ${members}};
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-      end
-
-      classrelation 142722 // <composition>
-	relation_ref 142338 // <composition>
       end
     end
 
@@ -1089,6 +1019,83 @@ ${inlines}
 	    classrelation_ref 141698 // <generalisation>
 	  b parent class_ref 141570 // OutPin_Component
       end
+
+      classrelation 151426 // sentSignal (<directional composition>)
+	relation 150530 *-->
+	  a role_name "sentSignal" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};"
+	    classrelation_ref 151426 // sentSignal (<directional composition>)
+	  b parent class_ref 134786 // Signal
+      end
+
+      operation 166146 "Source"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174594 "operator <<"
+	preserve_cpp_body_indent friend public explicit_return_type "ostream"
+	nparams 2
+	  param inout name "os" explicit_type "ostream"
+	  param in name "x" type class_ref 148482 // Source
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166530 "executeFunction"
+	cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166658 "flipSignal"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166274 "~Source"
+	cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
     end
 
     class 148738 "Lamp"
@@ -1110,6 +1117,61 @@ ${inlines}
 	    cpp default "${type}"
 	    classrelation_ref 141826 // <generalisation>
 	  b parent class_ref 141442 // InPin_Component
+      end
+
+      operation 164994 "Lamp"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174338 "operator <<"
+	preserve_cpp_body_indent friend public explicit_return_type "ostream"
+	nparams 2
+	  param inout name "os" explicit_type "ostream"
+	  param in name "x" type class_ref 148738 // Lamp
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 165250 "executeFunction"
+	cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165378 "~Lamp"
+	cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
       end
     end
 
@@ -1133,10 +1195,91 @@ ${inlines}
 	    classrelation_ref 141954 // <generalisation>
 	  b parent class_ref 141698 // IOPin_Component
       end
+
+      operation 165506 "Switch"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174722 "operator <<"
+	preserve_cpp_body_indent friend public explicit_return_type "ostream"
+	nparams 2
+	  param inout name "os" explicit_type "ostream"
+	  param in name "x" type class_ref 148866 // Switch
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 165890 "executeFunction"
+	cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166018 "flipState"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165634 "~Switch"
+	cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 169730 "closed"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
     end
 
     class 148994 "Gate"
-      visibility package 
+      abstract visibility package 
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
 ${inlines}
@@ -1154,6 +1297,45 @@ ${inlines}
 	    cpp default "${type}"
 	    classrelation_ref 142082 // <generalisation>
 	  b parent class_ref 141698 // IOPin_Component
+      end
+
+      operation 167170 "Gate"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167426 "executeFunction"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 167298 "~Gate"
+	cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
       end
     end
 
@@ -1176,6 +1358,48 @@ ${inlines}
 	    cpp default "${type}"
 	    classrelation_ref 142210 // <generalisation>
 	  b parent class_ref 141698 // IOPin_Component
+      end
+
+      operation 166786 "Node"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167042 "executeFunction"
+	cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166914 "~Node"
+	cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
       end
     end
   end
@@ -1255,8 +1479,8 @@ ${module_end}
       associated_elems
 	class_ref 134658 // Component
 	class_ref 141442 // InPin_Component
-	class_ref 141698 // IOPin_Component
 	class_ref 141570 // OutPin_Component
+	class_ref 141698 // IOPin_Component
       end
     end
 
