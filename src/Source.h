@@ -5,6 +5,7 @@
 #include "Component.h"
 #include "Pin.h"
 
+#include <iostream>
 class Source : public OutPin_Component {
   private:
     Signal sentSignal;
@@ -12,7 +13,7 @@ class Source : public OutPin_Component {
   public:
     Source();
 
-    friend ostream & operator <<(ostream & os, const Source & x);
+    friend std::ostream & operator <<(std::ostream & os, const Source & x);
 
     virtual void executeFunction();
 

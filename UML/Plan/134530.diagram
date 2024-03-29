@@ -1,0 +1,203 @@
+format 224
+
+classcanvas 128002 class_ref 155650 // Circuit
+  classdiagramsettings member_max_width 0 end
+  xyz 145.9 127 2000
+end
+classcanvas 128130 class_ref 155778 // Component
+  classdiagramsettings member_max_width 0 end
+  xyz 1201 237.2 2006
+end
+classcanvas 128386 class_ref 156546 // Pin
+  classdiagramsettings member_max_width 0 end
+  xyz 1361 544.9 2012
+end
+classcanvas 129026 class_ref 157186 // Signal
+  classdiagramsettings member_max_width 0 end
+  xyz 1518.5 848.1 2018
+end
+classcanvas 129794 class_ref 156418 // InPin_Component
+  classdiagramsettings member_max_width 0 end
+  xyz 175.9 724.9 2018
+end
+classcanvas 130178 class_ref 156674 // OutPin_Component
+  classdiagramsettings member_max_width 0 end
+  xyz 927.6 735.3 2018
+end
+classcanvas 130562 class_ref 156802 // IOPin_Component
+  classdiagramsettings member_max_width 0 end
+  xyz 502 868.2 2024
+end
+classcanvas 132226 class_ref 155906 // Source
+  classdiagramsettings member_max_width 0 end
+  xyz 1526.7 1117.3 2024
+end
+classcanvas 133506 class_ref 156162 // Lamp
+  classdiagramsettings member_max_width 0 end
+  xyz 33.9 1247 2024
+end
+classcanvas 134402 class_ref 156034 // Switch
+  classdiagramsettings member_max_width 0 end
+  xyz 656 1242.8 2030
+end
+classcanvas 135426 class_ref 156290 // Queue
+  classdiagramsettings member_max_width 0 end
+  xyz 43.9 1443 2005
+end
+classcanvas 135554 class_ref 157314 // QueueMember
+  classdiagramsettings member_max_width 0 end
+  xyz 467.4 1587.9 2005
+end
+classcanvas 135682 class_ref 156930 // Gate
+  classdiagramsettings member_max_width 0 end
+  xyz 986 1611.6 2030
+end
+classcanvas 136194 class_ref 157058 // Node
+  classdiagramsettings member_max_width 0 end
+  xyz 1527.6 1322.8 2030
+end
+relationcanvas 128258 relation_ref 157442 // <directional composition>
+  decenter_begin 455
+  from ref 128002 z 2007 stereotype "<<Queue>>" xyz 942 319.5 2007 to ref 128130
+  role_a_pos 1066 289 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128514 relation_ref 159234 // <unidirectional association>
+  from ref 128386 z 2013 to point 1698 454.2
+  line 129666 z 2013 to point 1299.6 453.6
+  line 128642 z 2013 to point 1297.8 618
+  line 128770 z 2013 to ref 128386
+  role_a_pos 1231 589 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128898 relation_ref 159362 // <unidirectional association>
+  decenter_begin 898
+  from ref 128386 z 2013 to point 1969.2 309.2
+  line 129282 z 2013 to ref 128130
+  role_a_pos 1856 282 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129154 relation_ref 159106 // <directional composition>
+  from ref 128386 z 2019 to ref 129026
+  role_a_pos 1712 817 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129922 relation_ref 157954 // <generalisation>
+  decenter_end 27
+  from ref 129794 z 2019 to point 289.2 577.8
+  line 131330 z 2019 to point 1220.6 572.4
+  line 131202 z 2019 to ref 128130
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130050 relation_ref 158082 // <directional composition>
+  decenter_begin 748
+  decenter_end 721
+  from ref 129794 z 2019 to point 347.8 668
+  line 131458 z 2019 to ref 128386
+  role_a_pos 1294 635 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130306 relation_ref 158210 // <generalisation>
+  decenter_end 89
+  from ref 130178 z 2019 to point 1044.2 538
+  line 130946 z 2019 to point 1263.2 538
+  line 131074 z 2019 to ref 128130
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130434 relation_ref 158338 // <directional composition>
+  decenter_begin 962
+  decenter_end 912
+  from ref 130178 z 2019 to point 1163 699.2
+  line 131586 z 2019 to ref 128386
+  role_a_pos 1280 667 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130690 relation_ref 158466 // <generalisation>
+  decenter_end 500
+  from ref 130562 z 2025 to point 289.2 899.2
+  line 131842 z 2025 to ref 129794
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130818 relation_ref 158594 // <generalisation>
+  from ref 130562 z 2025 to point 1048 896.6
+  line 131970 z 2025 to ref 130178
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132354 relation_ref 159490 // <generalisation>
+  decenter_begin 52
+  decenter_end 870
+  from ref 132226 z 2025 to point 1141.6 1127.8
+  line 133122 z 2025 to ref 130178
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132482 relation_ref 159618 // <directional composition>
+  decenter_end 768
+  from ref 132226 z 2025 to ref 129026
+  role_a_pos 1809 1025 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132610 relation_ref 157570 // <directional composition>
+  decenter_begin 483
+  from ref 128002 z 2025 to point 32.8 328
+  line 132994 z 2025 stereotype "<<Queue>>" xyz -18 767 2025 to point 35.4 1204.2
+  line 132866 z 2025 to ref 132226
+  role_a_pos 1417 1172 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133634 relation_ref 158850 // <generalisation>
+  decenter_begin 342
+  decenter_end 293
+  from ref 133506 z 2025 to ref 129794
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133762 relation_ref 157826 // <directional composition>
+  decenter_begin 572
+  decenter_end 75
+  from ref 128002 z 2025 to point 69.2 367.8
+  line 134018 z 2025 stereotype "<<Queue>>" xyz 22 808 2025 to ref 133506
+  role_a_pos 94 1216 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134530 relation_ref 159746 // <generalisation>
+  decenter_begin 16
+  decenter_end 689
+  from ref 134402 z 2031 to ref 130562
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134658 relation_ref 157698 // <directional composition>
+  decenter_begin 712
+  from ref 128002 z 2031 to point 105.4 425.4
+  line 134914 z 2031 to point 111.6 1103
+  line 135042 z 2031 stereotype "<<Queue>>" xyz 485 1104 2031 to point 965.4 1100.4
+  line 134786 z 2031 to ref 134402
+  role_a_pos 978 1212 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135810 relation_ref 158722 // <generalisation>
+  decenter_begin 875
+  decenter_end 791
+  from ref 135682 z 2031 to point 1354.2 1716.6
+  line 137218 z 2031 to point 1360.4 1044.2
+  line 136066 z 2031 to point 688 1039.2
+  line 135938 z 2031 to ref 130562
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136322 relation_ref 158978 // <generalisation>
+  decenter_begin 569
+  decenter_end 884
+  from ref 136194 z 2031 to point 1412.8 1385.4
+  line 136706 z 2031 to point 1414.2 1001.6
+  line 136578 z 2031 to point 710.4 999.2
+  line 136450 z 2031 to ref 130562
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

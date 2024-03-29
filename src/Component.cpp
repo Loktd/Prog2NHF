@@ -1,10 +1,6 @@
 
 #include "Component.h"
 #include "Queue.h"
-#include "Pin.h"
-
-void Component::addToActiveQueue(const Queue<Component> * & activeQueue) {
-}
 
 Component::~Component(){
 }

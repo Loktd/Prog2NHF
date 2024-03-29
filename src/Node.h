@@ -4,6 +4,7 @@
 
 #include "Component.h"
 
+#include <iostream>
 class Node : public IOPin_Component {
   public:
     Node();

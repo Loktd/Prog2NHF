@@ -4,11 +4,12 @@
 
 #include "Component.h"
 
+#include <iostream>
 class Switch : public IOPin_Component {
   public:
     Switch();
 
-    friend ostream & operator <<(ostream & os, const Switch & x);
+    friend std::ostream & operator <<(std::ostream & os, const Switch & x);
 
     virtual void executeFunction();
 

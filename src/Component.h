@@ -2,8 +2,9 @@
 #define _COMPONENT_H
 
 
+#include "Pin.h"
+
 template<class T> class Queue;
-class Pin;
 
 class Component {
   protected:
@@ -24,8 +25,7 @@ class InPin_Component : virtual public Component {
   protected:
     int inPinCount;
 
-    Pin * inPins;
-
+    Pin inPins;
     int activeInPins;
 
 
@@ -37,8 +37,7 @@ class OutPin_Component : virtual public Component {
   protected:
     int outPinCount;
 
-    Pin * outPins;
-
+    Pin outPins;
 
   public:
     virtual ~OutPin_Component();

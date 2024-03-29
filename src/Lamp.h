@@ -4,11 +4,12 @@
 
 #include "Component.h"
 
+#include <iostream>
 class Lamp : public InPin_Component {
   public:
     Lamp();
 
-    friend ostream & operator <<(ostream & os, const Lamp & x);
+    friend std::ostream & operator <<(std::ostream & os, const Lamp & x);
 
     virtual void executeFunction();
 

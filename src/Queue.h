@@ -7,6 +7,8 @@ class Queue {
   private:
     bool ownsMembers;
 
+    QueueMember<T> * queue;
+
 
   public:
     inline Queue(bool owner = false);
@@ -23,23 +25,7 @@ class Queue {
 
     inline ~Queue();
 
-
-  private:
-    QueueMember<T> * queue;
-
 };
-template<class T>
-inline Queue<T>::Queue(bool owner){
-}
-
-template<class T>
-inline Queue<T>::Queue(const Queue<T> & source){
-}
-
-template<class T>
-inline void Queue<T>::put(const T * & added) {
-}
-
 template<class T>
 inline void Queue<T>::deleteQueue() {
 }
