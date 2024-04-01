@@ -17,7 +17,7 @@ public:
 
   inline Queue<T>& operator =(const Queue<T>& source);
 
-  inline void put(const T*& added);
+  inline void put(const T* added);
 
   inline void deleteQueue();
 

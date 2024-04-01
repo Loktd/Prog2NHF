@@ -8,7 +8,6 @@ void InPin::SignalReady() const
         throw "ERROR: This input pin doesn't have an associated component...";
     }
     ofComponent->tickCounter();
-    ofComponent->checkIfReady();
 }
 
 void OutPin::sendSignal() const

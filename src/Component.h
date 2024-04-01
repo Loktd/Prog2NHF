@@ -8,9 +8,12 @@ template<class T> class Queue;
 
 class Component {
 protected:
+  Queue<Component>* activeQueue;
 
 public:
-  void addToActiveQueue(const Queue<Component>& activeQueue);
+  Component(Queue<Component>* newActiveQueue) : activeQueue(newActiveQueue) {}
+
+  void addToActiveQueue() const { activeQueue->put(this); }
 
   virtual void executeFunction() = 0;
 
@@ -19,33 +22,35 @@ public:
 };
 class InPin_Component : virtual public Component {
 protected:
-  int notReadyCounter;
-
-  int inPinCount;
-
-  Pin inPins;
-  int activeInPins;
-
+  size_t inPinCount;
+  size_t activeInPins;
+  InPin* inPins;
 
 public:
+  InPin_Component(size_t inCount);
+
+  void resetActiveCount() { activeInPins = 0; }
   void tickCounter();
-  void checkIfReady();
 
   virtual void executeFunction() = 0;
 
-  virtual ~InPin_Component() {}
+  virtual ~InPin_Component() { delete[] inPins; }
 
 };
 class OutPin_Component : virtual public Component {
 protected:
-  int outPinCount;
+  size_t outPinCount;
 
-  Pin outPins;
+  OutPin* outPins;
 
 public:
+  OutPin_Component(size_t outCount);
+
+  void sendOutSignals();
+
   virtual void executeFunction() = 0;
 
-  virtual ~OutPin_Component() {}
+  virtual ~OutPin_Component() { delete[] outPins; }
 
 };
 class IOPin_Component : public InPin_Component, public OutPin_Component {
@@ -53,6 +58,5 @@ public:
   virtual void executeFunction() = 0;
 
   virtual ~IOPin_Component() {}
-
 };
 #endif
