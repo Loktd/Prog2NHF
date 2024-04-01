@@ -5,7 +5,7 @@
 void InPin::SignalReady() const
 {
     if (ofComponent == nullptr) {
-        throw "ERROR: This input pin doesn't have an associated component...";
+        throw "ERROR: An input pin doesn't have an associated component...";
     }
     ofComponent->tickCounter();
 }
@@ -13,7 +13,7 @@ void InPin::SignalReady() const
 void OutPin::sendSignal() const
 {
     if (connectedTo == nullptr) {
-        throw "ERROR: This output pin doesn't have an associated input pin...";
+        throw "ERROR: An output pin doesn't have an associated input pin...";
     }
     connectedTo->setSignal(ownedSignal);
     connectedTo->SignalReady();

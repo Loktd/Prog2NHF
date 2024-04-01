@@ -1,18 +1,36 @@
 #ifndef _QUEUE_H
 #define _QUEUE_H
 
+typedef long long unsigned int size_t;
+
 template<class T>
 struct QueueMember {
+  /**
+   * @brief A következő elem címe a fifo-ban.
+   */
   QueueMember<T>* nextMember;
-
+  /**
+   * @brief A mutatott elem.
+   */
   T* pointingTo;
 };
 
 template<class T>
 class Queue {
+  /**
+   * @brief Birtokolja-e az elemeit, azaz destruktorban fel kell-e szabadítania a tárolt tagokat is a fifo tárolóival.
+   * (true = igen, false = nem)
+   */
   bool ownsMembers;
 
+  /**
+   * @brief A fifo elejére mutató. (kivétel és felszabadításhoz)
+   */
   QueueMember<T>* begin;
+  /**
+   * @brief A fifo végére mutató. (könnyű beszúráshoz)
+   *
+   */
   QueueMember<T>* end;
 
   /**
@@ -43,7 +61,7 @@ public:
    *
    * @param added A hozzáadott tag.
    */
-  void put(const T* added);
+  void put(T* added);
 
   /**
    * @brief Kivesz a sor elejéről egy tagot.
@@ -79,7 +97,7 @@ Queue<T>::Queue(const Queue<T>& source)
   *this = source;
 }
 template<class T>
-void Queue<T>::put(const T* added)
+void Queue<T>::put(T* added)
 {
   if (begin == nullptr) {
     begin = new QueueMember<T>;
@@ -109,7 +127,7 @@ template<class T>
 Queue<T>::~Queue() {
   if (ownsMembers) {
     while (begin != nullptr) {
-      QueueMember<T>* next = begin;
+      QueueMember<T>* next = begin->nextMember;
       delete begin->pointingTo;
       delete begin;
       begin = next;

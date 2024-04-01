@@ -1,22 +1,42 @@
 #ifndef _COMPONENT_H
 #define _COMPONENT_H
 
-
 #include "Pin.h"
+#include "Queue.h"
 
-template<class T> class Queue;
+typedef long long unsigned int size_t;
 
 class Component {
 protected:
+  /**
+   * @brief Az aktív sor, amihez kell hozzáadni, ha ki kell értékelni az elemet, azaz végrehajtani a funkcióját.
+   */
   Queue<Component>* activeQueue;
 
 public:
+  /**
+   * @brief Felparaméterezi az aktív sort.
+   *
+   * @param newActiveQueue A kívánt aktív sor.
+   */
   Component(Queue<Component>* newActiveQueue) : activeQueue(newActiveQueue) {}
 
-  void addToActiveQueue() const { activeQueue->put(this); }
+  /**
+   * @brief Hozzáadja az aktív sorhoz az áramköri elemet.
+   *
+   */
+  void addToActiveQueue() { activeQueue->put(this); }
 
+  /**
+   * @brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
+   *
+   */
   virtual void executeFunction() = 0;
 
+  /**
+   * @brief Virtuális destruktor öröklés miatt.
+   *
+   */
   virtual ~Component() {}
 
 };
