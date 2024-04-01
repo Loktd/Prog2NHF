@@ -2,21 +2,20 @@
 #include "Pin.h"
 #include "Component.h"
 
-void Pin::sendOutSingal() const {
-    if (connectedTo == nullptr) {
-        throw "No connection...";
-    }
-    if (connectedTo->ofComponent == nullptr) {
-        throw "Target pin doesn't have an associated component..";
-    }
-    connectedTo->setSignal(ownedSignal);
-    connectedTo->signalReadyToComponent();
-}
-
-void Pin::signalReadyToComponent() const {
+void InPin::SignalReady() const
+{
     if (ofComponent == nullptr) {
-        throw "Pin doesn't have a component...";
+        throw "ERROR: This input pin doesn't have an associated component...";
     }
+    ofComponent->tickCounter();
     ofComponent->checkIfReady();
 }
 
+void OutPin::sendSignal() const
+{
+    if (connectedTo == nullptr) {
+        throw "ERROR: This output pin doesn't have an associated input pin...";
+    }
+    connectedTo->setSignal(ownedSignal);
+    connectedTo->SignalReady();
+}

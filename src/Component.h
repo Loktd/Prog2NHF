@@ -8,11 +8,8 @@ template<class T> class Queue;
 
 class Component {
 protected:
-  int notReadyCounter;
 
 public:
-  void checkIfReady();
-
   void addToActiveQueue(const Queue<Component>& activeQueue);
 
   virtual void executeFunction() = 0;
@@ -22,6 +19,8 @@ public:
 };
 class InPin_Component : virtual public Component {
 protected:
+  int notReadyCounter;
+
   int inPinCount;
 
   Pin inPins;
@@ -29,6 +28,9 @@ protected:
 
 
 public:
+  void tickCounter();
+  void checkIfReady();
+
   virtual void executeFunction() = 0;
 
   virtual ~InPin_Component() {}
