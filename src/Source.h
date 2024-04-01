@@ -3,13 +3,9 @@
 
 
 #include "Component.h"
-#include "Pin.h"
 
 #include <iostream>
 class Source : public OutPin_Component {
-  private:
-    Signal sentSignal;
-
   public:
     Source();
 

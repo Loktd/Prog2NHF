@@ -1,12 +1,13 @@
 
 #include "Node.h"
 
-Node::Node(){
+Node::Node() {
+
 }
 
 void Node::executeFunction() {
 }
 
-Node::~Node(){
+Node::~Node() {
 }
 

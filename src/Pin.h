@@ -2,41 +2,29 @@
 #define _PIN_H
 
 
+#include "Signal.h"
+
 class Component;
 
 class Pin {
-  private:
-    Signal ownedSignal;
-    Pin * connectedTo;
+  Signal ownedSignal;
+  Pin* connectedTo;
 
-    Component * component;
-
-
-  public:
-    Pin(const Signal & signal, const Pin * & connection, const Component * & component);
-
-    void connectWith(const Pin * & other);
-
-    void sendOutSingal() const;
-
-    void setSignal(const Signal & newSignal);
-
-    void signalReady() const;
-
-};
-class Signal {
-  private:
-    bool signal;
+  Component* ofComponent;
 
 
-  public:
-    Signal(bool baseValue = false);
+public:
+  Pin() : ownedSignal(Signal(false)), connectedTo(nullptr), ofComponent(nullptr) {}
 
-    void setSignal(bool newValue);
+  void connectWithPin(Pin* other) { connectedTo = other; }
 
-    bool getSignal() const;
+  void connectWithCompononet(Component* component) { ofComponent = component; }
 
-    void flipSignal();
+  void sendOutSingal() const;
+
+  void setSignal(const Signal& newSignal) { ownedSignal = newSignal; }
+
+  void signalReadyToComponent() const;
 
 };
 #endif

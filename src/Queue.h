@@ -4,26 +4,26 @@
 
 template<class T>
 class Queue {
-  private:
-    bool ownsMembers;
+private:
+  bool ownsMembers;
 
-    QueueMember<T> * queue;
+  QueueMember<T>* queue;
 
 
-  public:
-    inline Queue(bool owner = false);
+public:
+  inline Queue(bool owner = false);
 
-    inline Queue(const Queue<T> & source);
+  inline Queue(const Queue<T>& source);
 
-    inline Queue<T> & operator =(const Queue<T> & source);
+  inline Queue<T>& operator =(const Queue<T>& source);
 
-    inline void put(const T * & added);
+  inline void put(const T*& added);
 
-    inline void deleteQueue();
+  inline void deleteQueue();
 
-    inline T * get();
+  inline T* get();
 
-    inline ~Queue();
+  inline ~Queue();
 
 };
 template<class T>
@@ -31,18 +31,18 @@ inline void Queue<T>::deleteQueue() {
 }
 
 template<class T>
-inline T * Queue<T>::get() {
+inline T* Queue<T>::get() {
 }
 
 template<class T>
-inline Queue<T>::~Queue(){
+inline Queue<T>::~Queue() {
 }
 
 template<class T>
 struct QueueMember {
-    QueueMember<T> * nextMember;
+  QueueMember<T>* nextMember;
 
-    T * pointingTo;
+  T* pointingTo;
 
 };
 #endif

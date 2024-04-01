@@ -1,6 +1,6 @@
 format 224
 "src" // src
-  revision 2
+  revision 3
   modified_by 2 "palin"
   // class settings
   
@@ -389,14 +389,6 @@ ${inlines}
 	    cpp default "${type}"
 	    classrelation_ref 160386 // <generalisation>
 	  b parent class_ref 156674 // OutPin_Component
-      end
-
-      classrelation 160514 // sentSignal (<directional composition>)
-	relation 159618 *-->
-	  a role_name "sentSignal" private
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};"
-	    classrelation_ref 160514 // sentSignal (<directional composition>)
-	  b parent class_ref 157186 // Signal
       end
 
       operation 187138 "Source"
@@ -891,11 +883,8 @@ ${inlines}
 
       operation 185090 "Pin"
 	preserve_cpp_body_indent public explicit_return_type ""
-	nparams 3
-	  param in name "signal" type class_ref 157186 // Signal
-	  param in name "connection" type class_ref 156546 // Pin
-	  param in name "component" type class_ref 155778 // Component
-	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} * & ${p1}${v1}, const ${t2} * & ${p2}${v2}${)}${volatile}${throw}${abstract};
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${volatile}${throw}${abstract};
 "
 	
 	
@@ -992,7 +981,8 @@ ${inlines}
       classrelation 159234 // outPins (<directional composition>)
 	relation 158338 *-->
 	  a role_name "outPins" protected
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
 	    classrelation_ref 159234 // outPins (<directional composition>)
 	  b parent class_ref 156546 // Pin
       end
@@ -1194,6 +1184,7 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      locked
       attribute 177282 "signal"
 	private explicit_type "bool"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
@@ -1431,6 +1422,30 @@ ${namespace_end}"
       end
     end
 
+    artifact 171138 "Signal"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      locked
+      associated_elems
+	class_ref 157186 // Signal
+      end
+    end
+
     artifact 164226 "Pin"
       stereotype "source"
       cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
@@ -1451,7 +1466,6 @@ ${members}
 ${namespace_end}"
       associated_elems
 	class_ref 156546 // Pin
-	class_ref 157186 // Signal
       end
     end
 

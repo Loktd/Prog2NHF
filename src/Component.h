@@ -7,45 +7,50 @@
 template<class T> class Queue;
 
 class Component {
-  protected:
-    bool canExecute;
+protected:
+  int notReadyCounter;
 
+public:
+  void checkIfReady();
 
-  public:
-    void canExecute();
+  void addToActiveQueue(const Queue<Component>& activeQueue);
 
-    void addToActiveQueue(const Queue<Component> * & activeQueue);
+  virtual void executeFunction() = 0;
 
-    virtual void executeFunction() = 0;
-
-    virtual ~Component();
+  virtual ~Component() {}
 
 };
 class InPin_Component : virtual public Component {
-  protected:
-    int inPinCount;
+protected:
+  int inPinCount;
 
-    Pin inPins;
-    int activeInPins;
+  Pin inPins;
+  int activeInPins;
 
 
-  public:
-    virtual ~InPin_Component();
+public:
+  virtual void executeFunction() = 0;
+
+  virtual ~InPin_Component() {}
 
 };
 class OutPin_Component : virtual public Component {
-  protected:
-    int outPinCount;
+protected:
+  int outPinCount;
 
-    Pin outPins;
+  Pin outPins;
 
-  public:
-    virtual ~OutPin_Component();
+public:
+  virtual void executeFunction() = 0;
+
+  virtual ~OutPin_Component() {}
 
 };
 class IOPin_Component : public InPin_Component, public OutPin_Component {
-  public:
-    virtual ~IOPin_Component();
+public:
+  virtual void executeFunction() = 0;
+
+  virtual ~IOPin_Component() {}
 
 };
 #endif

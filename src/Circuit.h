@@ -10,41 +10,42 @@ class Switch;
 class Lamp;
 
 class Circuit {
-private:
-  bool outputValid;
+  private:
+    bool outputValid;
 
-  std::ostream outputStream;
+    std::ostream outputStream;
 
-  Queue<Component> componentList;
-  Queue<Source> sourceList;
-  Queue<Switch> switchList;
-  Queue<Lamp> lampList;
+    Queue<Component> componentList;
+    Queue<Source> sourceList;
+    Queue<Switch> switchList;
+    Queue<Lamp> lampList;
+    void reset();
 
 
-public:
-  Circuit(const std::ostream& outStream = std::cout);
+  public:
+    Circuit(const std::ostream & outStream = std::cout);
 
-  Circuit(const Circuit& source);
+    Circuit(const Circuit & source);
 
-  Circuit& operator =(const Circuit& source);
+    Circuit & operator =(const Circuit & source);
 
-  void setOutputStream(const std::ostream& os);
+    void setOutputStream(const std::ostream & os);
 
-  void configure(const std::string& fileName);
+    void configure(const std::string & fileName);
 
-  void simulate();
+    void simulate();
 
-  void flipSource(int connectedNode);
+    void flipSource(int connectedNode);
 
-  void flipSwitch(int connectedNode1, int connectedNode2);
+    void flipSwitch(int connectedNode1, int connectedNode2);
 
-  void readLampStates() const;
+    void readLampStates() const;
 
-  void readSourceStates() const;
+    void readSourceStates() const;
 
-  void readSwitchStates() const;
+    void readSwitchStates() const;
 
-  ~Circuit();
+    ~Circuit();
 
 };
 #endif
