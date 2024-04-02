@@ -71,6 +71,14 @@ public:
   T* get();
 
   /**
+   * @brief Megmondja, hogy üres-e a fifo.
+   *
+   * @return true = üres a fifo
+   * @return false = nem üres a fifo
+   */
+  bool isEmpty();
+
+  /**
    * @brief Detruktor, mely felszabadítja a tárolt elemeket, attól függően, hogy birtokolja-e őket.
    *
    */
@@ -121,6 +129,12 @@ T* Queue<T>::get()
   T* returned = returnedMember->pointingTo;
   delete returnedMember;
   return returned;
+}
+
+template<class T>
+inline bool Queue<T>::isEmpty()
+{
+  return begin == nullptr;
 }
 
 template<class T>

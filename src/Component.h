@@ -82,6 +82,12 @@ public:
   void tickCounter();
 
   /**
+   * @brief Visszaadja a bemeneti pin-ek tömbjének címét.
+   *
+   */
+  InPin* getInPinsBaseAdress() const { return inPins; }
+
+  /**
    * @brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
    *
    */
@@ -113,6 +119,15 @@ public:
    * @param outCount A kívánt kimeneti pin-ek száma.
    */
   OutPin_Component(size_t outCount);
+
+  /**
+   * @brief Összeköti a megadott kimeneti pin-jét egy másik áramköri elem bemeneti pin-jével.
+   *
+   * @param outPinIndex A kimeneti pin indexe.
+   * @param component Amivel össze szeretnénk kötni.
+   * @param inPinIndex A bemeneti pin indexe.
+   */
+  void connectTo(size_t outPinIndex, InPin_Component* component, size_t inPinIndex);
 
   /**
    * @brief Kiküldi minden kimeneti lábán a lábakban tárolt jeleket.
