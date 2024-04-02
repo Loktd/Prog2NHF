@@ -5,6 +5,7 @@
 #include "../src/Source.h"
 #include "../src/Lamp.h"
 #include "../src/Node.h"
+#include "../src/Switch.h"
 
 int main() {
     Queue<Component>* active = new Queue<Component>;
@@ -14,9 +15,23 @@ int main() {
 
     Lamp* lamp = new Lamp;
     lamp->setActiveQueue(active);
+    Lamp* lamp2 = new Lamp;
+    lamp2->setActiveQueue(active);
 
-    src->connectTo(0, lamp, 0);
-    src->setOutput(Signal(false));
+    Node* node = new Node(2);
+    node->setActiveQueue(active);
+
+    Switch* sw = new Switch;
+    sw->setActiveQueue(active);
+
+    src->connectTo(0, node, 0);
+    node->connectTo(0, lamp, 0);
+    node->connectTo(1, sw, 0);
+    sw->connectTo(0, lamp2, 0);
+
+    src->setOutput(Signal(true));
+    sw->flipState();
+    sw->flipState();
 
     src->addToActiveQueue();
 
@@ -30,5 +45,8 @@ int main() {
         std::cout << str << std::endl;
     }
 
-    std::cout << *lamp;
+    std::cout << *lamp << std::endl << std::endl;
+
+    std::cout << *sw << std::endl;
+    std::cout << *lamp2 << std::endl;
 }
