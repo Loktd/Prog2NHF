@@ -31,7 +31,7 @@ public:
    * @brief Hozzáadja az aktív sorhoz az áramköri elemet.
    *
    */
-  void addToActiveQueue() { activeQueue->put(this); }
+  void addToActiveQueue();
 
   /**
    * @brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.

@@ -34,3 +34,10 @@ void OutPin_Component::sendOutSignals()
         outPins[i].sendSignal();
     }
 }
+
+void Component::addToActiveQueue()
+{
+    if (activeQueue == nullptr)
+        throw "This component doesn't have an active queue...";
+    activeQueue->put(this);
+}
