@@ -36,5 +36,7 @@ public:
    *
    */
   void flipSignal() { signal = !signal; }
+
+  bool operator==(const Signal& other) { return signal == other.signal; }
 };
 #endif

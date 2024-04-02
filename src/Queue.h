@@ -47,7 +47,7 @@ public:
    *
    * @param owner Tulaja-e az elemeknek, azaz fel kell majd szabadítani a mutatott objektumokat-e.
    */
-  Queue(bool owner = true) : ownsMembers(owner), begin(nullptr), end(nullptr) {}
+  Queue(bool owner) : ownsMembers(owner), begin(nullptr), end(nullptr) {}
 
   /**
    * @brief Másolást teszi lehetővé, hogy ideiglenesen valamit tudjunk futtatni a fifo-n, a tagokat nem birtokolja.

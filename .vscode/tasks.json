@@ -7,6 +7,7 @@
 			"command": "c:\\mingw64\\bin\\g++.exe",
 			"args": [
 				"-fdiagnostics-color=always",
+				"-DMEMTRACE",
 				"-g",
 				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Source.cpp",
 				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Component.cpp",
@@ -14,6 +15,8 @@
 				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Lamp.cpp",
 				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Node.cpp",
 				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Switch.cpp",
+				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Gate.cpp",
+				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\memtrace.cpp",
 				"${file}",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
