@@ -19,7 +19,13 @@ public:
    *
    * @param newActiveQueue A kívánt aktív sor.
    */
-  Component(Queue<Component>* newActiveQueue) : activeQueue(newActiveQueue) {}
+  Component(Queue<Component>* newActiveQueue = nullptr) : activeQueue(newActiveQueue) {}
+
+  /**
+   * @brief
+   *
+   */
+  void setActiveQueue(Queue<Component>* newActiveQueue) { activeQueue = newActiveQueue; }
 
   /**
    * @brief Hozzáadja az aktív sorhoz az áramköri elemet.
@@ -129,6 +135,14 @@ public:
 };
 class IOPin_Component : public InPin_Component, public OutPin_Component {
 public:
+  /**
+   * @brief Lértehozza a lábakat.
+   *
+   * @param inCount Bemeneti lábak száma.
+   * @param outCount Kimeneti lábak száma.
+   */
+  IOPin_Component(size_t inCount, size_t outCount) : InPin_Component(inCount), OutPin_Component(outCount) {}
+
   /**
    * @brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
    *

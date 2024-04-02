@@ -5,12 +5,12 @@
 #include "Component.h"
 
 class Gate : public IOPin_Component {
-  public:
-    Gate();
+public:
+  Gate();
 
-    virtual void executeFunction() = 0;
+  virtual void executeFunction() = 0;
 
-    virtual ~Gate();
+  virtual ~Gate();
 
 };
 #endif

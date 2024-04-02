@@ -28,12 +28,19 @@ public:
    * @param newSignal Az új jel.
    */
   void setSignal(const Signal& newSignal) { ownedSignal = newSignal; }
+
   /**
    * @brief Visszaadja a pin jelét. Mivel kicsi a Signal osztály, ezért nem kell pointer/referencia.
    *
    * @return A visszaadott jel.
    */
   Signal getSignal() const { return ownedSignal; }
+
+  /**
+   * @brief Megfordítja a pin jelét.
+   *
+   */
+  void flipSignal() { ownedSignal.flipSignal(); }
 
   /**
    * @brief Virtuál destruktor, mert öröklés.

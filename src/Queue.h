@@ -135,7 +135,7 @@ Queue<T>::~Queue() {
   }
   else {
     while (begin != nullptr) {
-      QueueMember<T>* next = begin;
+      QueueMember<T>* next = begin->nextMember;
       delete begin;
       begin = next;
     }

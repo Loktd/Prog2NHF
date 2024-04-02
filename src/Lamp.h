@@ -1,19 +1,40 @@
 #ifndef _LAMP_H
 #define _LAMP_H
 
-
 #include "Component.h"
 
 #include <iostream>
+
 class Lamp : public InPin_Component {
-  public:
-    Lamp();
+public:
+  /**
+   * @brief Létrehoz egy lámpát.
+   *
+   */
+  Lamp();
 
-    friend std::ostream & operator <<(std::ostream & os, const Lamp & x);
+  /**
+   * @brief Visszaadja a lámpa jelét, azaz, hogy világít-e.
+   *
+   * @return A jelérték.
+   */
+  Signal getState() const { return inPins[0].getSignal(); }
 
-    virtual void executeFunction();
+  /**
+   * @brief Itt igazából haszontalan, lámpának nincs végezni valója.
+   *
+   */
+  virtual void executeFunction() {}
 
-    virtual ~Lamp();
-
+  virtual ~Lamp() {}
 };
+
+/**
+ * @brief Kiírja a kimeneti streamre a lámpa jelének értékét.
+ *
+ * @param os A kimeneti stream.
+ * @param x A kiírt lámpa.
+ * @return A kimeneti stream-re referencia, láncolás miatt.
+ */
+std::ostream& operator<<(std::ostream& os, const Lamp& x);
 #endif
