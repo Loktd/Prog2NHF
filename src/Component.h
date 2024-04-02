@@ -22,7 +22,7 @@ public:
   Component(Queue<Component>* newActiveQueue = nullptr) : activeQueue(newActiveQueue) {}
 
   /**
-   * @brief
+   * @brief Beállítja az aktív fifo-t.
    *
    */
   void setActiveQueue(Queue<Component>* newActiveQueue) { activeQueue = newActiveQueue; }
