@@ -1,34 +1,35 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "cppbuild",
-			"label": "C/C++: g++.exe build active file",
-			"command": "c:\\mingw64\\bin\\g++.exe",
-			"args": [
-				"-fdiagnostics-color=always",
-				"-DMEMTRACE",
-				"-g",
-				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Source.cpp",
-				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Component.cpp",
-				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Pin.cpp",
-				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Lamp.cpp",
-				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Node.cpp",
-				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Switch.cpp",
-				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Gate.cpp",
-				"C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\memtrace.cpp",
-				"${file}",
-				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
-			],
-			"options": {
-				"cwd": "c:\\mingw64\\bin"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": "build",
-			"detail": "compiler: c:\\mingw64\\bin\\g++.exe"
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "c:\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-DMEMTRACE",
+                "-g",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Circuit.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Source.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Component.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Pin.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Lamp.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Node.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Switch.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Gate.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\memtrace.cpp",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "c:\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: c:\\mingw64\\bin\\g++.exe"
+        }
+    ]
 }

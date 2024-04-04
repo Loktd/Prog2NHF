@@ -1,51 +1,64 @@
 #ifndef _CIRCUIT_H
 #define _CIRCUIT_H
 
-
+#include "Component.h"
+#include "Gate.h"
+#include "Lamp.h"
+#include "Node.h"
+#include "Pin.h"
 #include "Queue.h"
+#include "Signal.h"
+#include "Source.h"
+#include "Switch.h"
 
-class Component;
-class Source;
-class Switch;
-class Lamp;
+#include <iostream>
+#include <fstream>
+#include <cstring>
 
 class Circuit {
-  private:
-    bool outputValid;
+  static std::ostream* errorStream;
 
-    std::ostream outputStream;
+  bool outputValid;
 
-    Queue<Component> componentList;
-    Queue<Source> sourceList;
-    Queue<Switch> switchList;
-    Queue<Lamp> lampList;
-    void reset();
+  std::string inputFileName;
+  std::ifstream inputfile;
 
+  Queue<Component>* componentList;
+  Queue<Source>* sourceList;
+  Queue<Switch>* switchList;
+  Queue<Lamp>* lampList;
 
-  public:
-    Circuit(const std::ostream & outStream = std::cout);
+  Queue<Component>* activeList;
 
-    Circuit(const Circuit & source);
+  void nullifyPointers();
+  void allocateMemory();
+  void deleteMemory();
 
-    Circuit & operator =(const Circuit & source);
+  void checkSyntax();
 
-    void setOutputStream(const std::ostream & os);
+public:
+  Circuit();
+  Circuit(const Circuit& source);
+  Circuit& operator=(const Circuit& source);
 
-    void configure(const std::string & fileName);
+  void setInputFile(const std::string& fileName);
+  const std::string& getInputFileName() const;
 
-    void simulate();
+  static void setErrorStream(std::ostream* os);
 
-    void flipSource(int connectedNode);
+  void configure();
+  void simulate();
 
-    void flipSwitch(int connectedNode1, int connectedNode2);
+  void flipSource(int connectedNode);
+  void flipSwitch(int connectedNode1, int connectedNode2);
 
-    void readLampStates() const;
+  void printLampStates(std::ostream& os) const;
+  void printSourceStates(std::ostream& os) const;
+  void printSwitchStates(std::ostream& os) const;
 
-    void readSourceStates() const;
-
-    void readSwitchStates() const;
-
-    ~Circuit();
-
+  ~Circuit();
 };
+
+std::ostream& operator<<(std::ostream& os, const Circuit& circuit);
+void printSeparatorLine(std::ostream& os, char c, int times);
 #endif
