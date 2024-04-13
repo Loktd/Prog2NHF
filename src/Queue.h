@@ -47,7 +47,7 @@ public:
    *
    * @param owner Tulaja-e az elemeknek, azaz fel kell majd szabadítani a mutatott objektumokat-e.
    */
-  Queue(bool owner) : ownsMembers(owner), begin(nullptr), end(nullptr) {}
+  Queue(bool owner = false) : ownsMembers(owner), begin(nullptr), end(nullptr) {}
 
   /**
    * @brief Másolást teszi lehetővé, hogy ideiglenesen valamit tudjunk futtatni a fifo-n, a tagokat nem birtokolja.
@@ -77,6 +77,12 @@ public:
    * @return false = nem üres a fifo
    */
   bool isEmpty();
+
+  /**
+   * @brief Kiürítí a fifo-t, ha tulaj, akkor törli a memóriát is.
+   *
+   */
+  void clear();
 
   /**
    * @brief Detruktor, mely felszabadítja a tárolt elemeket, attól függően, hogy birtokolja-e őket.
@@ -135,6 +141,21 @@ template<class T>
 inline bool Queue<T>::isEmpty()
 {
   return begin == nullptr;
+}
+
+template<class T>
+inline void Queue<T>::clear()
+{
+  if (ownsMembers) {
+    while (!isEmpty()) {
+      delete get();
+    }
+  }
+  else {
+    while (!isEmpty()) {
+      get();
+    }
+  }
 }
 
 template<class T>

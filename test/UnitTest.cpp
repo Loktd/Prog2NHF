@@ -28,7 +28,7 @@ int main() {
 
     TEST(CIRCUIT, KonstruktorDestruktorUres) {
         Circuit circuit;
-        EXPECT_EQ("", circuit.getInputFileName());
+        EXPECT_EQ("", circuit.getSourceFileName());
     } END;
 
     TEST(CIRCUIT, MasoloKonstruktorUres) {
@@ -45,15 +45,15 @@ int main() {
     TEST(CIRCUIT, BementiFileBeallitas) {
         Circuit circuit;
 
-        circuit.setInputFile(inputFile1Name);
-        EXPECT_EQ(inputFile1Name, circuit.getInputFileName());
+        circuit.setSourceFile(inputFile1Name);
+        EXPECT_EQ(inputFile1Name, circuit.getSourceFileName());
 
         clearFileContent(errorFileName);
         std::ifstream errorFileIn;
         errorFileIn.open(errorFileName);
         std::string line;
 
-        circuit.setInputFile(nonExistentFileName);
+        circuit.setSourceFile(nonExistentFileName);
         std::getline(errorFileIn, line);
         EXPECT_EQ("There is no file with name: " + nonExistentFileName, line);
 
