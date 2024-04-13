@@ -18,6 +18,7 @@
 class Circuit {
   static std::ostream* errorStream;
 
+  bool configured;
   bool outputValid;
 
   std::string inputFileName;
@@ -35,6 +36,7 @@ class Circuit {
   void deleteMemory();
 
   void checkSyntax();
+  void configure();
 
 public:
   Circuit();
@@ -46,7 +48,6 @@ public:
 
   static void setErrorStream(std::ostream* os);
 
-  void configure();
   void simulate();
 
   void flipSource(int connectedNode);
