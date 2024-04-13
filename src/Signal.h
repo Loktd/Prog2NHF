@@ -37,6 +37,13 @@ public:
    */
   void flipSignal() { signal = !signal; }
 
+  /**
+   * @brief Egyenlőséget vizsgálja két jelszint között.
+   *
+   * @param other A másik jel.
+   * @return true, ha gyeznek.
+   * @return false, ha nem egyeznek
+   */
   bool operator==(const Signal& other) { return signal == other.signal; }
 };
 #endif

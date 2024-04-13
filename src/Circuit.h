@@ -38,7 +38,7 @@ class Circuit {
 
   void build();
   enum ComponentType {
-    INVALID = 0, SOURCE = 1, LAMP = 2, SWITCH = 3, AND = 4, OR = 5, NOT = 6, XOR = 7, NAND = 8, NOR = 9, XNOR = 10
+    INVALID = 0, SOURCE = 1, LAMP = 2, SWITCH = 3, And = 4, Or = 5, Not = 6, Xor = 7, Nand = 8, Nor = 9, Xnor = 10
   };
   struct ContentInfo {
     size_t lineCount;
@@ -51,7 +51,17 @@ class Circuit {
   void checkLineType(ContentInfo& info);
   void buildComponent(ContentInfo& info);
   void getNodeNumbers(ContentInfo& info, Queue<int>& nodeNumbers);
-  void checkNodeCount(ContentInfo& info, Queue<int>& nodeNumbers);
+  void checkNodeCount(ContentInfo& info, size_t count);
+  void createBasedOnType(ContentInfo& info, size_t count, Queue<int>& nodeNumbers);
+
+  template<typename T>
+  void create(ContentInfo& info, size_t count, Queue<int>& nodeNumbers) {
+    T* created = new T(count);
+  }
+  template<typename T>
+  void createWithoutCount(ContentInfo& info, Queue<int>& nodeNumbers) {
+    T* created = new T();
+  }
 
 public:
   Circuit();

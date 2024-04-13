@@ -13,4 +13,13 @@ public:
 
   virtual ~Node() {}
 };
+
+class Wire : private Node {
+public:
+  Wire() : Node(1) {}
+
+  virtual void executeFunction() { Node::executeFunction(); }
+
+  virtual ~Wire() {}
+};
 #endif

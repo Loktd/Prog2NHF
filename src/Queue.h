@@ -85,6 +85,13 @@ public:
   void clear();
 
   /**
+   * @brief Visszaadja a fifo elemszámát.
+   *
+   * @return size_t A fifo mérete.
+   */
+  size_t size() const;
+
+  /**
    * @brief Detruktor, mely felszabadítja a tárolt elemeket, attól függően, hogy birtokolja-e őket.
    *
    */
@@ -156,6 +163,18 @@ inline void Queue<T>::clear()
       get();
     }
   }
+}
+
+template<class T>
+inline size_t Queue<T>::size() const
+{
+  size_t result = 0;
+  Queue<T> copy(*this);
+  while (!copy.isEmpty()) {
+    result++;
+    copy.get();
+  }
+  return result;
 }
 
 template<class T>

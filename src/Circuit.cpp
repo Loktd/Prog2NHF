@@ -86,7 +86,10 @@ void Circuit::buildComponent(ContentInfo& info)
 {
     Queue<int> nodeNumbers(true);
     getNodeNumbers(info, nodeNumbers);
-    checkNodeCount(info, nodeNumbers);
+
+    size_t count = nodeNumbers.size();
+    checkNodeCount(info, count);
+
 
 }
 
@@ -117,14 +120,8 @@ void Circuit::getNodeNumbers(ContentInfo& info, Queue<int>& nodeNumbers)
     }
 }
 
-void Circuit::checkNodeCount(ContentInfo& info, Queue<int>& nodeNumbers)
+void Circuit::checkNodeCount(ContentInfo& info, size_t count)
 {
-    Queue<int> copyList(nodeNumbers);
-    size_t count = 0;
-    while (!copyList.isEmpty()) {
-        count++;
-        copyList.get();
-    }
     switch (info.type)
     {
     case SOURCE:
@@ -139,33 +136,73 @@ void Circuit::checkNodeCount(ContentInfo& info, Queue<int>& nodeNumbers)
         if (count != 2)
             throw std::string("Incorrect pin count for SWITCH type at line " + std::to_string(info.lineCount));
         break;
-    case AND:
+    case And:
         if (count <= 2)
             throw std::string("Incorrect pin count for AND type at line " + std::to_string(info.lineCount));
         break;
-    case OR:
+    case Or:
         if (count <= 2)
             throw std::string("Incorrect pin count for OR type at line " + std::to_string(info.lineCount));
         break;
-    case NOT:
+    case Not:
         if (count != 2)
             throw std::string("Incorrect pin count for NOT type at line " + std::to_string(info.lineCount));
         break;
-    case XOR:
+    case Xor:
         if (count <= 2)
             throw std::string("Incorrect pin count for XOR type at line " + std::to_string(info.lineCount));
         break;
-    case NAND:
+    case Nand:
         if (count <= 2)
             throw std::string("Incorrect pin count for NAND type at line " + std::to_string(info.lineCount));
         break;
-    case NOR:
+    case Nor:
         if (count <= 2)
             throw std::string("Incorrect pin count for NOR type at line " + std::to_string(info.lineCount));
         break;
-    case XNOR:
+    case Xnor:
         if (count <= 2)
             throw std::string("Incorrect pin count for XNOR type at line " + std::to_string(info.lineCount));
+        break;
+    default:
+        throw std::string("No found type error...");
+        break;
+    }
+}
+
+void Circuit::createBasedOnType(ContentInfo& info, size_t count, Queue<int>& nodeNumbers)
+{
+    switch (info.type)
+    {
+    case SOURCE:
+        createWithoutCount<Source>(info, nodeNumbers);
+        break;
+    case LAMP:
+        createWithoutCount<Lamp>(info, nodeNumbers);
+        break;
+    case SWITCH:
+        createWithoutCount<Switch>(info, nodeNumbers);
+        break;
+    case And:
+        create<AND>(info, count, nodeNumbers);
+        break;
+    case Or:
+        create<OR>(info, count, nodeNumbers);
+        break;
+    case Not:
+        createWithoutCount<NOT>(info, nodeNumbers);
+        break;
+    case Xor:
+        create<XOR>(info, count, nodeNumbers);
+        break;
+    case Nand:
+        create<NAND>(info, count, nodeNumbers);
+        break;
+    case Nor:
+        create<NOR>(info, count, nodeNumbers);
+        break;
+    case Xnor:
+        create<XNOR>(info, count, nodeNumbers);
         break;
     default:
         throw std::string("No found type error...");
