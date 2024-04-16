@@ -55,13 +55,13 @@ class Circuit {
   void createBasedOnType(ContentInfo& info, size_t count, Queue<int>& nodeNumbers);
 
   template<typename T>
-  void create(ContentInfo& info, size_t count, Queue<int>& nodeNumbers) {
-    T* created = new T(count);
-  }
+  void create(size_t count, Queue<int>& nodeNumbers);
+
   template<typename T>
-  void createWithoutCount(ContentInfo& info, Queue<int>& nodeNumbers) {
-    T* created = new T();
-  }
+  void create(Queue<int>& nodeNumbers);
+
+  void connectInPinWithNode(InPin* pin, size_t id);
+  void connectOutPinWithNode(OutPin* pin, size_t id);
 
 public:
   Circuit();
@@ -101,5 +101,17 @@ public:
 
 std::ostream& operator<<(std::ostream& os, const Circuit& circuit);
 void printSeparatorLine(std::ostream& os, char c, int times);
+
+template<typename T>
+void Circuit::create(size_t count, Queue<int>& nodeNumbers) {
+  T* created = new T(count - 1);
+  ((Component*)created)->setActiveQueue(&activeList);
+  Queue<int> copy(nodeNumbers);
+  for (size_t i = 0; i < count - 1; i++) {
+    connectInPinWithNode(((InPin_Component*)created)->getInPinsBaseAdress() + i, *(copy.get()));
+  }
+  connectOutPinWithNode(((OutPin_Component*)created)->getOutPinBaseAdress(), *(copy.get()));
+  componentList.put(created);
+}
 
 #endif

@@ -15,16 +15,12 @@
 #include "TestHelpFunctions.h"
 
 int main() {
-    std::string inputFile1Name = "TestMaterial_InputTest1.txt";
+    std::string inputFile1Name = "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\TestMaterial_InputTest1.txt";
     std::string outputFileName = "TestMaterial_OutputTest.txt";
     std::string errorFileName = "Errors.txt";
     std::string nonExistentFileName = "IDONTEXIST.txt";
     std::string starSeperator = "**************************************************";
     std::string dashSeperator = "--------------------------------------------------";
-
-    std::ofstream errorFile;
-    errorFile.open(errorFileName);
-    Circuit::setErrorStream(&errorFile);
 
     TEST(CIRCUIT, KonstruktorDestruktorUres) {
         Circuit circuit;
@@ -88,5 +84,9 @@ int main() {
         EXPECT_EQ(starSeperator, line.c_str());
     } END;
 
-    errorFile.close();
+    TEST(CIRCUIT, KonfigSikeres) {
+        Circuit circuit;
+        circuit.setSourceFile(inputFile1Name);
+        circuit.simulate(std::cout);
+    } END;
 }

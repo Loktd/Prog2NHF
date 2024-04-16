@@ -1,6 +1,48 @@
 
 #include "Circuit.h"
 
+
+template<>
+void Circuit::create<NOT>(size_t count, Queue<int>& nodeNumbers) {
+    NOT* created = new NOT();
+    created->setActiveQueue(&activeList);
+    Queue<int> copy(nodeNumbers);
+    for (size_t i = 0; i < count - 1; i++) {
+        connectInPinWithNode(created->getInPinsBaseAdress() + i, *(copy.get()));
+    }
+    connectOutPinWithNode(created->getOutPinBaseAdress(), *(copy.get()));
+    componentList.put(created);
+}
+
+template<>
+void Circuit::create<Source>(Queue<int>& nodeNumbers) {
+    Source* created = new Source();
+    created->setActiveQueue(&activeList);
+    Queue<int> copy(nodeNumbers);
+    connectOutPinWithNode(created->getOutPinBaseAdress(), *(copy.get()));
+    componentList.put(created);
+    sourceList.put(created);
+}
+template<>
+void Circuit::create<Lamp>(Queue<int>& nodeNumbers) {
+    Lamp* created = new Lamp();
+    created->setActiveQueue(&activeList);
+    Queue<int> copy(nodeNumbers);
+    connectInPinWithNode(created->getInPinsBaseAdress(), *(copy.get()));
+    componentList.put(created);
+    lampList.put(created);
+}
+template<>
+void Circuit::create<Switch>(Queue<int>& nodeNumbers) {
+    Switch* created = new Switch();
+    created->setActiveQueue(&activeList);
+    Queue<int> copy(nodeNumbers);
+    connectInPinWithNode(created->getInPinsBaseAdress(), *(copy.get()));
+    connectOutPinWithNode(created->getOutPinBaseAdress(), *(copy.get()));
+    componentList.put(created);
+    switchList.put(created);
+}
+
 std::ostream* Circuit::errorStream = &std::cerr;
 
 void Circuit::reset()
@@ -21,7 +63,7 @@ void Circuit::configure() {
     }
     catch (std::string errormsg) {
         printSeparatorLine(*errorStream, '*', 50);
-        *errorStream << "SYNTAX ERROR";
+        *errorStream << "SYNTAX ERROR" << std::endl;
         printSeparatorLine(*errorStream, '*', 50);
         *errorStream << errormsg;
         printSeparatorLine(*errorStream, '*', 50);
@@ -33,11 +75,15 @@ void Circuit::configure() {
 
 void Circuit::build()
 {
+    if (!inputfile.is_open()) {
+        throw std::string("Input file doesn't exist or can't be opened...");
+    }
     inputfile.seekg(std::ios_base::beg);
     ContentInfo info;
     while (!inputfile.eof()) {
         std::getline(inputfile, info.line);
         if (!info.line.empty()) {
+            info.idx = 0;
             buildLine(info);
         }
     }
@@ -74,6 +120,7 @@ void Circuit::checkLineType(ContentInfo& info)
         if (validTypes[i] == lineType) {
             valid = true;
             info.type = ComponentType(i + 1);
+            break;
         }
     }
 
@@ -90,32 +137,33 @@ void Circuit::buildComponent(ContentInfo& info)
     size_t count = nodeNumbers.size();
     checkNodeCount(info, count);
 
-
+    createBasedOnType(info, count, nodeNumbers);
 }
 
 void Circuit::getNodeNumbers(ContentInfo& info, Queue<int>& nodeNumbers)
 {
     int read;
-    std::stringstream s(info.line);
+    std::stringstream s(std::string(info.line.c_str() + info.idx));
     bool go = true;
     while (go) {
         if (!(s >> read)) {
             nodeNumbers.clear();
-            throw std::string("Incorrect syntax at: \"(" + info.line + "\" !");
+            throw std::string("Incorrect syntax at: \"()" + std::string(info.line.c_str() + info.idx) + "\" !");
         }
         nodeNumbers.put(new int(read));
         char c;
         if (!(s >> c)) {
             nodeNumbers.clear();
-            throw std::string("Incorrect syntax at: \"(" + info.line + "\" !");
+            throw std::string("Incorrect syntax at: \"(" + std::string(info.line.c_str() + info.idx) + "\" !");
         }
         if (c != ',' && c != ')') {
             nodeNumbers.clear();
-            throw std::string("Incorrect syntax at: \"(" + info.line + "\" !");
+            throw std::string("Incorrect syntax at: \"(" + std::string(info.line.c_str() + info.idx) + "\" !");
         }
         else if (c == ')') {
             while (info.line[info.idx] != ')')
                 info.idx++;
+            break;
         }
     }
 }
@@ -175,38 +223,78 @@ void Circuit::createBasedOnType(ContentInfo& info, size_t count, Queue<int>& nod
     switch (info.type)
     {
     case SOURCE:
-        createWithoutCount<Source>(info, nodeNumbers);
+        create<Source>(nodeNumbers);
         break;
     case LAMP:
-        createWithoutCount<Lamp>(info, nodeNumbers);
+        create<Lamp>(nodeNumbers);
         break;
     case SWITCH:
-        createWithoutCount<Switch>(info, nodeNumbers);
+        create<Switch>(nodeNumbers);
         break;
     case And:
-        create<AND>(info, count, nodeNumbers);
+        create<AND>(count, nodeNumbers);
         break;
     case Or:
-        create<OR>(info, count, nodeNumbers);
+        create<OR>(count, nodeNumbers);
         break;
     case Not:
-        createWithoutCount<NOT>(info, nodeNumbers);
+        create<NOT>(count, nodeNumbers);
         break;
     case Xor:
-        create<XOR>(info, count, nodeNumbers);
+        create<XOR>(count, nodeNumbers);
         break;
     case Nand:
-        create<NAND>(info, count, nodeNumbers);
+        create<NAND>(count, nodeNumbers);
         break;
     case Nor:
-        create<NOR>(info, count, nodeNumbers);
+        create<NOR>(count, nodeNumbers);
         break;
     case Xnor:
-        create<XNOR>(info, count, nodeNumbers);
+        create<XNOR>(count, nodeNumbers);
         break;
     default:
         throw std::string("No found type error...");
         break;
+    }
+}
+
+void Circuit::connectInPinWithNode(InPin* pin, size_t id)
+{
+    Queue<Node> copy(nodeList);
+    bool found = false;
+    while (!copy.isEmpty()) {
+        Node* current = copy.get();
+        if (current->getID() == id) {
+            current->addOutPin(pin);
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        Node* newNode = new Node(id);
+        newNode->addOutPin(pin);
+        newNode->setActiveQueue(&activeList);
+        nodeList.put(newNode);
+    }
+}
+
+void Circuit::connectOutPinWithNode(OutPin* pin, size_t id)
+{
+    Queue<Node> copy(nodeList);
+    bool found = false;
+    while (!copy.isEmpty()) {
+        Node* current = copy.get();
+        if (current->getID() == id) {
+            pin->connectToPin(current->getInPin());
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        Node* newNode = new Node(id);
+        pin->connectToPin(newNode->getInPin());
+        newNode->setActiveQueue(&activeList);
+        nodeList.put(newNode);
     }
 }
 

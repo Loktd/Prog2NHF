@@ -136,6 +136,12 @@ public:
   void sendOutSignals();
 
   /**
+   * @brief
+   *
+   */
+  OutPin* getOutPinBaseAdress() { return outPins; }
+
+  /**
    * @brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
    *
    */

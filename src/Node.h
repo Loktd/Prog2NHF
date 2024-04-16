@@ -5,21 +5,18 @@
 
 #include <iostream>
 
-class Node : public IOPin_Component {
+class Node : public InPin_Component {
+  size_t ID;
+  Queue<OutPin> outPins;
 public:
-  Node(size_t outCount) : IOPin_Component(1, outCount) {}
+  Node(size_t nodeID) : InPin_Component(1), ID(nodeID), outPins(true) {}
+
+  InPin* getInPin();
+  size_t getID() const;
+  void addOutPin(InPin* endPoint);
 
   virtual void executeFunction();
 
   virtual ~Node() {}
-};
-
-class Wire : private Node {
-public:
-  Wire() : Node(1) {}
-
-  virtual void executeFunction() { Node::executeFunction(); }
-
-  virtual ~Wire() {}
 };
 #endif
