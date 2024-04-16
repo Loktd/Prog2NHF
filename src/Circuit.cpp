@@ -298,7 +298,7 @@ void Circuit::connectOutPinWithNode(OutPin* pin, size_t id)
     }
 }
 
-Circuit::Circuit() : simulated(false), configured(false), componentList(true) {}
+Circuit::Circuit() : simulated(false), configured(false), componentList(true), nodeList(true) {}
 
 Circuit::Circuit(const Circuit& source) : componentList(true)
 {
