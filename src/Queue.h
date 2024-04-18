@@ -3,6 +3,8 @@
 
 typedef long long unsigned int size_t;
 
+#include <iostream>
+
 template<class T>
 struct QueueMember {
   /**
@@ -40,6 +42,7 @@ class Queue {
    * @return Queue<T>& Minta szerint van csak, igazi értelme nincsen.
    */
   Queue<T>& operator=(const Queue<T>& source);
+  size_t siz;
 
 public:
   /**
@@ -47,7 +50,7 @@ public:
    *
    * @param owner Tulaja-e az elemeknek, azaz fel kell majd szabadítani a mutatott objektumokat-e.
    */
-  Queue(bool owner = false) : ownsMembers(owner), begin(nullptr), end(nullptr) {}
+  Queue(bool owner = false) : ownsMembers(owner), begin(nullptr), end(nullptr), siz(0) {}
 
   /**
    * @brief Másolást teszi lehetővé, hogy ideiglenesen valamit tudjunk futtatni a fifo-n, a tagokat nem birtokolja.
@@ -111,10 +114,8 @@ Queue<T>& Queue<T>::operator=(const Queue<T>& source)
 }
 template<class T>
 Queue<T>::Queue(const Queue<T>& source)
+  : ownsMembers(false), begin(nullptr), end(nullptr), siz(0)
 {
-  ownsMembers = false;
-  begin = nullptr;
-  end = nullptr;
   *this = source;
 }
 template<class T>
@@ -133,21 +134,26 @@ void Queue<T>::put(T* added)
     end->nextMember = newMember;
     end = newMember;
   }
+  siz++;
 }
 template<class T>
 T* Queue<T>::get()
 {
-  QueueMember<T>* returnedMember = begin;
-  begin = begin->nextMember;
-  T* returned = returnedMember->pointingTo;
-  delete returnedMember;
-  return returned;
+  if (siz > 0) {
+    QueueMember<T>* returnedMember = begin;
+    begin = begin->nextMember;
+    T* returned = returnedMember->pointingTo;
+    delete returnedMember;
+    siz--;
+    return returned;
+  }
+  return nullptr;
 }
 
 template<class T>
 inline bool Queue<T>::isEmpty()
 {
-  return begin == nullptr;
+  return siz == 0;
 }
 
 template<class T>
@@ -168,13 +174,7 @@ inline void Queue<T>::clear()
 template<class T>
 inline size_t Queue<T>::size() const
 {
-  size_t result = 0;
-  Queue<T> copy(*this);
-  while (!copy.isEmpty()) {
-    result++;
-    copy.get();
-  }
-  return result;
+  return siz;
 }
 
 template<class T>

@@ -7,11 +7,12 @@ Source::Source()
     outPins[0].setSignal(Signal(false));
 }
 
-
 std::ostream& operator<<(std::ostream& os, const Source& x) {
+    os << "Source connected to node ";
+    x.printOutConnectedNodes(os);
     if (x.getOutput().getSignal())
-        os << "Source is outputting HIGH (1) signal...";
+        os << ": outputting HIGH (1) signal...";
     else
-        os << "Source is outputting LOW (0) signal...";
+        os << ": outputting LOW (0) signal...";
     return os;
 }

@@ -60,6 +60,7 @@ protected:
    * @brief A bemeneti pin-ek tömbje. Az index jelentést a specifikált alkatrész adja meg.
    */
   InPin* inPins;
+  size_t* inNodeIDs;
 
 public:
   /**
@@ -74,6 +75,12 @@ public:
    *
    */
   void resetActiveCount() { activeInPins = 0; }
+
+  void setInNodeID(size_t at, size_t id);
+  bool connectedToNodeIn(size_t id);
+  void printInConnectedNodes(std::ostream& os) const;
+
+  void resetForSimulation();
 
   /**
    * @brief Növeli az aktív lábak számát, és aktivizálja az áramköri elemet, ha eléri a maximumot.
@@ -97,7 +104,7 @@ public:
    * @brief Törli a bemeneti pin-ek tömbjét.
    *
    */
-  virtual ~InPin_Component() { delete[] inPins; }
+  virtual ~InPin_Component();
 
 };
 class OutPin_Component : virtual public Component {
@@ -111,6 +118,7 @@ protected:
    *
    */
   OutPin* outPins;
+  size_t* outPinIDs;
 
 public:
   /**
@@ -141,6 +149,10 @@ public:
    */
   OutPin* getOutPinBaseAdress() { return outPins; }
 
+  void setOutNodeID(size_t at, size_t id);
+  bool connectedToNodeOut(size_t id);
+  void printOutConnectedNodes(std::ostream& os) const;
+
   /**
    * @brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
    *
@@ -151,7 +163,7 @@ public:
    * @brief Törli a kimeneti pin-ek tömbjét.
    *
    */
-  virtual ~OutPin_Component() { delete[] outPins; }
+  virtual ~OutPin_Component();
 
 };
 class IOPin_Component : public InPin_Component, public OutPin_Component {
@@ -169,6 +181,9 @@ public:
    *
    */
   virtual void executeFunction() = 0;
+
+  bool connectedToNodes(size_t connectedNode1, size_t connectedNode2);
+  void printConnectedNodes(std::ostream& os) const;
 
   /**
    * @brief Virtuális destruktor, mert öröklés.

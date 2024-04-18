@@ -8,10 +8,11 @@ void Circuit::create<NOT>(size_t count, Queue<int>& nodeNumbers) {
     created->setActiveQueue(&activeList);
     Queue<int> copy(nodeNumbers);
     for (size_t i = 0; i < count - 1; i++) {
-        connectInPinWithNode(created->getInPinsBaseAdress() + i, *(copy.get()));
+        connectInPinWithNode(created->getInPinsBaseAdress() + i, *(copy.get()), i);
     }
-    connectOutPinWithNode(created->getOutPinBaseAdress(), *(copy.get()));
+    connectOutPinWithNode(created, created->getOutPinBaseAdress(), *(copy.get()), 0);
     componentList.put(created);
+    incomponents.put(created);
 }
 
 template<>
@@ -19,7 +20,7 @@ void Circuit::create<Source>(Queue<int>& nodeNumbers) {
     Source* created = new Source();
     created->setActiveQueue(&activeList);
     Queue<int> copy(nodeNumbers);
-    connectOutPinWithNode(created->getOutPinBaseAdress(), *(copy.get()));
+    connectOutPinWithNode(created, created->getOutPinBaseAdress(), *(copy.get()), 0);
     componentList.put(created);
     sourceList.put(created);
 }
@@ -28,19 +29,21 @@ void Circuit::create<Lamp>(Queue<int>& nodeNumbers) {
     Lamp* created = new Lamp();
     created->setActiveQueue(&activeList);
     Queue<int> copy(nodeNumbers);
-    connectInPinWithNode(created->getInPinsBaseAdress(), *(copy.get()));
+    connectInPinWithNode(created->getInPinsBaseAdress(), *(copy.get()), 0);
     componentList.put(created);
     lampList.put(created);
+    incomponents.put(created);
 }
 template<>
 void Circuit::create<Switch>(Queue<int>& nodeNumbers) {
     Switch* created = new Switch();
     created->setActiveQueue(&activeList);
     Queue<int> copy(nodeNumbers);
-    connectInPinWithNode(created->getInPinsBaseAdress(), *(copy.get()));
-    connectOutPinWithNode(created->getOutPinBaseAdress(), *(copy.get()));
+    connectInPinWithNode(created->getInPinsBaseAdress(), *(copy.get()), 0);
+    connectOutPinWithNode(created, created->getOutPinBaseAdress(), *(copy.get()), 0);
     componentList.put(created);
     switchList.put(created);
+    incomponents.put(created);
 }
 
 std::ostream* Circuit::errorStream = &std::cerr;
@@ -75,8 +78,10 @@ void Circuit::configure() {
 
 void Circuit::build()
 {
+    if (inputFileName == "")
+        return;
     if (!inputfile.is_open()) {
-        throw std::string("Input file doesn't exist or can't be opened...");
+        throw std::string("Input file doesn't exist or can't be opened...\n");
     }
     inputfile.seekg(std::ios_base::beg);
     ContentInfo info;
@@ -258,7 +263,7 @@ void Circuit::createBasedOnType(ContentInfo& info, size_t count, Queue<int>& nod
     }
 }
 
-void Circuit::connectInPinWithNode(InPin* pin, size_t id)
+void Circuit::connectInPinWithNode(InPin* pin, size_t id, size_t idx)
 {
     Queue<Node> copy(nodeList);
     bool found = false;
@@ -266,6 +271,7 @@ void Circuit::connectInPinWithNode(InPin* pin, size_t id)
         Node* current = copy.get();
         if (current->getID() == id) {
             current->addOutPin(pin);
+            pin->getComponent()->setInNodeID(idx, id);
             found = true;
             break;
         }
@@ -273,12 +279,14 @@ void Circuit::connectInPinWithNode(InPin* pin, size_t id)
     if (!found) {
         Node* newNode = new Node(id);
         newNode->addOutPin(pin);
+        pin->getComponent()->setInNodeID(idx, id);
         newNode->setActiveQueue(&activeList);
         nodeList.put(newNode);
+        incomponents.put(newNode);
     }
 }
 
-void Circuit::connectOutPinWithNode(OutPin* pin, size_t id)
+void Circuit::connectOutPinWithNode(OutPin_Component* component, OutPin* pin, size_t id, size_t idx)
 {
     Queue<Node> copy(nodeList);
     bool found = false;
@@ -286,6 +294,7 @@ void Circuit::connectOutPinWithNode(OutPin* pin, size_t id)
         Node* current = copy.get();
         if (current->getID() == id) {
             pin->connectToPin(current->getInPin());
+            component->setOutNodeID(idx, id);
             found = true;
             break;
         }
@@ -293,8 +302,10 @@ void Circuit::connectOutPinWithNode(OutPin* pin, size_t id)
     if (!found) {
         Node* newNode = new Node(id);
         pin->connectToPin(newNode->getInPin());
+        component->setOutNodeID(idx, id);
         newNode->setActiveQueue(&activeList);
         nodeList.put(newNode);
+        incomponents.put(newNode);
     }
 }
 
@@ -343,9 +354,15 @@ const std::string& Circuit::getSourceFileName() const
 
 void Circuit::simulate(std::ostream& os)
 {
-    if (!configured) {
+    if (!configured)
         configure();
+
+    for (size_t i = 0; i < incomponents.size(); i++) {
+        InPin_Component* current = incomponents.get();
+        current->resetForSimulation();
+        incomponents.put(current);
     }
+
     Queue<Source> temp(sourceList);
     while (!temp.isEmpty()) {
         activeList.put(temp.get());
@@ -357,6 +374,22 @@ void Circuit::simulate(std::ostream& os)
     }
 
     os << *this;
+}
+
+void Circuit::setSource(size_t connectedNode, Signal newSignal)
+{
+    if (!configured) {
+        configure();
+    }
+    Queue<Source> copy(sourceList);
+    while (!copy.isEmpty()) {
+        Source* current = copy.get();
+        if (current->connectedToNodeOut(connectedNode)) {
+            current->setOutput(newSignal);
+            return;
+        }
+    }
+    *errorStream << "No source connected to node: " << connectedNode << " !" << std::endl;
 }
 
 void Circuit::printAllLampStates(std::ostream& os) const
@@ -377,6 +410,19 @@ void Circuit::printAllSourceStates(std::ostream& os) const
     }
 }
 
+void Circuit::setSwitch(size_t connectedNode1, size_t connectedNode2, bool closed)
+{
+    Queue<Switch> copy(switchList);
+    while (!copy.isEmpty()) {
+        Switch* current = copy.get();
+        if (current->connectedToNodes(connectedNode1, connectedNode2)) {
+            current->setState(closed);
+            return;
+        }
+    }
+    *errorStream << "No switch connected to nodes: " << connectedNode1 << " and " << connectedNode2 << " !" << std::endl;
+}
+
 void Circuit::printAllSwitchStates(std::ostream& os) const
 {
     Queue<Switch> copyList(switchList);
@@ -393,15 +439,17 @@ Circuit::~Circuit()
 
 std::ostream& operator<<(std::ostream& os, const Circuit& circuit)
 {
-    printSeparatorLine(os, '*', 50);
+    size_t times = circuit.getSourceFileName().length();
+    times = times < 50 ? 50 : times;
+    printSeparatorLine(os, '*', times);
     os << circuit.getSourceFileName() << std::endl;
-    printSeparatorLine(os, '*', 50);
+    printSeparatorLine(os, '*', times);
     circuit.printAllSourceStates(os);
-    printSeparatorLine(os, '-', 50);
+    printSeparatorLine(os, '-', times);
     circuit.printAllSwitchStates(os);
-    printSeparatorLine(os, '-', 50);
+    printSeparatorLine(os, '-', times);
     circuit.printAllLampStates(os);
-    printSeparatorLine(os, '*', 50);
+    printSeparatorLine(os, '*', times);
     return os;
 }
 

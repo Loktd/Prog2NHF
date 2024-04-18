@@ -68,6 +68,9 @@ public:
    * @param component Az áramköri elem, amihez kötjük.
    */
   void connenctToComponent(InPin_Component* component) { ofComponent = component; }
+
+  InPin_Component* getComponent() const { return ofComponent; }
+
   /**
    * @brief Jelzi az áramköri elem felé, hogy ezen a lábán rendelkezésre áll a jel.
    *

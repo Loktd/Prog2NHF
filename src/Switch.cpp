@@ -11,9 +11,11 @@ void Switch::executeFunction() {
 
 std::ostream& operator<<(std::ostream& os, const Switch& x)
 {
+    os << "Switch connected to nodes ";
+    x.printConnectedNodes(os);
     if (x.getState())
-        os << "Switch is closed...";
+        os << " is closed...";
     else
-        os << "Switch is open...";
+        os << " is open...";
     return os;
 }

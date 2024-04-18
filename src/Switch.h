@@ -32,6 +32,8 @@ public:
    */
   bool getState() const { return closed; }
 
+  void setState(bool newState) { closed = newState; }
+
   /**
    * @brief Átbillenti másik állapotba a kapcsolót.
    *

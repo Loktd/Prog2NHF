@@ -1,2 +1,4 @@
-SOURCE: (1)
-LAMP: (1)
+SOURCE: (1) (2) (3)
+SWITCH: (1, 5)
+AND: (5, 2, 3, 4)
+LAMP: (4)

@@ -20,7 +20,7 @@
                 "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\memtrace.cpp",
                 "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\UnitTest.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\UnitTest.exe"
             ],
             "options": {
                 "cwd": "c:\\mingw64\\bin"

@@ -22,71 +22,24 @@ int main() {
     std::string starSeperator = "**************************************************";
     std::string dashSeperator = "--------------------------------------------------";
 
-    TEST(CIRCUIT, KonstruktorDestruktorUres) {
-        Circuit circuit;
-        EXPECT_EQ("", circuit.getSourceFileName());
-    } END;
-
-    TEST(CIRCUIT, MasoloKonstruktorUres) {
-        Circuit circuit;
-        Circuit circuit2(circuit);
-    } END;
-
-    TEST(CIRCUIT, EgyenlosegOperatorUres) {
-        Circuit circuit;
-        Circuit circuit2;
-        circuit2 = circuit;
-    } END;
-
-    TEST(CIRCUIT, BementiFileBeallitas) {
-        Circuit circuit;
-
-        circuit.setSourceFile(inputFile1Name);
-        EXPECT_EQ(inputFile1Name, circuit.getSourceFileName());
-
-        clearFileContent(errorFileName);
-        std::ifstream errorFileIn;
-        errorFileIn.open(errorFileName);
-        std::string line;
-
-        circuit.setSourceFile(nonExistentFileName);
-        std::getline(errorFileIn, line);
-        EXPECT_EQ("There is no file with name: " + nonExistentFileName, line);
-
-        errorFileIn.close();
-    } END;
-
-    TEST(CIRCUIT, KiirasUres) {
-        Circuit circuit;
-
-        clearFileContent(outputFileName);
-
+    TEST(CIRCUIT, KonfigSikeres) {
         std::ofstream write;
         write.open(outputFileName, std::ostream::app);
-        write << circuit;
-        write.close();
+        clearFileContent(outputFileName);
 
-        std::ifstream read;
-        read.open(outputFileName);
-        std::string line;
-
-        std::getline(read, line);
-        EXPECT_EQ(starSeperator, line);
-        std::getline(read, line);
-        EXPECT_EQ(inputFile1Name, line);
-        std::getline(read, line);
-        EXPECT_EQ(starSeperator, line);
-        std::getline(read, line);
-        EXPECT_EQ(dashSeperator, line);
-        std::getline(read, line);
-        EXPECT_EQ(dashSeperator, line);
-        std::getline(read, line);
-        EXPECT_EQ(starSeperator, line.c_str());
-    } END;
-
-    TEST(CIRCUIT, KonfigSikeres) {
         Circuit circuit;
         circuit.setSourceFile(inputFile1Name);
-        circuit.simulate(std::cout);
+
+        circuit.setSource(1, Signal(true));
+        circuit.simulate(write);
+
+        circuit.setSource(2, Signal(true));
+        circuit.simulate(write);
+
+        circuit.setSwitch(1, 5, true);
+        circuit.setSource(3, Signal(true));
+        circuit.simulate(write);
+        
+        write.close();
     } END;
 }

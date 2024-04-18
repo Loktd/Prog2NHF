@@ -27,6 +27,7 @@ class Circuit {
   std::ifstream inputfile;
 
   Queue<Component> componentList;
+  Queue<InPin_Component> incomponents;
   Queue<Source> sourceList;
   Queue<Switch> switchList;
   Queue<Lamp> lampList;
@@ -60,8 +61,8 @@ class Circuit {
   template<typename T>
   void create(Queue<int>& nodeNumbers);
 
-  void connectInPinWithNode(InPin* pin, size_t id);
-  void connectOutPinWithNode(OutPin* pin, size_t id);
+  void connectInPinWithNode(InPin* pin, size_t id, size_t idx);
+  void connectOutPinWithNode(OutPin_Component* component, OutPin* pin, size_t id, size_t idx);
 
 public:
   Circuit();
@@ -75,24 +76,24 @@ public:
 
   void simulate(std::ostream& os);
 
-  void setSource(int connectedNode, Signal newSignal);
+  void setSource(size_t connectedNode, Signal newSignal);
   void setAllSources(int* connectedNodes, Signal* newSignals);
-  void flipSource(int connectedNode);
+  void flipSource(size_t connectedNode);
   void flipAllSources();
-  Signal getSourceSignal(int connectedNode) const;
+  Signal getSourceSignal(size_t connectedNode) const;
   void printSourceState(std::ostream& os) const;
   void printAllSourceStates(std::ostream& os) const;
 
-  void setSwitch(int connectedNode1, int connectedNode2, bool closed);
-  void setAllSwitches(int* connectedNodes1, int* connectedNodes2, bool* closedStates);
-  void flipSwitch(int connectedNode1, int connectedNode2);
+  void setSwitch(size_t connectedNode1, size_t connectedNode2, bool closed);
+  void setAllSwitches(size_t* connectedNodes1, size_t* connectedNodes2, bool closedStates[]);
+  void flipSwitch(size_t connectedNode1, size_t connectedNode2);
   void flipAllSwitches();
-  bool isSwitchClosed(int connectedNode1, int connectedNode2);
-  void printSwitchState(int connectedNode1, int connectedNode2, std::ostream& os) const;
+  bool isSwitchClosed(size_t connectedNode1, size_t connectedNode2);
+  void printSwitchState(size_t connectedNode1, size_t connectedNode2, std::ostream& os) const;
   void printAllSwitchStates(std::ostream& os) const;
 
-  Signal getLampSignal() const;
-  bool isLampGlowing() const;
+  Signal getLampSignal(int connectedNode) const;
+  bool isLampGlowing(int connectedNode) const;
   void printLampState(int connectedNode, std::ostream& os);
   void printAllLampStates(std::ostream& os) const;
 
@@ -108,10 +109,11 @@ void Circuit::create(size_t count, Queue<int>& nodeNumbers) {
   ((Component*)created)->setActiveQueue(&activeList);
   Queue<int> copy(nodeNumbers);
   for (size_t i = 0; i < count - 1; i++) {
-    connectInPinWithNode(((InPin_Component*)created)->getInPinsBaseAdress() + i, *(copy.get()));
+    connectInPinWithNode(((InPin_Component*)created)->getInPinsBaseAdress() + i, *(copy.get()), i);
   }
-  connectOutPinWithNode(((OutPin_Component*)created)->getOutPinBaseAdress(), *(copy.get()));
+  connectOutPinWithNode(created, ((OutPin_Component*)created)->getOutPinBaseAdress(), *(copy.get()), 0);
   componentList.put(created);
+  incomponents.put(created);
 }
 
 #endif
