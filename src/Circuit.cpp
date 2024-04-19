@@ -1,6 +1,8 @@
 
 #include "Circuit.h"
 
+#include <ctime>
+
 
 template<>
 void Circuit::create<NOT>(size_t count, Queue<int>& nodeNumbers) {
@@ -443,6 +445,9 @@ std::ostream& operator<<(std::ostream& os, const Circuit& circuit)
     times = times < 50 ? 50 : times;
     printSeparatorLine(os, '*', times);
     os << circuit.getSourceFileName() << std::endl;
+    printSeparatorLine(os, '*', times);
+    std::time_t result = std::time(nullptr);
+    os << std::ctime(&result);
     printSeparatorLine(os, '*', times);
     circuit.printAllSourceStates(os);
     printSeparatorLine(os, '-', times);

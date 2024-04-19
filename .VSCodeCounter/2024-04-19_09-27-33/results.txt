@@ -1,0 +1,42 @@
+Date : 2024-04-19 09:27:33
+Directory : c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src
+Total : 18 files,  1123 codes, 338 comments, 240 blanks, all 1701 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |         18 |      1,123 |        338 |        240 |      1,701 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                        |         18 |      1,123 |        338 |        240 |      1,701 |
++--------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                 | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Circuit.cpp   | C++      |        423 |          0 |         44 |        467 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Circuit.h     | C++      |         97 |          0 |         22 |        119 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Component.cpp | C++      |        119 |          0 |         21 |        140 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Component.h   | C++      |         58 |        107 |         30 |        195 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Gate.cpp      | C++      |         59 |          0 |         11 |         70 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Gate.h        | C++      |         57 |          0 |         13 |         70 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Lamp.cpp      | C++      |         16 |          0 |          4 |         20 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Lamp.h        | C++      |         13 |         20 |          8 |         41 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Node.cpp      | C++      |         23 |          0 |          6 |         29 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Node.h        | C++      |         16 |          0 |          7 |         23 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Pin.cpp       | C++      |         17 |          0 |          4 |         21 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Pin.h         | C++      |         32 |         62 |         15 |        109 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Queue.h       | C++      |        116 |         62 |         21 |        199 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Signal.h      | C++      |         13 |         30 |          7 |         50 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Source.cpp    | C++      |         15 |          0 |          3 |         18 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Source.h      | C++      |         15 |         28 |         10 |         53 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Switch.cpp    | C++      |         18 |          0 |          4 |         22 |
+| c:\Users\palin\VSCodeProjects\Egyetem\2.Felev\Prog2NHF\src\Switch.h      | C++      |         16 |         29 |         10 |         55 |
+| Total                                                                    |          |      1,123 |        338 |        240 |      1,701 |
++--------------------------------------------------------------------------+----------+------------+------------+------------+------------+

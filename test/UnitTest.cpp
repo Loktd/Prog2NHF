@@ -30,16 +30,18 @@ int main() {
         Circuit circuit;
         circuit.setSourceFile(inputFile1Name);
 
+        circuit.simulate(write);
+
         circuit.setSource(1, Signal(true));
         circuit.simulate(write);
 
         circuit.setSource(2, Signal(true));
         circuit.simulate(write);
 
-        circuit.setSwitch(1, 5, true);
+        circuit.setSwitch(6, 7, true);
         circuit.setSource(3, Signal(true));
         circuit.simulate(write);
-        
+
         write.close();
     } END;
 }
