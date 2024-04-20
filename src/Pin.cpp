@@ -1,6 +1,9 @@
 
 #include "Pin.h"
 #include "Component.h"
+#include "Node.h"
+
+#include <string>
 
 Pin::Pin(Signal baseSignal) : ownedSignal(baseSignal) {}
 
@@ -31,12 +34,23 @@ InputComponent* InputPin::getComponent() const
     return component;
 }
 
-void InputPin::SignalReady() const
+bool InputPin::isReady()
+{
+    return ready;
+}
+
+void InputPin::setReady()
 {
     if (component == nullptr) {
         throw "ERROR: An input pin doesn't have an associated component...";
     }
-    component->tickCounter();
+    ready = true;
+    component->activateIfReady();
+}
+
+void InputPin::resetReady()
+{
+    ready = false;
 }
 
 void OutputPin::sendSignal() const
@@ -44,6 +58,11 @@ void OutputPin::sendSignal() const
     if (connectedTo == nullptr) {
         throw "ERROR: An output pin doesn't have an associated input pin...";
     }
-    connectedTo->setSignal(ownedSignal);
-    connectedTo->SignalReady();
+    if (!connectedTo->isReady()) {
+        connectedTo->setSignal(ownedSignal);
+        connectedTo->setReady();
+    }
+    else if (connectedTo->getSignal() != ownedSignal) {
+        throw std::string("ERROR: Shortcircuit at node ");
+    }
 }

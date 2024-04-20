@@ -53,10 +53,6 @@ protected:
    */
   size_t inPinCount;
   /**
-   * @brief Az aktív, valid adattal rendelkező pin-ek száma.
-   */
-  size_t activeInPins;
-  /**
    * @brief A bemeneti pin-ek tömbje. Az index jelentést a specifikált alkatrész adja meg.
    */
   InputPin* inPins;
@@ -70,12 +66,6 @@ public:
    */
   InputComponent(size_t inCount);
 
-  /**
-   * @brief Reseteli az aktív pin-ek számát 0-ra.
-   *
-   */
-  void resetActiveCount() { activeInPins = 0; }
-
   void setInNodeID(size_t at, size_t id);
   bool connectedToNodeIn(size_t id);
   void printInConnectedNodes(std::ostream& os) const;
@@ -86,7 +76,7 @@ public:
    * @brief Növeli az aktív lábak számát, és aktivizálja az áramköri elemet, ha eléri a maximumot.
    *
    */
-  void tickCounter();
+  void activateIfReady();
 
   /**
    * @brief Visszaadja a bemeneti pin-ek tömbjének címét.

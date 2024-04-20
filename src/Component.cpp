@@ -10,7 +10,6 @@ typedef long long unsigned int size_t;
 InputComponent::InputComponent(size_t inCount)
 {
     inPinCount = inCount;
-    activeInPins = 0;
     inPins = new InputPin[inPinCount];
     inNodeIDs = new size_t[inPinCount];
     for (size_t i = 0; i < inPinCount; i++) {
@@ -47,17 +46,22 @@ void InputComponent::printInConnectedNodes(std::ostream& os) const
 
 void InputComponent::resetForSimulation()
 {
-    activeInPins = 0;
+    for (size_t i = 0; i < inPinCount; i++) {
+        inPins[i].resetReady();
+    }
 }
 
-void InputComponent::tickCounter()
+void InputComponent::activateIfReady()
 {
-    activeInPins++;
-    if (activeInPins == inPinCount) {
-        addToActiveQueue();
+    bool isActive = true;
+    for (size_t i = 0; i < inPinCount; i++) {
+        if (!inPins[i].isReady()) {
+            isActive = false;
+            break;
+        }
     }
-    else if (activeInPins > inPinCount) {
-        std::cout << this << activeInPins << std::endl;
+    if (isActive) {
+        addToActiveQueue();
     }
 }
 

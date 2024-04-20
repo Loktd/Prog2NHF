@@ -18,11 +18,7 @@
 #include <string>
 
 class Circuit {
-  static std::ostream* errorStream;
-
-  bool configured;
-  bool simulated;
-
+  std::ostream* errorStream;
   std::string inputFileName;
   std::ifstream inputfile;
 
@@ -33,6 +29,9 @@ class Circuit {
   Queue<Lamp> lampList;
   Queue<Component> activeList;
   Queue<Node> nodeList;
+
+  bool configured;
+  bool simulated;
 
   void reset();
   void configure();
@@ -69,7 +68,7 @@ public:
   Circuit(const Circuit& source);
   Circuit& operator=(const Circuit& source);
 
-  static void setErrorStream(std::ostream* os);
+  void setErrorStream(std::ostream* os);
 
   void setSourceFile(const std::string& fileName);
   const std::string& getSourceFileName() const;
@@ -77,24 +76,10 @@ public:
   void simulate(std::ostream& os);
 
   void setSource(size_t connectedNode, Signal newSignal);
-  void setAllSources(int* connectedNodes, Signal* newSignals);
-  void flipSource(size_t connectedNode);
-  void flipAllSources();
-  Signal getSourceSignal(size_t connectedNode) const;
-  void printSourceState(std::ostream& os) const;
-  void printAllSourceStates(std::ostream& os) const;
-
   void setSwitch(size_t connectedNode1, size_t connectedNode2, bool closed);
-  void setAllSwitches(size_t* connectedNodes1, size_t* connectedNodes2, bool closedStates[]);
-  void flipSwitch(size_t connectedNode1, size_t connectedNode2);
-  void flipAllSwitches();
-  bool isSwitchClosed(size_t connectedNode1, size_t connectedNode2);
-  void printSwitchState(size_t connectedNode1, size_t connectedNode2, std::ostream& os) const;
-  void printAllSwitchStates(std::ostream& os) const;
 
-  Signal getLampSignal(int connectedNode) const;
-  bool isLampGlowing(int connectedNode) const;
-  void printLampState(int connectedNode, std::ostream& os);
+  void printAllSourceStates(std::ostream& os) const;
+  void printAllSwitchStates(std::ostream& os) const;
   void printAllLampStates(std::ostream& os) const;
 
   ~Circuit();

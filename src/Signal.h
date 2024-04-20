@@ -47,6 +47,15 @@ public:
    * @return false, ha nem egyeznek
    */
   bool operator==(const Signal& other) { return signal == other.signal; }
+
+  /**
+   * @brief Nem egyenlőséget vizsgálja két jelszint között.
+   *
+   * @param other A másik jel amivel hasonlítunk.
+   * @return true, ha nem egyeznek.
+   * @return false, ha egyeznek
+   */
+  bool operator!=(const Signal& other) { return signal != other.signal; }
 };
 
 #endif

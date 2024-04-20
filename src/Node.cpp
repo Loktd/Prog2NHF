@@ -1,6 +1,8 @@
 
 #include "Node.h"
 
+#include <string>
+
 InputPin* Node::getInPin()
 {
     return inPins;

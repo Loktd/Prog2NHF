@@ -84,11 +84,25 @@ public:
   InputComponent* getComponent() const;
 
   /**
+   * @brief Visszaadja, hogy készen áll-e kiértékelésre a bemeneti pin, azaz erről a pinről már meg van-e a helyes bemenet.
+   *
+   * @return true = ha készenáll.
+   * @return false = ha még nem áll készen
+   */
+  bool isReady();
+
+  /**
    * @brief Jelzi az áramköri elem felé, hogy ezen a lábán rendelkezésre áll a jel.
    *
    * @exception const char* = amennyiben nincs hozzá kötve áramköri elem.
    */
-  void SignalReady() const;
+  void setReady();
+
+  /**
+   * @brief Reseteli a készenlétet, azaz a pin-nek beállítja, hogy még nem áll készen adat feldolgozásra.
+   *
+   */
+  void resetReady();
 
   /**
    * @brief Virtuális a destruktor az öröklés miatt.

@@ -15,6 +15,7 @@
 #include "TestHelpFunctions.h"
 
 int main() {
+#ifdef CPORTA
     std::string inputFile1Name = "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\TestMaterial_InputTest1.txt";
     std::string outputFileName = "TestMaterial_OutputTest.txt";
     std::string errorFileName = "Errors.txt";
@@ -33,15 +34,21 @@ int main() {
         circuit.simulate(write);
 
         circuit.setSource(1, Signal(true));
+        circuit.setSource(5, Signal(true));
         circuit.simulate(write);
 
         circuit.setSource(2, Signal(true));
+        circuit.setSource(6, Signal(true));
         circuit.simulate(write);
 
-        circuit.setSwitch(6, 7, true);
-        circuit.setSource(3, Signal(true));
         circuit.simulate(write);
 
         write.close();
     } END;
+#else
+    Circuit circuit;
+
+    circuit.setSourceFile("C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\TestMaterial_InputTest1.txt");
+    circuit.simulate(std::cout);
+#endif
 }

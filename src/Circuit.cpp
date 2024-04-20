@@ -48,8 +48,6 @@ void Circuit::create<Switch>(Queue<int>& nodeNumbers) {
     incomponents.put(created);
 }
 
-std::ostream* Circuit::errorStream = &std::cerr;
-
 void Circuit::reset()
 {
     componentList.clear();
@@ -84,6 +82,9 @@ void Circuit::build()
 {
     if (inputFileName == "")
         return;
+    if (!inputfile.is_open()) {
+        inputfile.open(inputFileName);
+    }
     if (!inputfile.is_open()) {
         throw std::string("Input file doesn't exist or can't be opened...\n");
     }
@@ -313,7 +314,7 @@ void Circuit::connectOutPinWithNode(OutputComponent* component, OutputPin* pin, 
     }
 }
 
-Circuit::Circuit() : simulated(false), configured(false), componentList(true), nodeList(true) {}
+Circuit::Circuit() : errorStream(&std::cerr), simulated(false), configured(false), componentList(true), nodeList(true) {}
 
 Circuit::Circuit(const Circuit& source) : componentList(true)
 {
@@ -372,12 +373,35 @@ void Circuit::simulate(std::ostream& os)
         activeList.put(temp.get());
     }
 
+    bool wasShortCircuit = false;
+
     while (!activeList.isEmpty()) {
         Component* current = activeList.get();
-        current->executeFunction();
+        try {
+            current->executeFunction();
+        }
+        catch (std::string str) {
+            if (!wasShortCircuit) {
+                printSeparatorLine(os, '=', 50);
+                os << "ERROR DURING SIMULATION!" << std::endl;
+                printSeparatorLine(os, '=', 50);
+                std::time_t result = std::time(nullptr);
+                os << std::ctime(&result);
+                printSeparatorLine(os, '*', 50);
+                wasShortCircuit = true;
+            }
+            os << str;
+            dynamic_cast<OutputComponent*>(current)->printOutConnectedNodes(os);
+            os << "!" << std::endl;
+        }
     }
 
-    os << *this;
+    if (!wasShortCircuit)
+        os << *this;
+    else {
+        printSeparatorLine(os, '=', 50);
+        os << std::endl << std::endl;
+    }
 }
 
 void Circuit::setSource(size_t connectedNode, Signal newSignal)
@@ -393,7 +417,7 @@ void Circuit::setSource(size_t connectedNode, Signal newSignal)
             return;
         }
     }
-    *errorStream << "No source connected to node: " << connectedNode << " !" << std::endl;
+    *errorStream << "No source connected to node: " << connectedNode << "!" << std::endl;
 }
 
 void Circuit::printAllLampStates(std::ostream& os) const
@@ -424,7 +448,7 @@ void Circuit::setSwitch(size_t connectedNode1, size_t connectedNode2, bool close
             return;
         }
     }
-    *errorStream << "No switch connected to nodes: " << connectedNode1 << " and " << connectedNode2 << " !" << std::endl;
+    *errorStream << "No switch connected to nodes: " << connectedNode1 << " and " << connectedNode2 << "!" << std::endl;
 }
 
 void Circuit::printAllSwitchStates(std::ostream& os) const
@@ -444,7 +468,7 @@ Circuit::~Circuit()
 std::ostream& operator<<(std::ostream& os, const Circuit& circuit)
 {
     size_t times = circuit.getSourceFileName().length();
-    times = times < 50 ? 50 : times;
+    times = times < 75 ? 75 : times;
     printSeparatorLine(os, '=', times);
     os << circuit.getSourceFileName() << std::endl;
     printSeparatorLine(os, '*', times);
