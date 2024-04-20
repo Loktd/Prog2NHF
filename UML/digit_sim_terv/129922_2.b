@@ -1,0 +1,7 @@
+class IOPin_Component
+!!!136450.cpp!!!	connectedToNodes(in connectedNode1 : size_t, in connectedNode2 : size_t) : bool
+    return connectedToNodeIn(connectedNode1) && connectedToNodeOut(connectedNode2) || connectedToNodeIn(connectedNode2) && connectedToNodeOut(connectedNode1);
+!!!136578.cpp!!!	printConnectedNodes(inout os : std::ostream) : void
+    printInConnectedNodes(os);
+    os << " and ";
+    printOutConnectedNodes(os);

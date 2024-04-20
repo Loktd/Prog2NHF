@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class OutPin_Component</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class OutPin_Component</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_136194"></a>
+<p>Declaration :</p><ul>
+<li>C++ : class OutPin_Component : public virtual <a href="class134786.html#ref4_134786"><b>Component</b></a> </li></ul><p>Directly inherited by : <a href="class136578.html#ref4_136578"><b>IOPin_Component</b></a> <a href="class135042.html#ref4_135042"><b>Source</b></a> </p>
+<p>Artifact : <a href="index.html#ref8_130690"><b>Component</b></a></p>
+<div class="sub">
+<a name="ref0_140546"></a>
+<table><tr><td><div class="element">Relation <b>outPinCount (&lt;directional composition&gt;)</b></div></td></tr></table><p>@brief A kimeneti pin-ek szÃ¡ma.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : # outPinCount : <a href="class135810.html#ref4_135810"><b>size_t</b></a></li><li>C++ : protected: <a href="class135810.html#ref4_135810"><b>size_t</b></a> outPinCount</li></ul><a name="ref0_140674"></a>
+<table><tr><td><div class="element">Relation <b>outPins (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>@brief A kimeneti pin-ek tÃ¶mbje.  Az index jelentÃ©st a specifikÃ¡lt alkatrÃ©sz adja meg.<br /><br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : # outPins : <a href="class136322.html#ref4_136322"><b>OutPin</b></a></li><li>C++ : protected: <a href="class136322.html#ref4_136322"><b>OutPin</b></a> * outPins</li></ul><a name="ref0_140802"></a>
+<table><tr><td><div class="element">Relation <b>outPinIDs (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : # outPinIDs : <a href="class135810.html#ref4_135810"><b>size_t</b></a></li><li>C++ : protected: <a href="class135810.html#ref4_135810"><b>size_t</b></a> * outPinIDs</li></ul><a name="ref2_171394"></a>
+<table><tr><td><div class="element">Operation <b>OutPin_Component</b></div></td></tr></table><p>@brief LÃ©trehozza a kimeneti pin-ek tÃ¶mbjÃ©t.<br /><br />@param outCount A kÃ­vÃ¡nt kimeneti pin-ek szÃ¡ma.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + OutPin_Component(in outCount : <a href="class135810.html#ref4_135810"><b>size_t</b></a>) : </li><li>C++ : public: OutPin_Component(<a href="class135810.html#ref4_135810"><b>size_t</b></a> outCount)</li></ul><a name="ref2_171522"></a>
+<table><tr><td><div class="element">Operation <b>connectTo</b></div></td></tr></table><p>@brief ÃsszekÃ¶ti a megadott kimeneti pin-jÃ©t egy mÃ¡sik Ã¡ramkÃ¶ri elem bemeneti pin-jÃ©vel.<br /><br />@param outPinIndex A kimeneti pin indexe.<br />@param component Amivel Ã¶ssze szeretnÃ©nk kÃ¶tni.<br />@param inPinIndex A bemeneti pin indexe.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + connectTo(in outPinIndex : <a href="class135810.html#ref4_135810"><b>size_t</b></a>, inout component : <a href="class134914.html#ref4_134914"><b>InPin_Component</b></a>, in inPinIndex : <a href="class135810.html#ref4_135810"><b>size_t</b></a>) : void</li><li>C++ : public: void connectTo(<a href="class135810.html#ref4_135810"><b>size_t</b></a> outPinIndex, <a href="class134914.html#ref4_134914"><b>InPin_Component</b></a> * component, <a href="class135810.html#ref4_135810"><b>size_t</b></a> inPinIndex)</li></ul><a name="ref2_171650"></a>
+<table><tr><td><div class="element">Operation <b>sendOutSignals</b></div></td></tr></table><p>@brief KikÃ¼ldi minden kimeneti lÃ¡bÃ¡n a lÃ¡bakban tÃ¡rolt jeleket.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + sendOutSignals() : void</li><li>C++ : public: void sendOutSignals()</li></ul><a name="ref2_171778"></a>
+<table><tr><td><div class="element">Operation <b>getOutPinBaseAdress</b></div></td></tr></table><p>@brief<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + getOutPinBaseAdress() : <a href="class136322.html#ref4_136322"><b>OutPin</b></a></li><li>C++ : public: inline <a href="class136322.html#ref4_136322"><b>OutPin</b></a> * getOutPinBaseAdress()</li></ul><a name="ref2_171906"></a>
+<table><tr><td><div class="element">Operation <b>setOutNodeID</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + setOutNodeID(in at : <a href="class135810.html#ref4_135810"><b>size_t</b></a>, in id : <a href="class135810.html#ref4_135810"><b>size_t</b></a>) : void</li><li>C++ : public: void setOutNodeID(<a href="class135810.html#ref4_135810"><b>size_t</b></a> at, <a href="class135810.html#ref4_135810"><b>size_t</b></a> id)</li></ul><a name="ref2_172034"></a>
+<table><tr><td><div class="element">Operation <b>connectedToNodeOut</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + connectedToNodeOut(in id : <a href="class135810.html#ref4_135810"><b>size_t</b></a>) : bool</li><li>C++ : public: bool connectedToNodeOut(<a href="class135810.html#ref4_135810"><b>size_t</b></a> id)</li></ul><a name="ref2_172162"></a>
+<table><tr><td><div class="element">Operation <b>printOutConnectedNodes</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + printOutConnectedNodes(inout os : std::ostream) : void</li><li>C++ : public: void printOutConnectedNodes(std::ostream &amp; os) const</li></ul><a name="ref2_172290"></a>
+<table><tr><td><div class="element">Operation <b>executeFunction</b></div></td></tr></table><p>@brief VÃ©grehajtja a funkciÃ³jÃ¡t az Ã¡ramkÃ¶ri elemnek. LeszÃ¡rmazottban konkretizÃ¡lva.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : abstract, + executeFunction() : void</li><li>C++ : public: virtual void executeFunction()= 0 </li></ul><a name="ref2_172418"></a>
+<table><tr><td><div class="element">Operation <b>~OutPin_Component</b></div></td></tr></table><p>@brief TÃ¶rli a kimeneti pin-ek tÃ¶mbjÃ©t.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + ~OutPin_Component() : </li><li>C++ : public: virtual ~OutPin_Component()</li></ul></div>
+<p>All public operations : <a href="class134786.html#ref2_169730"><b>addToActiveQueue</b></a> , <a href="class136194.html#ref2_172034"><b>connectedToNodeOut</b></a> , <a href="class136194.html#ref2_171522"><b>connectTo</b></a> , <a href="class134786.html#ref2_169858"><b>executeFunction</b></a> , <a href="class136194.html#ref2_172290"><b>executeFunction</b></a> , <a href="class136194.html#ref2_171778"><b>getOutPinBaseAdress</b></a> , <a href="class136194.html#ref2_172162"><b>printOutConnectedNodes</b></a> , <a href="class136194.html#ref2_171650"><b>sendOutSignals</b></a> , <a href="class134786.html#ref2_169602"><b>setActiveQueue</b></a> , <a href="class136194.html#ref2_171906"><b>setOutNodeID</b></a> </p>
+</body>
+</html>

@@ -1,0 +1,7 @@
+class Switch
+!!!145538.cpp!!!	executeFunction() : void
+    if (closed)
+        outPins[0].setSignal(inPins[0].getSignal());
+    else
+        outPins[0].setSignal(Signal(false));
+    sendOutSignals();

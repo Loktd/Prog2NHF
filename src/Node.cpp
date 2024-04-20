@@ -1,7 +1,7 @@
 
 #include "Node.h"
 
-InPin* Node::getInPin()
+InputPin* Node::getInPin()
 {
     return inPins;
 }
@@ -11,17 +11,17 @@ size_t Node::getID() const
     return ID;
 }
 
-void Node::addOutPin(InPin* endPoint)
+void Node::addOutPin(InputPin* endPoint)
 {
-    OutPin* nextOut = new OutPin();
+    OutputPin* nextOut = new OutputPin();
     nextOut->connectToPin(endPoint);
     outPins.put(nextOut);
 }
 
 void Node::executeFunction() {
-    Queue<OutPin> copy(outPins);
+    Queue<OutputPin> copy(outPins);
     while (!copy.isEmpty()) {
-        OutPin* current = copy.get();
+        OutputPin* current = copy.get();
         current->setSignal(inPins[0].getSignal());
         current->sendSignal();
     }

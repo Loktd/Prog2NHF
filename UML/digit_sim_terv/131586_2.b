@@ -1,0 +1,49 @@
+class InPin_Component
+!!!151938.cpp!!!	InPin_Component(in inCount : size_t)
+    inPinCount = inCount;
+    activeInPins = 0;
+    inPins = new InPin[inPinCount];
+    inNodeIDs = new size_t[inPinCount];
+    for (size_t i = 0; i < inPinCount; i++) {
+        inPins[i].connenctToComponent(this);
+    }
+!!!152194.cpp!!!	setInNodeID(in at : size_t, in id : size_t) : void
+    if (at >= inPinCount) {
+        throw std::string("Indexed out of inNodeID range...\n");
+    }
+    inNodeIDs[at] = id;
+!!!152322.cpp!!!	connectedToNodeIn(in id : size_t) : bool
+    for (size_t i = 0; i < inPinCount; i++) {
+        if (inNodeIDs[i] == id) {
+            return true;
+        }
+    }
+    return false;
+!!!152450.cpp!!!	printInConnectedNodes(inout os : std::ostream) : void
+    for (size_t i = 0; i < inPinCount; i++) {
+        os << inNodeIDs[i];
+        if (i != inPinCount - 1)
+            os << " ";
+    }
+!!!152578.cpp!!!	resetForSimulation() : void
+    activeInPins = 0;
+!!!152706.cpp!!!	tickCounter() : void
+    activeInPins++;
+    if (activeInPins == inPinCount) {
+        addToActiveQueue();
+    }
+    else if (activeInPins > inPinCount) {
+        std::cout << this << activeInPins << std::endl;
+        throw "ERROR: Recursion...";
+    }
+!!!153090.cpp!!!	~InPin_Component()
+    delete[] inPins;
+    delete[] inNodeIDs;
+!!!152706.cpp!!!	tickCounter() : void
+    activeInPins++;
+    if (activeInPins == inPinCount) {
+        addToActiveQueue();
+    }
+    else if (activeInPins > inPinCount) {
+        std::cout << this << activeInPins << std::endl;
+    }

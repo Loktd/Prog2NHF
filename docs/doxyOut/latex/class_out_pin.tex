@@ -1,0 +1,93 @@
+\doxysection{Out\+Pin Class Reference}
+\hypertarget{class_out_pin}{}\label{class_out_pin}\index{OutPin@{OutPin}}
+Inheritance diagram for Out\+Pin\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_out_pin}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_out_pin_a8b2e2641c2c540f5d89fd2eeaf51dc2f}{Out\+Pin}} (\mbox{\hyperlink{class_signal}{Signal}} base\+Signal=\mbox{\hyperlink{class_signal}{Signal}}(false))
+\begin{DoxyCompactList}\small\item\em Létrhoz egy kimeneti pin-\/t, kapcsolt bemeneti pin-\/jét NULL-\/ra állítva. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_out_pin_acc9a7a8b618054beee7d2901cf55e157}{connect\+To\+Pin}} (\mbox{\hyperlink{class_in_pin}{In\+Pin}} \texorpdfstring{$\ast$}{*}pin)
+\begin{DoxyCompactList}\small\item\em Összekapcsolja egy bemeneti pin-\/nel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_out_pin_ae838bc1002fac7a37946099e1108c924}{send\+Signal}} () const
+\begin{DoxyCompactList}\small\item\em Jelet küld a kapcsolt bemeneti pin-\/nek. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_pin}{Pin}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pin_a42500409341a08ca0987dd6f409a3edd}{Pin}} (\mbox{\hyperlink{class_signal}{Signal}} base\+Signal=\mbox{\hyperlink{class_signal}{Signal}}(false))
+\begin{DoxyCompactList}\small\item\em Létrehoz egy pin-\/t kezdő jelértékkel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pin_a2131812b2230df76b4c05f5a8dde4322}{set\+Signal}} (const \mbox{\hyperlink{class_signal}{Signal}} \&new\+Signal)
+\begin{DoxyCompactList}\small\item\em Beállítja a pin jelét. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_signal}{Signal}} \mbox{\hyperlink{class_pin_a064080c36a74a6bed908c883d18ec7c2}{get\+Signal}} () const
+\begin{DoxyCompactList}\small\item\em Visszaadja a pin jelét. Mivel kicsi a \doxylink{class_signal}{Signal} osztály, ezért nem kell pointer/referencia. \end{DoxyCompactList}\item 
+void {\bfseries flip\+Signal} ()
+\begin{DoxyCompactList}\small\item\em Megfordítja a pin jelét. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Pin} ()
+\begin{DoxyCompactList}\small\item\em Virtuál destruktor, mert öröklés. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_pin}{Pin}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_signal}{Signal}} {\bfseries owned\+Signal}
+\begin{DoxyCompactList}\small\item\em A pin által birtokolt jel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_out_pin_a8b2e2641c2c540f5d89fd2eeaf51dc2f}\label{class_out_pin_a8b2e2641c2c540f5d89fd2eeaf51dc2f} 
+\index{OutPin@{OutPin}!OutPin@{OutPin}}
+\index{OutPin@{OutPin}!OutPin@{OutPin}}
+\doxysubsubsection{\texorpdfstring{OutPin()}{OutPin()}}
+{\footnotesize\ttfamily Out\+Pin\+::\+Out\+Pin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_signal}{Signal}}}]{base\+Signal = {\ttfamily \mbox{\hyperlink{class_signal}{Signal}}(false)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Létrhoz egy kimeneti pin-\/t, kapcsolt bemeneti pin-\/jét NULL-\/ra állítva. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Signal} & Az alapjel, ha van megadva. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_out_pin_acc9a7a8b618054beee7d2901cf55e157}\label{class_out_pin_acc9a7a8b618054beee7d2901cf55e157} 
+\index{OutPin@{OutPin}!connectToPin@{connectToPin}}
+\index{connectToPin@{connectToPin}!OutPin@{OutPin}}
+\doxysubsubsection{\texorpdfstring{connectToPin()}{connectToPin()}}
+{\footnotesize\ttfamily void Out\+Pin\+::connect\+To\+Pin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_in_pin}{In\+Pin}} \texorpdfstring{$\ast$}{*}}]{pin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Összekapcsolja egy bemeneti pin-\/nel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin} & A kapcsolni kívánt pin. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_out_pin_ae838bc1002fac7a37946099e1108c924}\label{class_out_pin_ae838bc1002fac7a37946099e1108c924} 
+\index{OutPin@{OutPin}!sendSignal@{sendSignal}}
+\index{sendSignal@{sendSignal}!OutPin@{OutPin}}
+\doxysubsubsection{\texorpdfstring{sendSignal()}{sendSignal()}}
+{\footnotesize\ttfamily void Out\+Pin\+::send\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Jelet küld a kapcsolt bemeneti pin-\/nek. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em const} & char\texorpdfstring{$\ast$}{*} = amennyiben nincs hozzá kötve bemeneti pin. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/palin/\+VSCode\+Projects/\+Egyetem/2.\+Felev/\+Prog2\+NHF/src/Pin.\+h\item 
+C\+:/\+Users/palin/\+VSCode\+Projects/\+Egyetem/2.\+Felev/\+Prog2\+NHF/src/Pin.\+cpp\end{DoxyCompactItemize}

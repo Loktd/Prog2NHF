@@ -12,7 +12,7 @@ void AND::performLogicCalculation()
     Signal result(true);
     for (size_t i = 0; i < inPinCount; i++) {
         if (inPins[i].getSignal() == Signal(false)) {
-            result.setSignal(false);
+            result.setValue(false);
             break;
         }
     }
@@ -24,7 +24,7 @@ void OR::performLogicCalculation()
     Signal result(false);
     for (size_t i = 0; i < inPinCount; i++) {
         if (inPins[i].getSignal() == Signal(true)) {
-            result.setSignal(true);
+            result.setValue(true);
             break;
         }
     }
@@ -35,7 +35,7 @@ void OR::performLogicCalculation()
 void NOT::performLogicCalculation()
 {
     Signal result = inPins[0].getSignal();
-    result.flipSignal();
+    result.flip();
     outPins[0].setSignal(result);
 }
 
@@ -44,7 +44,7 @@ void XOR::performLogicCalculation()
     Signal result(false);
     for (size_t i = 0; i < inPinCount; i++) {
         if (inPins[i].getSignal() == Signal(true)) {
-            result.flipSignal();
+            result.flip();
         }
     }
     outPins[0].setSignal(result);

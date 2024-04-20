@@ -27,7 +27,7 @@ class Circuit {
   std::ifstream inputfile;
 
   Queue<Component> componentList;
-  Queue<InPin_Component> incomponents;
+  Queue<InputComponent> incomponents;
   Queue<Source> sourceList;
   Queue<Switch> switchList;
   Queue<Lamp> lampList;
@@ -61,8 +61,8 @@ class Circuit {
   template<typename T>
   void create(Queue<int>& nodeNumbers);
 
-  void connectInPinWithNode(InPin* pin, size_t id, size_t idx);
-  void connectOutPinWithNode(OutPin_Component* component, OutPin* pin, size_t id, size_t idx);
+  void connectInPinWithNode(InputPin* pin, size_t id, size_t idx);
+  void connectOutPinWithNode(OutputComponent* component, OutputPin* pin, size_t id, size_t idx);
 
 public:
   Circuit();
@@ -109,9 +109,9 @@ void Circuit::create(size_t count, Queue<int>& nodeNumbers) {
   ((Component*)created)->setActiveQueue(&activeList);
   Queue<int> copy(nodeNumbers);
   for (size_t i = 0; i < count - 1; i++) {
-    connectInPinWithNode(((InPin_Component*)created)->getInPinsBaseAdress() + i, *(copy.get()), i);
+    connectInPinWithNode(((InputComponent*)created)->getInPinsBaseAdress() + i, *(copy.get()), i);
   }
-  connectOutPinWithNode(created, ((OutPin_Component*)created)->getOutPinBaseAdress(), *(copy.get()), 0);
+  connectOutPinWithNode(created, ((OutputComponent*)created)->getOutPinBaseAdress(), *(copy.get()), 0);
   componentList.put(created);
   incomponents.put(created);
 }

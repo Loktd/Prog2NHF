@@ -1,0 +1,30 @@
+\doxysection{Source.\+h}
+\hypertarget{_source_8h_source}{}\label{_source_8h_source}\index{C:/Users/palin/VSCodeProjects/Egyetem/2.Felev/Prog2NHF/src/Source.h@{C:/Users/palin/VSCodeProjects/Egyetem/2.Felev/Prog2NHF/src/Source.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_SOURCE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_SOURCE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Component.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_source}{Source}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_out_pin___component}{OutPin\_Component}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \mbox{\hyperlink{class_source_a660c0a4b8b8f8402568bef86f2cb2fbb}{Source}}();}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_source_a05707699c01b4cc5badcb1d8a5f37d67}{executeFunction}}()\ \{\ \mbox{\hyperlink{class_out_pin___component_ac6a820f5f9d0ad2570871abdc727fa1b}{sendOutSignals}}();\ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_source_ae387e1f21b45ab4bf8cd84751ce23136}{setOutput}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_signal}{Signal}}\&\ signal)\ \{\ \mbox{\hyperlink{class_out_pin___component_add817e4ba5908bcc9e09964c0a388029}{outPins}}[0].\mbox{\hyperlink{class_pin_a2131812b2230df76b4c05f5a8dde4322}{setSignal}}(signal);\ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{class_signal}{Signal}}\ \mbox{\hyperlink{class_source_ad71e51cb10735c7d55659156326baabf}{getOutput}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_out_pin___component_add817e4ba5908bcc9e09964c0a388029}{outPins}}[0].\mbox{\hyperlink{class_pin_a064080c36a74a6bed908c883d18ec7c2}{getSignal}}();\ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_source_a1533f564203d031f94c2d3ea7f1d21e3}{flipOutput}}()\ \{\ \mbox{\hyperlink{class_out_pin___component_add817e4ba5908bcc9e09964c0a388029}{outPins}}[0].\mbox{\hyperlink{class_pin_a8ac945d1966746bd62b38eea1a5e9136}{flipSignal}}();\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_source}{\string~Source}}()\ \{\}}
+\DoxyCodeLine{00042\ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00051\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_source}{Source}}\&\ x);}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

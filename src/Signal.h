@@ -5,7 +5,8 @@ typedef long long unsigned int size_t;
 
 class Signal {
   /**
-   * @brief A tárolt jelérték. (0 = false, 1 = true)
+   * @brief A tárolt jelérték.
+   * @brief false = LOW (0) jel, true = HIGH (1) jel
    */
   bool signal;
 
@@ -22,28 +23,30 @@ public:
    *
    * @param newValue Az új jel értéke.
    */
-  void setSignal(bool newValue) { signal = newValue; }
+  void setValue(bool newValue) { signal = newValue; }
+
   /**
    * @brief Visszaadja a jel értékét.
    *
    * @return true = 1 a jelérték.
    * @return false = 0 a jelérték.
    */
-  bool getSignal() const { return signal; }
+  bool getValue() const { return signal; }
 
   /**
    * @brief Megfordítja a jelértéket.
    *
    */
-  void flipSignal() { signal = !signal; }
+  void flip() { signal = !signal; }
 
   /**
    * @brief Egyenlőséget vizsgálja két jelszint között.
    *
-   * @param other A másik jel.
-   * @return true, ha gyeznek.
+   * @param other A másik jel amivel hasonlítunk.
+   * @return true, ha egyeznek.
    * @return false, ha nem egyeznek
    */
   bool operator==(const Signal& other) { return signal == other.signal; }
 };
+
 #endif

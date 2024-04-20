@@ -1,0 +1,31 @@
+\doxysection{Switch.\+h}
+\hypertarget{_switch_8h_source}{}\label{_switch_8h_source}\index{C:/Users/palin/VSCodeProjects/Egyetem/2.Felev/Prog2NHF/src/Switch.h@{C:/Users/palin/VSCodeProjects/Egyetem/2.Felev/Prog2NHF/src/Switch.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_SWITCH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_SWITCH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Component.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_switch}{Switch}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_i_o_pin___component}{IOPin\_Component}}\ \{}
+\DoxyCodeLine{00013\ \ \ \textcolor{keywordtype}{bool}\ closed;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{class_switch_a54db96db46113c6a4904553796d183ce}{Switch}}()\ :\ \mbox{\hyperlink{class_i_o_pin___component}{IOPin\_Component}}(1,\ 1),\ closed(false)\ \{\}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_switch_a60c6061913178f8f2af67a844fb949a9}{executeFunction}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_switch_a13277bc2072d78124e85a6c7dd3895aa}{getState}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ closed;\ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{void}\ setState(\textcolor{keywordtype}{bool}\ newState)\ \{\ closed\ =\ newState;\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_switch_add41f17c2bfc173d7f919c52e5b1e315}{flipState}}()\ \{\ closed\ =\ !closed;\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_switch}{\string~Switch}}()\ \{\}}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00053\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_switch}{Switch}}\&\ x);}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,7 @@
+format 224
+
+classcanvas 128002 class_ref 129794 // Signal
+  classdiagramsettings member_max_width 0 end
+  xyzwh 161 305 2000 391 225
+end
+end

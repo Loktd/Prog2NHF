@@ -1,0 +1,103 @@
+\doxysection{Lamp Class Reference}
+\hypertarget{class_lamp}{}\label{class_lamp}\index{Lamp@{Lamp}}
+Inheritance diagram for Lamp\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_lamp}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lamp_a9d24d06a5bd4d4a537d4d413fd434e6b}\label{class_lamp_a9d24d06a5bd4d4a537d4d413fd434e6b} 
+{\bfseries Lamp} ()
+\begin{DoxyCompactList}\small\item\em Létrehoz egy lámpát. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_signal}{Signal}} \mbox{\hyperlink{class_lamp_a74208f59b899da612f17f070d11050a4}{get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Visszaadja a lámpa jelét, azaz, hogy világít-\/e. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lamp_a23db6019f3980088a00b74bafbb66083}{execute\+Function}} ()
+\begin{DoxyCompactList}\small\item\em Itt igazából haszontalan, lámpának nincs végezni valója. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_in_pin___component}{In\+Pin\+\_\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_in_pin___component_a5325268db58eca5d54bc593290e4a4a4}{In\+Pin\+\_\+\+Component}} (size\+\_\+t in\+Count)
+\begin{DoxyCompactList}\small\item\em Létrehozza a bemeneti pin-\/ek tömbjét. \end{DoxyCompactList}\item 
+void {\bfseries reset\+Active\+Count} ()
+\begin{DoxyCompactList}\small\item\em Reseteli az aktív pin-\/ek számát 0-\/ra. \end{DoxyCompactList}\item 
+void {\bfseries set\+In\+Node\+ID} (size\+\_\+t at, size\+\_\+t id)
+\item 
+bool {\bfseries connected\+To\+Node\+In} (size\+\_\+t id)
+\item 
+void {\bfseries print\+In\+Connected\+Nodes} (std\+::ostream \&os) const
+\item 
+void {\bfseries reset\+For\+Simulation} ()
+\item 
+void {\bfseries tick\+Counter} ()
+\begin{DoxyCompactList}\small\item\em Növeli az aktív lábak számát, és aktivizálja az áramköri elemet, ha eléri a maximumot. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_in_pin}{In\+Pin}} \texorpdfstring{$\ast$}{*} {\bfseries get\+In\+Pins\+Base\+Adress} () const
+\begin{DoxyCompactList}\small\item\em Visszaadja a bemeneti pin-\/ek tömbjének címét. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+In\+Pin\+\_\+\+Component} ()
+\begin{DoxyCompactList}\small\item\em Törli a bemeneti pin-\/ek tömbjét. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_component}{Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_component_aad688caec90fd06db5cdfb9e5fc0f09d}{Component}} (\mbox{\hyperlink{class_queue}{Queue}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$ \texorpdfstring{$\ast$}{*}new\+Active\+Queue=nullptr)
+\begin{DoxyCompactList}\small\item\em Felparaméterezi az aktív sort. \end{DoxyCompactList}\item 
+void {\bfseries set\+Active\+Queue} (\mbox{\hyperlink{class_queue}{Queue}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$ \texorpdfstring{$\ast$}{*}new\+Active\+Queue)
+\begin{DoxyCompactList}\small\item\em Beállítja az aktív fifo-\/t. \end{DoxyCompactList}\item 
+void {\bfseries add\+To\+Active\+Queue} ()
+\begin{DoxyCompactList}\small\item\em Hozzáadja az aktív sorhoz az áramköri elemet. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Component} ()
+\begin{DoxyCompactList}\small\item\em Virtuális destruktor öröklés miatt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_in_pin___component}{In\+Pin\+\_\+\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t {\bfseries in\+Pin\+Count}
+\begin{DoxyCompactList}\small\item\em A bemeneti pin-\/ek száma. \end{DoxyCompactList}\item 
+size\+\_\+t {\bfseries active\+In\+Pins}
+\begin{DoxyCompactList}\small\item\em Az aktív, valid adattal rendelkező pin-\/ek száma. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_in_pin}{In\+Pin}} \texorpdfstring{$\ast$}{*} {\bfseries in\+Pins}
+\begin{DoxyCompactList}\small\item\em A bemeneti pin-\/ek tömbje. Az index jelentést a specifikált alkatrész adja meg. \end{DoxyCompactList}\item 
+size\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries in\+Node\+IDs}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_component}{Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_queue}{Queue}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$ \texorpdfstring{$\ast$}{*} {\bfseries active\+Queue}
+\begin{DoxyCompactList}\small\item\em Az aktív sor, amihez kell hozzáadni, ha ki kell értékelni az elemet, azaz végrehajtani a funkcióját. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lamp_a23db6019f3980088a00b74bafbb66083}\label{class_lamp_a23db6019f3980088a00b74bafbb66083} 
+\index{Lamp@{Lamp}!executeFunction@{executeFunction}}
+\index{executeFunction@{executeFunction}!Lamp@{Lamp}}
+\doxysubsubsection{\texorpdfstring{executeFunction()}{executeFunction()}}
+{\footnotesize\ttfamily virtual void Lamp\+::execute\+Function (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Itt igazából haszontalan, lámpának nincs végezni valója. 
+
+
+
+Implements \mbox{\hyperlink{class_in_pin___component_a2e1b7248a5b05b04e8b6ff84b71320e9}{In\+Pin\+\_\+\+Component}}.
+
+\Hypertarget{class_lamp_a74208f59b899da612f17f070d11050a4}\label{class_lamp_a74208f59b899da612f17f070d11050a4} 
+\index{Lamp@{Lamp}!getState@{getState}}
+\index{getState@{getState}!Lamp@{Lamp}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_signal}{Signal}} Lamp\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Visszaadja a lámpa jelét, azaz, hogy világít-\/e. 
+
+\begin{DoxyReturn}{Returns}
+A jelérték. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/palin/\+VSCode\+Projects/\+Egyetem/2.\+Felev/\+Prog2\+NHF/src/Lamp.\+h\item 
+C\+:/\+Users/palin/\+VSCode\+Projects/\+Egyetem/2.\+Felev/\+Prog2\+NHF/src/Lamp.\+cpp\end{DoxyCompactItemize}

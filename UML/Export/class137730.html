@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class Pin</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class Pin</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_137730"></a>
+<p>Declaration :</p><ul>
+<li>C++ : class Pin </li></ul><p>Directly inherited by : <a href="class136066.html#ref4_136066"><b>InPin</b></a> <a href="class136322.html#ref4_136322"><b>OutPin</b></a> </p>
+<p>Artifact : <a href="index.html#ref8_131202"><b>Pin</b></a></p>
+<div class="sub">
+<a name="ref0_142722"></a>
+<table><tr><td><div class="element">Relation <b>ownedSignal (&lt;directional composition&gt;)</b></div></td></tr></table><p>@brief A pin Ã¡ltal birtokolt jel.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : # ownedSignal : <a href="class136450.html#ref4_136450"><b>Signal</b></a>, multiplicity : 1</li><li>C++ : protected: <a href="class136450.html#ref4_136450"><b>Signal</b></a> ownedSignal</li></ul><a name="ref2_177666"></a>
+<table><tr><td><div class="element">Operation <b>Pin</b></div></td></tr></table><p>@brief LÃ©trehoz egy pin-t kezdÅ jelÃ©rtÃ©kkel.<br /><br />@param baseSignal Az alap jelÃ©rtÃ©k, default-kÃ©nt LOW (0) jelszinttel.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + Pin(in baseSignal : <a href="class136450.html#ref4_136450"><b>Signal</b></a> = Signal(false)) : </li><li>C++ : public: Pin(<a href="class136450.html#ref4_136450"><b>Signal</b></a> baseSignal = Signal(false))</li></ul><a name="ref2_177794"></a>
+<table><tr><td><div class="element">Operation <b>setSignal</b></div></td></tr></table><p>@brief BeÃ¡llÃ­tja a pin jelÃ©t.<br /><br />@param newSignal Az Ãºj jel.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + setSignal(in newSignal : <a href="class136450.html#ref4_136450"><b>Signal</b></a>) : void</li><li>C++ : public: void setSignal(const <a href="class136450.html#ref4_136450"><b>Signal</b></a> &amp; newSignal)</li></ul><a name="ref2_177922"></a>
+<table><tr><td><div class="element">Operation <b>getSignal</b></div></td></tr></table><p>@brief Visszaadja a pin jelÃ©t. Mivel kicsi a Signal osztÃ¡ly, ezÃ©rt nem kell pointer/referencia.<br /><br />@return A visszaadott jel.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + getSignal() : <a href="class136450.html#ref4_136450"><b>Signal</b></a></li><li>C++ : public: <a href="class136450.html#ref4_136450"><b>Signal</b></a> getSignal() const</li></ul><a name="ref2_178050"></a>
+<table><tr><td><div class="element">Operation <b>flipSignal</b></div></td></tr></table><p>@brief MegfordÃ­tja a pin jelÃ©t.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + flipSignal() : void</li><li>C++ : public: void flipSignal()</li></ul><a name="ref2_178178"></a>
+<table><tr><td><div class="element">Operation <b>~Pin</b></div></td></tr></table><p>@brief VirtuÃ¡l destruktor, mert Ã¶rÃ¶klÃ©s.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + ~Pin() : </li><li>C++ : public: inline virtual ~Pin()</li></ul></div>
+<p>All public operations : <a href="class137730.html#ref2_178050"><b>flipSignal</b></a> , <a href="class137730.html#ref2_177922"><b>getSignal</b></a> , <a href="class137730.html#ref2_177794"><b>setSignal</b></a> </p>
+</body>
+</html>

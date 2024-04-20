@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class Node</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class Node</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_135426"></a>
+<p>Declaration :</p><ul>
+<li>C++ : class Node : public <a href="class134914.html#ref4_134914"><b>InPin_Component</b></a> </li></ul><p>Artifact : <a href="index.html#ref8_131074"><b>Node</b></a></p>
+<div class="sub">
+<a name="ref0_142466"></a>
+<table><tr><td><div class="element">Relation <b>ID (&lt;directional composition&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - ID : <a href="class135810.html#ref4_135810"><b>size_t</b></a></li><li>C++ : private: <a href="class135810.html#ref4_135810"><b>size_t</b></a> ID</li></ul><a name="ref0_142594"></a>
+<table><tr><td><div class="element">Relation <b>outPins (&lt;directional composition&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - outPins : <a href="class136322.html#ref4_136322"><b>OutPin</b></a></li><li>C++ : private: Queue&lt;<a href="class136322.html#ref4_136322"><b>OutPin</b></a>&gt; outPins</li></ul><p>Stereotype: Queue</p>
+<a name="ref2_176898"></a>
+<table><tr><td><div class="element">Operation <b>Node</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + Node(in nodeID : <a href="class135810.html#ref4_135810"><b>size_t</b></a>) : </li><li>C++ : public: inline Node(<a href="class135810.html#ref4_135810"><b>size_t</b></a> nodeID)</li></ul><a name="ref2_177026"></a>
+<table><tr><td><div class="element">Operation <b>getInPin</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + getInPin() : <a href="class136066.html#ref4_136066"><b>InPin</b></a></li><li>C++ : public: <a href="class136066.html#ref4_136066"><b>InPin</b></a> * getInPin()</li></ul><a name="ref2_177154"></a>
+<table><tr><td><div class="element">Operation <b>getID</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + getID() : <a href="class135810.html#ref4_135810"><b>size_t</b></a></li><li>C++ : public: <a href="class135810.html#ref4_135810"><b>size_t</b></a> getID() const</li></ul><a name="ref2_177282"></a>
+<table><tr><td><div class="element">Operation <b>addOutPin</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + addOutPin(inout endPoint : <a href="class136066.html#ref4_136066"><b>InPin</b></a>) : void</li><li>C++ : public: void addOutPin(<a href="class136066.html#ref4_136066"><b>InPin</b></a> * endPoint)</li></ul><a name="ref2_177410"></a>
+<table><tr><td><div class="element">Operation <b>executeFunction</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + executeFunction() : void</li><li>C++ : public: virtual void executeFunction()</li></ul><a name="ref2_177538"></a>
+<table><tr><td><div class="element">Operation <b>~Node</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + ~Node() : </li><li>C++ : public: inline virtual ~Node()</li></ul></div>
+<p>All public operations : <a href="class135426.html#ref2_177282"><b>addOutPin</b></a> , <a href="class134786.html#ref2_169730"><b>addToActiveQueue</b></a> , <a href="class134914.html#ref2_170498"><b>connectedToNodeIn</b></a> , <a href="class134786.html#ref2_169858"><b>executeFunction</b></a> , <a href="class134914.html#ref2_171138"><b>executeFunction</b></a> , <a href="class135426.html#ref2_177410"><b>executeFunction</b></a> , <a href="class135426.html#ref2_177154"><b>getID</b></a> , <a href="class135426.html#ref2_177026"><b>getInPin</b></a> , <a href="class134914.html#ref2_171010"><b>getInPinsBaseAdress</b></a> , <a href="class134914.html#ref2_170626"><b>printInConnectedNodes</b></a> , <a href="class134914.html#ref2_170242"><b>resetActiveCount</b></a> , <a href="class134914.html#ref2_170754"><b>resetForSimulation</b></a> , <a href="class134786.html#ref2_169602"><b>setActiveQueue</b></a> , <a href="class134914.html#ref2_170370"><b>setInNodeID</b></a> , <a href="class134914.html#ref2_170882"><b>tickCounter</b></a> </p>
+</body>
+</html>

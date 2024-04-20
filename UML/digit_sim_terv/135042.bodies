@@ -1,0 +1,4 @@
+class Source
+!!!180994.cpp!!!	Source()
+
+    outPins[0].setSignal(Signal(false));

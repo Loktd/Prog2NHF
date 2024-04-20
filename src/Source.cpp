@@ -2,7 +2,7 @@
 #include "Source.h"
 
 Source::Source()
-    : Component(nullptr), OutPin_Component(1)
+    : Component(nullptr), OutputComponent(1)
 {
     outPins[0].setSignal(Signal(false));
 }
@@ -10,7 +10,7 @@ Source::Source()
 std::ostream& operator<<(std::ostream& os, const Source& x) {
     os << "Source connected to node ";
     x.printOutConnectedNodes(os);
-    if (x.getOutput().getSignal())
+    if (x.getOutput().getValue())
         os << ": outputting HIGH (1) signal...";
     else
         os << ": outputting LOW (0) signal...";

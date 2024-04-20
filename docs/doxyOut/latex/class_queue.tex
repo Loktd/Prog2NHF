@@ -1,0 +1,126 @@
+\doxysection{Queue\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_queue}{}\label{class_queue}\index{Queue$<$ T $>$@{Queue$<$ T $>$}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_queue_af75de667438380d83f89e0f35ee45962}{Queue}} (bool owner=false)
+\begin{DoxyCompactList}\small\item\em Beállítja az üres fifo állapotát. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_queue_a4fb4e6aaf007e7ac51a06bc76b6469c2}{Queue}} (const \mbox{\hyperlink{class_queue}{Queue}}$<$ T $>$ \&source)
+\begin{DoxyCompactList}\small\item\em Másolást teszi lehetővé, hogy ideiglenesen valamit tudjunk futtatni a fifo-\/n, a tagokat nem birtokolja. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_queue_a811da6e612d056bf98157092cfc2dc87}{put}} (T \texorpdfstring{$\ast$}{*}added)
+\begin{DoxyCompactList}\small\item\em Berak egy tagot a sor végére. \end{DoxyCompactList}\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_queue_a606ee6477ad4898da067066d503df0e0}{get}} ()
+\begin{DoxyCompactList}\small\item\em Kivesz a sor elejéről egy tagot. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_queue_a515bd72c9d7d2bc12add78c0d2e79762}{is\+Empty}} ()
+\begin{DoxyCompactList}\small\item\em Megmondja, hogy üres-\/e a fifo. \end{DoxyCompactList}\item 
+\Hypertarget{class_queue_acb12e3d108397a77e412d43cdd0b2836}\label{class_queue_acb12e3d108397a77e412d43cdd0b2836} 
+void {\bfseries clear} ()
+\begin{DoxyCompactList}\small\item\em Kiürítí a fifo-\/t, ha tulaj, akkor törli a memóriát is. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_queue_a91cbd71c4aeb13c6c7b6a9c8939636e3}{size}} () const
+\begin{DoxyCompactList}\small\item\em Visszaadja a fifo elemszámát. \end{DoxyCompactList}\item 
+\Hypertarget{class_queue_aa7eef1b427e24555780505de20e9acbc}\label{class_queue_aa7eef1b427e24555780505de20e9acbc} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Queue} ()
+\begin{DoxyCompactList}\small\item\em Detruktor, mely felszabadítja a tárolt elemeket, attól függően, hogy birtokolja-\/e őket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_queue_af75de667438380d83f89e0f35ee45962}\label{class_queue_af75de667438380d83f89e0f35ee45962} 
+\index{Queue$<$ T $>$@{Queue$<$ T $>$}!Queue@{Queue}}
+\index{Queue@{Queue}!Queue$<$ T $>$@{Queue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Queue()}{Queue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_queue}{Queue}}$<$ T $>$\mbox{\hyperlink{class_queue}{\+::\+Queue}} (\begin{DoxyParamCaption}\item[{bool}]{owner = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Beállítja az üres fifo állapotát. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owner} & Tulaja-\/e az elemeknek, azaz fel kell majd szabadítani a mutatott objektumokat-\/e. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_queue_a4fb4e6aaf007e7ac51a06bc76b6469c2}\label{class_queue_a4fb4e6aaf007e7ac51a06bc76b6469c2} 
+\index{Queue$<$ T $>$@{Queue$<$ T $>$}!Queue@{Queue}}
+\index{Queue@{Queue}!Queue$<$ T $>$@{Queue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Queue()}{Queue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_queue}{Queue}}$<$ T $>$\mbox{\hyperlink{class_queue}{\+::\+Queue}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_queue}{Queue}}$<$ T $>$ \&}]{source }\end{DoxyParamCaption})}
+
+
+
+Másolást teszi lehetővé, hogy ideiglenesen valamit tudjunk futtatni a fifo-\/n, a tagokat nem birtokolja. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & A másolás forrása. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_queue_a606ee6477ad4898da067066d503df0e0}\label{class_queue_a606ee6477ad4898da067066d503df0e0} 
+\index{Queue$<$ T $>$@{Queue$<$ T $>$}!get@{get}}
+\index{get@{get}!Queue$<$ T $>$@{Queue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_queue}{Queue}}$<$ T $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Kivesz a sor elejéről egy tagot. 
+
+\begin{DoxyReturn}{Returns}
+T\texorpdfstring{$\ast$}{*} A soron következő tag. 
+\end{DoxyReturn}
+\Hypertarget{class_queue_a515bd72c9d7d2bc12add78c0d2e79762}\label{class_queue_a515bd72c9d7d2bc12add78c0d2e79762} 
+\index{Queue$<$ T $>$@{Queue$<$ T $>$}!isEmpty@{isEmpty}}
+\index{isEmpty@{isEmpty}!Queue$<$ T $>$@{Queue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{isEmpty()}{isEmpty()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{class_queue}{Queue}}$<$ T $>$\+::is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Megmondja, hogy üres-\/e a fifo. 
+
+\begin{DoxyReturn}{Returns}
+true = üres a fifo 
+
+false = nem üres a fifo 
+\end{DoxyReturn}
+\Hypertarget{class_queue_a811da6e612d056bf98157092cfc2dc87}\label{class_queue_a811da6e612d056bf98157092cfc2dc87} 
+\index{Queue$<$ T $>$@{Queue$<$ T $>$}!put@{put}}
+\index{put@{put}!Queue$<$ T $>$@{Queue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{put()}{put()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{class_queue}{Queue}}$<$ T $>$\+::put (\begin{DoxyParamCaption}\item[{T \texorpdfstring{$\ast$}{*}}]{added }\end{DoxyParamCaption})}
+
+
+
+Berak egy tagot a sor végére. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em added} & A hozzáadott tag. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_queue_a91cbd71c4aeb13c6c7b6a9c8939636e3}\label{class_queue_a91cbd71c4aeb13c6c7b6a9c8939636e3} 
+\index{Queue$<$ T $>$@{Queue$<$ T $>$}!size@{size}}
+\index{size@{size}!Queue$<$ T $>$@{Queue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+size\+\_\+t \mbox{\hyperlink{class_queue}{Queue}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Visszaadja a fifo elemszámát. 
+
+\begin{DoxyReturn}{Returns}
+size\+\_\+t A fifo mérete. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/palin/\+VSCode\+Projects/\+Egyetem/2.\+Felev/\+Prog2\+NHF/src/Queue.\+h\end{DoxyCompactItemize}

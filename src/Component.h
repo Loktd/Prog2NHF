@@ -46,7 +46,7 @@ public:
   virtual ~Component() {}
 
 };
-class InPin_Component : virtual public Component {
+class InputComponent : virtual public Component {
 protected:
   /**
    * @brief A bemeneti pin-ek száma.
@@ -59,7 +59,7 @@ protected:
   /**
    * @brief A bemeneti pin-ek tömbje. Az index jelentést a specifikált alkatrész adja meg.
    */
-  InPin* inPins;
+  InputPin* inPins;
   size_t* inNodeIDs;
 
 public:
@@ -68,7 +68,7 @@ public:
    *
    * @param inCount A bemeneti pin-ek száma.
    */
-  InPin_Component(size_t inCount);
+  InputComponent(size_t inCount);
 
   /**
    * @brief Reseteli az aktív pin-ek számát 0-ra.
@@ -92,7 +92,7 @@ public:
    * @brief Visszaadja a bemeneti pin-ek tömbjének címét.
    *
    */
-  InPin* getInPinsBaseAdress() const { return inPins; }
+  InputPin* getInPinsBaseAdress() const { return inPins; }
 
   /**
    * @brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
@@ -104,10 +104,10 @@ public:
    * @brief Törli a bemeneti pin-ek tömbjét.
    *
    */
-  virtual ~InPin_Component();
+  virtual ~InputComponent();
 
 };
-class OutPin_Component : virtual public Component {
+class OutputComponent : virtual public Component {
 protected:
   /**
    * @brief A kimeneti pin-ek száma.
@@ -117,7 +117,7 @@ protected:
    * @brief A kimeneti pin-ek tömbje.  Az index jelentést a specifikált alkatrész adja meg.
    *
    */
-  OutPin* outPins;
+  OutputPin* outPins;
   size_t* outPinIDs;
 
 public:
@@ -126,7 +126,7 @@ public:
    *
    * @param outCount A kívánt kimeneti pin-ek száma.
    */
-  OutPin_Component(size_t outCount);
+  OutputComponent(size_t outCount);
 
   /**
    * @brief Összeköti a megadott kimeneti pin-jét egy másik áramköri elem bemeneti pin-jével.
@@ -135,7 +135,7 @@ public:
    * @param component Amivel össze szeretnénk kötni.
    * @param inPinIndex A bemeneti pin indexe.
    */
-  void connectTo(size_t outPinIndex, InPin_Component* component, size_t inPinIndex);
+  void connectTo(size_t outPinIndex, InputComponent* component, size_t inPinIndex);
 
   /**
    * @brief Kiküldi minden kimeneti lábán a lábakban tárolt jeleket.
@@ -147,7 +147,7 @@ public:
    * @brief
    *
    */
-  OutPin* getOutPinBaseAdress() { return outPins; }
+  OutputPin* getOutPinBaseAdress() { return outPins; }
 
   void setOutNodeID(size_t at, size_t id);
   bool connectedToNodeOut(size_t id);
@@ -163,10 +163,10 @@ public:
    * @brief Törli a kimeneti pin-ek tömbjét.
    *
    */
-  virtual ~OutPin_Component();
+  virtual ~OutputComponent();
 
 };
-class IOPin_Component : public InPin_Component, public OutPin_Component {
+class IOComponent : public InputComponent, public OutputComponent {
 public:
   /**
    * @brief Lértehozza a lábakat.
@@ -174,7 +174,7 @@ public:
    * @param inCount Bemeneti lábak száma.
    * @param outCount Kimeneti lábak száma.
    */
-  IOPin_Component(size_t inCount, size_t outCount) : InPin_Component(inCount), OutPin_Component(outCount) {}
+  IOComponent(size_t inCount, size_t outCount) : InputComponent(inCount), OutputComponent(outCount) {}
 
   /**
    * @brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
@@ -189,6 +189,6 @@ public:
    * @brief Virtuális destruktor, mert öröklés.
    *
    */
-  virtual ~IOPin_Component() {}
+  virtual ~IOComponent() {}
 };
 #endif

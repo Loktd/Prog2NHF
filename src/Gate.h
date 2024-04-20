@@ -4,11 +4,11 @@
 
 #include "Component.h"
 
-class Gate : public IOPin_Component {
+class Gate : public IOComponent {
 protected:
   virtual void performLogicCalculation() = 0;
 public:
-  Gate(size_t inCount, size_t outCount) : IOPin_Component(inCount, outCount) {}
+  Gate(size_t inCount, size_t outCount) : IOComponent(inCount, outCount) {}
 
   virtual void executeFunction();
 

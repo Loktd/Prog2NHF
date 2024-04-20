@@ -1,0 +1,125 @@
+\doxysection{Circuit.\+h}
+\hypertarget{_circuit_8h_source}{}\label{_circuit_8h_source}\index{C:/Users/palin/VSCodeProjects/Egyetem/2.Felev/Prog2NHF/src/Circuit.h@{C:/Users/palin/VSCodeProjects/Egyetem/2.Felev/Prog2NHF/src/Circuit.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_CIRCUIT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_CIRCUIT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Component.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Gate.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Lamp.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Node.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Pin.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Queue.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}Signal.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Source.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Switch.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_circuit}{Circuit}}\ \{}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{static}\ std::ostream*\ errorStream;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keywordtype}{bool}\ configured;}
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{bool}\ simulated;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ std::string\ inputFileName;}
+\DoxyCodeLine{00027\ \ \ std::ifstream\ inputfile;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{class_queue}{Queue<Component>}}\ componentList;}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{class_queue}{Queue<InPin\_Component>}}\ incomponents;}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{class_queue}{Queue<Source>}}\ sourceList;}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{class_queue}{Queue<Switch>}}\ switchList;}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{class_queue}{Queue<Lamp>}}\ lampList;}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{class_queue}{Queue<Component>}}\ activeList;}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{class_queue}{Queue<Node>}}\ nodeList;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ reset();}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{void}\ configure();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{void}\ build();}
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{enum}\ ComponentType\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ INVALID\ =\ 0,\ SOURCE\ =\ 1,\ LAMP\ =\ 2,\ SWITCH\ =\ 3,\ And\ =\ 4,\ Or\ =\ 5,\ Not\ =\ 6,\ Xor\ =\ 7,\ Nand\ =\ 8,\ Nor\ =\ 9,\ Xnor\ =\ 10}
+\DoxyCodeLine{00043\ \ \ \};}
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{struct\ }ContentInfo\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ lineCount;}
+\DoxyCodeLine{00046\ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ idx;}
+\DoxyCodeLine{00048\ \ \ \ \ ComponentType\ type;}
+\DoxyCodeLine{00049\ \ \ \ \ ContentInfo()\ :\ lineCount(0),\ line(\textcolor{stringliteral}{"{}"{}}),\ idx(0),\ type(INVALID)\ \{\}}
+\DoxyCodeLine{00050\ \ \ \};}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ buildLine(ContentInfo\&\ info);}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{void}\ checkLineType(ContentInfo\&\ info);}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{void}\ buildComponent(ContentInfo\&\ info);}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ getNodeNumbers(ContentInfo\&\ info,\ \mbox{\hyperlink{class_queue}{Queue<int>}}\&\ nodeNumbers);}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ checkNodeCount(ContentInfo\&\ info,\ \textcolor{keywordtype}{size\_t}\ count);}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{void}\ createBasedOnType(ContentInfo\&\ info,\ \textcolor{keywordtype}{size\_t}\ count,\ \mbox{\hyperlink{class_queue}{Queue<int>}}\&\ nodeNumbers);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{void}\ create(\textcolor{keywordtype}{size\_t}\ count,\ \mbox{\hyperlink{class_queue}{Queue<int>}}\&\ nodeNumbers);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00062\ \ \ \textcolor{keywordtype}{void}\ create(\mbox{\hyperlink{class_queue}{Queue<int>}}\&\ nodeNumbers);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{void}\ connectInPinWithNode(\mbox{\hyperlink{class_in_pin}{InPin}}*\ pin,\ \textcolor{keywordtype}{size\_t}\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{size\_t}\ idx);}
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordtype}{void}\ connectOutPinWithNode(\mbox{\hyperlink{class_out_pin___component}{OutPin\_Component}}*\ component,\ \mbox{\hyperlink{class_out_pin}{OutPin}}*\ pin,\ \textcolor{keywordtype}{size\_t}\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{size\_t}\ idx);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{class_circuit}{Circuit}}();}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{class_circuit}{Circuit}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_circuit}{Circuit}}\&\ source);}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{class_circuit}{Circuit}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_circuit}{Circuit}}\&\ source);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ setErrorStream(std::ostream*\ os);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{void}\ setSourceFile(\textcolor{keyword}{const}\ std::string\&\ fileName);}
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{const}\ std::string\&\ getSourceFileName()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{void}\ simulate(std::ostream\&\ os);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{void}\ setSource(\textcolor{keywordtype}{size\_t}\ connectedNode,\ \mbox{\hyperlink{class_signal}{Signal}}\ newSignal);}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{void}\ setAllSources(\textcolor{keywordtype}{int}*\ connectedNodes,\ \mbox{\hyperlink{class_signal}{Signal}}*\ newSignals);}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{void}\ flipSource(\textcolor{keywordtype}{size\_t}\ connectedNode);}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordtype}{void}\ flipAllSources();}
+\DoxyCodeLine{00083\ \ \ \mbox{\hyperlink{class_signal}{Signal}}\ getSourceSignal(\textcolor{keywordtype}{size\_t}\ connectedNode)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{void}\ printSourceState(std::ostream\&\ os)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{void}\ printAllSourceStates(std::ostream\&\ os)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordtype}{void}\ setSwitch(\textcolor{keywordtype}{size\_t}\ connectedNode1,\ \textcolor{keywordtype}{size\_t}\ connectedNode2,\ \textcolor{keywordtype}{bool}\ closed);}
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordtype}{void}\ setAllSwitches(\textcolor{keywordtype}{size\_t}*\ connectedNodes1,\ \textcolor{keywordtype}{size\_t}*\ connectedNodes2,\ \textcolor{keywordtype}{bool}\ closedStates[]);}
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordtype}{void}\ flipSwitch(\textcolor{keywordtype}{size\_t}\ connectedNode1,\ \textcolor{keywordtype}{size\_t}\ connectedNode2);}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordtype}{void}\ flipAllSwitches();}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{bool}\ isSwitchClosed(\textcolor{keywordtype}{size\_t}\ connectedNode1,\ \textcolor{keywordtype}{size\_t}\ connectedNode2);}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{void}\ printSwitchState(\textcolor{keywordtype}{size\_t}\ connectedNode1,\ \textcolor{keywordtype}{size\_t}\ connectedNode2,\ std::ostream\&\ os)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ printAllSwitchStates(std::ostream\&\ os)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \mbox{\hyperlink{class_signal}{Signal}}\ getLampSignal(\textcolor{keywordtype}{int}\ connectedNode)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordtype}{bool}\ isLampGlowing(\textcolor{keywordtype}{int}\ connectedNode)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{void}\ printLampState(\textcolor{keywordtype}{int}\ connectedNode,\ std::ostream\&\ os);}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{void}\ printAllLampStates(std::ostream\&\ os)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \mbox{\hyperlink{class_circuit}{\string~Circuit}}();}
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_circuit}{Circuit}}\&\ circuit);}
+\DoxyCodeLine{00104\ \textcolor{keywordtype}{void}\ printSeparatorLine(std::ostream\&\ os,\ \textcolor{keywordtype}{char}\ c,\ \textcolor{keywordtype}{int}\ times);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{void}\ Circuit::create(\textcolor{keywordtype}{size\_t}\ count,\ \mbox{\hyperlink{class_queue}{Queue<int>}}\&\ nodeNumbers)\ \{}
+\DoxyCodeLine{00108\ \ \ T*\ created\ =\ \textcolor{keyword}{new}\ T(count\ -\/\ 1);}
+\DoxyCodeLine{00109\ \ \ ((\mbox{\hyperlink{class_component}{Component}}*)created)-\/>setActiveQueue(\&activeList);}
+\DoxyCodeLine{00110\ \ \ \mbox{\hyperlink{class_queue}{Queue<int>}}\ copy(nodeNumbers);}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ count\ -\/\ 1;\ i++)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ connectInPinWithNode(((\mbox{\hyperlink{class_in_pin___component}{InPin\_Component}}*)created)-\/>getInPinsBaseAdress()\ +\ i,\ *(copy.get()),\ i);}
+\DoxyCodeLine{00113\ \ \ \}}
+\DoxyCodeLine{00114\ \ \ connectOutPinWithNode(created,\ ((\mbox{\hyperlink{class_out_pin___component}{OutPin\_Component}}*)created)-\/>getOutPinBaseAdress(),\ *(copy.get()),\ 0);}
+\DoxyCodeLine{00115\ \ \ componentList.\mbox{\hyperlink{class_queue_a811da6e612d056bf98157092cfc2dc87}{put}}(created);}
+\DoxyCodeLine{00116\ \ \ incomponents.\mbox{\hyperlink{class_queue_a811da6e612d056bf98157092cfc2dc87}{put}}(created);}
+\DoxyCodeLine{00117\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,84 @@
+\doxysection{Pin Class Reference}
+\hypertarget{class_pin}{}\label{class_pin}\index{Pin@{Pin}}
+Inheritance diagram for Pin\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pin}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pin_a42500409341a08ca0987dd6f409a3edd}{Pin}} (\mbox{\hyperlink{class_signal}{Signal}} base\+Signal=\mbox{\hyperlink{class_signal}{Signal}}(false))
+\begin{DoxyCompactList}\small\item\em Létrehoz egy pin-\/t kezdő jelértékkel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pin_a2131812b2230df76b4c05f5a8dde4322}{set\+Signal}} (const \mbox{\hyperlink{class_signal}{Signal}} \&new\+Signal)
+\begin{DoxyCompactList}\small\item\em Beállítja a pin jelét. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_signal}{Signal}} \mbox{\hyperlink{class_pin_a064080c36a74a6bed908c883d18ec7c2}{get\+Signal}} () const
+\begin{DoxyCompactList}\small\item\em Visszaadja a pin jelét. Mivel kicsi a \doxylink{class_signal}{Signal} osztály, ezért nem kell pointer/referencia. \end{DoxyCompactList}\item 
+\Hypertarget{class_pin_a8ac945d1966746bd62b38eea1a5e9136}\label{class_pin_a8ac945d1966746bd62b38eea1a5e9136} 
+void {\bfseries flip\+Signal} ()
+\begin{DoxyCompactList}\small\item\em Megfordítja a pin jelét. \end{DoxyCompactList}\item 
+\Hypertarget{class_pin_ab86af668f577dc4c39d7e191f9c157bd}\label{class_pin_ab86af668f577dc4c39d7e191f9c157bd} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Pin} ()
+\begin{DoxyCompactList}\small\item\em Virtuál destruktor, mert öröklés. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_pin_ae202972881be3e05c473229f2a8ab902}\label{class_pin_ae202972881be3e05c473229f2a8ab902} 
+\mbox{\hyperlink{class_signal}{Signal}} {\bfseries owned\+Signal}
+\begin{DoxyCompactList}\small\item\em A pin által birtokolt jel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_pin_a42500409341a08ca0987dd6f409a3edd}\label{class_pin_a42500409341a08ca0987dd6f409a3edd} 
+\index{Pin@{Pin}!Pin@{Pin}}
+\index{Pin@{Pin}!Pin@{Pin}}
+\doxysubsubsection{\texorpdfstring{Pin()}{Pin()}}
+{\footnotesize\ttfamily Pin\+::\+Pin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_signal}{Signal}}}]{base\+Signal = {\ttfamily \mbox{\hyperlink{class_signal}{Signal}}(false)} }\end{DoxyParamCaption})}
+
+
+
+Létrehoz egy pin-\/t kezdő jelértékkel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Signal} & Az alap jelérték, default-\/ként LOW (0) jelszinttel. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pin_a064080c36a74a6bed908c883d18ec7c2}\label{class_pin_a064080c36a74a6bed908c883d18ec7c2} 
+\index{Pin@{Pin}!getSignal@{getSignal}}
+\index{getSignal@{getSignal}!Pin@{Pin}}
+\doxysubsubsection{\texorpdfstring{getSignal()}{getSignal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_signal}{Signal}} Pin\+::get\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Visszaadja a pin jelét. Mivel kicsi a \doxylink{class_signal}{Signal} osztály, ezért nem kell pointer/referencia. 
+
+\begin{DoxyReturn}{Returns}
+A visszaadott jel. 
+\end{DoxyReturn}
+\Hypertarget{class_pin_a2131812b2230df76b4c05f5a8dde4322}\label{class_pin_a2131812b2230df76b4c05f5a8dde4322} 
+\index{Pin@{Pin}!setSignal@{setSignal}}
+\index{setSignal@{setSignal}!Pin@{Pin}}
+\doxysubsubsection{\texorpdfstring{setSignal()}{setSignal()}}
+{\footnotesize\ttfamily void Pin\+::set\+Signal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_signal}{Signal}} \&}]{new\+Signal }\end{DoxyParamCaption})}
+
+
+
+Beállítja a pin jelét. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Signal} & Az új jel. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/palin/\+VSCode\+Projects/\+Egyetem/2.\+Felev/\+Prog2\+NHF/src/Pin.\+h\item 
+C\+:/\+Users/palin/\+VSCode\+Projects/\+Egyetem/2.\+Felev/\+Prog2\+NHF/src/Pin.\+cpp\end{DoxyCompactItemize}

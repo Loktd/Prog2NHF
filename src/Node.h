@@ -5,15 +5,15 @@
 
 #include <iostream>
 
-class Node : public InPin_Component {
+class Node : public InputComponent {
   size_t ID;
-  Queue<OutPin> outPins;
+  Queue<OutputPin> outPins;
 public:
-  Node(size_t nodeID) : InPin_Component(1), ID(nodeID), outPins(true) {}
+  Node(size_t nodeID) : InputComponent(1), ID(nodeID), outPins(true) {}
 
-  InPin* getInPin();
+  InputPin* getInPin();
   size_t getID() const;
-  void addOutPin(InPin* endPoint);
+  void addOutPin(InputPin* endPoint);
 
   virtual void executeFunction();
 

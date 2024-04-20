@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-class Source : public OutPin_Component {
+class Source : public OutputComponent {
 public:
   /**
    * @brief Létrehoz egy forrást.

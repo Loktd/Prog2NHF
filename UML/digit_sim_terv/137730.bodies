@@ -1,0 +1,7 @@
+class Pin
+!!!177794.cpp!!!	setSignal(in newSignal : Signal) : void
+    ownedSignal = newSignal;
+!!!177922.cpp!!!	getSignal() : Signal
+    return ownedSignal;
+!!!178050.cpp!!!	flipSignal() : void
+    ownedSignal.flip();

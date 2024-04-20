@@ -1,0 +1,143 @@
+\doxysection{Queue.\+h}
+\hypertarget{_queue_8h_source}{}\label{_queue_8h_source}\index{C:/Users/palin/VSCodeProjects/Egyetem/2.Felev/Prog2NHF/src/Queue.h@{C:/Users/palin/VSCodeProjects/Egyetem/2.Felev/Prog2NHF/src/Queue.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_QUEUE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_QUEUE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size\_t;}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00009\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_queue_member}{QueueMember}}\ \{}
+\DoxyCodeLine{00013\ \ \ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}}*\ \mbox{\hyperlink{struct_queue_member_a7b6162c7926543214d4964eea16e176f}{nextMember}};}
+\DoxyCodeLine{00017\ \ \ T*\ \mbox{\hyperlink{struct_queue_member_a3e134d12a0640ecb8c18da894b113acc}{pointingTo}};}
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_queue}{Queue}}\ \{}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{bool}\ ownsMembers;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}}*\ begin;}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}}*\ end;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{class_queue}{Queue<T>}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_queue}{Queue<T>}}\&\ source);}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{size\_t}\ siz;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{class_queue_af75de667438380d83f89e0f35ee45962}{Queue}}(\textcolor{keywordtype}{bool}\ owner\ =\ \textcolor{keyword}{false})\ :\ ownsMembers(owner),\ begin(nullptr),\ end(nullptr),\ siz(0)\ \{\}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{class_queue_a4fb4e6aaf007e7ac51a06bc76b6469c2}{Queue}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_queue}{Queue<T>}}\&\ source);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_queue_a811da6e612d056bf98157092cfc2dc87}{put}}(T*\ added);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00074\ \ \ T*\ \mbox{\hyperlink{class_queue_a606ee6477ad4898da067066d503df0e0}{get}}();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_queue_a515bd72c9d7d2bc12add78c0d2e79762}{isEmpty}}();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_queue_acb12e3d108397a77e412d43cdd0b2836}{clear}}();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_queue_a91cbd71c4aeb13c6c7b6a9c8939636e3}{size}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00101\ \ \ \mbox{\hyperlink{class_queue_aa7eef1b427e24555780505de20e9acbc}{\string~Queue}}();}
+\DoxyCodeLine{00102\ \};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00106\ \mbox{\hyperlink{class_queue}{Queue<T>}}\&\ \mbox{\hyperlink{class_queue}{Queue<T>::operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_queue}{Queue<T>}}\&\ source)}
+\DoxyCodeLine{00107\ \{}
+\DoxyCodeLine{00108\ \ \ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}}*\ moving\ =\ source.begin;}
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordflow}{while}\ (moving\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ this-\/>put(moving-\/>\mbox{\hyperlink{struct_queue_member_a3e134d12a0640ecb8c18da894b113acc}{pointingTo}});}
+\DoxyCodeLine{00111\ \ \ \ \ moving\ =\ moving-\/>\mbox{\hyperlink{struct_queue_member_a7b6162c7926543214d4964eea16e176f}{nextMember}};}
+\DoxyCodeLine{00112\ \ \ \}}
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00114\ \}}
+\DoxyCodeLine{00115\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00116\ \mbox{\hyperlink{class_queue_af75de667438380d83f89e0f35ee45962}{Queue<T>::Queue}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_queue}{Queue<T>}}\&\ source)}
+\DoxyCodeLine{00117\ \ \ :\ ownsMembers(false),\ begin(nullptr),\ end(nullptr),\ siz(0)}
+\DoxyCodeLine{00118\ \{}
+\DoxyCodeLine{00119\ \ \ *\textcolor{keyword}{this}\ =\ source;}
+\DoxyCodeLine{00120\ \}}
+\DoxyCodeLine{00121\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00122\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_queue_a811da6e612d056bf98157092cfc2dc87}{Queue<T>::put}}(T*\ added)}
+\DoxyCodeLine{00123\ \{}
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordflow}{if}\ (begin\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ begin\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}};}
+\DoxyCodeLine{00126\ \ \ \ \ begin-\/>\mbox{\hyperlink{struct_queue_member_a3e134d12a0640ecb8c18da894b113acc}{pointingTo}}\ =\ added;}
+\DoxyCodeLine{00127\ \ \ \ \ begin-\/>nextMember\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00128\ \ \ \ \ end\ =\ begin;}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}}*\ newMember\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}};}
+\DoxyCodeLine{00132\ \ \ \ \ newMember-\/>\mbox{\hyperlink{struct_queue_member_a3e134d12a0640ecb8c18da894b113acc}{pointingTo}}\ =\ added;}
+\DoxyCodeLine{00133\ \ \ \ \ newMember-\/>\mbox{\hyperlink{struct_queue_member_a7b6162c7926543214d4964eea16e176f}{nextMember}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00134\ \ \ \ \ end-\/>nextMember\ =\ newMember;}
+\DoxyCodeLine{00135\ \ \ \ \ end\ =\ newMember;}
+\DoxyCodeLine{00136\ \ \ \}}
+\DoxyCodeLine{00137\ \ \ siz++;}
+\DoxyCodeLine{00138\ \}}
+\DoxyCodeLine{00139\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00140\ T*\ \mbox{\hyperlink{class_queue_a606ee6477ad4898da067066d503df0e0}{Queue<T>::get}}()}
+\DoxyCodeLine{00141\ \{}
+\DoxyCodeLine{00142\ \ \ \textcolor{keywordflow}{if}\ (siz\ >\ 0)\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}}*\ returnedMember\ =\ begin;}
+\DoxyCodeLine{00144\ \ \ \ \ begin\ =\ begin-\/>\mbox{\hyperlink{struct_queue_member_a7b6162c7926543214d4964eea16e176f}{nextMember}};}
+\DoxyCodeLine{00145\ \ \ \ \ T*\ returned\ =\ returnedMember-\/>\mbox{\hyperlink{struct_queue_member_a3e134d12a0640ecb8c18da894b113acc}{pointingTo}};}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{delete}\ returnedMember;}
+\DoxyCodeLine{00147\ \ \ \ \ siz-\/-\/;}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{return}\ returned;}
+\DoxyCodeLine{00149\ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00151\ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00154\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_queue_a515bd72c9d7d2bc12add78c0d2e79762}{Queue<T>::isEmpty}}()}
+\DoxyCodeLine{00155\ \{}
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordflow}{return}\ siz\ ==\ 0;}
+\DoxyCodeLine{00157\ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00160\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_queue_acb12e3d108397a77e412d43cdd0b2836}{Queue<T>::clear}}()}
+\DoxyCodeLine{00161\ \{}
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordflow}{if}\ (ownsMembers)\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{while}\ (!isEmpty())\ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ get();}
+\DoxyCodeLine{00165\ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \ \ \}}
+\DoxyCodeLine{00167\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{while}\ (!isEmpty())\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ get();}
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \}}
+\DoxyCodeLine{00172\ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00175\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{class_queue_a91cbd71c4aeb13c6c7b6a9c8939636e3}{Queue<T>::size}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00176\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{return}\ siz;}
+\DoxyCodeLine{00178\ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00181\ \mbox{\hyperlink{class_queue_aa7eef1b427e24555780505de20e9acbc}{Queue<T>::\string~Queue}}()\ \{}
+\DoxyCodeLine{00182\ \ \ \textcolor{keywordflow}{if}\ (ownsMembers)\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{while}\ (begin\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}}*\ next\ =\ begin-\/>\mbox{\hyperlink{struct_queue_member_a7b6162c7926543214d4964eea16e176f}{nextMember}};}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ begin-\/>pointingTo;}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ begin;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ begin\ =\ next;}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00189\ \ \ \}}
+\DoxyCodeLine{00190\ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordflow}{while}\ (begin\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \mbox{\hyperlink{struct_queue_member}{QueueMember<T>}}*\ next\ =\ begin-\/>\mbox{\hyperlink{struct_queue_member_a7b6162c7926543214d4964eea16e176f}{nextMember}};}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ begin;}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ begin\ =\ next;}
+\DoxyCodeLine{00195\ \ \ \ \ \}}
+\DoxyCodeLine{00196\ \ \ \}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \}}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

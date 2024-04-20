@@ -67,11 +67,13 @@ void Circuit::configure() {
         build();
     }
     catch (std::string errormsg) {
-        printSeparatorLine(*errorStream, '*', 50);
+        *errorStream << std::endl;
+        printSeparatorLine(*errorStream, '=', 50);
         *errorStream << "SYNTAX ERROR" << std::endl;
         printSeparatorLine(*errorStream, '*', 50);
         *errorStream << errormsg;
-        printSeparatorLine(*errorStream, '*', 50);
+        printSeparatorLine(*errorStream, '=', 50);
+        *errorStream << std::endl;
         reset();
         return;
     }
@@ -155,17 +157,17 @@ void Circuit::getNodeNumbers(ContentInfo& info, Queue<int>& nodeNumbers)
     while (go) {
         if (!(s >> read)) {
             nodeNumbers.clear();
-            throw std::string("Incorrect syntax at: \"()" + std::string(info.line.c_str() + info.idx) + "\" !");
+            throw std::string("Incorrect syntax at: \"(" + std::string(info.line.c_str() + info.idx) + "\" !\n");
         }
         nodeNumbers.put(new int(read));
         char c;
         if (!(s >> c)) {
             nodeNumbers.clear();
-            throw std::string("Incorrect syntax at: \"(" + std::string(info.line.c_str() + info.idx) + "\" !");
+            throw std::string("Incorrect syntax at: \"(" + std::string(info.line.c_str() + info.idx) + "\" !\n");
         }
         if (c != ',' && c != ')') {
             nodeNumbers.clear();
-            throw std::string("Incorrect syntax at: \"(" + std::string(info.line.c_str() + info.idx) + "\" !");
+            throw std::string("Incorrect syntax at: \"(" + std::string(info.line.c_str() + info.idx) + "\" !\n");
         }
         else if (c == ')') {
             while (info.line[info.idx] != ')')
@@ -265,7 +267,7 @@ void Circuit::createBasedOnType(ContentInfo& info, size_t count, Queue<int>& nod
     }
 }
 
-void Circuit::connectInPinWithNode(InPin* pin, size_t id, size_t idx)
+void Circuit::connectInPinWithNode(InputPin* pin, size_t id, size_t idx)
 {
     Queue<Node> copy(nodeList);
     bool found = false;
@@ -288,7 +290,7 @@ void Circuit::connectInPinWithNode(InPin* pin, size_t id, size_t idx)
     }
 }
 
-void Circuit::connectOutPinWithNode(OutPin_Component* component, OutPin* pin, size_t id, size_t idx)
+void Circuit::connectOutPinWithNode(OutputComponent* component, OutputPin* pin, size_t id, size_t idx)
 {
     Queue<Node> copy(nodeList);
     bool found = false;
@@ -360,7 +362,7 @@ void Circuit::simulate(std::ostream& os)
         configure();
 
     for (size_t i = 0; i < incomponents.size(); i++) {
-        InPin_Component* current = incomponents.get();
+        InputComponent* current = incomponents.get();
         current->resetForSimulation();
         incomponents.put(current);
     }
@@ -443,7 +445,7 @@ std::ostream& operator<<(std::ostream& os, const Circuit& circuit)
 {
     size_t times = circuit.getSourceFileName().length();
     times = times < 50 ? 50 : times;
-    printSeparatorLine(os, '*', times);
+    printSeparatorLine(os, '=', times);
     os << circuit.getSourceFileName() << std::endl;
     printSeparatorLine(os, '*', times);
     std::time_t result = std::time(nullptr);
@@ -454,7 +456,8 @@ std::ostream& operator<<(std::ostream& os, const Circuit& circuit)
     circuit.printAllSwitchStates(os);
     printSeparatorLine(os, '-', times);
     circuit.printAllLampStates(os);
-    printSeparatorLine(os, '*', times);
+    printSeparatorLine(os, '=', times);
+    os << std::endl << std::endl;
     return os;
 }
 

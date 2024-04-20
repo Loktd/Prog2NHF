@@ -7,18 +7,18 @@
 
 typedef long long unsigned int size_t;
 
-InPin_Component::InPin_Component(size_t inCount)
+InputComponent::InputComponent(size_t inCount)
 {
     inPinCount = inCount;
     activeInPins = 0;
-    inPins = new InPin[inPinCount];
+    inPins = new InputPin[inPinCount];
     inNodeIDs = new size_t[inPinCount];
     for (size_t i = 0; i < inPinCount; i++) {
         inPins[i].connenctToComponent(this);
     }
 }
 
-void InPin_Component::setInNodeID(size_t at, size_t id)
+void InputComponent::setInNodeID(size_t at, size_t id)
 {
     if (at >= inPinCount) {
         throw std::string("Indexed out of inNodeID range...\n");
@@ -26,7 +26,7 @@ void InPin_Component::setInNodeID(size_t at, size_t id)
     inNodeIDs[at] = id;
 }
 
-bool InPin_Component::connectedToNodeIn(size_t id)
+bool InputComponent::connectedToNodeIn(size_t id)
 {
     for (size_t i = 0; i < inPinCount; i++) {
         if (inNodeIDs[i] == id) {
@@ -36,7 +36,7 @@ bool InPin_Component::connectedToNodeIn(size_t id)
     return false;
 }
 
-void InPin_Component::printInConnectedNodes(std::ostream& os) const
+void InputComponent::printInConnectedNodes(std::ostream& os) const
 {
     for (size_t i = 0; i < inPinCount; i++) {
         os << inNodeIDs[i];
@@ -45,12 +45,12 @@ void InPin_Component::printInConnectedNodes(std::ostream& os) const
     }
 }
 
-void InPin_Component::resetForSimulation()
+void InputComponent::resetForSimulation()
 {
     activeInPins = 0;
 }
 
-void InPin_Component::tickCounter()
+void InputComponent::tickCounter()
 {
     activeInPins++;
     if (activeInPins == inPinCount) {
@@ -58,36 +58,35 @@ void InPin_Component::tickCounter()
     }
     else if (activeInPins > inPinCount) {
         std::cout << this << activeInPins << std::endl;
-        throw "ERROR: Recursion...";
     }
 }
 
-InPin_Component::~InPin_Component()
+InputComponent::~InputComponent()
 {
     delete[] inPins;
     delete[] inNodeIDs;
 }
 
-OutPin_Component::OutPin_Component(size_t outCount)
+OutputComponent::OutputComponent(size_t outCount)
 {
     outPinCount = outCount;
-    outPins = new OutPin[outPinCount];
+    outPins = new OutputPin[outPinCount];
     outPinIDs = new size_t[outPinCount];
 }
 
-void OutPin_Component::connectTo(size_t outPinIndex, InPin_Component* component, size_t inPinIndex)
+void OutputComponent::connectTo(size_t outPinIndex, InputComponent* component, size_t inPinIndex)
 {
     outPins[outPinIndex].connectToPin(component->getInPinsBaseAdress() + inPinIndex);
 }
 
-void OutPin_Component::sendOutSignals()
+void OutputComponent::sendOutSignals()
 {
     for (size_t i = 0; i < outPinCount; i++) {
         outPins[i].sendSignal();
     }
 }
 
-void OutPin_Component::setOutNodeID(size_t at, size_t id)
+void OutputComponent::setOutNodeID(size_t at, size_t id)
 {
     if (at >= outPinCount) {
         throw std::string("Indexed out of outNodeID range...");
@@ -95,7 +94,7 @@ void OutPin_Component::setOutNodeID(size_t at, size_t id)
     outPinIDs[at] = id;
 }
 
-bool OutPin_Component::connectedToNodeOut(size_t id)
+bool OutputComponent::connectedToNodeOut(size_t id)
 {
     for (size_t i = 0; i < outPinCount; i++) {
         if (outPinIDs[i] == id)
@@ -104,7 +103,7 @@ bool OutPin_Component::connectedToNodeOut(size_t id)
     return false;
 }
 
-void OutPin_Component::printOutConnectedNodes(std::ostream& os) const
+void OutputComponent::printOutConnectedNodes(std::ostream& os) const
 {
     for (size_t i = 0; i < outPinCount; i++) {
         os << outPinIDs[i];
@@ -113,7 +112,7 @@ void OutPin_Component::printOutConnectedNodes(std::ostream& os) const
     }
 }
 
-OutPin_Component::~OutPin_Component()
+OutputComponent::~OutputComponent()
 {
     delete[] outPins;
     delete[] outPinIDs;
@@ -126,12 +125,12 @@ void Component::addToActiveQueue()
     activeQueue->put(this);
 }
 
-bool IOPin_Component::connectedToNodes(size_t connectedNode1, size_t connectedNode2)
+bool IOComponent::connectedToNodes(size_t connectedNode1, size_t connectedNode2)
 {
     return connectedToNodeIn(connectedNode1) && connectedToNodeOut(connectedNode2) || connectedToNodeIn(connectedNode2) && connectedToNodeOut(connectedNode1);
 }
 
-void IOPin_Component::printConnectedNodes(std::ostream& os) const
+void IOComponent::printConnectedNodes(std::ostream& os) const
 {
     printInConnectedNodes(os);
     os << " and ";

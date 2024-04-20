@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-class Switch : public IOPin_Component {
+class Switch : public IOComponent {
   /**
    * @brief Zárva van-e a kapcsoló (true = zárt, false = nyitott)
    *
@@ -16,7 +16,7 @@ public:
    * @brief Létrehozza a kapcsolót.
    *
    */
-  Switch() : IOPin_Component(1, 1), closed(false) {}
+  Switch() : IOComponent(1, 1), closed(false) {}
 
   /**
    * @brief Megvalósítja a kapcsolót, azaz ha zárt akkor a bemeneti jelet továbbítja, egyébként meg LOW (0) jelet ad.

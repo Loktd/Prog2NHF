@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-class Lamp : public InPin_Component {
+class Lamp : public InputComponent {
 public:
   /**
    * @brief Létrehoz egy lámpát.
