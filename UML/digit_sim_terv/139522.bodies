@@ -1,0 +1,31 @@
+class OutputComponent
+!!!187778.cpp!!!	OutputComponent(in outCount : size_t)
+    outPinCount = outCount;
+    outPins = new OutputPin[outPinCount];
+    outPinIDs = new size_t[outPinCount];
+!!!187906.cpp!!!	connectTo(in outPinIndex : size_t, inout component : InputComponent, in inPinIndex : size_t) : void
+    outPins[outPinIndex].connectToPin(component->getInPinsBaseAdress() + inPinIndex);
+!!!188034.cpp!!!	sendOutSignals() : void
+    for (size_t i = 0; i < outPinCount; i++) {
+        outPins[i].sendSignal();
+    }
+!!!188290.cpp!!!	setOutNodeID(in at : size_t, in id : size_t) : void
+    if (at >= outPinCount) {
+        throw std::string("Indexed out of outNodeID range...");
+    }
+    outPinIDs[at] = id;
+!!!188418.cpp!!!	connectedToNodeOut(in id : size_t) : bool
+    for (size_t i = 0; i < outPinCount; i++) {
+        if (outPinIDs[i] == id)
+            return true;
+    }
+    return false;
+!!!188546.cpp!!!	printOutConnectedNodes(inout os : std::ostream) : void
+    for (size_t i = 0; i < outPinCount; i++) {
+        os << outPinIDs[i];
+        if (i != outPinCount - 1)
+            os << " ";
+    }
+!!!188802.cpp!!!	~OutputComponent()
+    delete[] outPins;
+    delete[] outPinIDs;

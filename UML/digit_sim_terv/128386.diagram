@@ -1,0 +1,292 @@
+format 224
+
+classcanvas 128002 class_ref 139778 // Signal
+  classdiagramsettings member_max_width 0 end
+  xyz 1230.3 1491.8 2000
+end
+classcanvas 128130 class_ref 141058 // Pin
+  classdiagramsettings member_max_width 0 end
+  xyz 1205.4 1836.7 3005
+end
+classcanvas 128386 class_ref 139394 // InputPin
+  classdiagramsettings member_max_width 0 end
+  xyz 1411.7 2085.6 3011
+end
+classcanvas 128642 class_ref 139650 // OutputPin
+  classdiagramsettings member_max_width 0 end
+  xyz 747.1 2086.4 3017
+end
+classcanvas 129154 class_ref 138242 // InputComponent
+  classdiagramsettings member_max_width 0 end
+  xyz 1638.1 1134.3 3017
+end
+classcanvas 129794 class_ref 139522 // OutputComponent
+  classdiagramsettings member_max_width 0 end
+  xyz 543.3 1122.5 3023
+end
+classcanvas 130050 class_ref 138114 // Component
+  classdiagramsettings member_max_width 0 end
+  xyz 1157.1 799.1 3029
+end
+classcanvas 131458 class_ref 138370 // Source
+  classdiagramsettings member_max_width 0 end
+  xyz 600.9 554.7 3029
+end
+classcanvas 136066 class_ref 137986 // Circuit
+  classdiagramsettings member_max_width 0 end
+  xyz 1521.1 115.5 2010
+end
+classcanvas 141442 class_ref 138754 // Node
+  classdiagramsettings member_max_width 0 end
+  xyz 2757 1438.8 2000
+end
+classcanvas 142466 class_ref 139906 // IOComponent
+  classdiagramsettings member_max_width 0 end
+  xyz 903 2444.2 2000
+end
+classcanvas 143362 class_ref 138626 // Lamp
+  classdiagramsettings member_max_width 0 end
+  xyz 2344.2 1194.4 2000
+end
+classcanvas 143874 class_ref 138498 // Switch
+  classdiagramsettings member_max_width 0 end
+  xyz 50 2485.4 3034
+end
+classcanvas 144386 class_ref 139266 // Queue
+  classdiagramsettings member_max_width 0 end
+  xyz 2545.2 106.2 2018
+end
+classcanvas 144514 class_ref 141186 // QueueMember
+  classdiagramsettings member_max_width 0 end
+  xyz 2979.6 356.8 2005
+end
+classcanvas 144642 class_ref 140034 // Gate
+  classdiagramsettings member_max_width 0 end
+  xyz 585.6 2774.4 2000
+end
+classcanvas 144898 class_ref 140162 // AND
+  classdiagramsettings member_max_width 0 end
+  xyz 128 3100.8 2000
+end
+classcanvas 145282 class_ref 140674 // NAND
+  classdiagramsettings member_max_width 0 end
+  xyz 126.6 3342.2 2000
+end
+classcanvas 145538 class_ref 140290 // OR
+  classdiagramsettings member_max_width 0 end
+  xyz 522.8 3100.8 2000
+end
+classcanvas 145794 class_ref 140802 // NOR
+  classdiagramsettings member_max_width 0 end
+  xyz 520.4 3342.2 2000
+end
+classcanvas 146050 class_ref 140546 // XOR
+  classdiagramsettings member_max_width 0 end
+  xyz 898 3100.8 2000
+end
+classcanvas 146306 class_ref 140930 // XNOR
+  classdiagramsettings member_max_width 0 end
+  xyz 904.2 3334.6 2000
+end
+classcanvas 146562 class_ref 140418 // NOT
+  classdiagramsettings member_max_width 0 end
+  xyz 1274.2 3102.2 2000
+end
+relationcanvas 128258 relation_ref 147842 // <directional composition>
+  from ref 128130 z 3006 to ref 128002
+  role_a_pos 1435 1746 3000 no_role_b
+  multiplicity_a_pos 1384 1746 3000 multiplicity_b_pos 1386 1790 3000
+end
+relationcanvas 128514 relation_ref 147970 // <generalisation>
+  decenter_begin 57
+  decenter_end 565
+  from ref 128386 z 3012 to ref 128130
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128770 relation_ref 148226 // <generalisation>
+  decenter_begin 971
+  decenter_end 54
+  from ref 128642 z 3018 to ref 128130
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128898 relation_ref 148354 // <unidirectional association>
+  decenter_end 354
+  from ref 128642 z 3018 to ref 128386
+  role_a_pos 1270 2136 3000 no_role_b
+  multiplicity_a_pos 1356 2186 3000 multiplicity_b_pos 1265 2190 3000
+end
+relationcanvas 129282 relation_ref 145282 // <unidirectional association>
+  decenter_begin 555
+  decenter_end 801
+  from ref 129154 z 3018 to ref 128386
+  role_a_pos 1961 2036 3000 no_role_b
+  multiplicity_a_pos 1889 2036 3000 multiplicity_b_pos 1912 1452 3000
+end
+relationcanvas 129410 relation_ref 148098 // <unidirectional association>
+  decenter_begin 527
+  decenter_end 224
+  from ref 128386 z 3018 to ref 129154
+  role_a_pos 1782 1452 3000 no_role_b
+  multiplicity_a_pos 1730 1452 3000 multiplicity_b_pos 1709 2036 3000
+end
+relationcanvas 129922 relation_ref 145794 // <unidirectional association>
+  decenter_begin 391
+  decenter_end 347
+  from ref 129794 z 3024 to ref 128642
+  role_a_pos 941 2040 3000 no_role_b
+  multiplicity_a_pos 869 2040 3000 multiplicity_b_pos 896 1440 3000
+end
+relationcanvas 130178 relation_ref 145538 // <generalisation>
+  decenter_end 120
+  from ref 129794 z 3030 to ref 130050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130306 relation_ref 145026 // <generalisation>
+  decenter_end 832
+  from ref 129154 z 3030 to ref 130050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131586 relation_ref 148610 // <generalisation>
+  decenter_begin 569
+  decenter_end 273
+  from ref 131458 z 3030 to ref 129794
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137474 relation_ref 143746 // <directional composition>
+  decenter_begin 52
+  decenter_end 577
+  from ref 136066 z 3030 stereotype "<<Queue>>" xyz 1477 730.5 3000 to ref 130050
+  role_a_pos 1582 752 3000 no_role_b
+  multiplicity_a_pos 1531 752 3000 multiplicity_b_pos 1532 688 3000
+end
+relationcanvas 137602 relation_ref 143874 // <directional composition>
+  decenter_end 574
+  from ref 136066 z 3018 stereotype "<<Queue>>" xyz 1889.5 894.5 3000 to ref 129154
+  role_a_pos 1975 1084 3000 no_role_b
+  multiplicity_a_pos 1925 1084 3000 multiplicity_b_pos 1916 688 3000
+end
+relationcanvas 138498 relation_ref 144386 // <directional composition>
+  decenter_begin 237
+  decenter_end 818
+  from ref 136066 z 3030 stereotype "<<Queue>>" xyz 1679 730 3000 to ref 130050
+  role_a_pos 1750 752 3000 no_role_b
+  multiplicity_a_pos 1701 752 3000 multiplicity_b_pos 1698 688 3000
+end
+relationcanvas 139138 relation_ref 144002 // <directional composition>
+  decenter_begin 617
+  from ref 136066 z 3030 stereotype "<<Queue>>" xyz 1101 448 3000 to point 783.7 447.2
+  line 140546 z 3030 to ref 131458
+  role_a_pos 798 516 3000 no_role_b
+  multiplicity_a_pos 756 516 3000 multiplicity_b_pos 1484 466 3000
+end
+relationcanvas 141570 relation_ref 147458 // <generalisation>
+  decenter_end 970
+  from ref 141442 z 3018 to point 2171.4 1543.8
+  line 143490 z 3018 to ref 129154
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 142082 relation_ref 144514 // <directional composition>
+  decenter_begin 828
+  decenter_end 342
+  from ref 136066 z 2011 to point 2909 573.8
+  line 143234 z 2011 stereotype "<<Queue>>" xyz 2857.5 998 3000 to ref 141442
+  role_a_pos 2930 1390 3000 no_role_b
+  multiplicity_a_pos 2881 1390 3000 multiplicity_b_pos 2438 588 3000
+end
+relationcanvas 142594 relation_ref 146050 // <generalisation>
+  decenter_end 879
+  from ref 142466 z 3018 to point 2133.8 2549
+  line 142978 z 3018 to ref 129154
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 142722 relation_ref 146178 // <generalisation>
+  decenter_end 64
+  from ref 142466 z 3024 to point 583.8 2537.6
+  line 142850 z 3024 to ref 129794
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 143618 relation_ref 147330 // <generalisation>
+  from ref 143362 z 3018 to ref 129154
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 143746 relation_ref 144258 // <directional composition>
+  decenter_begin 921
+  decenter_end 57
+  from ref 136066 z 2011 stereotype "<<Queue>>" xyz 2299 928 3000 to ref 143362
+  role_a_pos 2375 1148 3000 no_role_b
+  multiplicity_a_pos 2325 1148 3000 multiplicity_b_pos 2316 688 3000
+end
+relationcanvas 144002 relation_ref 148738 // <generalisation>
+  decenter_end 767
+  from ref 143874 z 3035 to ref 142466
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144130 relation_ref 144130 // <directional composition>
+  from ref 136066 z 3035 stereotype "<<Queue>>" xyz 825 380.5 3000 to point 237.6 381.4
+  line 144258 z 3035 to ref 143874
+  role_a_pos 250 2436 3000 no_role_b
+  multiplicity_a_pos 201 2436 3000 multiplicity_b_pos 1484 396 3000
+end
+relationcanvas 144770 relation_ref 146306 // <generalisation>
+  decenter_end 52
+  from ref 144642 z 2001 to ref 142466
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145026 relation_ref 146434 // <generalisation>
+  from ref 144898 z 2001 to point 301.4 2847.6
+  line 145154 z 2001 to ref 144642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145410 relation_ref 146946 // <generalisation>
+  from ref 145282 z 2001 to ref 144898
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145666 relation_ref 146562 // <generalisation>
+  decenter_end 282
+  from ref 145538 z 2001 to ref 144642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145922 relation_ref 147074 // <generalisation>
+  from ref 145794 z 2001 to ref 145538
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146178 relation_ref 146818 // <generalisation>
+  decenter_end 904
+  from ref 146050 z 2001 to ref 144642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146434 relation_ref 147202 // <generalisation>
+  from ref 146306 z 2001 to ref 146050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146690 relation_ref 146690 // <generalisation>
+  from ref 146562 z 2001 to point 1441.4 2851.4
+  line 146818 z 2001 to ref 144642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146946 relation_ref 147714 // <directional composition>
+  from ref 141442 z 3018 to point 2989 2385.2
+  line 147074 z 3018 stereotype "<<Queue>>" xyz 1943 2382.5 3000 to point 997.6 2383.8
+  line 147202 z 3018 to ref 128642
+  role_a_pos 1017 2260 3000 no_role_b
+  multiplicity_a_pos 945 2260 3000 multiplicity_b_pos 2948 1670 3000
+end
+end

@@ -1,0 +1,3216 @@
+format 224
+"src" // src::src
+  revision 1
+  modified_by 2 "palin"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src/"
+  cpp_src_dir "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src/"
+  classview 128386 "src"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 137986 "Circuit"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 137602 "errorStream"
+	private explicit_type "std::ostream"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137730 "inputFileName"
+	private explicit_type "std::string"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137858 "inputfile"
+	private explicit_type "std::ifstream"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 143746 // componentList (<directional composition>)
+	relation 143746 *-->
+	  stereotype "Queue"
+	  a role_name "componentList" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 143746 // componentList (<directional composition>)
+	  b multiplicity "1" parent class_ref 138114 // Component
+      end
+
+      classrelation 143874 // incomponents (<directional composition>)
+	relation 143874 *-->
+	  stereotype "Queue"
+	  a role_name "incomponents" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 143874 // incomponents (<directional composition>)
+	  b multiplicity "1" parent class_ref 138242 // InputComponent
+      end
+
+      classrelation 144002 // sourceList (<directional composition>)
+	relation 144002 *-->
+	  stereotype "Queue"
+	  a role_name "sourceList" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 144002 // sourceList (<directional composition>)
+	  b multiplicity "1" parent class_ref 138370 // Source
+      end
+
+      classrelation 144130 // switchList (<directional composition>)
+	relation 144130 *-->
+	  stereotype "Queue"
+	  a role_name "switchList" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 144130 // switchList (<directional composition>)
+	  b multiplicity "1" parent class_ref 138498 // Switch
+      end
+
+      classrelation 144258 // lampList (<directional composition>)
+	relation 144258 *-->
+	  stereotype "Queue"
+	  a role_name "lampList" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 144258 // lampList (<directional composition>)
+	  b multiplicity "1" parent class_ref 138626 // Lamp
+      end
+
+      classrelation 144386 // activeList (<directional composition>)
+	relation 144386 *-->
+	  stereotype "Queue"
+	  a role_name "activeList" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 144386 // activeList (<directional composition>)
+	  b multiplicity "1" parent class_ref 138114 // Component
+      end
+
+      classrelation 144514 // nodeList (<directional composition>)
+	relation 144514 *-->
+	  stereotype "Queue"
+	  a role_name "nodeList" multiplicity "*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 144514 // nodeList (<directional composition>)
+	  b multiplicity "1" parent class_ref 138754 // Node
+      end
+
+      attribute 137986 "configured"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 138114 "simulated"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      class 138882 "ComponentType"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 138242 "INVALID"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 0"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 138370 "SOURCE"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 1"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 138498 "LAMP"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 2"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 138626 "SWITCH"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 3"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 138754 "And"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 4"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 138882 "Or"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 5"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 139010 "Not"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 6"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 139138 "Xor"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 7"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 139266 "Nand"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 8"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 139394 "Nor"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 9"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 139522 "Xnor"
+	  public type class_ref 138882 // ComponentType
+	  init_value " 10
+  "
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
+      class 139010 "ContentInfo"
+	visibility package stereotype "struct"
+	cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 144642 // lineCount (<directional composition>)
+	  relation 144642 *-->
+	    a role_name "lineCount" public
+	      cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	      classrelation_ref 144642 // lineCount (<directional composition>)
+	    b parent class_ref 139138 // size_t
+	end
+
+	attribute 139650 "line"
+	  public explicit_type "std::string"
+	  cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	classrelation 144770 // idx (<directional composition>)
+	  relation 144770 *-->
+	    a role_name "idx" public
+	      cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	      classrelation_ref 144770 // idx (<directional composition>)
+	    b parent class_ref 139138 // size_t
+	end
+
+	classrelation 144898 // type (<directional composition>)
+	  relation 144898 *-->
+	    a role_name "type" public
+	      cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	      classrelation_ref 144898 // type (<directional composition>)
+	    b parent class_ref 138882 // ComponentType
+	end
+
+	operation 182914 "ContentInfo"
+	  cpp_inline public explicit_return_type ""
+	  nparams 0
+	  cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract} : lineCount(0), line(\"\"), idx(0), type(INVALID) {};
+"
+	  
+	  
+	  
+	  
+	end
+      end
+
+      operation 184322 "Circuit"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)} : errorStream(&std::cerr), simulated(false), configured(false), componentList(true), nodeList(true) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 184450 "Circuit"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "source" type class_ref 137986 // Circuit
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)} : componentList(true)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 184578 "operator ="
+	preserve_cpp_body_indent public return_type class_ref 137986 // Circuit
+	nparams 1
+	  param in name "source" type class_ref 137986 // Circuit
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 184706 "setErrorStream"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param inout name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 184834 "setSourceFile"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "fileName" explicit_type "std::string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 184962 "getSourceFileName"
+	preserve_cpp_body_indent const constvalue public explicit_return_type "std::string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 185090 "simulate"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param inout name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 185218 "setSource"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "connectedNode" type class_ref 139138 // size_t
+	  param in name "newSignal" type class_ref 139778 // Signal
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 185346 "setSwitch"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 3
+	  param in name "connectedNode1" type class_ref 139138 // size_t
+	  param in name "connectedNode2" type class_ref 139138 // size_t
+	  param in name "closed" explicit_type "bool"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 185474 "printAllSourceStates"
+	preserve_cpp_body_indent const public explicit_return_type "void"
+	nparams 1
+	  param inout name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 185602 "printAllSwitchStates"
+	preserve_cpp_body_indent const public explicit_return_type "void"
+	nparams 1
+	  param inout name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 185730 "printAllLampStates"
+	preserve_cpp_body_indent const public explicit_return_type "void"
+	nparams 1
+	  param inout name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 185858 "~Circuit"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 138114 "Component"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 139778 "activeQueue"
+	protected explicit_type "Component"
+	stereotype "Queue"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief Az aktív sor, amihez kell hozzáadni, ha ki kell értékelni az elemet, azaz végrehajtani a funkcióját.
+
+"
+      end
+
+      operation 185986 "Component"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param inout name "newActiveQueue" explicit_type "Queue<Component>"
+	    defaultvalue "nullptr"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract} : activeQueue(newActiveQueue) {};
+"
+	
+	
+	
+	
+	comment "@brief Felparaméterezi az aktív sort.
+
+@param newActiveQueue A kívánt aktív sor.
+"
+      end
+
+      operation 186114 "setActiveQueue"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param inout name "newActiveQueue" explicit_type "Queue<Component>"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract} { activeQueue = newActiveQueue; };
+"
+	
+	
+	
+	
+	comment "@brief Beállítja az aktív fifo-t.
+
+"
+      end
+
+      operation 186242 "addToActiveQueue"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Hozzáadja az aktív sorhoz az áramköri elemet.
+
+"
+      end
+
+      operation 186370 "executeFunction"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "@brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
+
+"
+      end
+
+      operation 186498 "~Component"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+	comment "@brief Virtuális destruktor öröklés miatt.
+
+"
+      end
+    end
+
+    class 138242 "InputComponent"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 145026 // <generalisation>
+	relation 145026 ---|>
+	  a public
+	    cpp virtual default "${type}"
+	    classrelation_ref 145026 // <generalisation>
+	  b parent class_ref 138114 // Component
+      end
+
+      classrelation 145154 // inPinCount (<directional composition>)
+	relation 145154 *-->
+	  a role_name "inPinCount" protected
+	    comment "@brief A bemeneti pin-ek száma.
+
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 145154 // inPinCount (<directional composition>)
+	  b parent class_ref 139138 // size_t
+      end
+
+      classrelation 145282 // inPins (<unidirectional association>)
+	relation 145282 --->
+	  a role_name "inPins" multiplicity "1..*" protected
+	    comment "@brief A bemeneti pin-ek tömbje. Az index jelentést a specifikált alkatrész adja meg.
+
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type} *> ${name}${value};
+"
+	    classrelation_ref 145282 // inPins (<unidirectional association>)
+	  b multiplicity "1" parent class_ref 139394 // InputPin
+      end
+
+      classrelation 145410 // inNodeIDs (<unidirectional association>)
+	relation 145410 --->
+	  a role_name "inNodeIDs" protected
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 145410 // inNodeIDs (<unidirectional association>)
+	  b parent class_ref 139138 // size_t
+      end
+
+      operation 186626 "InputComponent"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "inCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Létrehozza a bemeneti pin-ek tömbjét.
+
+@param inCount A bemeneti pin-ek száma.
+"
+      end
+
+      operation 186754 "setInNodeID"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "at" type class_ref 139138 // size_t
+	  param in name "id" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 186882 "connectedToNodeIn"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 1
+	  param in name "id" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 187010 "printInConnectedNodes"
+	preserve_cpp_body_indent const public explicit_return_type "void"
+	nparams 1
+	  param inout name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 187138 "resetForSimulation"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 187266 "activateIfReady"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Növeli az aktív lábak számát, és aktivizálja az áramköri elemet, ha eléri a maximumot.
+
+"
+      end
+
+      operation 187394 "getInPinsBaseAdress"
+	const cpp_inline public return_type class_ref 139394 // InputPin
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract} { return inPins; };
+"
+	
+	
+	
+	
+	comment "@brief Visszaadja a bemeneti pin-ek tömbjének címét.
+
+"
+      end
+
+      operation 187522 "executeFunction"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "@brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
+
+"
+      end
+
+      operation 187650 "~InputComponent"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Törli a bemeneti pin-ek tömbjét.
+
+"
+      end
+    end
+
+    class 138370 "Source"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 148610 // <generalisation>
+	relation 148610 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 148610 // <generalisation>
+	  b parent class_ref 139522 // OutputComponent
+      end
+
+      operation 198018 "Source"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}
+    : Component(nullptr), OutputComponent(1)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "@brief Létrehoz egy forrást.
+"
+      end
+
+      operation 198146 "executeFunction"
+	cpp_virtual cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { sendOutSignals(); };
+"
+	
+	
+	
+	
+	comment "@brief Végrehajtja a forrás funkcióját, azaz kiküldi a jelet a kimenetén.
+
+"
+      end
+
+      operation 198274 "setOutput"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "signal" type class_ref 139778 // Signal
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract} { outPins[0].setSignal(signal); };
+"
+	
+	
+	
+	
+	comment "@brief Beállítja a forrás kimeneti jelét.
+
+@param signal Az új jel.
+"
+      end
+
+      operation 198402 "getOutput"
+	const cpp_inline public return_type class_ref 139778 // Signal
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { return outPins[0].getSignal(); };
+"
+	
+	
+	
+	
+	comment "@brief Visszaadja a forrás kimeneti jelét.
+
+@return A forrás jele.
+"
+      end
+
+      operation 198530 "flipOutput"
+	cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { outPins[0].flipSignal(); };
+"
+	
+	
+	
+	
+	comment "@brief Megfordítja a kimeneti jel értékét.
+
+"
+      end
+
+      operation 198658 "~Source"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 138498 "Switch"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 148738 // <generalisation>
+	relation 148738 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 148738 // <generalisation>
+	  b parent class_ref 139906 // IOComponent
+      end
+
+      attribute 140802 "closed"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief Zárva van-e a kapcsoló (true = zárt, false = nyitott)
+
+
+"
+      end
+
+      operation 198786 "Switch"
+	cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract} : IOComponent(1, 1), closed(false) {};
+"
+	
+	
+	
+	
+	comment "@brief Létrehozza a kapcsolót.
+
+"
+      end
+
+      operation 198914 "executeFunction"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Megvalósítja a kapcsolót, azaz ha zárt akkor a bemeneti jelet továbbítja, egyébként meg LOW (0) jelet ad.
+
+"
+      end
+
+      operation 199042 "getState"
+	const cpp_inline public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { return closed; };
+"
+	
+	
+	
+	
+	comment "@brief Vissza adja hogy zárt-e a kapcsoló.
+
+@return true = zárt,
+@return false = nyitott
+"
+      end
+
+      operation 199170 "setState"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "newState" explicit_type "bool"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} { closed = newState; };
+"
+	
+	
+	
+	
+      end
+
+      operation 199298 "flipState"
+	cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { closed = !closed; };
+"
+	
+	
+	
+	
+	comment "@brief Átbillenti másik állapotba a kapcsolót.
+
+"
+      end
+
+      operation 199426 "~Switch"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 138626 "Lamp"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 147330 // <generalisation>
+	relation 147330 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 147330 // <generalisation>
+	  b parent class_ref 138242 // InputComponent
+      end
+
+      operation 192770 "Lamp"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}
+    : Component(nullptr), InputComponent(1)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "@brief Létrehoz egy lámpát.
+
+"
+      end
+
+      operation 192898 "getState"
+	const cpp_inline public return_type class_ref 139778 // Signal
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { return inPins[0].getSignal(); };
+"
+	
+	
+	
+	
+	comment "@brief Visszaadja a lámpa jelét, azaz, hogy világít-e.
+
+@return A jelérték.
+"
+      end
+
+      operation 193026 "executeFunction"
+	cpp_virtual cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+	comment "@brief Itt igazából haszontalan, lámpának nincs végezni valója.
+
+"
+      end
+
+      operation 193154 "~Lamp"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 138754 "Node"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 147458 // <generalisation>
+	relation 147458 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 147458 // <generalisation>
+	  b parent class_ref 138242 // InputComponent
+      end
+
+      classrelation 147586 // ID (<directional composition>)
+	relation 147586 *-->
+	  a role_name "ID" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 147586 // ID (<directional composition>)
+	  b parent class_ref 139138 // size_t
+      end
+
+      classrelation 147714 // outPins (<directional composition>)
+	relation 147714 *-->
+	  stereotype "Queue"
+	  a role_name "outPins" multiplicity "1..*" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 147714 // outPins (<directional composition>)
+	  b multiplicity "1" parent class_ref 139650 // OutputPin
+      end
+
+      operation 193282 "Node"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "nodeID" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : InputComponent(1), ID(nodeID), outPins(true) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 193410 "getInPin"
+	preserve_cpp_body_indent public return_type class_ref 139394 // InputPin
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 193538 "getID"
+	preserve_cpp_body_indent const public return_type class_ref 139138 // size_t
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 193666 "addOutPin"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param inout name "endPoint" type class_ref 139394 // InputPin
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 193794 "executeFunction"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 193922 "~Node"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 139138 "size_t"
+      visibility package stereotype "typedef" explicit_base_type "unsigned int"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 139266 "Queue"
+      visibility package 
+      nformals 1
+      formal name "T" type "class" explicit_default_value ""
+        explicit_extends ""
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 140290 "ownsMembers"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief Birtokolja-e az elemeit, azaz destruktorban fel kell-e szabadítania a tárolt tagokat is a fifo tárolóival.
+(true = igen, false = nem)
+
+"
+      end
+
+      attribute 140418 "begin"
+	private explicit_type "T"
+	stereotype "QueueMember"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief A fifo elejére mutató. (kivétel és felszabadításhoz)
+
+"
+      end
+
+      attribute 140546 "end"
+	private explicit_type "T"
+	stereotype "QueueMember"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief A fifo végére mutató. (könnyű beszúráshoz)
+
+
+"
+      end
+
+      operation 196098 "operator ="
+	preserve_cpp_body_indent cpp_inline private return_type class_ref 139266 // Queue
+	nparams 1
+	  param in name "source" type class_ref 139266 // Queue
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Csak a másolás megengedett, emiatt ezt priváttal letiltjuk.
+
+@param source A másolás forrása, a mutatott tagokat ez a fifo nem birtokolja.
+@return Queue<T>& Minta szerint van csak, igazi értelme nincsen.
+"
+      end
+
+      classrelation 148482 // siz (<directional composition>)
+	relation 148482 *-->
+	  a role_name "siz" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 148482 // siz (<directional composition>)
+	  b parent class_ref 139138 // size_t
+      end
+
+      operation 196226 "Queue"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "owner" explicit_type "bool"
+	    defaultvalue "false"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : ownsMembers(owner), begin(nullptr), end(nullptr), siz(0) {};
+"
+	
+	
+	
+	
+	comment "@brief Beállítja az üres fifo állapotát.
+
+@param owner Tulaja-e az elemeknek, azaz fel kell majd szabadítani a mutatott objektumokat-e.
+"
+      end
+
+      operation 196354 "Queue"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "source" type class_ref 139266 // Queue
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)}
+  : ownsMembers(false), begin(nullptr), end(nullptr), siz(0)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "@brief Másolást teszi lehetővé, hogy ideiglenesen valamit tudjunk futtatni a fifo-n, a tagokat nem birtokolja.
+
+@param source A másolás forrása.
+"
+      end
+
+      operation 196482 "put"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param inout name "added" explicit_type "T"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Berak egy tagot a sor végére.
+
+@param added A hozzáadott tag.
+"
+      end
+
+      operation 196610 "get"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "T"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Kivesz a sor elejéről egy tagot.
+
+@return T* A soron következő tag.
+"
+      end
+
+      operation 196738 "isEmpty"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Megmondja, hogy üres-e a fifo.
+
+@return true = üres a fifo
+@return false = nem üres a fifo
+"
+      end
+
+      operation 196866 "clear"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Kiürítí a fifo-t, ha tulaj, akkor törli a memóriát is.
+
+"
+      end
+
+      operation 196994 "size"
+	preserve_cpp_body_indent const cpp_inline public return_type class_ref 139138 // size_t
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Visszaadja a fifo elemszámát.
+
+@return size_t A fifo mérete.
+"
+      end
+
+      operation 197122 "~Queue"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Detruktor, mely felszabadítja a tárolt elemeket, attól függően, hogy birtokolja-e őket.
+
+"
+      end
+    end
+
+    class 139394 "InputPin"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 147970 // <generalisation>
+	relation 147970 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 147970 // <generalisation>
+	  b parent class_ref 141058 // Pin
+      end
+
+      classrelation 148098 // component (<unidirectional association>)
+	relation 148098 --->
+	  a role_name "component" multiplicity "1" private
+	    comment "@brief Az áramköri elem, melynek része a bemeneti pin.
+
+
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 148098 // component (<unidirectional association>)
+	  b multiplicity "1..*" parent class_ref 138242 // InputComponent
+      end
+
+      attribute 139906 "ready"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief Tárolja, hogy készen áll a pin feldolgozásra.
+
+
+"
+      end
+
+      operation 194690 "InputPin"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "baseSignal" type class_ref 139778 // Signal
+	    defaultvalue "Signal(false)"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)} : Pin(baseSignal), component(nullptr), ready(false) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "@brief Létrehoz egy bemeneti pin-t, komponensét NULL-ra állítva.
+
+@param baseSignal Az alapjel, ha van megadva.
+"
+      end
+
+      operation 194818 "connenctToComponent"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param inout name "connected" type class_ref 138242 // InputComponent
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Egy áramköri elemhez köti a bemeneti pin-t, így tud majd neki üzenni.
+
+@param component Az áramköri elem, amihez kötjük.
+"
+      end
+
+      operation 194946 "getComponent"
+	preserve_cpp_body_indent const public return_type class_ref 138242 // InputComponent
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Visszaadja a pointerét arra az elemre, amihez kapcsolódik.
+
+@return Az elem, aminek része.
+"
+      end
+
+      operation 195074 "isReady"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Visszaadja, hogy készen áll-e kiértékelésre a bemeneti pin, azaz erről a pinről már meg van-e a helyes bemenet.
+
+@return true = ha készenáll.
+@return false = ha még nem áll készen
+"
+      end
+
+      operation 195202 "setReady"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Jelzi az áramköri elem felé, hogy ezen a lábán rendelkezésre áll a jel.
+
+@exception const char* = amennyiben nincs hozzá kötve áramköri elem.
+"
+      end
+
+      operation 195330 "resetReady"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Reseteli a készenlétet, azaz a pin-nek beállítja, hogy még nem áll készen adat feldolgozásra.
+
+"
+      end
+
+      operation 195458 "~InputPin"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+	comment "@brief Virtuális a destruktor az öröklés miatt.
+
+"
+      end
+    end
+
+    class 139522 "OutputComponent"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 145538 // <generalisation>
+	relation 145538 ---|>
+	  a public
+	    cpp virtual default "${type}"
+	    classrelation_ref 145538 // <generalisation>
+	  b parent class_ref 138114 // Component
+      end
+
+      classrelation 145666 // outPinCount (<directional composition>)
+	relation 145666 *-->
+	  a role_name "outPinCount" protected
+	    comment "@brief A kimeneti pin-ek száma.
+
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 145666 // outPinCount (<directional composition>)
+	  b parent class_ref 139138 // size_t
+      end
+
+      classrelation 145794 // outPins (<unidirectional association>)
+	relation 145794 --->
+	  a role_name "outPins" multiplicity "1..*" protected
+	    comment "@brief A kimeneti pin-ek tömbje.  Az index jelentést a specifikált alkatrész adja meg.
+
+
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type} *> ${name}${value};
+"
+	    classrelation_ref 145794 // outPins (<unidirectional association>)
+	  b multiplicity "1" parent class_ref 139650 // OutputPin
+      end
+
+      classrelation 145922 // outPinIDs (<unidirectional association>)
+	relation 145922 --->
+	  a role_name "outPinIDs" protected
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 145922 // outPinIDs (<unidirectional association>)
+	  b parent class_ref 139138 // size_t
+      end
+
+      operation 187778 "OutputComponent"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "outCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Létrehozza a kimeneti pin-ek tömbjét.
+
+@param outCount A kívánt kimeneti pin-ek száma.
+"
+      end
+
+      operation 187906 "connectTo"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 3
+	  param in name "outPinIndex" type class_ref 139138 // size_t
+	  param inout name "component" type class_ref 138242 // InputComponent
+	  param in name "inPinIndex" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} * ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Összeköti a megadott kimeneti pin-jét egy másik áramköri elem bemeneti pin-jével.
+
+@param outPinIndex A kimeneti pin indexe.
+@param component Amivel össze szeretnénk kötni.
+@param inPinIndex A bemeneti pin indexe.
+"
+      end
+
+      operation 188034 "sendOutSignals"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Kiküldi minden kimeneti lábán a lábakban tárolt jeleket.
+
+"
+      end
+
+      operation 188162 "getOutPinBaseAdress"
+	cpp_inline public return_type class_ref 139650 // OutputPin
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract} { return outPins; };
+"
+	
+	
+	
+	
+	comment "@brief
+
+"
+      end
+
+      operation 188290 "setOutNodeID"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "at" type class_ref 139138 // size_t
+	  param in name "id" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 188418 "connectedToNodeOut"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 1
+	  param in name "id" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 188546 "printOutConnectedNodes"
+	preserve_cpp_body_indent const public explicit_return_type "void"
+	nparams 1
+	  param inout name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 188674 "executeFunction"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "@brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
+
+"
+      end
+
+      operation 188802 "~OutputComponent"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Törli a kimeneti pin-ek tömbjét.
+
+"
+      end
+    end
+
+    class 139650 "OutputPin"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 148226 // <generalisation>
+	relation 148226 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 148226 // <generalisation>
+	  b parent class_ref 141058 // Pin
+      end
+
+      classrelation 148354 // connectedTo (<unidirectional association>)
+	relation 148354 --->
+	  a role_name "connectedTo" multiplicity "0..1" private
+	    comment "@brief A bemeneti pin, amihez van kapcsolva.
+
+
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 148354 // connectedTo (<unidirectional association>)
+	  b multiplicity "1..*" parent class_ref 139394 // InputPin
+      end
+
+      operation 195586 "OutputPin"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "baseSignal" type class_ref 139778 // Signal
+	    defaultvalue "Signal(false)"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)} : Pin(baseSignal), connectedTo(nullptr) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "@brief Létrhoz egy kimeneti pin-t, kapcsolt bemeneti pin-jét NULL-ra állítva.
+
+@param baseSignal Az alapjel, ha van megadva.
+"
+      end
+
+      operation 195714 "connectToPin"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param inout name "pin" type class_ref 139394 // InputPin
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Összekapcsolja egy bemeneti pin-nel.
+
+@param pin A kapcsolni kívánt pin.
+"
+      end
+
+      operation 195842 "sendSignal"
+	preserve_cpp_body_indent const public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Jelet küld a kapcsolt bemeneti pin-nek.
+
+@exception const char* = amennyiben nincs hozzá kötve bemeneti pin.
+"
+      end
+
+      operation 195970 "~OutputPin"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 139778 "Signal"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 140674 "signal"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief A tárolt jelérték.
+@brief false = LOW (0) jel, true = HIGH (1) jel
+
+"
+      end
+
+      operation 197250 "Signal"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "baseValue" explicit_type "bool"
+	    defaultvalue "false"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : signal(baseValue) {};
+"
+	
+	
+	
+	
+	comment "@brief Létrehozza a jel objektumot, adott értékkel, ha van.
+
+@param baseValue Az alapérték.
+"
+      end
+
+      operation 197378 "setValue"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "newValue" explicit_type "bool"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} { signal = newValue; };
+"
+	
+	
+	
+	
+	comment "@brief Beállítja egy új értékre a jelet.
+
+@param newValue Az új jel értéke.
+"
+      end
+
+      operation 197506 "getValue"
+	const cpp_inline public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { return signal; };
+"
+	
+	
+	
+	
+	comment "@brief Visszaadja a jel értékét.
+
+@return true = 1 a jelérték.
+@return false = 0 a jelérték.
+"
+      end
+
+      operation 197634 "flip"
+	cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { signal = !signal; };
+"
+	
+	
+	
+	
+	comment "@brief Megfordítja a jelértéket.
+
+"
+      end
+
+      operation 197762 "operator =="
+	cpp_inline public explicit_return_type "bool"
+	nparams 1
+	  param in name "other" type class_ref 139778 // Signal
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract} { return signal == other.signal; };
+"
+	
+	
+	
+	
+	comment "@brief Egyenlőséget vizsgálja két jelszint között.
+
+@param other A másik jel amivel hasonlítunk.
+@return true, ha egyeznek.
+@return false, ha nem egyeznek
+"
+      end
+
+      operation 197890 "operator !="
+	cpp_inline public explicit_return_type "bool"
+	nparams 1
+	  param in name "other" type class_ref 139778 // Signal
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract} { return signal != other.signal; };
+"
+	
+	
+	
+	
+	comment "@brief Nem egyenlőséget vizsgálja két jelszint között.
+
+@param other A másik jel amivel hasonlítunk.
+@return true, ha nem egyeznek.
+@return false, ha egyeznek
+"
+      end
+    end
+
+    class 139906 "IOComponent"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146050 // <generalisation>
+	relation 146050 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 146050 // <generalisation>
+	  b parent class_ref 138242 // InputComponent
+      end
+
+      classrelation 146178 // <generalisation>
+	relation 146178 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 146178 // <generalisation>
+	  b parent class_ref 139522 // OutputComponent
+      end
+
+      operation 188930 "IOComponent"
+	cpp_inline public explicit_return_type ""
+	nparams 2
+	  param in name "inCount" type class_ref 139138 // size_t
+	  param in name "outCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw}${abstract} : InputComponent(inCount), OutputComponent(outCount) {};
+"
+	
+	
+	
+	
+	comment "@brief Lértehozza a lábakat.
+
+@param inCount Bemeneti lábak száma.
+@param outCount Kimeneti lábak száma.
+"
+      end
+
+      operation 189058 "executeFunction"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "@brief Végrehajtja a funkcióját az áramköri elemnek. Leszármazottban konkretizálva.
+
+"
+      end
+
+      operation 189186 "connectedToNodes"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 2
+	  param in name "connectedNode1" type class_ref 139138 // size_t
+	  param in name "connectedNode2" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 189314 "printConnectedNodes"
+	preserve_cpp_body_indent const public explicit_return_type "void"
+	nparams 1
+	  param inout name "os" explicit_type "std::ostream"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 189442 "~IOComponent"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+	comment "@brief Virtuális destruktor, mert öröklés.
+
+"
+      end
+    end
+
+    class 140034 "Gate"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146306 // <generalisation>
+	relation 146306 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 146306 // <generalisation>
+	  b parent class_ref 139906 // IOComponent
+      end
+
+      operation 189570 "performLogicCalculation"
+	abstract cpp_virtual protected explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 189698 "Gate"
+	cpp_inline public explicit_return_type ""
+	nparams 2
+	  param in name "inCount" type class_ref 139138 // size_t
+	  param in name "outCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw}${abstract} : IOComponent(inCount, outCount) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 189826 "executeFunction"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 189954 "~Gate"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 140162 "AND"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146434 // <generalisation>
+	relation 146434 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 146434 // <generalisation>
+	  b parent class_ref 140034 // Gate
+      end
+
+      operation 190082 "performLogicCalculation"
+	preserve_cpp_body_indent cpp_virtual protected explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 190210 "AND"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "inCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : Gate(inCount, 1) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 190338 "~AND"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 140290 "OR"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146562 // <generalisation>
+	relation 146562 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 146562 // <generalisation>
+	  b parent class_ref 140034 // Gate
+      end
+
+      operation 190466 "performLogicCalculation"
+	preserve_cpp_body_indent cpp_virtual protected explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 190594 "OR"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "inCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : Gate(inCount, 1) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 190722 "~OR"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 140418 "NOT"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146690 // <generalisation>
+	relation 146690 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 146690 // <generalisation>
+	  b parent class_ref 140034 // Gate
+      end
+
+      operation 190850 "performLogicCalculation"
+	preserve_cpp_body_indent cpp_virtual private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 190978 "NOT"
+	cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract} : Gate(1, 1) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 191106 "~NOT"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 140546 "XOR"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146818 // <generalisation>
+	relation 146818 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 146818 // <generalisation>
+	  b parent class_ref 140034 // Gate
+      end
+
+      operation 191234 "performLogicCalculation"
+	preserve_cpp_body_indent cpp_virtual protected explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 191362 "XOR"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "inCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : Gate(inCount, 1) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 191490 "~XOR"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 140674 "NAND"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146946 // <generalisation>
+	relation 146946 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 146946 // <generalisation>
+	  b parent class_ref 140162 // AND
+      end
+
+      operation 191618 "performLogicCalculation"
+	preserve_cpp_body_indent cpp_virtual private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 191746 "NAND"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "inCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : AND(inCount) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 191874 "~NAND"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 140802 "NOR"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 147074 // <generalisation>
+	relation 147074 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 147074 // <generalisation>
+	  b parent class_ref 140290 // OR
+      end
+
+      operation 192002 "performLogicCalculation"
+	preserve_cpp_body_indent cpp_virtual private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 192130 "NOR"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "inCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : OR(inCount) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 192258 "~NOR"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 140930 "XNOR"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 147202 // <generalisation>
+	relation 147202 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 147202 // <generalisation>
+	  b parent class_ref 140546 // XOR
+      end
+
+      operation 192386 "performLogicCalculation"
+	preserve_cpp_body_indent cpp_virtual private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 192514 "XNOR"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "inCount" type class_ref 139138 // size_t
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract} : XOR(inCount) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 192642 "~XNOR"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 141058 "Pin"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 147842 // ownedSignal (<directional composition>)
+	relation 147842 *-->
+	  a role_name "ownedSignal" multiplicity "1" protected
+	    comment "@brief A pin által birtokolt jel.
+
+
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 147842 // ownedSignal (<directional composition>)
+	  b multiplicity "1" parent class_ref 139778 // Signal
+      end
+
+      operation 194050 "Pin"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "baseSignal" type class_ref 139778 // Signal
+	    defaultvalue "Signal(false)"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)} : ownedSignal(baseSignal) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "@brief Létrehoz egy pin-t kezdő jelértékkel.
+
+@param baseSignal Az alap jelérték, default-ként LOW (0) jelszinttel.
+"
+      end
+
+      operation 194178 "setSignal"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "newSignal" type class_ref 139778 // Signal
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Beállítja a pin jelét.
+
+@param newSignal Az új jel.
+"
+      end
+
+      operation 194306 "getSignal"
+	preserve_cpp_body_indent const public return_type class_ref 139778 // Signal
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Visszaadja a pin jelét. Mivel kicsi a Signal osztály, ezért nem kell pointer/referencia.
+
+@return A visszaadott jel.
+"
+      end
+
+      operation 194434 "flipSignal"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "@brief Megfordítja a pin jelét.
+
+"
+      end
+
+      operation 194562 "~Pin"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+	comment "@brief Virtuál a destruktor az öröklés miatt.
+
+"
+      end
+    end
+
+    class 141186 "QueueMember"
+      visibility package stereotype "struct"
+      nformals 1
+      formal name "T" type "class" explicit_default_value ""
+        explicit_extends ""
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 140034 "nextMember"
+	public type class_ref 141186 // QueueMember
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief A következő elem címe a fifo-ban.
+
+"
+      end
+
+      attribute 140162 "pointingTo"
+	public explicit_type "T"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "@brief A mutatott elem.
+
+"
+      end
+    end
+
+    classdiagram 128386 "Terv"
+      classdiagramsettings draw_all_relations no member_max_width 0 end
+      size A0
+    end
+  end
+
+  deploymentview 128386 "src"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 131842 "Circuit"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 137986 // Circuit
+      end
+    end
+
+    artifact 131970 "Component"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 139138 // size_t
+	class_ref 138114 // Component
+	class_ref 138242 // InputComponent
+	class_ref 139522 // OutputComponent
+	class_ref 139906 // IOComponent
+      end
+    end
+
+    artifact 132098 "Gate"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 140034 // Gate
+	class_ref 140162 // AND
+	class_ref 140290 // OR
+	class_ref 140418 // NOT
+	class_ref 140546 // XOR
+	class_ref 140674 // NAND
+	class_ref 140802 // NOR
+	class_ref 140930 // XNOR
+      end
+    end
+
+    artifact 132226 "Lamp"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 138626 // Lamp
+      end
+    end
+
+    artifact 132354 "Node"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 138754 // Node
+      end
+    end
+
+    artifact 132482 "Pin"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 141058 // Pin
+	class_ref 139394 // InputPin
+	class_ref 139650 // OutputPin
+      end
+    end
+
+    artifact 132610 "Queue"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 141186 // QueueMember
+	class_ref 139266 // Queue
+      end
+    end
+
+    artifact 132738 "Signal"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 139778 // Signal
+      end
+    end
+
+    artifact 132866 "Source"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 138370 // Source
+      end
+    end
+
+    artifact 132994 "Switch"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 138498 // Switch
+      end
+    end
+  end
+end

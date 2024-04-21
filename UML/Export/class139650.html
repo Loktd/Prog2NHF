@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class OutputPin</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class OutputPin</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_139650"></a>
+<p>Declaration :</p><ul>
+<li>C++ : class OutputPin : public <a href="class141058.html#ref4_141058"><b>Pin</b></a> </li></ul><p>Artifact : <a href="index.html#ref8_132482"><b>Pin</b></a></p>
+<div class="sub">
+<a name="ref0_148354"></a>
+<table><tr><td><div class="element">Relation <b>connectedTo (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>@brief A bemeneti pin, amihez van kapcsolva.<br /><br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : - connectedTo : <a href="class139394.html#ref4_139394"><b>InputPin</b></a>, multiplicity : 0..1</li><li>C++ : private: <a href="class139394.html#ref4_139394"><b>InputPin</b></a> * connectedTo</li></ul><a name="ref2_195586"></a>
+<table><tr><td><div class="element">Operation <b>OutputPin</b></div></td></tr></table><p>@brief LÃ©trhoz egy kimeneti pin-t, kapcsolt bemeneti pin-jÃ©t NULL-ra Ã¡llÃ­tva.<br /><br />@param baseSignal Az alapjel, ha van megadva.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + OutputPin(in baseSignal : <a href="class139778.html#ref4_139778"><b>Signal</b></a> = Signal(false)) : </li><li>C++ : public: OutputPin(<a href="class139778.html#ref4_139778"><b>Signal</b></a> baseSignal = Signal(false))</li></ul><a name="ref2_195714"></a>
+<table><tr><td><div class="element">Operation <b>connectToPin</b></div></td></tr></table><p>@brief Ãsszekapcsolja egy bemeneti pin-nel.<br /><br />@param pin A kapcsolni kÃ­vÃ¡nt pin.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + connectToPin(inout pin : <a href="class139394.html#ref4_139394"><b>InputPin</b></a>) : void</li><li>C++ : public: void connectToPin(<a href="class139394.html#ref4_139394"><b>InputPin</b></a> * pin)</li></ul><a name="ref2_195842"></a>
+<table><tr><td><div class="element">Operation <b>sendSignal</b></div></td></tr></table><p>@brief Jelet kÃ¼ld a kapcsolt bemeneti pin-nek.<br /><br />@exception const char* = amennyiben nincs hozzÃ¡ kÃ¶tve bemeneti pin.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + sendSignal() : void</li><li>C++ : public: void sendSignal() const</li></ul><a name="ref2_195970"></a>
+<table><tr><td><div class="element">Operation <b>~OutputPin</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + ~OutputPin() : </li><li>C++ : public: inline virtual ~OutputPin()</li></ul></div>
+<p>All public operations : <a href="class139650.html#ref2_195714"><b>connectToPin</b></a> , <a href="class141058.html#ref2_194434"><b>flipSignal</b></a> , <a href="class141058.html#ref2_194306"><b>getSignal</b></a> , <a href="class139650.html#ref2_195842"><b>sendSignal</b></a> , <a href="class141058.html#ref2_194178"><b>setSignal</b></a> </p>
+</body>
+</html>

@@ -1,5 +1,0 @@
-class Component
-!!!151554.cpp!!!	addToActiveQueue() : void
-    if (activeQueue == nullptr)
-        throw "This component doesn't have an active queue...";
-    activeQueue->put(this);

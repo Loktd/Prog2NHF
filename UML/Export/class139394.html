@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class InputPin</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class InputPin</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_139394"></a>
+<p>Declaration :</p><ul>
+<li>C++ : class InputPin : public <a href="class141058.html#ref4_141058"><b>Pin</b></a> </li></ul><p>Artifact : <a href="index.html#ref8_132482"><b>Pin</b></a></p>
+<div class="sub">
+<a name="ref0_148098"></a>
+<table><tr><td><div class="element">Relation <b>component (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>@brief Az Ã¡ramkÃ¶ri elem, melynek rÃ©sze a bemeneti pin.<br /><br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : - component : <a href="class138242.html#ref4_138242"><b>InputComponent</b></a>, multiplicity : 1</li><li>C++ : private: <a href="class138242.html#ref4_138242"><b>InputComponent</b></a> * component</li></ul><a name="ref1_139906"></a>
+<table><tr><td><div class="element">Attribute <b>ready</b></div></td></tr></table>
+<p>@brief TÃ¡rolja, hogy kÃ©szen Ã¡ll a pin feldolgozÃ¡sra.<br /><br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : - ready : bool</li><li>C++ : private: bool ready</li></ul><a name="ref2_194690"></a>
+<table><tr><td><div class="element">Operation <b>InputPin</b></div></td></tr></table><p>@brief LÃ©trehoz egy bemeneti pin-t, komponensÃ©t NULL-ra Ã¡llÃ­tva.<br /><br />@param baseSignal Az alapjel, ha van megadva.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + InputPin(in baseSignal : <a href="class139778.html#ref4_139778"><b>Signal</b></a> = Signal(false)) : </li><li>C++ : public: InputPin(<a href="class139778.html#ref4_139778"><b>Signal</b></a> baseSignal = Signal(false))</li></ul><a name="ref2_194818"></a>
+<table><tr><td><div class="element">Operation <b>connenctToComponent</b></div></td></tr></table><p>@brief Egy Ã¡ramkÃ¶ri elemhez kÃ¶ti a bemeneti pin-t, Ã­gy tud majd neki Ã¼zenni.<br /><br />@param component Az Ã¡ramkÃ¶ri elem, amihez kÃ¶tjÃ¼k.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + connenctToComponent(inout connected : <a href="class138242.html#ref4_138242"><b>InputComponent</b></a>) : void</li><li>C++ : public: void connenctToComponent(<a href="class138242.html#ref4_138242"><b>InputComponent</b></a> * connected)</li></ul><a name="ref2_194946"></a>
+<table><tr><td><div class="element">Operation <b>getComponent</b></div></td></tr></table><p>@brief Visszaadja a pointerÃ©t arra az elemre, amihez kapcsolÃ³dik.<br /><br />@return Az elem, aminek rÃ©sze.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + getComponent() : <a href="class138242.html#ref4_138242"><b>InputComponent</b></a></li><li>C++ : public: <a href="class138242.html#ref4_138242"><b>InputComponent</b></a> * getComponent() const</li></ul><a name="ref2_195074"></a>
+<table><tr><td><div class="element">Operation <b>isReady</b></div></td></tr></table><p>@brief Visszaadja, hogy kÃ©szen Ã¡ll-e kiÃ©rtÃ©kelÃ©sre a bemeneti pin, azaz errÅl a pinrÅl mÃ¡r meg van-e a helyes bemenet.<br /><br />@return true = ha kÃ©szenÃ¡ll.<br />@return false = ha mÃ©g nem Ã¡ll kÃ©szen<br /><br /></p><p>Declaration :</p><ul><li>Uml : + isReady() : bool</li><li>C++ : public: bool isReady()</li></ul><a name="ref2_195202"></a>
+<table><tr><td><div class="element">Operation <b>setReady</b></div></td></tr></table><p>@brief Jelzi az Ã¡ramkÃ¶ri elem felÃ©, hogy ezen a lÃ¡bÃ¡n rendelkezÃ©sre Ã¡ll a jel.<br /><br />@exception const char* = amennyiben nincs hozzÃ¡ kÃ¶tve Ã¡ramkÃ¶ri elem.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + setReady() : void</li><li>C++ : public: void setReady()</li></ul><a name="ref2_195330"></a>
+<table><tr><td><div class="element">Operation <b>resetReady</b></div></td></tr></table><p>@brief Reseteli a kÃ©szenlÃ©tet, azaz a pin-nek beÃ¡llÃ­tja, hogy mÃ©g nem Ã¡ll kÃ©szen adat feldolgozÃ¡sra.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + resetReady() : void</li><li>C++ : public: void resetReady()</li></ul><a name="ref2_195458"></a>
+<table><tr><td><div class="element">Operation <b>~InputPin</b></div></td></tr></table><p>@brief VirtuÃ¡lis a destruktor az Ã¶rÃ¶klÃ©s miatt.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + ~InputPin() : </li><li>C++ : public: inline virtual ~InputPin()</li></ul></div>
+<p>All public operations : <a href="class139394.html#ref2_194818"><b>connenctToComponent</b></a> , <a href="class141058.html#ref2_194434"><b>flipSignal</b></a> , <a href="class139394.html#ref2_194946"><b>getComponent</b></a> , <a href="class141058.html#ref2_194306"><b>getSignal</b></a> , <a href="class139394.html#ref2_195074"><b>isReady</b></a> , <a href="class139394.html#ref2_195330"><b>resetReady</b></a> , <a href="class139394.html#ref2_195202"><b>setReady</b></a> , <a href="class141058.html#ref2_194178"><b>setSignal</b></a> </p>
+</body>
+</html>

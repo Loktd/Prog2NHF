@@ -1,0 +1,114 @@
+class Circuit
+!!!184450.cpp!!!	Circuit(in source : Circuit)
+    *this = source;
+!!!184578.cpp!!!	operator =(in source : Circuit) : Circuit
+    if (this != &source) {
+        simulated = false;
+        configured = false;
+        reset();
+        setSourceFile(source.inputFileName);
+        configure();
+    }
+    return *this;
+!!!184706.cpp!!!	setErrorStream(inout os : std::ostream) : void
+    errorStream = os;
+!!!184834.cpp!!!	setSourceFile(in fileName : std::string) : void
+    if (inputfile.is_open()) {
+        inputfile.close();
+    }
+
+    inputFileName = fileName;
+    inputfile.open(inputFileName);
+
+    if (!inputfile.is_open() && inputFileName != "") {
+        *errorStream << "There is no file with name: " << fileName << std::endl;
+    }
+!!!184962.cpp!!!	getSourceFileName() : std::string
+    return inputFileName;
+!!!185090.cpp!!!	simulate(inout os : std::ostream) : void
+    if (!configured)
+        configure();
+
+    for (size_t i = 0; i < incomponents.size(); i++) {
+        InputComponent* current = incomponents.get();
+        current->resetForSimulation();
+        incomponents.put(current);
+    }
+
+    Queue<Source> temp(sourceList);
+    while (!temp.isEmpty()) {
+        activeList.put(temp.get());
+    }
+
+    bool wasShortCircuit = false;
+
+    while (!activeList.isEmpty()) {
+        Component* current = activeList.get();
+        try {
+            current->executeFunction();
+        }
+        catch (std::string str) {
+            if (!wasShortCircuit) {
+                printSeparatorLine(os, '=', 50);
+                os << "ERROR DURING SIMULATION!" << std::endl;
+                printSeparatorLine(os, '=', 50);
+                std::time_t result = std::time(nullptr);
+                os << std::ctime(&result);
+                printSeparatorLine(os, '*', 50);
+                wasShortCircuit = true;
+            }
+            os << str << " at node ";
+            dynamic_cast<OutputComponent*>(current)->printOutConnectedNodes(os);
+            os << "!" << std::endl;
+        }
+    }
+
+    if (!wasShortCircuit)
+        os << *this;
+    else {
+        printSeparatorLine(os, '=', 50);
+        os << std::endl << std::endl;
+    }
+!!!185218.cpp!!!	setSource(in connectedNode : size_t, in newSignal : Signal) : void
+    if (!configured) {
+        configure();
+    }
+    Queue<Source> copy(sourceList);
+    while (!copy.isEmpty()) {
+        Source* current = copy.get();
+        if (current->connectedToNodeOut(connectedNode)) {
+            current->setOutput(newSignal);
+            return;
+        }
+    }
+    *errorStream << "No source connected to node: " << connectedNode << "!" << std::endl;
+!!!185346.cpp!!!	setSwitch(in connectedNode1 : size_t, in connectedNode2 : size_t, in closed : bool) : void
+    Queue<Switch> copy(switchList);
+    while (!copy.isEmpty()) {
+        Switch* current = copy.get();
+        if (current->connectedToNodes(connectedNode1, connectedNode2)) {
+            current->setState(closed);
+            return;
+        }
+    }
+    *errorStream << "No switch connected to nodes: " << connectedNode1 << " and " << connectedNode2 << "!" << std::endl;
+!!!185474.cpp!!!	printAllSourceStates(inout os : std::ostream) : void
+    Queue<Source> copyList(sourceList);
+    while (!copyList.isEmpty()) {
+        Source* current = copyList.get();
+        os << *current << std::endl;
+    }
+!!!185602.cpp!!!	printAllSwitchStates(inout os : std::ostream) : void
+    Queue<Switch> copyList(switchList);
+    while (!copyList.isEmpty()) {
+        Switch* current = copyList.get();
+        os << *current << std::endl;
+    }
+!!!185730.cpp!!!	printAllLampStates(inout os : std::ostream) : void
+    Queue<Lamp> copyList(lampList);
+    while (!copyList.isEmpty()) {
+        Lamp* current = copyList.get();
+        os << *current << std::endl;
+    }
+!!!185858.cpp!!!	~Circuit()
+    reset();

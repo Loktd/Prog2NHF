@@ -1,0 +1,4 @@
+class NAND
+!!!191618.cpp!!!	performLogicCalculation() : void
+    AND::performLogicCalculation();
+    outPins[0].flipSignal();

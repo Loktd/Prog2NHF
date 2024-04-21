@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class InputComponent</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class InputComponent</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_138242"></a>
+<p>Declaration :</p><ul>
+<li>C++ : class InputComponent : public virtual <a href="class138114.html#ref4_138114"><b>Component</b></a> </li></ul><p>Directly inherited by : <a href="class139906.html#ref4_139906"><b>IOComponent</b></a> <a href="class138626.html#ref4_138626"><b>Lamp</b></a> <a href="class138754.html#ref4_138754"><b>Node</b></a> </p>
+<p>Artifact : <a href="index.html#ref8_131970"><b>Component</b></a></p>
+<div class="sub">
+<a name="ref0_145154"></a>
+<table><tr><td><div class="element">Relation <b>inPinCount (&lt;directional composition&gt;)</b></div></td></tr></table><p>@brief A bemeneti pin-ek szÃ¡ma.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : # inPinCount : <a href="class139138.html#ref4_139138"><b>size_t</b></a></li><li>C++ : protected: <a href="class139138.html#ref4_139138"><b>size_t</b></a> inPinCount</li></ul><a name="ref0_145282"></a>
+<table><tr><td><div class="element">Relation <b>inPins (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>@brief A bemeneti pin-ek tÃ¶mbje. Az index jelentÃ©st a specifikÃ¡lt alkatrÃ©sz adja meg.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : # inPins : <a href="class139394.html#ref4_139394"><b>InputPin</b></a>, multiplicity : 1..*</li><li>C++ : protected: &lt;<a href="class139394.html#ref4_139394"><b>InputPin</b></a> *&gt; inPins</li></ul><a name="ref0_145410"></a>
+<table><tr><td><div class="element">Relation <b>inNodeIDs (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : # inNodeIDs : <a href="class139138.html#ref4_139138"><b>size_t</b></a></li><li>C++ : protected: <a href="class139138.html#ref4_139138"><b>size_t</b></a> * inNodeIDs</li></ul><a name="ref2_186626"></a>
+<table><tr><td><div class="element">Operation <b>InputComponent</b></div></td></tr></table><p>@brief LÃ©trehozza a bemeneti pin-ek tÃ¶mbjÃ©t.<br /><br />@param inCount A bemeneti pin-ek szÃ¡ma.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + InputComponent(in inCount : <a href="class139138.html#ref4_139138"><b>size_t</b></a>) : </li><li>C++ : public: InputComponent(<a href="class139138.html#ref4_139138"><b>size_t</b></a> inCount)</li></ul><a name="ref2_186754"></a>
+<table><tr><td><div class="element">Operation <b>setInNodeID</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + setInNodeID(in at : <a href="class139138.html#ref4_139138"><b>size_t</b></a>, in id : <a href="class139138.html#ref4_139138"><b>size_t</b></a>) : void</li><li>C++ : public: void setInNodeID(<a href="class139138.html#ref4_139138"><b>size_t</b></a> at, <a href="class139138.html#ref4_139138"><b>size_t</b></a> id)</li></ul><a name="ref2_186882"></a>
+<table><tr><td><div class="element">Operation <b>connectedToNodeIn</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + connectedToNodeIn(in id : <a href="class139138.html#ref4_139138"><b>size_t</b></a>) : bool</li><li>C++ : public: bool connectedToNodeIn(<a href="class139138.html#ref4_139138"><b>size_t</b></a> id)</li></ul><a name="ref2_187010"></a>
+<table><tr><td><div class="element">Operation <b>printInConnectedNodes</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + printInConnectedNodes(inout os : std::ostream) : void</li><li>C++ : public: void printInConnectedNodes(std::ostream &amp; os) const</li></ul><a name="ref2_187138"></a>
+<table><tr><td><div class="element">Operation <b>resetForSimulation</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + resetForSimulation() : void</li><li>C++ : public: void resetForSimulation()</li></ul><a name="ref2_187266"></a>
+<table><tr><td><div class="element">Operation <b>activateIfReady</b></div></td></tr></table><p>@brief NÃ¶veli az aktÃ­v lÃ¡bak szÃ¡mÃ¡t, Ã©s aktivizÃ¡lja az Ã¡ramkÃ¶ri elemet, ha elÃ©ri a maximumot.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + activateIfReady() : void</li><li>C++ : public: void activateIfReady()</li></ul><a name="ref2_187394"></a>
+<table><tr><td><div class="element">Operation <b>getInPinsBaseAdress</b></div></td></tr></table><p>@brief Visszaadja a bemeneti pin-ek tÃ¶mbjÃ©nek cÃ­mÃ©t.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + getInPinsBaseAdress() : <a href="class139394.html#ref4_139394"><b>InputPin</b></a></li><li>C++ : public: inline <a href="class139394.html#ref4_139394"><b>InputPin</b></a> * getInPinsBaseAdress() const</li></ul><a name="ref2_187522"></a>
+<table><tr><td><div class="element">Operation <b>executeFunction</b></div></td></tr></table><p>@brief VÃ©grehajtja a funkciÃ³jÃ¡t az Ã¡ramkÃ¶ri elemnek. LeszÃ¡rmazottban konkretizÃ¡lva.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : abstract, + executeFunction() : void</li><li>C++ : public: virtual void executeFunction()= 0 </li></ul><a name="ref2_187650"></a>
+<table><tr><td><div class="element">Operation <b>~InputComponent</b></div></td></tr></table><p>@brief TÃ¶rli a bemeneti pin-ek tÃ¶mbjÃ©t.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + ~InputComponent() : </li><li>C++ : public: virtual ~InputComponent()</li></ul></div>
+<p>All public operations : <a href="class138242.html#ref2_187266"><b>activateIfReady</b></a> , <a href="class138114.html#ref2_186242"><b>addToActiveQueue</b></a> , <a href="class138242.html#ref2_186882"><b>connectedToNodeIn</b></a> , <a href="class138114.html#ref2_186370"><b>executeFunction</b></a> , <a href="class138242.html#ref2_187522"><b>executeFunction</b></a> , <a href="class138242.html#ref2_187394"><b>getInPinsBaseAdress</b></a> , <a href="class138242.html#ref2_187010"><b>printInConnectedNodes</b></a> , <a href="class138242.html#ref2_187138"><b>resetForSimulation</b></a> , <a href="class138114.html#ref2_186114"><b>setActiveQueue</b></a> , <a href="class138242.html#ref2_186754"><b>setInNodeID</b></a> </p>
+</body>
+</html>

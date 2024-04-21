@@ -1,0 +1,4 @@
+class Gate
+!!!189826.cpp!!!	executeFunction() : void
+    performLogicCalculation();
+    sendOutSignals();

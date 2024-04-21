@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class Signal</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class Signal</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_139778"></a>
+<p>Declaration :</p><ul>
+<li>C++ : class Signal </li></ul><p>Artifact : <a href="index.html#ref8_132738"><b>Signal</b></a></p>
+<div class="sub">
+<a name="ref1_140674"></a>
+<table><tr><td><div class="element">Attribute <b>signal</b></div></td></tr></table>
+<p>@brief A tÃ¡rolt jelÃ©rtÃ©k.<br />@brief false = LOW (0) jel, true = HIGH (1) jel<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : - signal : bool</li><li>C++ : private: bool signal</li></ul><a name="ref2_197250"></a>
+<table><tr><td><div class="element">Operation <b>Signal</b></div></td></tr></table><p>@brief LÃ©trehozza a jel objektumot, adott Ã©rtÃ©kkel, ha van.<br /><br />@param baseValue Az alapÃ©rtÃ©k.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + Signal(in baseValue : bool = false) : </li><li>C++ : public: inline Signal(bool baseValue = false)</li></ul><a name="ref2_197378"></a>
+<table><tr><td><div class="element">Operation <b>setValue</b></div></td></tr></table><p>@brief BeÃ¡llÃ­tja egy Ãºj Ã©rtÃ©kre a jelet.<br /><br />@param newValue Az Ãºj jel Ã©rtÃ©ke.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + setValue(in newValue : bool) : void</li><li>C++ : public: inline void setValue(bool newValue)</li></ul><a name="ref2_197506"></a>
+<table><tr><td><div class="element">Operation <b>getValue</b></div></td></tr></table><p>@brief Visszaadja a jel Ã©rtÃ©kÃ©t.<br /><br />@return true = 1 a jelÃ©rtÃ©k.<br />@return false = 0 a jelÃ©rtÃ©k.<br /><br /></p><p>Declaration :</p><ul><li>Uml : + getValue() : bool</li><li>C++ : public: inline bool getValue() const</li></ul><a name="ref2_197634"></a>
+<table><tr><td><div class="element">Operation <b>flip</b></div></td></tr></table><p>@brief MegfordÃ­tja a jelÃ©rtÃ©ket.<br /><br /><br /></p><p>Declaration :</p><ul><li>Uml : + flip() : void</li><li>C++ : public: inline void flip()</li></ul><a name="ref2_197762"></a>
+<table><tr><td><div class="element">Operation <b>operator ==</b></div></td></tr></table><p>@brief EgyenlÅsÃ©get vizsgÃ¡lja kÃ©t jelszint kÃ¶zÃ¶tt.<br /><br />@param other A mÃ¡sik jel amivel hasonlÃ­tunk.<br />@return true, ha egyeznek.<br />@return false, ha nem egyeznek<br /><br /></p><p>Declaration :</p><ul><li>Uml : + operator ==(in other : <a href="class139778.html#ref4_139778"><b>Signal</b></a>) : bool</li><li>C++ : public: inline bool operator ==(const <a href="class139778.html#ref4_139778"><b>Signal</b></a> &amp; other)</li></ul><a name="ref2_197890"></a>
+<table><tr><td><div class="element">Operation <b>operator !=</b></div></td></tr></table><p>@brief Nem egyenlÅsÃ©get vizsgÃ¡lja kÃ©t jelszint kÃ¶zÃ¶tt.<br /><br />@param other A mÃ¡sik jel amivel hasonlÃ­tunk.<br />@return true, ha nem egyeznek.<br />@return false, ha egyeznek<br /><br /></p><p>Declaration :</p><ul><li>Uml : + operator !=(in other : <a href="class139778.html#ref4_139778"><b>Signal</b></a>) : bool</li><li>C++ : public: inline bool operator !=(const <a href="class139778.html#ref4_139778"><b>Signal</b></a> &amp; other)</li></ul></div>
+<p>All public operations : <a href="class139778.html#ref2_197634"><b>flip</b></a> , <a href="class139778.html#ref2_197506"><b>getValue</b></a> , <a href="class139778.html#ref2_197890"><b>operator !=</b></a> , <a href="class139778.html#ref2_197762"><b>operator ==</b></a> , <a href="class139778.html#ref2_197378"><b>setValue</b></a> </p>
+</body>
+</html>
