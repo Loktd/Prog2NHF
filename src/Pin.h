@@ -123,14 +123,14 @@ public:
    *
    * @param baseSignal Az alapjel, ha van megadva.
    */
-  OutputPin(Signal baseSignal = Signal(false)) : Pin(baseSignal), connectedTo(nullptr) {}
+  OutputPin(Signal baseSignal = Signal(false));
 
   /**
    * @brief Összekapcsolja egy bemeneti pin-nel.
    *
    * @param pin A kapcsolni kívánt pin.
    */
-  void connectToPin(InputPin* pin) { connectedTo = pin; }
+  void connectToPin(InputPin* pin);
 
   /**
    * @brief Jelet küld a kapcsolt bemeneti pin-nek.

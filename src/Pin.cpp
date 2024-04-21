@@ -53,6 +53,13 @@ void InputPin::resetReady()
     ready = false;
 }
 
+OutputPin::OutputPin(Signal baseSignal) : Pin(baseSignal), connectedTo(nullptr) {}
+
+void OutputPin::connectToPin(InputPin* pin)
+{
+    connectedTo = pin;
+}
+
 void OutputPin::sendSignal() const
 {
     if (connectedTo == nullptr) {
@@ -63,6 +70,6 @@ void OutputPin::sendSignal() const
         connectedTo->setReady();
     }
     else if (connectedTo->getSignal() != ownedSignal) {
-        throw std::string("ERROR: Shortcircuit at node ");
+        throw std::string("ERROR: Shortcircuit");
     }
 }

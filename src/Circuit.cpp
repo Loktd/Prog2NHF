@@ -390,7 +390,7 @@ void Circuit::simulate(std::ostream& os)
                 printSeparatorLine(os, '*', 50);
                 wasShortCircuit = true;
             }
-            os << str;
+            os << str << " at node ";
             dynamic_cast<OutputComponent*>(current)->printOutConnectedNodes(os);
             os << "!" << std::endl;
         }
