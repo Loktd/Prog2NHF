@@ -1,6 +1,9 @@
 #include <iostream>
 
+#ifdef CPORTA
 #include "gtest_lite.h"
+#endif
+
 #include "memtrace.h"
 
 #include "../src/Circuit.h"
@@ -12,7 +15,7 @@
 #include "../src/Switch.h"
 #include "../src/Gate.h"
 
-#include "TestHelpFunctions.h"
+#include "Menu.h"
 
 int main() {
 #ifdef CPORTA
@@ -26,7 +29,6 @@ int main() {
     TEST(CIRCUIT, KonfigSikeres) {
         std::ofstream write;
         write.open(outputFileName, std::ostream::app);
-        clearFileContent(outputFileName);
 
         Circuit circuit;
         circuit.setSourceFile(inputFile1Name);
@@ -46,9 +48,10 @@ int main() {
         write.close();
     } END;
 #else
-    Circuit circuit;
-
-    circuit.setSourceFile("C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\TestMaterial_InputTest1.txt");
-    circuit.simulate(std::cout);
+    App application;
+    while (application.keepRunning()) {
+        application.display();
+        application.handleInput();
+    }
 #endif
 }

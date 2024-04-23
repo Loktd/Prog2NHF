@@ -1,8 +1,8 @@
-window_sizes 2560 1459 600 1950 1157 216
+window_sizes 2560 1459 600 1950 1164 216
 
 diagrams
   active  classdiagram_ref 128386 // Terv
-    1950 1157 59 A0 246 0
+    1950 1157 58 A0 75 0
 end
 show_stereotypes
 selected class_ref 138754 // Node

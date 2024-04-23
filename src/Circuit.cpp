@@ -62,6 +62,7 @@ void Circuit::reset()
 
 void Circuit::configure() {
     try {
+        reset();
         build();
     }
     catch (std::string errormsg) {
@@ -81,7 +82,7 @@ void Circuit::configure() {
 void Circuit::build()
 {
     if (inputFileName == "")
-        return;
+        throw std::string("No file given...\n");
     if (!inputfile.is_open()) {
         inputfile.open(inputFileName);
     }
@@ -120,7 +121,7 @@ void Circuit::checkLineType(ContentInfo& info)
         "SOURCE", "LAMP", "SWITCH", "AND", "OR", "NOT", "XOR", "NAND", "NOR", "XNOR"
     };
     char c = info.line[info.idx++];
-    while (c != ':' || info.idx > info.line.length()) {
+    while (c != ':' && info.idx < info.line.length()) {
         lineType += c;
         c = info.line[info.idx++];
     }
@@ -135,7 +136,7 @@ void Circuit::checkLineType(ContentInfo& info)
     }
 
     if (!valid) {
-        throw std::string("Invalid component type: \"" + lineType + "\"!");
+        throw std::string("Invalid component type: \"" + lineType + "\"!\n");
     }
 }
 
@@ -184,43 +185,43 @@ void Circuit::checkNodeCount(ContentInfo& info, size_t count)
     {
     case SOURCE:
         if (count != 1)
-            throw std::string("Incorrect pin count for SOURCE type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for SOURCE type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case LAMP:
         if (count != 1)
-            throw std::string("Incorrect pin count for LAMP type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for LAMP type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case SWITCH:
         if (count != 2)
-            throw std::string("Incorrect pin count for SWITCH type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for SWITCH type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case And:
         if (count <= 2)
-            throw std::string("Incorrect pin count for AND type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for AND type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case Or:
         if (count <= 2)
-            throw std::string("Incorrect pin count for OR type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for OR type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case Not:
         if (count != 2)
-            throw std::string("Incorrect pin count for NOT type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for NOT type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case Xor:
         if (count <= 2)
-            throw std::string("Incorrect pin count for XOR type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for XOR type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case Nand:
         if (count <= 2)
-            throw std::string("Incorrect pin count for NAND type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for NAND type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case Nor:
         if (count <= 2)
-            throw std::string("Incorrect pin count for NOR type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for NOR type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     case Xnor:
         if (count <= 2)
-            throw std::string("Incorrect pin count for XNOR type at line " + std::to_string(info.lineCount));
+            throw std::string("Incorrect pin count for XNOR type at line " + std::to_string(info.lineCount)) + "\n";
         break;
     default:
         throw std::string("No found type error...");
@@ -340,6 +341,8 @@ void Circuit::setErrorStream(std::ostream* os)
 
 void Circuit::setSourceFile(const std::string& fileName)
 {
+    std::string prev = inputFileName;
+
     if (inputfile.is_open()) {
         inputfile.close();
     }
@@ -348,7 +351,13 @@ void Circuit::setSourceFile(const std::string& fileName)
     inputfile.open(inputFileName);
 
     if (!inputfile.is_open() && inputFileName != "") {
+        inputFileName = prev;
+        inputfile.open(prev);
         *errorStream << "There is no file with name: " << fileName << std::endl;
+    }
+    else {
+        configured = false;
+        simulated = false;
     }
 }
 
@@ -362,45 +371,47 @@ void Circuit::simulate(std::ostream& os)
     if (!configured)
         configure();
 
-    for (size_t i = 0; i < incomponents.size(); i++) {
-        InputComponent* current = incomponents.get();
-        current->resetForSimulation();
-        incomponents.put(current);
-    }
-
-    Queue<Source> temp(sourceList);
-    while (!temp.isEmpty()) {
-        activeList.put(temp.get());
-    }
-
-    bool wasShortCircuit = false;
-
-    while (!activeList.isEmpty()) {
-        Component* current = activeList.get();
-        try {
-            current->executeFunction();
+    if (configured) {
+        for (size_t i = 0; i < incomponents.size(); i++) {
+            InputComponent* current = incomponents.get();
+            current->resetForSimulation();
+            incomponents.put(current);
         }
-        catch (std::string str) {
-            if (!wasShortCircuit) {
-                printSeparatorLine(os, '=', 50);
-                os << "ERROR DURING SIMULATION!" << std::endl;
-                printSeparatorLine(os, '=', 50);
-                std::time_t result = std::time(nullptr);
-                os << std::ctime(&result);
-                printSeparatorLine(os, '*', 50);
-                wasShortCircuit = true;
+
+        Queue<Source> temp(sourceList);
+        while (!temp.isEmpty()) {
+            activeList.put(temp.get());
+        }
+
+        bool wasShortCircuit = false;
+
+        while (!activeList.isEmpty()) {
+            Component* current = activeList.get();
+            try {
+                current->executeFunction();
             }
-            os << str << " at node ";
-            dynamic_cast<OutputComponent*>(current)->printOutConnectedNodes(os);
-            os << "!" << std::endl;
+            catch (std::string str) {
+                if (!wasShortCircuit) {
+                    printSeparatorLine(os, '=', 50);
+                    os << "ERROR DURING SIMULATION!" << std::endl;
+                    printSeparatorLine(os, '=', 50);
+                    std::time_t result = std::time(nullptr);
+                    os << std::ctime(&result);
+                    printSeparatorLine(os, '*', 50);
+                    wasShortCircuit = true;
+                }
+                os << str << " at node ";
+                dynamic_cast<OutputComponent*>(current)->printOutConnectedNodes(os);
+                os << "!" << std::endl;
+            }
         }
-    }
 
-    if (!wasShortCircuit)
-        os << *this;
-    else {
-        printSeparatorLine(os, '=', 50);
-        os << std::endl << std::endl;
+        if (!wasShortCircuit)
+            os << *this;
+        else {
+            printSeparatorLine(os, '=', 50);
+            os << std::endl << std::endl;
+        }
     }
 }
 
