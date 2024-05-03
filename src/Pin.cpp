@@ -5,6 +5,9 @@
 
 #include <string>
 
+
+// Pin kezdet
+
 Pin::Pin(Signal baseSignal) : ownedSignal(baseSignal) {}
 
 void Pin::setSignal(const Signal& newSignal)
@@ -21,6 +24,11 @@ void Pin::flipSignal()
 {
     ownedSignal.flip();
 }
+
+// Pin vége
+
+
+// InputPin kezdet
 
 InputPin::InputPin(Signal baseSignal) : Pin(baseSignal), component(nullptr), ready(false) {}
 
@@ -44,6 +52,7 @@ void InputPin::setReady()
     if (component == nullptr) {
         throw "ERROR: An input pin doesn't have an associated component...";
     }
+
     ready = true;
     component->activateIfReady();
 }
@@ -52,6 +61,15 @@ void InputPin::resetReady()
 {
     ready = false;
 }
+
+InputPin::~InputPin()
+{
+}
+
+// InputPin vége
+
+
+// OutputPin kezdet
 
 OutputPin::OutputPin(Signal baseSignal) : Pin(baseSignal), connectedTo(nullptr) {}
 
@@ -73,3 +91,9 @@ void OutputPin::sendSignal() const
         throw std::string("ERROR: Shortcircuit");
     }
 }
+
+OutputPin::~OutputPin()
+{
+}
+
+// OutputPin vége

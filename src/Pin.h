@@ -2,6 +2,7 @@
 #define _PIN_H
 
 #include "Signal.h"
+#include "Exceptions.h"
 
 typedef long long unsigned int size_t;
 
@@ -44,7 +45,7 @@ public:
   void flipSignal();
 
   /**
-   * @brief Virtuál a destruktor az öröklés miatt.
+   * @brief Virtuális a destruktor az öröklés miatt.
    *
    */
   virtual ~Pin() {}
@@ -108,7 +109,7 @@ public:
    * @brief Virtuális a destruktor az öröklés miatt.
    *
    */
-  virtual ~InputPin() {}
+  virtual ~InputPin();
 };
 
 class OutputPin : public Pin {
@@ -139,6 +140,10 @@ public:
    */
   void sendSignal() const;
 
-  virtual ~OutputPin() {}
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   * 
+   */
+  virtual ~OutputPin();
 };
 #endif
