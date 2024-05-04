@@ -1,4 +1,0 @@
-class XNOR
-!!!176002.cpp!!!	performLogicCalculation() : void
-    XOR::performLogicCalculation();
-    outPins[0].flipSignal();

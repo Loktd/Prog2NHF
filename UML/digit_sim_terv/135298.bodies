@@ -1,3 +1,0 @@
-class Lamp
-!!!176386.cpp!!!	Lamp()
-    inPins[0].setSignal(Signal(false));

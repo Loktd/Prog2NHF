@@ -1,5 +1,0 @@
-class NOT
-!!!190850.cpp!!!	performLogicCalculation() : void
-    Signal result = inPins[0].getSignal();
-    result.flip();
-    outPins[0].setSignal(result);
