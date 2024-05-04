@@ -56,11 +56,7 @@ public:
  */
 std::ostream& operator<<(std::ostream& os, const Source& x);
 
-/**
- * @brief A kapcsolót megvalósító osztály, állítható hogy zárt vagy nyílt-e, ennek függvényében
- * @brief vagy adja tovább a bemeneti jelet ha zárva, vagy LOW jelszintet ha nyitva van.
- *
- */
+
 class Switch : public IOComponent {
     /**
      * @brief Zárva van-e a kapcsoló (true = zárt, false = nyitott)
