@@ -4,13 +4,13 @@
 Lamp::Lamp()
     : Component(nullptr), InputComponent(1)
 {
-    inPins[0].setSignal(Signal(false));
+    inputPins[0].setSignal(Signal(false));
 }
 
 std::ostream& operator<<(std::ostream& os, const Lamp& x)
 {
     os << "Lamp connected to node ";
-    x.printInConnectedNodes(os);
+    x.printConnectedInputNodes(os);
     if (x.getState().getValue())
         os << ": glowing, HIGH (1) signal...";
     else

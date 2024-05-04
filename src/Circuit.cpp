@@ -10,9 +10,9 @@ void Circuit::create<NOT>(size_t count, Queue<int>& nodeNumbers) {
     created->setActiveQueue(&activeList);
     Queue<int> copy(nodeNumbers);
     for (size_t i = 0; i < count - 1; i++) {
-        connectInPinWithNode(created->getInPinsBaseAdress() + i, *(copy.get()), i);
+        connectInPinWithNode(created->getInputPinByIndex(i), *(copy.get()), i);
     }
-    connectOutPinWithNode(created, created->getOutPinBaseAdress(), *(copy.get()), 0);
+    connectOutPinWithNode(created, created->getOutputPinByIndex(0), *(copy.get()), 0);
     componentList.put(created);
     incomponents.put(created);
 }
@@ -22,7 +22,7 @@ void Circuit::create<Source>(Queue<int>& nodeNumbers) {
     Source* created = new Source();
     created->setActiveQueue(&activeList);
     Queue<int> copy(nodeNumbers);
-    connectOutPinWithNode(created, created->getOutPinBaseAdress(), *(copy.get()), 0);
+    connectOutPinWithNode(created, created->getOutputPinByIndex(0), *(copy.get()), 0);
     componentList.put(created);
     sourceList.put(created);
 }
@@ -31,7 +31,7 @@ void Circuit::create<Lamp>(Queue<int>& nodeNumbers) {
     Lamp* created = new Lamp();
     created->setActiveQueue(&activeList);
     Queue<int> copy(nodeNumbers);
-    connectInPinWithNode(created->getInPinsBaseAdress(), *(copy.get()), 0);
+    connectInPinWithNode(created->getInputPinByIndex(0), *(copy.get()), 0);
     componentList.put(created);
     lampList.put(created);
     incomponents.put(created);
@@ -41,8 +41,8 @@ void Circuit::create<Switch>(Queue<int>& nodeNumbers) {
     Switch* created = new Switch();
     created->setActiveQueue(&activeList);
     Queue<int> copy(nodeNumbers);
-    connectInPinWithNode(created->getInPinsBaseAdress(), *(copy.get()), 0);
-    connectOutPinWithNode(created, created->getOutPinBaseAdress(), *(copy.get()), 0);
+    connectInPinWithNode(created->getInputPinByIndex(0), *(copy.get()), 0);
+    connectOutPinWithNode(created, created->getOutputPinByIndex(0), *(copy.get()), 0);
     componentList.put(created);
     switchList.put(created);
     incomponents.put(created);
@@ -277,7 +277,7 @@ void Circuit::connectInPinWithNode(InputPin* pin, size_t id, size_t idx)
         Node* current = copy.get();
         if (current->getID() == id) {
             current->addOutPin(pin);
-            pin->getComponent()->setInNodeID(idx, id);
+            pin->getComponent()->setInputNodeID(idx, id);
             found = true;
             break;
         }
@@ -285,7 +285,7 @@ void Circuit::connectInPinWithNode(InputPin* pin, size_t id, size_t idx)
     if (!found) {
         Node* newNode = new Node(id);
         newNode->addOutPin(pin);
-        pin->getComponent()->setInNodeID(idx, id);
+        pin->getComponent()->setInputNodeID(idx, id);
         newNode->setActiveQueue(&activeList);
         nodeList.put(newNode);
         incomponents.put(newNode);
@@ -300,7 +300,7 @@ void Circuit::connectOutPinWithNode(OutputComponent* component, OutputPin* pin, 
         Node* current = copy.get();
         if (current->getID() == id) {
             pin->connectToPin(current->getInPin());
-            component->setOutNodeID(idx, id);
+            component->setOutputNodeID(idx, id);
             found = true;
             break;
         }
@@ -308,7 +308,7 @@ void Circuit::connectOutPinWithNode(OutputComponent* component, OutputPin* pin, 
     if (!found) {
         Node* newNode = new Node(id);
         pin->connectToPin(newNode->getInPin());
-        component->setOutNodeID(idx, id);
+        component->setOutputNodeID(idx, id);
         newNode->setActiveQueue(&activeList);
         nodeList.put(newNode);
         incomponents.put(newNode);
@@ -401,7 +401,7 @@ void Circuit::simulate(std::ostream& os)
                     wasShortCircuit = true;
                 }
                 os << str << " at node ";
-                dynamic_cast<OutputComponent*>(current)->printOutConnectedNodes(os);
+                dynamic_cast<OutputComponent*>(current)->printConnectedOutputNodes(os);
                 os << "!" << std::endl;
             }
         }
@@ -423,7 +423,7 @@ void Circuit::setSource(size_t connectedNode, Signal newSignal)
     Queue<Source> copy(sourceList);
     while (!copy.isEmpty()) {
         Source* current = copy.get();
-        if (current->connectedToNodeOut(connectedNode)) {
+        if (current->isConnectedToNodeOnOutput(connectedNode)) {
             current->setOutput(newSignal);
             return;
         }
@@ -454,7 +454,7 @@ void Circuit::setSwitch(size_t connectedNode1, size_t connectedNode2, bool close
     Queue<Switch> copy(switchList);
     while (!copy.isEmpty()) {
         Switch* current = copy.get();
-        if (current->connectedToNodes(connectedNode1, connectedNode2)) {
+        if (current->isConnectedToNodes(connectedNode1, connectedNode2)) {
             current->setState(closed);
             return;
         }

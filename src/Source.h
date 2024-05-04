@@ -23,20 +23,20 @@ public:
    *
    * @param signal Az új jel.
    */
-  void setOutput(const Signal& signal) { outPins[0].setSignal(signal); }
+  void setOutput(const Signal& signal) { outputPins[0].setSignal(signal); }
 
   /**
    * @brief Visszaadja a forrás kimeneti jelét.
    *
    * @return A forrás jele.
    */
-  Signal getOutput() const { return outPins[0].getSignal(); }
+  Signal getOutput() const { return outputPins[0].getSignal(); }
 
   /**
    * @brief Megfordítja a kimeneti jel értékét.
    *
    */
-  void flipOutput() { outPins[0].flipSignal(); }
+  void flipOutput() { outputPins[0].flipSignal(); }
 
   virtual ~Source() {}
 };

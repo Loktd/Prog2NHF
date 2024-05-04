@@ -2,12 +2,14 @@
 #define _PIN_H
 
 #include "Signal.h"
+#include "Component.h"
 #include "Exceptions.h"
 
-typedef long long unsigned int size_t;
 
+typedef long long unsigned int size_t;
 class InputComponent;
 class OutputComponent;
+
 
 class Pin {
 protected:
@@ -48,8 +50,9 @@ public:
    * @brief Virtuális a destruktor az öröklés miatt.
    *
    */
-  virtual ~Pin() {}
+  virtual ~Pin();
 };
+
 
 class InputPin : public Pin {
   /**
@@ -95,7 +98,7 @@ public:
   /**
    * @brief Jelzi az áramköri elem felé, hogy ezen a lábán rendelkezésre áll a jel.
    *
-   * @exception const char* = amennyiben nincs hozzá kötve áramköri elem.
+   * @exception Ha nincs kapcsolt áramköri elem, akkor dob egy NonExistentConnection exception-t.
    */
   void setReady();
 
@@ -111,6 +114,7 @@ public:
    */
   virtual ~InputPin();
 };
+
 
 class OutputPin : public Pin {
   /**
@@ -136,14 +140,16 @@ public:
   /**
    * @brief Jelet küld a kapcsolt bemeneti pin-nek.
    *
-   * @exception const char* = amennyiben nincs hozzá kötve bemeneti pin.
+   * @exception Ha nincs kapcsolt bemeneti pin, akkor dob egy NonExistentConnection exception-t.
+   * @exception Ha már aktivált bemeneti pin-nek üzen, akkor rövidzár esetén dob egy ShortCircuit exception-t.
    */
   void sendSignal() const;
 
   /**
    * @brief Virtuális destruktor az öröklés miatt.
-   * 
+   *
    */
   virtual ~OutputPin();
 };
+
 #endif

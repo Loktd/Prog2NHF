@@ -18,7 +18,7 @@ public:
    *
    * @return A jelérték.
    */
-  Signal getState() const { return inPins[0].getSignal(); }
+  Signal getState() const { return inputPins[0].getSignal(); }
 
   /**
    * @brief Itt igazából haszontalan, lámpának nincs végezni valója.

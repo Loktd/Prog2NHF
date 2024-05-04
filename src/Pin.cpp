@@ -1,9 +1,4 @@
-
 #include "Pin.h"
-#include "Component.h"
-#include "Node.h"
-
-#include <string>
 
 
 // Pin kezdet
@@ -24,6 +19,8 @@ void Pin::flipSignal()
 {
     ownedSignal.flip();
 }
+
+Pin::~Pin() {}
 
 // Pin vége
 
@@ -50,7 +47,7 @@ bool InputPin::isReady()
 void InputPin::setReady()
 {
     if (component == nullptr) {
-        throw "ERROR: An input pin doesn't have an associated component...";
+        throw NonExistentConnection("ERROR: An InputPin doesn't have a connected component while sending a message...\n");
     }
 
     ready = true;
@@ -62,9 +59,7 @@ void InputPin::resetReady()
     ready = false;
 }
 
-InputPin::~InputPin()
-{
-}
+InputPin::~InputPin() {}
 
 // InputPin vége
 
@@ -81,19 +76,16 @@ void OutputPin::connectToPin(InputPin* pin)
 void OutputPin::sendSignal() const
 {
     if (connectedTo == nullptr) {
-        throw "ERROR: An output pin doesn't have an associated input pin...";
+        throw NonExistentConnection("ERROR: An OutputPin doesn't have an associated input pin when sending message...\n");
     }
-    if (!connectedTo->isReady()) {
-        connectedTo->setSignal(ownedSignal);
-        connectedTo->setReady();
+    if (connectedTo->isReady()) {
+        throw ShortCircuit("ERROR: Shortcircuit from looping back...\n");
     }
-    else if (connectedTo->getSignal() != ownedSignal) {
-        throw std::string("ERROR: Shortcircuit");
-    }
+
+    connectedTo->setSignal(ownedSignal);
+    connectedTo->setReady();
 }
 
-OutputPin::~OutputPin()
-{
-}
+OutputPin::~OutputPin() {}
 
 // OutputPin vége

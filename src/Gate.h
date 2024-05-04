@@ -4,30 +4,66 @@
 
 #include "Component.h"
 
+
 class Gate : public IOComponent {
 protected:
+  /**
+   * @brief Végrehajtja a logikai műveletet amit specifikus kapunak kell végeznie.
+   *
+   */
   virtual void performLogicCalculation() = 0;
+
 public:
-  Gate(size_t inCount, size_t outCount) : IOComponent(inCount, outCount) {}
+  /**
+   * @brief Létrehozza a kaput.
+   *
+   * @param inputCount A bemenetek száma.
+   * @param outputCount A kimenetek száma.
+   */
+  Gate(size_t inputCount, size_t outputCount);
 
-  virtual void executeFunction();
+  /**
+   * @brief Vérgehajtja a kapu funckióját, azaz a bemeneti jelekből a belső logika alapján előállítja kimeneti jeleket, majd ezeket tovább küldi.
+   *
+   */
+  void executeFunction();
 
-  virtual ~Gate() {}
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~Gate();
 };
+
 
 class AND : public Gate {
 protected:
+  /**
+   * @brief AND operációt végrehajtja a bemeneti pin-ek jelein, és beállítja a kimenetet.
+   *
+   */
   virtual void performLogicCalculation();
 public:
-  AND(size_t inCount) : Gate(inCount, 1) {}
-  virtual ~AND() {}
+  /**
+   * @brief Létrehozza az AND kaput.
+   *
+   * @param inputCount A kapu bemeneteinek száma.
+   */
+  AND(size_t inputCount);
+
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~AND();
 };
+
 
 class OR : public Gate {
 protected:
   virtual void performLogicCalculation();
 public:
-  OR(size_t inCount) : Gate(inCount, 1) {}
+  OR(size_t inputCount) : Gate(inputCount, 1) {}
   virtual ~OR() {}
 };
 
@@ -42,28 +78,28 @@ class XOR : public Gate {
 protected:
   virtual void performLogicCalculation();
 public:
-  XOR(size_t inCount) : Gate(inCount, 1) {}
+  XOR(size_t inputCount) : Gate(inputCount, 1) {}
   virtual ~XOR() {}
 };
 
 class NAND : public AND {
   virtual void performLogicCalculation();
 public:
-  NAND(size_t inCount) : AND(inCount) {}
+  NAND(size_t inputCount) : AND(inputCount) {}
   virtual ~NAND() {}
 };
 
 class NOR : public OR {
   virtual void performLogicCalculation();
 public:
-  NOR(size_t inCount) : OR(inCount) {}
+  NOR(size_t inputCount) : OR(inputCount) {}
   virtual ~NOR() {}
 };
 
 class XNOR : public XOR {
   virtual void performLogicCalculation();
 public:
-  XNOR(size_t inCount) : XOR(inCount) {}
+  XNOR(size_t inputCount) : XOR(inputCount) {}
   virtual ~XNOR() {}
 };
 #endif

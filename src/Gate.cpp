@@ -1,5 +1,8 @@
-
 #include "Gate.h"
+
+// Gate kezdet
+
+Gate::Gate(size_t inputCount, size_t outputCount) : IOComponent(inputCount, outputCount) {}
 
 void Gate::executeFunction()
 {
@@ -7,63 +10,76 @@ void Gate::executeFunction()
     sendOutSignals();
 }
 
+Gate::~Gate() {}
+
+// Gate vége
+
+
+// AND kezdet
+
 void AND::performLogicCalculation()
 {
     Signal result(true);
-    for (size_t i = 0; i < inPinCount; i++) {
-        if (inPins[i].getSignal() == Signal(false)) {
+    for (size_t i = 0; i < inputPinCount; i++) {
+        if (inputPins[i].getSignal() == Signal(false)) {
             result.setValue(false);
             break;
         }
     }
-    outPins[0].setSignal(result);
+    outputPins[0].setSignal(result);
 }
+
+AND::AND(size_t inputCount) : Gate(inputCount, 1) {}
+
+AND::~AND() {}
+
+// AND vége
 
 void OR::performLogicCalculation()
 {
     Signal result(false);
-    for (size_t i = 0; i < inPinCount; i++) {
-        if (inPins[i].getSignal() == Signal(true)) {
+    for (size_t i = 0; i < inputPinCount; i++) {
+        if (inputPins[i].getSignal() == Signal(true)) {
             result.setValue(true);
             break;
         }
     }
-    outPins[0].setSignal(result);
+    outputPins[0].setSignal(result);
 }
 
 
 void NOT::performLogicCalculation()
 {
-    Signal result = inPins[0].getSignal();
+    Signal result = inputPins[0].getSignal();
     result.flip();
-    outPins[0].setSignal(result);
+    outputPins[0].setSignal(result);
 }
 
 void XOR::performLogicCalculation()
 {
     Signal result(false);
-    for (size_t i = 0; i < inPinCount; i++) {
-        if (inPins[i].getSignal() == Signal(true)) {
+    for (size_t i = 0; i < inputPinCount; i++) {
+        if (inputPins[i].getSignal() == Signal(true)) {
             result.flip();
         }
     }
-    outPins[0].setSignal(result);
+    outputPins[0].setSignal(result);
 }
 
 void NAND::performLogicCalculation()
 {
     AND::performLogicCalculation();
-    outPins[0].flipSignal();
+    outputPins[0].flipSignal();
 }
 
 void NOR::performLogicCalculation()
 {
     OR::performLogicCalculation();
-    outPins[0].flipSignal();
+    outputPins[0].flipSignal();
 }
 
 void XNOR::performLogicCalculation()
 {
     XOR::performLogicCalculation();
-    outPins[0].flipSignal();
+    outputPins[0].flipSignal();
 }

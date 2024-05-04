@@ -1,142 +1,189 @@
-
 #include "Component.h"
 #include "Queue.h"
 
 #include <string>
 #include <iostream>
 
+
 typedef long long unsigned int size_t;
 
-InputComponent::InputComponent(size_t inCount)
+// Component kezdet
+
+Component::Component(Queue<Component>* newActiveQueue) : activeQueue(newActiveQueue) {}
+
+void Component::setActiveQueue(Queue<Component>* newActiveQueue)
 {
-    inPinCount = inCount;
-    inPins = new InputPin[inPinCount];
-    inNodeIDs = new size_t[inPinCount];
-    for (size_t i = 0; i < inPinCount; i++) {
-        inPins[i].connenctToComponent(this);
-    }
+    activeQueue = newActiveQueue;
 }
 
-void InputComponent::setInNodeID(size_t at, size_t id)
+void Component::addToActiveQueue()
 {
-    if (at >= inPinCount) {
-        throw std::string("Indexed out of inNodeID range...\n");
+    if (activeQueue == nullptr) {
+        throw NonExistentConnection("A component doesn't have an active queue...\n");
     }
-    inNodeIDs[at] = id;
+
+    activeQueue->put(this);
 }
 
-bool InputComponent::connectedToNodeIn(size_t id)
-{
-    for (size_t i = 0; i < inPinCount; i++) {
-        if (inNodeIDs[i] == id) {
-            return true;
-        }
-    }
-    return false;
-}
+// Component vége
 
-void InputComponent::printInConnectedNodes(std::ostream& os) const
+
+// InputComponent kezdet
+
+InputComponent::InputComponent(size_t inputCount) : inputPinCount(inputCount)
 {
-    for (size_t i = 0; i < inPinCount; i++) {
-        os << inNodeIDs[i];
-        if (i != inPinCount - 1)
-            os << " ";
+    inputPins = new InputPin[inputPinCount];
+    inputNodeIDs = new size_t[inputPinCount];
+    for (size_t i = 0; i < inputPinCount; i++) {
+        inputPins[i].connenctToComponent(this);
     }
 }
 
 void InputComponent::resetForSimulation()
 {
-    for (size_t i = 0; i < inPinCount; i++) {
-        inPins[i].resetReady();
+    for (size_t i = 0; i < inputPinCount; i++) {
+        inputPins[i].resetReady();
     }
 }
 
 void InputComponent::activateIfReady()
 {
-    bool isActive = true;
-    for (size_t i = 0; i < inPinCount; i++) {
-        if (!inPins[i].isReady()) {
-            isActive = false;
-            break;
+    for (size_t i = 0; i < inputPinCount; i++) {
+        if (!inputPins[i].isReady()) {
+            return;
         }
     }
-    if (isActive) {
-        addToActiveQueue();
+    addToActiveQueue();
+}
+
+InputPin* InputComponent::getInputPinByIndex(size_t idx) const
+{
+    if (idx >= inputPinCount)
+        throw std::out_of_range("Indexed out of inputPin array range...\n");
+
+    return inputPins + idx;
+}
+
+void InputComponent::setInputNodeID(size_t at, size_t ID)
+{
+    if (at >= inputPinCount) {
+        throw std::out_of_range("Indexed out of inputNodeID array range...\n");
+    }
+
+    inputNodeIDs[at] = ID;
+}
+
+bool InputComponent::isConnectedToNodeOnInput(size_t ID)
+{
+    for (size_t i = 0; i < inputPinCount; i++) {
+        if (inputNodeIDs[i] == ID) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void InputComponent::printConnectedInputNodes(std::ostream& os) const
+{
+    for (size_t i = 0; i < inputPinCount; i++) {
+        os << inputNodeIDs[i];
+        if (i != inputPinCount - 1)
+            os << " ";
     }
 }
 
 InputComponent::~InputComponent()
 {
-    delete[] inPins;
-    delete[] inNodeIDs;
+    delete[] inputPins;
+    delete[] inputNodeIDs;
 }
 
-OutputComponent::OutputComponent(size_t outCount)
+// InputComponent vége
+
+
+// OutputComponent kezdet
+
+OutputComponent::OutputComponent(size_t outputCount) : outputPinCount(outputCount)
 {
-    outPinCount = outCount;
-    outPins = new OutputPin[outPinCount];
-    outPinIDs = new size_t[outPinCount];
+    outputPins = new OutputPin[outputPinCount];
+    outputPinIDs = new size_t[outputPinCount];
 }
 
-void OutputComponent::connectTo(size_t outPinIndex, InputComponent* component, size_t inPinIndex)
+void OutputComponent::connectToInputPin(size_t outputPinIndex, InputComponent* component, size_t inputPinIndex)
 {
-    outPins[outPinIndex].connectToPin(component->getInPinsBaseAdress() + inPinIndex);
+    if (outputPinIndex >= outputPinCount) {
+        throw std::out_of_range("Indexed out of outputPin array range...\n");
+    }
+
+    outputPins[outputPinIndex].connectToPin(component->getInputPinByIndex(inputPinIndex));
 }
 
 void OutputComponent::sendOutSignals()
 {
-    for (size_t i = 0; i < outPinCount; i++) {
-        outPins[i].sendSignal();
+    for (size_t i = 0; i < outputPinCount; i++) {
+        outputPins[i].sendSignal();
     }
 }
 
-void OutputComponent::setOutNodeID(size_t at, size_t id)
+OutputPin* OutputComponent::getOutputPinByIndex(size_t idx)
 {
-    if (at >= outPinCount) {
-        throw std::string("Indexed out of outNodeID range...");
+    if (idx >= outputPinCount) {
+        throw std::out_of_range("Indexed out of outputPin array range...\n");
     }
-    outPinIDs[at] = id;
+
+    return outputPins + idx;
 }
 
-bool OutputComponent::connectedToNodeOut(size_t id)
+void OutputComponent::setOutputNodeID(size_t at, size_t ID)
 {
-    for (size_t i = 0; i < outPinCount; i++) {
-        if (outPinIDs[i] == id)
+    if (at >= outputPinCount) {
+        throw std::out_of_range("Indexed out of outputNodeID range...");
+    }
+
+    outputPinIDs[at] = ID;
+}
+
+bool OutputComponent::isConnectedToNodeOnOutput(size_t ID)
+{
+    for (size_t i = 0; i < outputPinCount; i++) {
+        if (outputPinIDs[i] == ID)
             return true;
     }
     return false;
 }
 
-void OutputComponent::printOutConnectedNodes(std::ostream& os) const
+void OutputComponent::printConnectedOutputNodes(std::ostream& os) const
 {
-    for (size_t i = 0; i < outPinCount; i++) {
-        os << outPinIDs[i];
-        if (i != outPinCount - 1)
+    for (size_t i = 0; i < outputPinCount; i++) {
+        os << outputPinIDs[i];
+        if (i != outputPinCount - 1)
             os << " ";
     }
 }
 
 OutputComponent::~OutputComponent()
 {
-    delete[] outPins;
-    delete[] outPinIDs;
+    delete[] outputPins;
+    delete[] outputPinIDs;
 }
 
-void Component::addToActiveQueue()
-{
-    if (activeQueue == nullptr)
-        throw "This component doesn't have an active queue...";
-    activeQueue->put(this);
-}
+// OutputComponent vége
 
-bool IOComponent::connectedToNodes(size_t connectedNode1, size_t connectedNode2)
+
+// IOComponent kezdet
+
+IOComponent::IOComponent(size_t inputCount, size_t outputCount) : InputComponent(inputCount), OutputComponent(outputCount) {}
+
+bool IOComponent::isConnectedToNodes(size_t NodeID1, size_t NodeID2)
 {
-    return connectedToNodeIn(connectedNode1) && connectedToNodeOut(connectedNode2) || connectedToNodeIn(connectedNode2) && connectedToNodeOut(connectedNode1);
+    return isConnectedToNodeOnInput(NodeID1) && isConnectedToNodeOnOutput(NodeID2) || isConnectedToNodeOnInput(NodeID2) && isConnectedToNodeOnOutput(NodeID1);
 }
 
 void IOComponent::printConnectedNodes(std::ostream& os) const
 {
-    printInConnectedNodes(os);
+    printConnectedInputNodes(os);
     os << " and ";
-    printOutConnectedNodes(os);
+    printConnectedOutputNodes(os);
 }
+
+// IOComponent vége

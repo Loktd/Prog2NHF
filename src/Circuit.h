@@ -94,9 +94,9 @@ void Circuit::create(size_t count, Queue<int>& nodeNumbers) {
   ((Component*)created)->setActiveQueue(&activeList);
   Queue<int> copy(nodeNumbers);
   for (size_t i = 0; i < count - 1; i++) {
-    connectInPinWithNode(((InputComponent*)created)->getInPinsBaseAdress() + i, *(copy.get()), i);
+    connectInPinWithNode(((InputComponent*)created)->getInputPinByIndex(i), *(copy.get()), i);
   }
-  connectOutPinWithNode(created, ((OutputComponent*)created)->getOutPinBaseAdress(), *(copy.get()), 0);
+  connectOutPinWithNode(created, ((OutputComponent*)created)->getOutputPinByIndex(0), *(copy.get()), 0);
   componentList.put(created);
   incomponents.put(created);
 }

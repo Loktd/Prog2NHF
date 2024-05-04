@@ -5,7 +5,7 @@
 
 InputPin* Node::getInPin()
 {
-    return inPins;
+    return inputPins;
 }
 
 size_t Node::getID() const
@@ -24,7 +24,7 @@ void Node::executeFunction() {
     Queue<OutputPin> copy(outPins);
     while (!copy.isEmpty()) {
         OutputPin* current = copy.get();
-        current->setSignal(inPins[0].getSignal());
+        current->setSignal(inputPins[0].getSignal());
         current->sendSignal();
     }
 }

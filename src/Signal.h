@@ -1,7 +1,9 @@
 #ifndef _SIGNAL_H
 #define _SIGNAL_H
 
+
 typedef long long unsigned int size_t;
+
 
 class Signal {
   /**
