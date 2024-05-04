@@ -35,6 +35,9 @@ AND::~AND() {}
 
 // AND vége
 
+
+// OR kezdet
+
 void OR::performLogicCalculation()
 {
     Signal result(false);
@@ -47,6 +50,14 @@ void OR::performLogicCalculation()
     outputPins[0].setSignal(result);
 }
 
+OR::OR(size_t inputCount) : Gate(inputCount, 1) {}
+
+OR::~OR() {}
+
+// OR vége
+
+
+// NOT kezdet
 
 void NOT::performLogicCalculation()
 {
@@ -54,6 +65,15 @@ void NOT::performLogicCalculation()
     result.flip();
     outputPins[0].setSignal(result);
 }
+
+NOT::NOT() : Gate(1, 1) {}
+
+NOT::~NOT() {}
+
+// NOT vége
+
+
+// XOR kezdet
 
 void XOR::performLogicCalculation()
 {
@@ -66,11 +86,29 @@ void XOR::performLogicCalculation()
     outputPins[0].setSignal(result);
 }
 
+XOR::XOR(size_t inputCount) : Gate(inputCount, 1) {}
+
+XOR::~XOR() {}
+
+// XOR vége
+
+
+// NAND kezdet
+
 void NAND::performLogicCalculation()
 {
     AND::performLogicCalculation();
     outputPins[0].flipSignal();
 }
+
+NAND::NAND(size_t inputCount) : AND(inputCount) {}
+
+NAND::~NAND() {}
+
+// NAND vége
+
+
+// NOR kezdet
 
 void NOR::performLogicCalculation()
 {
@@ -78,8 +116,23 @@ void NOR::performLogicCalculation()
     outputPins[0].flipSignal();
 }
 
+NOR::NOR(size_t inputCount) : OR(inputCount) {}
+
+NOR::~NOR() {}
+
+// NOR vége
+
+
+// XNOR kezdet
+
 void XNOR::performLogicCalculation()
 {
     XOR::performLogicCalculation();
     outputPins[0].flipSignal();
 }
+
+XNOR::XNOR(size_t inputCount) : XOR(inputCount) {}
+
+XNOR::~XNOR() {}
+
+// XNOR vége

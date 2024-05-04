@@ -61,45 +61,144 @@ public:
 
 class OR : public Gate {
 protected:
+  /**
+   * @brief OR operációt végrehajtja a bemeneti pin-ek jelein, és beállítja a kimenetet.
+   *
+   */
   virtual void performLogicCalculation();
+
 public:
-  OR(size_t inputCount) : Gate(inputCount, 1) {}
-  virtual ~OR() {}
+  /**
+   * @brief Létrehozza az OR kaput.
+   *
+   * @param inputCount A kapu bemeneteinek száma.
+   */
+  OR(size_t inputCount);
+
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~OR();
 };
 
+
 class NOT : public Gate {
+protected:
+  /**
+   * @brief NOT operációt végrehajtja a bemeneti pin-ek jelein, és beállítja a kimenetet.
+   *
+   */
   virtual void performLogicCalculation();
+
 public:
-  NOT() : Gate(1, 1) {}
-  virtual ~NOT() {}
+  /**
+   * @brief Létrehozza az NOT kaput.
+   *
+   * @param inputCount A kapu bemeneteinek száma.
+   */
+  NOT();
+
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~NOT();
 };
+
 
 class XOR : public Gate {
 protected:
+  /**
+   * @brief XOR operációt végrehajtja a bemeneti pin-ek jelein, és beállítja a kimenetet.
+   *
+   */
   virtual void performLogicCalculation();
+
 public:
-  XOR(size_t inputCount) : Gate(inputCount, 1) {}
-  virtual ~XOR() {}
+  /**
+   * @brief Létrehozza az XOR kaput.
+   *
+   * @param inputCount A kapu bemeneteinek száma.
+   */
+  XOR(size_t inputCount);
+
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~XOR();
 };
+
 
 class NAND : public AND {
+protected:
+  /**
+   * @brief NAND operációt végrehajtja a bemeneti pin-ek jelein, és beállítja a kimenetet.
+   *
+   */
   virtual void performLogicCalculation();
+
 public:
-  NAND(size_t inputCount) : AND(inputCount) {}
-  virtual ~NAND() {}
+  /**
+   * @brief Létrehozza az NAND kaput.
+   *
+   * @param inputCount A kapu bemeneteinek száma.
+   */
+  NAND(size_t inputCount);
+
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~NAND();
 };
+
 
 class NOR : public OR {
+protected:
+  /**
+   * @brief NOR operációt végrehajtja a bemeneti pin-ek jelein, és beállítja a kimenetet.
+   *
+   */
   virtual void performLogicCalculation();
+
 public:
-  NOR(size_t inputCount) : OR(inputCount) {}
-  virtual ~NOR() {}
+  /**
+   * @brief Létrehozza az NOR kaput.
+   *
+   * @param inputCount A kapu bemeneteinek száma.
+   */
+  NOR(size_t inputCount);
+
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~NOR();
 };
 
+
 class XNOR : public XOR {
+protected:
+  /**
+   * @brief XNOR operációt végrehajtja a bemeneti pin-ek jelein, és beállítja a kimenetet.
+   *
+   */
   virtual void performLogicCalculation();
+
 public:
-  XNOR(size_t inputCount) : XOR(inputCount) {}
-  virtual ~XNOR() {}
+  /**
+   * @brief Létrehozza az XNOR kaput.
+   *
+   * @param inputCount A kapu bemeneteinek száma.
+   */
+  XNOR(size_t inputCount);
+
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~XNOR();
 };
 #endif
