@@ -18,6 +18,12 @@ protected:
    */
   Queue<Component>* activeQueue;
 
+  /**
+   * @brief Le lett-e szimulálva az áramkör elem. (true = igen, false = nem)
+   *
+   */
+  bool simulated;
+
 public:
   /**
    * @brief Felparaméterezi az aktív FIFO-t.
@@ -43,6 +49,26 @@ public:
    *
    */
   virtual void executeFunction() = 0;
+
+  /**
+   * @brief Beállítja, hogy szimulálva volt, az elem;
+   *
+   */
+  void gotSimulated();
+
+  /**
+   * @brief Visszaadja, hogy le volt-e szimulálva az elem.
+   *
+   * @return true = már le volt szimulálva ;
+   * @return false = még nem volt leszimulálva
+   */
+  bool wasSimulated();
+
+  /**
+   * @brief Reseteli a szimuláltság státuszát.
+   *
+   */
+  void resetSimulted();
 
   /**
    * @brief Virtuális destruktor öröklés miatt.

@@ -137,12 +137,17 @@ class Circuit {
    */
   void build();
   /**
+   * @brief Tesztel szimulálás során elérhetetlen elemek után, ha talál dob egy kivételt.
+   *
+   * @exception UnsimulatedComponent = ha talált nem szimulált elemet
+   */
+  void testForIsolatedComponent();
+  /**
    * @brief Egy konkrét sor feldolgozásához szükséges folyamatokat végzi el.
    *
    * @param line A feldolgozandó sor-hoz tartozó információkat tároló struktúra.
    */
   void buildLine(LineContent& line);
-
   /**
    * @brief Kiszedi a sorból, hogy milyen típusú elemeket hozunk benne létre.
    *
@@ -230,7 +235,7 @@ public:
    *
    * @param path A forrás file helye.
    */
-  void setSourceFile(const std::string& path);
+  void setSchematicsFile(const std::string& path);
   /**
    * @brief Visszaadja a forrás file nevét (esetlegesen a helyével, ha úgy lett megadva).
    *

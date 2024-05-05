@@ -118,6 +118,19 @@ void Circuit::configure() {
         *errorStream << err.errorMessage();
         printSeparatorLine(*errorStream, '=', 50);
         *errorStream << std::endl;
+
+        return;
+    }
+    catch (UnsimulatedComponent& err) {
+        printSeparatorLine(*errorStream, '=', 50);
+        *errorStream << "SEMANTIC ERROR" << std::endl;
+        printSeparatorLine(*errorStream, '*', 50);
+        *errorStream << err.errorMessage();
+        printSeparatorLine(*errorStream, '=', 50);
+        *errorStream << std::endl;
+
+        reset();
+        return;
     }
     catch (MessagedException& errormsg) {
         printSeparatorLine(*errorStream, '=', 50);
@@ -156,6 +169,54 @@ void Circuit::build()
             line.idx = 0;
             buildLine(line);
         }
+    }
+
+    testForIsolatedComponent();
+}
+
+void Circuit::testForIsolatedComponent()
+{
+    for (Queue<Source>::iterator it = sourceList.begin(); it != sourceList.end(); it++) {
+        activeList.put(*it);
+    }
+
+    while (!activeList.isEmpty()) {
+        Component* current = activeList.get();
+        current->executeFunction();
+        current->gotSimulated();
+    }
+
+    for (Queue<Component>::iterator it = componentList.begin(); it != componentList.end(); it++) {
+        Component* current = *it;
+        if (!current->wasSimulated()) {
+            Node* nptr = dynamic_cast<Node*>(current);
+            if (nptr != nullptr) {
+                throw UnsimulatedComponent("Node " + size_tToString(nptr->getID()) + " is unsimulated (isolated or self-referential)...\n");
+            }
+            else {
+                std::stringstream message("Component connected to node(s): ");
+                InputComponent* iptr = dynamic_cast<InputComponent*>(current);
+                OutputComponent* optr = dynamic_cast<OutputComponent*>(current);
+                if (iptr != nullptr) {
+                    iptr->printConnectedInputNodes(message);
+                    message << " ";
+                }
+                if (optr != nullptr) {
+                    optr->printConnectedOutputNodes(message);
+                    message << " ";
+                }
+                message << " is unsimulated (isolated or self-referential)...";
+                std::string result;
+                std::getline(message, result);
+                throw UnsimulatedComponent(result);
+            }
+        }
+    }
+
+    for (Queue<InputComponent>::iterator it = inputComponentList.begin(); it != inputComponentList.end(); it++) {
+        InputComponent* current = *it;
+        current->resetForSimulation();
+        current->resetSimulted();
     }
 }
 
@@ -387,7 +448,7 @@ Circuit& Circuit::operator=(const Circuit& source)
         errorStream = source.errorStream;
         reset();
 
-        setSourceFile(source.inputFilePath);
+        setSchematicsFile(source.inputFilePath);
         configure();
     }
     return *this;
@@ -398,7 +459,7 @@ void Circuit::setErrorStream(std::ostream* os)
     errorStream = os;
 }
 
-void Circuit::setSourceFile(const std::string& path)
+void Circuit::setSchematicsFile(const std::string& path)
 {
     std::string prev = inputFilePath;
 

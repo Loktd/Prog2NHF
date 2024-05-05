@@ -25,6 +25,21 @@ void Component::addToActiveQueue()
     activeQueue->put(this);
 }
 
+void Component::gotSimulated()
+{
+    simulated = true;
+}
+
+bool Component::wasSimulated()
+{
+    return simulated;
+}
+
+void Component::resetSimulted()
+{
+    simulated = false;
+}
+
 // Component vége
 
 
@@ -176,7 +191,7 @@ IOComponent::IOComponent(size_t inputCount, size_t outputCount) : InputComponent
 
 bool IOComponent::isConnectedToNodes(size_t NodeID1, size_t NodeID2)
 {
-    return isConnectedToNodeOnInput(NodeID1) && isConnectedToNodeOnOutput(NodeID2) || isConnectedToNodeOnInput(NodeID2) && isConnectedToNodeOnOutput(NodeID1);
+    return (isConnectedToNodeOnInput(NodeID1) && isConnectedToNodeOnOutput(NodeID2)) || (isConnectedToNodeOnInput(NodeID2) && isConnectedToNodeOnOutput(NodeID1));
 }
 
 void IOComponent::printConnectedNodes(std::ostream& os) const

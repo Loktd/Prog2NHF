@@ -59,4 +59,9 @@ public:
     ConversionError(const std::string& msg) : MessagedException(msg) {}
 };
 
+class UnsimulatedComponent : public MessagedException {
+public:
+    UnsimulatedComponent(const std::string& msg) : MessagedException(msg) {}
+};
+
 #endif // EXCEPTIONS_H_

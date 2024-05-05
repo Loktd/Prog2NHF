@@ -59,7 +59,7 @@ void App::loadCircuitFromName()
 {
     std::string input;
     std::cin >> input;
-    circuit.setSourceFile(input);
+    circuit.setSchematicsFile(input);
     state = MAIN_MENU;
 }
 
