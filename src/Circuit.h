@@ -3,13 +3,10 @@
 
 #include "Component.h"
 #include "Gate.h"
-#include "Lamp.h"
-#include "Node.h"
 #include "Pin.h"
 #include "Queue.h"
 #include "Signal.h"
-#include "Source.h"
-#include "Switch.h"
+#include "Peripherals.h"
 
 #include <iostream>
 #include <fstream>

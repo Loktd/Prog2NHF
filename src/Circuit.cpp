@@ -1,4 +1,3 @@
-
 #include "Circuit.h"
 
 #include <ctime>
@@ -276,7 +275,7 @@ void Circuit::connectInPinWithNode(InputPin* pin, size_t id, size_t idx)
     while (!copy.isEmpty()) {
         Node* current = copy.get();
         if (current->getID() == id) {
-            current->addOutPin(pin);
+            current->addOutputPin(pin);
             pin->getComponent()->setInputNodeID(idx, id);
             found = true;
             break;
@@ -284,7 +283,7 @@ void Circuit::connectInPinWithNode(InputPin* pin, size_t id, size_t idx)
     }
     if (!found) {
         Node* newNode = new Node(id);
-        newNode->addOutPin(pin);
+        newNode->addOutputPin(pin);
         pin->getComponent()->setInputNodeID(idx, id);
         newNode->setActiveQueue(&activeList);
         nodeList.put(newNode);

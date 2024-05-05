@@ -9,10 +9,7 @@
 #include "../src/Circuit.h"
 #include "../src/Pin.h"
 #include "../src/Component.h"
-#include "../src/Source.h"
-#include "../src/Lamp.h"
-#include "../src/Node.h"
-#include "../src/Switch.h"
+#include "../src/Peripherals.h"
 #include "../src/Gate.h"
 
 #include "Menu.h"
