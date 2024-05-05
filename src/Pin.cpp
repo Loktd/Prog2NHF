@@ -79,7 +79,7 @@ void OutputPin::sendSignal() const
         throw NonExistentConnection("ERROR: An OutputPin doesn't have an associated input pin when sending message...\n");
     }
     if (connectedTo->isReady()) {
-        throw ShortCircuit("ERROR: Shortcircuit from looping back...\n");
+        throw ShortCircuit("ERROR: Shortcircuit from looping back", connectedTo->getComponent());
     }
 
     connectedTo->setSignal(ownedSignal);

@@ -1,9 +1,10 @@
 #ifndef EXCEPTIONS_H_
 #define EXCEPTIONS_H_
 
-
 #include <exception>
 #include <string>
+
+class InputComponent;
 
 class MessagedException : public std::exception {
     std::string message;
@@ -20,8 +21,10 @@ public:
 };
 
 class ShortCircuit : public MessagedException {
+    InputComponent* resimulated;
 public:
-    ShortCircuit(const std::string& msg) : MessagedException(msg) {}
+    ShortCircuit(const std::string& msg, InputComponent* resimmed) : MessagedException(msg), resimulated(resimmed) {}
+    InputComponent* getResimulated() { return resimulated; }
 };
 
 class MatchingComponentNotFound : public MessagedException {

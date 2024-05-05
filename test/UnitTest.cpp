@@ -1,10 +1,9 @@
 #include <iostream>
 
-#include "memtrace.h"
-
 #include "../src/Circuit.h"
 #include "Menu.h"
 
+#include "memtrace.h"
 #include "gtest_lite.h"
 
 int main() {
@@ -12,8 +11,14 @@ int main() {
         Circuit circuit;
         EXPECT_STREQ("", circuit.getSourceFileName().c_str());
 
-        circuit.setSchematicsFile("Gates.dat");
+        circuit.setSchematicFile("Gates.dat");
         EXPECT_STREQ("Gates.dat", circuit.getSourceFileName().c_str());
+
+        circuit.setSchematicFile("Peripherals.dat");
+        EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
+
+        circuit.setSchematicFile("IDontExist.dat");
+        EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
     }END;
 
     TEST(SANITY, ErrorAllitas) {
@@ -45,7 +50,7 @@ int main() {
         std::stringstream output1;
         std::stringstream output2;
 
-        circuit1.setSchematicsFile("Gates.dat");
+        circuit1.setSchematicFile("Gates.dat");
 
         Circuit circuit2(circuit1);
         EXPECT_EQ(circuit1.getSourceFileName(), circuit2.getSourceFileName());
@@ -55,7 +60,7 @@ int main() {
         EXPECT_STREQ(output1.str().c_str(), output2.str().c_str());
 
         output2.str("");
-        circuit2.setSchematicsFile("Peripherals.dat");
+        circuit2.setSchematicFile("Peripherals.dat");
         circuit2.simulate(output2);
         EXPECT_STRNE(output1.str().c_str(), output2.str().c_str());
 
@@ -67,7 +72,7 @@ int main() {
 
     TEST(COMPONENT_CHECK, Kapuk) {
         Circuit circuit;
-        circuit.setSchematicsFile("Gates.dat");
+        circuit.setSchematicFile("Gates.dat");
 
         std::stringstream error;
         circuit.setErrorStream(&error);
@@ -103,7 +108,7 @@ int main() {
     TEST(COMPONENT_CHECK, Periferiak) {
         Circuit circuit;
         std::stringstream output;
-        circuit.setSchematicsFile("Peripherals.dat");
+        circuit.setSchematicFile("Peripherals.dat");
 
         bool SOURCE_1_SIGNALS[] = { true, true, true, false };
         bool SOURCE_4_SIGNALS[] = { true, true, true, true };
@@ -139,10 +144,10 @@ int main() {
         }
     }END;
 
-    TEST(ERRORS, Periferiak) {
+    TEST(COMPONENT_CHECK, Periferia_Kivetelek) {
         Circuit circuit;
         std::stringstream output;
-        circuit.setSchematicsFile("Peripherals.dat");
+        circuit.setSchematicFile("Peripherals.dat");
 
         EXPECT_THROW(circuit.setSource(0, Signal(true)), MatchingComponentNotFound);
         EXPECT_THROW(circuit.setSwitch(0, 0, true), MatchingComponentNotFound);
@@ -173,7 +178,7 @@ int main() {
         for (size_t i = 0; i < 4; i++) {
             error.str("");
             output.str("");
-            circuit.setSchematicsFile(FILENAMES[i]);
+            circuit.setSchematicFile(FILENAMES[i]);
             circuit.simulate(output);
 
             std::string errorMessage;
@@ -186,7 +191,7 @@ int main() {
 
     TEST(ERRORS, Onhivatkozo_Elem) {
         Circuit circuit;
-        circuit.setSchematicsFile("SelfRef.dat");
+        circuit.setSchematicFile("SelfRef.dat");
         std::stringstream output;
         std::stringstream error;
         circuit.setErrorStream(&error);
@@ -202,7 +207,7 @@ int main() {
 
     TEST(ERRORS, Elszigetelt_Elem) {
         Circuit circuit;
-        circuit.setSchematicsFile("Isolated.dat");
+        circuit.setSchematicFile("Isolated.dat");
         std::stringstream output;
         std::stringstream error;
         circuit.setErrorStream(&error);
@@ -216,7 +221,18 @@ int main() {
     }END;
 
     TEST(ERRORS, RovidZar) {
-        // Itt a rövidzár kezelés helyességét vizsgáljuk.
+        Circuit circuit;
+        circuit.setSchematicFile("ShortCircuit.dat");
+        std::stringstream output;
+        std::stringstream error;
+        circuit.setErrorStream(&error);
+        circuit.simulate(output);
+
+        std::string EXPECTED = "ERROR: Shortcircuit from looping back at node 1!";
+        std::string line;
+        for (size_t i = 0; i < 4; i++)
+            std::getline(error, line);
+        EXPECT_STREQ(EXPECTED.c_str(), line.c_str());
     }END;
 
     TEST(COMLEX_CIRCUITS, Ot_Bemenet) {

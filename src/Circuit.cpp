@@ -132,11 +132,28 @@ void Circuit::configure() {
         reset();
         return;
     }
-    catch (MessagedException& errormsg) {
+    catch (ShortCircuit& err) {
+        printSeparatorLine(*errorStream, '=', 50);
+        *errorStream << "SEMANTIC ERROR" << std::endl;
+        printSeparatorLine(*errorStream, '*', 50);
+        *errorStream << err.errorMessage();
+
+        Node* nptr = dynamic_cast<Node*>(err.getResimulated());
+        if (nptr != nullptr) {
+            *errorStream << " at node " << size_tToString(nptr->getID()) << "!\n";
+        }
+
+        printSeparatorLine(*errorStream, '=', 50);
+        *errorStream << std::endl;
+
+        reset();
+        return;
+    }
+    catch (MessagedException& err) {
         printSeparatorLine(*errorStream, '=', 50);
         *errorStream << "SYNTAX ERROR" << std::endl;
         printSeparatorLine(*errorStream, '*', 50);
-        *errorStream << errormsg.errorMessage();
+        *errorStream << err.errorMessage();
         printSeparatorLine(*errorStream, '=', 50);
         *errorStream << std::endl;
 
@@ -448,7 +465,7 @@ Circuit& Circuit::operator=(const Circuit& source)
         errorStream = source.errorStream;
         reset();
 
-        setSchematicsFile(source.inputFilePath);
+        setSchematicFile(source.inputFilePath);
         configure();
     }
     return *this;
@@ -459,7 +476,7 @@ void Circuit::setErrorStream(std::ostream* os)
     errorStream = os;
 }
 
-void Circuit::setSchematicsFile(const std::string& path)
+void Circuit::setSchematicFile(const std::string& path)
 {
     std::string prev = inputFilePath;
 

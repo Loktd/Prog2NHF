@@ -235,7 +235,7 @@ public:
    *
    * @param path A forrás file helye.
    */
-  void setSchematicsFile(const std::string& path);
+  void setSchematicFile(const std::string& path);
   /**
    * @brief Visszaadja a forrás file nevét (esetlegesen a helyével, ha úgy lett megadva).
    *
