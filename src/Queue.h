@@ -8,7 +8,7 @@
 typedef long long unsigned int size_t;
 
 
-template<class T>
+template<class ComponentType>
 class Queue {
   struct QueueMember {
     /**
@@ -19,7 +19,7 @@ class Queue {
     /**
      * @brief A mutatott elem.
      */
-    T* storedPointer;
+    ComponentType* storedPointer;
 
     /**
      * @brief Default konstruktor, ami NULL-ra állítja a tárolt pointert, amit lehet átállítani.
@@ -51,7 +51,7 @@ class Queue {
    * @param source A másolás forrása, a mutatott tagokat ez a FIFO nem birtokolja.
    * @return Queue<T>& Minta szerint van csak, igazi értelme nincsen.
    */
-  Queue<T>& operator=(const Queue<T>& source);
+  Queue<ComponentType>& operator=(const Queue<ComponentType>& source);
 
   /**
    * @brief A tárolt elemek száma, könnyű méret olvasáshoz.
@@ -72,21 +72,21 @@ public:
    *
    * @param source A másolás forrása.
    */
-  Queue(const Queue<T>& source);
+  Queue(const Queue<ComponentType>& source);
 
   /**
    * @brief Berak egy tagot a sor végére.
    *
    * @param added A hozzáadott tag.
    */
-  void put(T* added);
+  void put(ComponentType* added);
 
   /**
    * @brief Kivesz a sor elejéről egy tagot.
    *
    * @return T* A soron következő tag.
    */
-  T* get();
+  ComponentType* get();
 
   /**
    * @brief Megmondja, hogy üres-e a FIFO.
@@ -187,7 +187,7 @@ public:
      * @return T* A tárolt pointer.
      * @exception Ha dereferálni akarunk a végén, akkor dob egy std::out_of_range-t.
      */
-    T* operator*() {
+    ComponentType* operator*() {
       if (pointingTo == nullptr)
         throw std::out_of_range("Queue iterator dereferenced end...");
       return pointingTo->storedPointer;
@@ -199,7 +199,7 @@ public:
      * @return T** Pointer a tárolt adat pointerére.
      * @exception Ha elérni akarunk tagot a végén, akkor dob egy std::out_of_range-t.
      */
-    T** operator->() {
+    ComponentType** operator->() {
       if (pointingTo == nullptr)
         throw std::out_of_range("Queue iterator accessed end member...");
       return &(pointingTo->storedPointer);
@@ -227,8 +227,8 @@ public:
 
 // Privát tagfüggvények
 
-template<class T>
-Queue<T>& Queue<T>::operator=(const Queue<T>& source)
+template<class ComponentType>
+Queue<ComponentType>& Queue<ComponentType>::operator=(const Queue<ComponentType>& source)
 {
   for (iterator moving = source.begin(); moving != source.end(); moving++) {
     put(*moving);
@@ -241,17 +241,17 @@ Queue<T>& Queue<T>::operator=(const Queue<T>& source)
 
 // Publikus tagfüggvények
 
-template<class T>
-inline Queue<T>::Queue(bool owner) : ownsMembers(owner), first(nullptr), last(nullptr), siz(0) {}
+template<class ComponentType>
+inline Queue<ComponentType>::Queue(bool owner) : ownsMembers(owner), first(nullptr), last(nullptr), siz(0) {}
 
-template<class T>
-Queue<T>::Queue(const Queue<T>& source) : ownsMembers(false), first(nullptr), last(nullptr), siz(0)
+template<class ComponentType>
+Queue<ComponentType>::Queue(const Queue<ComponentType>& source) : ownsMembers(false), first(nullptr), last(nullptr), siz(0)
 {
   *this = source;
 }
 
-template<class T>
-void Queue<T>::put(T* added)
+template<class ComponentType>
+void Queue<ComponentType>::put(ComponentType* added)
 {
   QueueMember* newMember = new QueueMember;
   newMember->storedPointer = added;
@@ -269,11 +269,11 @@ void Queue<T>::put(T* added)
   siz++;
 }
 
-template<class T>
-T* Queue<T>::get()
+template<class ComponentType>
+ComponentType* Queue<ComponentType>::get()
 {
   QueueMember* returnedMember = first;
-  T* returned = nullptr;
+  ComponentType* returned = nullptr;
 
   if (siz > 0) {
     if (siz > 1) {
@@ -292,14 +292,14 @@ T* Queue<T>::get()
   return returned;
 }
 
-template<class T>
-inline bool Queue<T>::isEmpty()
+template<class ComponentType>
+inline bool Queue<ComponentType>::isEmpty()
 {
   return siz == 0;
 }
 
-template<class T>
-inline void Queue<T>::clear()
+template<class ComponentType>
+inline void Queue<ComponentType>::clear()
 {
   if (!ownsMembers) {
     while (!isEmpty()) {
@@ -313,17 +313,32 @@ inline void Queue<T>::clear()
   }
 }
 
-template<class T>
-inline size_t Queue<T>::size() const
+template<class ComponentType>
+inline size_t Queue<ComponentType>::size() const
 {
   return siz;
 }
 
-template<class T>
-Queue<T>::~Queue() {
+template<class ComponentType>
+Queue<ComponentType>::~Queue() {
   clear();
 }
 
 // Publikus vége
+
+/**
+ * @brief Kiírja egy kimeneti stream-re a list összes elemét. (Feltételezett, hogy létezik << operátor a ComponentType típusra)
+ *
+ * @tparam ComponentType A listában tárolt elemek típusa.
+ * @param printed A kiírt lista.
+ * @param os A kimeneti stream.
+ */
+template<class ComponentType>
+void printQueue(const Queue<ComponentType>& printed, std::ostream& os) {
+  for (typename Queue<ComponentType>::iterator it = printed.begin(); it != printed.end(); it++) {
+    ComponentType* current = *it;
+    os << *current << std::endl;
+  }
+}
 
 #endif
