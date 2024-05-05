@@ -153,13 +153,35 @@ int main() {
 
     TEST(ERRORS, Helytelen_Szintaxis) {
         Circuit circuit;
-        circuit.setSchematicsFile("BadSyntax.dat");
         std::stringstream output;
         std::stringstream error;
         circuit.setErrorStream(&error);
-        circuit.simulate(output);
 
-        std::cerr << error.str();
+        std::string FILENAMES[4] = {
+            "BadSyntax1.dat",
+            "BadSyntax2.dat",
+            "BadSyntax3.dat",
+            "BadSyntax4.dat"
+        };
+        std::string EXPECTED[4] = {
+            "Invalid component type: \"SOUrC\" at line 1!",
+            "Incorrect syntax at: \"(1, 2, 3\"!",
+            "Incorrect pin count for NOT type at line 9!",
+            "Incorrect syntax at: \"(3svs) (4) (5) (6) (7) (8) (9)\"!",
+        };
+
+        for (size_t i = 0; i < 4; i++) {
+            error.str("");
+            output.str("");
+            circuit.setSchematicsFile(FILENAMES[i]);
+            circuit.simulate(output);
+
+            std::string errorMessage;
+            for (size_t i = 0; i < 4; i++)
+                std::getline(error, errorMessage);
+
+            EXPECT_STREQ(EXPECTED[i].c_str(), errorMessage.c_str());
+        }
     }END;
 
     TEST(ERRORS, Onhivatkozo_Elem) {
@@ -170,18 +192,12 @@ int main() {
         circuit.setErrorStream(&error);
         circuit.simulate(output);
 
-        const char* EXPECTED[5] = {
-            "==================================================",
-            "SEMANTIC ERROR",
-            "**************************************************",
-            "Node 2 is unsimulated (isolated or self-referential)...",
-            "=================================================="
-        };
-        for (size_t i = 0; i < 5; i++) {
-            std::string line;
+        std::string EXPECTED = "Node 2 is unsimulated (isolated or self-referential)...";
+
+        std::string line;
+        for (size_t i = 0; i < 4; i++)
             std::getline(error, line);
-            EXPECT_STREQ(EXPECTED[i], line.c_str());
-        }
+        EXPECT_STREQ(EXPECTED.c_str(), line.c_str());
     }END;
 
     TEST(ERRORS, Elszigetelt_Elem) {
@@ -192,18 +208,11 @@ int main() {
         circuit.setErrorStream(&error);
         circuit.simulate(output);
 
-        const char* EXPECTED[5] = {
-            "==================================================",
-            "SEMANTIC ERROR",
-            "**************************************************",
-            "Node 8 is unsimulated (isolated or self-referential)...",
-            "=================================================="
-        };
-        for (size_t i = 0; i < 5; i++) {
-            std::string line;
+        std::string EXPECTED = "Node 8 is unsimulated (isolated or self-referential)...";
+        std::string line;
+        for (size_t i = 0; i < 4; i++)
             std::getline(error, line);
-            EXPECT_STREQ(EXPECTED[i], line.c_str());
-        }
+        EXPECT_STREQ(EXPECTED.c_str(), line.c_str());
     }END;
 
     TEST(ERRORS, RovidZar) {

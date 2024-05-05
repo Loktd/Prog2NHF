@@ -271,16 +271,16 @@ void Circuit::getNodeNumbers(LineContent& line, Queue<size_t>& nodeNumbers)
     std::stringstream stream(std::string(line.content.c_str() + line.idx));
     while (true) {
         if (!(stream >> read)) {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\" !\n");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!\n");
         }
         nodeNumbers.put(new size_t(read));
 
         if (!(stream >> buff)) {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\" !\n");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!\n");
         }
 
         if (buff != ',' && buff != ')') {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\" !\n");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!\n");
         }
         else if (buff == ')') {
             while (line.content[line.idx] != ')') line.idx++;
@@ -295,43 +295,43 @@ void Circuit::checkNodeCount(LineContent& line, size_t count)
     {
     case SOURCE:
         if (count != 1)
-            throw IncorrectPinCount("Incorrect pin count for SOURCE type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for SOURCE type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case LAMP:
         if (count != 1)
-            throw IncorrectPinCount("Incorrect pin count for LAMP type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for LAMP type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case SWITCH:
         if (count != 2)
-            throw IncorrectPinCount("Incorrect pin count for SWITCH type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for SWITCH type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case GATE_AND:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for AND type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for AND type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case GATE_OR:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for OR type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for OR type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case GATE_NOT:
         if (count != 2)
-            throw IncorrectPinCount("Incorrect pin count for NOT type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for NOT type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case GATE_XOR:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for XOR type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for XOR type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case GATE_NAND:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for NAND type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for NAND type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case GATE_NOR:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for NOR type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for NOR type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     case GATE_XNOR:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for XNOR type at line " + size_tToString(line.lineNumber) + " !\n");
+            throw IncorrectPinCount("Incorrect pin count for XNOR type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     default:
         throw NonExistentType("Not found a type...");
@@ -435,9 +435,9 @@ void Circuit::connectOutputPinWithNode(OutputComponent* component, OutputPin* pi
 
 // Publikus interfész kezdet
 
-Circuit::Circuit() : errorStream(&std::cerr), simulated(false), configured(false), componentList(true) {}
+Circuit::Circuit() : errorStream(&std::cerr), componentList(true), configured(false), simulated(false) {}
 
-Circuit::Circuit(const Circuit& source) : errorStream(source.errorStream), simulated(false), configured(false), componentList(true)
+Circuit::Circuit(const Circuit& source) : errorStream(source.errorStream), componentList(true), configured(false), simulated(false)
 {
     *this = source;
 }
