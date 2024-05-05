@@ -179,10 +179,23 @@ class Circuit {
    */
   template<typename ComponentType>
   void create(Queue<size_t>& nodeNumbers);
-
-
-  void connectInPinWithNode(InputPin* pin, size_t id, size_t idx);
-  void connectOutPinWithNode(OutputComponent* component, OutputPin* pin, size_t id, size_t idx);
+  /**
+   * @brief Összeköt egy bemeneti pin-t egy csomóponttal. (Ha nem létezik, akkor létrehozza a csomópontot.)
+   *
+   * @param pin A bemenet pin-amivel kötünk.
+   * @param ID A csomópont ID-ja.
+   * @param idx Az indexe a bemeneti pin-nek, ID beállításhoz.
+   */
+  void connectInputPinWithNode(InputPin* pin, size_t ID, size_t idx);
+  /**
+   * @brief Összeköt egy kimeneti pin-t egy csomóponttal. (Ha nem létezik, akkor létrehozza a csomópontot.)
+   *
+   * @param component Az áramköri elem, amihez a kimeneti pin tartozik.
+   * @param pin A pin, amit akarunk összekötni.
+   * @param ID A csomópont ID-ja, amire akarjuk kötni.
+   * @param idx Az indexe a kimeneti pin-nek, ID beállításhoz.
+   */
+  void connectOutputPinWithNode(OutputComponent* component, OutputPin* pin, size_t ID, size_t idx);
 
 public:
   /**

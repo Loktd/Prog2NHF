@@ -14,16 +14,15 @@ void Circuit::create(Queue<size_t>& nodeNumbers) {
         delete created;
         throw ConversionError("Trying to create non-IOComponent type...\n");
     }
-
     ptr->setActiveQueue(&activeList);
 
     Queue<size_t>::iterator it = nodeNumbers.begin();
     for (size_t i = 0; it != nodeNumbers.end() && i < count - 1; it++, i++) {
         size_t current = *(*it);
-        connectInPinWithNode(ptr->getInputPinByIndex(i), current, i);
+        connectInputPinWithNode(ptr->getInputPinByIndex(i), current, i);
     }
     size_t outID = *(*it);
-    connectOutPinWithNode(created, ptr->getOutputPinByIndex(0), outID, 0);
+    connectOutputPinWithNode(created, ptr->getOutputPinByIndex(0), outID, 0);
 
     componentList.put(created);
     inputComponentList.put(created);
@@ -36,9 +35,9 @@ void Circuit::create<NOT>(Queue<size_t>& nodeNumbers) {
 
     Queue<size_t>::iterator it = nodeNumbers.begin();
     size_t current = *(*it++);
-    connectInPinWithNode(created->getInputPinByIndex(0), current, 0);
+    connectInputPinWithNode(created->getInputPinByIndex(0), current, 0);
     current = *(*it++);
-    connectOutPinWithNode(created, created->getOutputPinByIndex(0), current, 0);
+    connectOutputPinWithNode(created, created->getOutputPinByIndex(0), current, 0);
 
     componentList.put(created);
     inputComponentList.put(created);
@@ -51,7 +50,7 @@ void Circuit::create<Source>(Queue<size_t>& nodeNumbers) {
 
     Queue<size_t>::iterator it = nodeNumbers.begin();
     size_t current = *(*it++);
-    connectOutPinWithNode(created, created->getOutputPinByIndex(0), current, 0);
+    connectOutputPinWithNode(created, created->getOutputPinByIndex(0), current, 0);
 
     componentList.put(created);
     sourceList.put(created);
@@ -62,8 +61,9 @@ void Circuit::create<Lamp>(Queue<size_t>& nodeNumbers) {
     Lamp* created = new Lamp();
     created->setActiveQueue(&activeList);
 
-    Queue<size_t> copy(nodeNumbers);
-    connectInPinWithNode(created->getInputPinByIndex(0), *(copy.get()), 0);
+    Queue<size_t>::iterator it = nodeNumbers.begin();
+    size_t current = *(*it++);
+    connectInputPinWithNode(created->getInputPinByIndex(0), current, 0);
 
     componentList.put(created);
     lampList.put(created);
@@ -74,9 +74,13 @@ template<>
 void Circuit::create<Switch>(Queue<size_t>& nodeNumbers) {
     Switch* created = new Switch();
     created->setActiveQueue(&activeList);
-    Queue<size_t> copy(nodeNumbers);
-    connectInPinWithNode(created->getInputPinByIndex(0), *(copy.get()), 0);
-    connectOutPinWithNode(created, created->getOutputPinByIndex(0), *(copy.get()), 0);
+
+    Queue<size_t>::iterator it = nodeNumbers.begin();
+    size_t current = *(*it++);
+    connectInputPinWithNode(created->getInputPinByIndex(0), current, 0);
+    current = *(*it++);
+    connectOutputPinWithNode(created, created->getOutputPinByIndex(0), current, 0);
+
     componentList.put(created);
     switchList.put(created);
     inputComponentList.put(created);
@@ -314,51 +318,57 @@ void Circuit::createBasedOnType(LineContent& info, Queue<size_t>& nodeNumbers)
     }
 }
 
-void Circuit::connectInPinWithNode(InputPin* pin, size_t id, size_t idx)
+void Circuit::connectInputPinWithNode(InputPin* pin, size_t ID, size_t idx)
 {
-    Queue<Node> copy(nodeList);
     bool found = false;
-    while (!copy.isEmpty()) {
-        Node* current = copy.get();
-        if (current->getID() == id) {
+    for (Queue<Node>::iterator it = nodeList.begin(); it != nodeList.end(); it++) {
+        Node* current = *it;
+        if (current->getID() == ID) {
             current->addOutputPin(pin);
-            pin->getComponent()->setInputNodeID(idx, id);
+            pin->getComponent()->setInputNodeID(idx, ID);
+
             found = true;
             break;
         }
     }
+
     if (!found) {
-        Node* newNode = new Node(id);
-        newNode->addOutputPin(pin);
-        pin->getComponent()->setInputNodeID(idx, id);
+        Node* newNode = new Node(ID);
         newNode->setActiveQueue(&activeList);
-        nodeList.put(newNode);
-        inputComponentList.put(newNode);
+
+        newNode->addOutputPin(pin);
+        pin->getComponent()->setInputNodeID(idx, ID);
+
         componentList.put(newNode);
+        inputComponentList.put(newNode);
+        nodeList.put(newNode);
     }
 }
 
-void Circuit::connectOutPinWithNode(OutputComponent* component, OutputPin* pin, size_t id, size_t idx)
+void Circuit::connectOutputPinWithNode(OutputComponent* component, OutputPin* pin, size_t ID, size_t idx)
 {
-    Queue<Node> copy(nodeList);
     bool found = false;
-    while (!copy.isEmpty()) {
-        Node* current = copy.get();
-        if (current->getID() == id) {
+    for (Queue<Node>::iterator it = nodeList.begin(); it != nodeList.end(); it++) {
+        Node* current = *it;
+        if (current->getID() == ID) {
             pin->connectToPin(current->getInPin());
-            component->setOutputNodeID(idx, id);
+            component->setOutputNodeID(idx, ID);
+
             found = true;
             break;
         }
     }
+
     if (!found) {
-        Node* newNode = new Node(id);
-        pin->connectToPin(newNode->getInPin());
-        component->setOutputNodeID(idx, id);
+        Node* newNode = new Node(ID);
         newNode->setActiveQueue(&activeList);
-        nodeList.put(newNode);
-        inputComponentList.put(newNode);
+
+        pin->connectToPin(newNode->getInPin());
+        component->setOutputNodeID(idx, ID);
+
         componentList.put(newNode);
+        inputComponentList.put(newNode);
+        nodeList.put(newNode);
     }
 }
 
