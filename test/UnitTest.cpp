@@ -9,6 +9,9 @@
 int main() {
     TEST(SANITY, ForrasAllitas) {
         Circuit circuit;
+        std::stringstream error;
+        circuit.setErrorStream(&error);
+
         EXPECT_STREQ("", circuit.getSourceFileName().c_str());
 
         circuit.setSchematicFile("Gates.dat");
@@ -236,24 +239,97 @@ int main() {
     }END;
 
     TEST(COMLEX_CIRCUITS, Ot_Bemenet) {
-        // Itt a feladat által megadott áramkört szimuláljuk.
+        Circuit circuit;
+        circuit.setSchematicFile("FiveToOne.dat");
+        std::stringstream error;
+        circuit.setErrorStream(&error);
+        std::stringstream output;
+
+        bool EXPECTED_LAMP_STATE[5] = { true, true, true, true, false };
+
+        for (size_t i = 0; i < 5; i++) {
+            circuit.setSource(i + 1, Signal(true));
+            circuit.simulate(output);
+            EXPECT_EQ(EXPECTED_LAMP_STATE[i], circuit.getLampSignal(6).getValue());
+        }
     }END;
 
     TEST(COMPLEX_CIRCUITS, Comparator) {
-        // Itt a modellből felépített dekóder helyes műküdését vizsgáljuk.
-    }END;
+        Circuit circuit;
+        circuit.setSchematicFile("Comparator.dat");
+        std::stringstream error;
+        circuit.setErrorStream(&error);
+        std::stringstream output;
 
-    TEST(COMPLEX_CIRCUITS, Adder) {
-        // Itt a modellből felépített dekóder helyes műküdését vizsgáljuk.
+        // 13-al vetjük össze az összes többi értéket
+        circuit.setSource(1, Signal(true));
+        circuit.setSource(2, Signal(false));
+        circuit.setSource(3, Signal(true));
+        circuit.setSource(4, Signal(true));
+
+        for (size_t i = 0; i < 16; i++) {
+            circuit.setSource(5, Signal(i & 1));
+            circuit.setSource(6, Signal(i & 2));
+            circuit.setSource(7, Signal(i & 4));
+            circuit.setSource(8, Signal(i & 8));
+
+            circuit.simulate(output);
+
+            if (i != 13) {
+                EXPECT_EQ(false, circuit.getLampSignal(13).getValue());
+            }
+            else {
+                EXPECT_EQ(true, circuit.getLampSignal(13).getValue());
+            }
+        }
     }END;
 
     TEST(COMPLEX_CIRCUITS, Multiplexer) {
-        // Itt a modellből felépített muxi helyes műküdését vizsgáljuk.
+        Circuit circuit;
+        circuit.setSchematicFile("Multiplexer.dat");
+        std::stringstream error;
+        circuit.setErrorStream(&error);
+        std::stringstream output;
+
+        bool GIVEN_SIGNALS[4] = { true, false, false, true };
+
+        for (size_t i = 0; i < 4; i++)
+            circuit.setSource(i + 1, Signal(GIVEN_SIGNALS[i]));
+
+        for (size_t i = 0; i < 4; i++) {
+            circuit.setSource(5, Signal(i & 1));
+            circuit.setSource(6, Signal(i & 2));
+
+            circuit.simulate(output);
+
+            EXPECT_EQ(GIVEN_SIGNALS[i], circuit.getLampSignal(15).getValue());
+        }
     }END;
 
     TEST(COMPLEX_CIRCUITS, Decoder) {
-        // Itt a modellből felépített dekóder helyes műküdését vizsgáljuk.
+        Circuit circuit;
+        circuit.setSchematicFile("Decoder.dat");
+        std::stringstream error;
+        circuit.setErrorStream(&error);
+        std::stringstream output;
+
+        bool SOURCE_1_SIGNALS[4] = { false, true, false, true };
+        bool SOURCE_2_SIGNALS[4] = { false, false, true, true };
+
+        for (size_t i = 0; i < 4; i++) {
+            circuit.setSource(1, Signal(SOURCE_1_SIGNALS[i]));
+            circuit.setSource(2, Signal(SOURCE_2_SIGNALS[i]));
+
+            circuit.simulate(output);
+            for (size_t j = 0; j < 4; j++) {
+                if (i == j)
+                    EXPECT_EQ(true, circuit.getLampSignal(3 + j).getValue());
+                else
+                    EXPECT_EQ(false, circuit.getLampSignal(3 + j).getValue());
+            }
+        }
     }END;
+
 #ifndef CPORTA
     App application;
     while (application.keepRunning()) {
