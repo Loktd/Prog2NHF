@@ -1,11 +1,7 @@
 #include "Component.h"
 #include "Queue.h"
 
-#include <string>
 #include <iostream>
-
-
-typedef long long unsigned int size_t;
 
 // Component kezdet
 

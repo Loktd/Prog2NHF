@@ -5,8 +5,6 @@
 #include "Component.h"
 #include "Exceptions.h"
 
-
-typedef long long unsigned int size_t;
 class InputComponent;
 class OutputComponent;
 

@@ -5,9 +5,6 @@
 #include <exception>
 
 
-typedef long long unsigned int size_t;
-
-
 template<class ComponentType>
 class Queue {
   struct QueueMember {

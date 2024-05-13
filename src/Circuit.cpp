@@ -184,7 +184,15 @@ void Circuit::build()
 
         if (!line.content.empty()) {
             line.idx = 0;
-            buildLine(line);
+            try {
+                buildLine(line);
+            }
+            catch (CommentLine& exc) {
+                continue;
+            }
+            catch (...) {
+                throw;
+            }
         }
     }
 
@@ -264,6 +272,9 @@ void Circuit::getLineType(LineContent& line)
 
     std::string lineType;
     for (char c = line.content[line.idx++]; c != ':' && line.idx < line.content.length(); c = line.content[line.idx++]) {
+        if (line.idx == 1 && c == '#') {
+            throw CommentLine();
+        }
         lineType += c;
     }
 

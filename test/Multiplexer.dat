@@ -1,16 +1,18 @@
+# 4/1-es multiplexer jelérték bemenetei
 SOURCE: (1) (2) (3) (4)
+
+# Select jelek (MSB = (6))
 SOURCE: (5) (6)
 
+# Belső logika
 NOT: (5, 7) (6, 8)
 AND: (1, 7, 8, 9)
-
 NOT: (6, 10)
 AND: (2, 5, 10, 11)
-
 NOT: (5, 12)
 AND: (3, 12, 6, 13)
-
 AND: (4, 5, 6, 14)
-
 OR: (9, 11, 13, 14, 15)
+
+# Kimeneti jele
 LAMP: (15)
