@@ -23,17 +23,17 @@ void Component::addToActiveQueue()
 
 void Component::setSimulated()
 {
-    simulated = true;
+    gotSimulated = true;
 }
 
 bool Component::simulated()
 {
-    return simulated;
+    return gotSimulated;
 }
 
 void Component::resetSimulted()
 {
-    simulated = false;
+    gotSimulated = false;
 }
 
 // Component vége

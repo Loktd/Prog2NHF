@@ -115,9 +115,14 @@ class Circuit {
      */
     ComponentType type;
     /**
+     * @brief Számon tartja, hogy volt-e szintaxis error.
+     *
+     */
+    bool wasSyntaxError;
+    /**
      * @brief Egy szimpla default konstruktor a könnyebb használatért.
      */
-    LineContent() : lineNumber(0), content(""), idx(0), type(INVALID) {}
+    LineContent() : lineNumber(0), content(""), idx(0), type(INVALID), wasSyntaxError(false) {}
   };
 
   /**
@@ -201,6 +206,15 @@ class Circuit {
    * @param idx Az indexe a kimeneti pin-nek, ID beállításhoz.
    */
   void connectOutputPinWithNode(OutputComponent* component, OutputPin* pin, size_t ID, size_t idx);
+
+  /**
+   * @brief Kiírja a formátumosan a hibát egy stream-re.
+   *
+   * @param os Ahova kell kiírni az error-t.
+   * @param errorTypeName Az error típusának neve (pl. syntax, stb.)
+   * @param errorMessage Az error üzenete.
+   */
+  void printErrorMessage(std::ostream& os, const std::string& errorTypeName, const std::string& errorMessage);
 
 public:
   /**

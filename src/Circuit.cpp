@@ -12,7 +12,7 @@ void Circuit::create(Queue<size_t>& nodeNumbers) {
     IOComponent* ptr = dynamic_cast<IOComponent*>(created);
     if (ptr == nullptr) {
         delete created;
-        throw ConversionError("Trying to create non-IOComponent type...\n");
+        throw PointerConversionError("Trying to create non-IOComponent type...\n");
     }
     ptr->setActiveQueue(&activeList);
 
@@ -107,58 +107,31 @@ void Circuit::reset()
 }
 
 void Circuit::configure() {
+    reset();
+
     try {
-        reset();
         build();
     }
-    catch (NoFileGiven& err) {
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << "LOADING ERROR" << std::endl;
-        printSeparatorLine(*errorStream, '*', 50);
-        *errorStream << err.errorMessage();
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << std::endl;
+    catch (FileAccessError& error) {
+        printErrorMessage(*errorStream, "LOADING ERROR", error.exception_message());
 
-        return;
+        throw ConfigurationError("Unable to access schematics file during configuration...");
     }
-    catch (UnsimulatedComponent& err) {
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << "SEMANTIC ERROR" << std::endl;
-        printSeparatorLine(*errorStream, '*', 50);
-        *errorStream << err.errorMessage();
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << std::endl;
+    catch (UnsimulatedComponent& error) {
+        printErrorMessage(*errorStream, "SEMANTIC ERROR", error.exception_message());
 
         reset();
-        return;
+        throw ConfigurationError("There was an unsimulated element during configuration...");
     }
-    catch (ShortCircuit& err) {
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << "SEMANTIC ERROR" << std::endl;
-        printSeparatorLine(*errorStream, '*', 50);
-        *errorStream << err.errorMessage();
-
-        Node* nptr = dynamic_cast<Node*>(err.getResimulated());
-        if (nptr != nullptr) {
-            *errorStream << " at node " << size_tToString(nptr->getID()) << "!\n";
-        }
-
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << std::endl;
-
+    catch (SchematicsFileHasSyntaxError& error) {
         reset();
-        return;
+        throw ConfigurationError("Schematics file has a syntax error...");
     }
-    catch (MessagedException& err) {
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << "SYNTAX ERROR" << std::endl;
-        printSeparatorLine(*errorStream, '*', 50);
-        *errorStream << err.errorMessage();
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << std::endl;
-
+    catch (MessagedException& error) {
+        printErrorMessage(*errorStream, "GENERAL EXCEPTION", error.exception_message());
         reset();
-        return;
+
+        throw ConfigurationError("There was an unknown error during configuration...");
     }
     configured = true;
 }
@@ -166,12 +139,12 @@ void Circuit::configure() {
 void Circuit::build()
 {
     if (inputFilePath == "")
-        throw NoFileGiven("No file was given...\n");
+        throw FileAccessError("No file was given...\n");
 
     if (!inputfile.is_open()) {
         inputfile.open(inputFilePath);
         if (!inputfile.is_open()) {
-            throw NoFileGiven("Input file doesn't exist or can't be opened...\n");
+            throw FileAccessError("Input file doesn't exist or can't be opened...\n");
         }
     }
 
@@ -196,6 +169,9 @@ void Circuit::build()
             }
         }
     }
+    if (line.wasSyntaxError) {
+        throw SchematicsFileHasSyntaxError("File has incorrect syntax, can't be simulated...");
+    }
 
     testForIsolatedComponent();
 }
@@ -208,7 +184,10 @@ void Circuit::testForIsolatedComponent()
 
     while (!activeList.isEmpty()) {
         Component* current = activeList.get();
-        current->executeFunction();
+        try {
+            current->executeFunction();
+        }
+        catch (ShortCircuit& error) {}
         current->setSimulated();
     }
 
@@ -249,15 +228,40 @@ void Circuit::testForIsolatedComponent()
 
 void Circuit::buildLine(LineContent& line)
 {
-    getLineType(line);
+    try {
+        getLineType(line);
+    }
+    catch (NonExistentLineType& error) {
+        printErrorMessage(*errorStream, "SYNTAX ERROR", error.exception_message());
+        line.wasSyntaxError = true;
+        return;
+    }
 
     for (char c = line.content[line.idx++]; line.idx < line.content.length(); c = line.content[line.idx++]) {
         if (c == '(') {
             Queue<size_t> nodeNumbers(true);
-            getNodeNumbers(line, nodeNumbers);
+            try {
+                getNodeNumbers(line, nodeNumbers);
+            }
+            catch (IncorrectSyntax& error) {
+                printErrorMessage(*errorStream, "SYNTAX ERROR", error.exception_message());
+                line.wasSyntaxError = true;
+
+                while (line.content[line.idx] != ')' && line.content[line.idx] != '\n') line.idx++;
+                continue;
+            }
 
             size_t count = nodeNumbers.size();
-            checkNodeCount(line, count);
+            try {
+                checkNodeCount(line, count);
+            }
+            catch (IncorrectPinCount& error) {
+                printErrorMessage(*errorStream, "SYNTAX ERROR", error.exception_message());
+                line.wasSyntaxError = true;
+
+                while (line.content[line.idx] != ')' && line.content[line.idx] != '\n') line.idx++;
+                continue;
+            }
 
             createBasedOnType(line, nodeNumbers);
         }
@@ -363,7 +367,7 @@ void Circuit::checkNodeCount(LineContent& line, size_t count)
             throw IncorrectPinCount("Incorrect pin count for XNOR type at line " + size_tToString(line.lineNumber) + "!\n");
         break;
     default:
-        throw NonExistentType("Not found a type...");
+        throw NonExistentLineType("Not found a type...");
         break;
     }
 }
@@ -403,7 +407,7 @@ void Circuit::createBasedOnType(LineContent& info, Queue<size_t>& nodeNumbers)
         create<XNOR>(nodeNumbers);
         break;
     default:
-        throw NonExistentType("Not found a type...");
+        throw NonExistentLineType("Not found a type...");
         break;
     }
 }
@@ -462,6 +466,15 @@ void Circuit::connectOutputPinWithNode(OutputComponent* component, OutputPin* pi
     }
 }
 
+void Circuit::printErrorMessage(std::ostream& os, const std::string& errorTypeName, const std::string& errorMessage)
+{
+    printSeparatorLine(*errorStream, '=', 50);
+    *errorStream << errorTypeName << std::endl;
+    printSeparatorLine(*errorStream, '*', 50);
+    *errorStream << errorMessage;
+    printSeparatorLine(*errorStream, '=', 50);
+}
+
 // Publikus interfész kezdet
 
 Circuit::Circuit() : errorStream(&std::cerr), componentList(true), configured(false), simulated(false) {}
@@ -475,8 +488,8 @@ Circuit& Circuit::operator=(const Circuit& source)
 {
     if (this != &source) {
         errorStream = source.errorStream;
-        reset();
 
+        reset();
         setSchematicFile(source.inputFilePath);
         configure();
     }
@@ -502,11 +515,9 @@ void Circuit::setSchematicFile(const std::string& path)
     if (!inputfile.is_open() && inputFilePath != "") {
         inputFilePath = prev;
         inputfile.open(prev);
-        printSeparatorLine(*errorStream, '=', 50);
-        *errorStream << "LOADING ERROR\n";
-        printSeparatorLine(*errorStream, '*', 50);
-        *errorStream << "There is no file with name: " << path << std::endl;
-        printSeparatorLine(*errorStream, '=', 50);
+
+        std::string error_msg = "There is no file with name: " + path;
+        printErrorMessage(*errorStream, "LOADING ERROR", error_msg);
     }
     else {
         configured = false;
@@ -554,7 +565,7 @@ void Circuit::simulate(std::ostream& os)
 
                     wasShortCircuit = true;
                 }
-                os << err.errorMessage() << " at node ";
+                os << err.exception_message() << " at node ";
                 dynamic_cast<OutputComponent*>(current)->printConnectedOutputNodes(os);
                 os << "!" << std::endl;
             }

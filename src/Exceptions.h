@@ -10,7 +10,7 @@ class MessagedException : public std::exception {
     std::string message;
 public:
     MessagedException(const std::string& msg) : message(msg) {}
-    std::string errorMessage() {
+    std::string exception_message() {
         return std::string(message.c_str());
     }
 };
@@ -32,9 +32,9 @@ public:
     MatchingComponentNotFound(const std::string& msg) : MessagedException(msg) {}
 };
 
-class NoFileGiven : public MessagedException {
+class FileAccessError : public MessagedException {
 public:
-    NoFileGiven(const std::string& msg) : MessagedException(msg) {}
+    FileAccessError(const std::string& msg) : MessagedException(msg) {}
 };
 
 class NonExistentLineType : public MessagedException {
@@ -57,19 +57,24 @@ public:
     IncorrectPinCount(const std::string& msg) : MessagedException(msg) {}
 };
 
-class NonExistentType : public MessagedException {
+class PointerConversionError : public MessagedException {
 public:
-    NonExistentType(const std::string& msg) : MessagedException(msg) {}
-};
-
-class ConversionError : public MessagedException {
-public:
-    ConversionError(const std::string& msg) : MessagedException(msg) {}
+    PointerConversionError(const std::string& msg) : MessagedException(msg) {}
 };
 
 class UnsimulatedComponent : public MessagedException {
 public:
     UnsimulatedComponent(const std::string& msg) : MessagedException(msg) {}
+};
+
+class SchematicsFileHasSyntaxError : public MessagedException {
+public:
+    SchematicsFileHasSyntaxError(const std::string msg) : MessagedException(msg) {}
+};
+
+class ConfigurationError : public MessagedException {
+public:
+    ConfigurationError(const std::string msg) : MessagedException(msg) {}
 };
 
 #endif // EXCEPTIONS_H_

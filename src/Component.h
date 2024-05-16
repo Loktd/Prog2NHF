@@ -22,7 +22,7 @@ protected:
    * @brief Le lett-e szimulálva az áramkör elem. (true = igen, false = nem)
    *
    */
-  bool simulated;
+  bool gotSimulated;
 
 public:
   /**
