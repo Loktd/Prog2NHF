@@ -9,8 +9,8 @@
 int main() {
     TEST(SANITY, ForrasAllitas) {
         Circuit circuit;
-        std::stringstream error;
-        circuit.setErrorStream(&error);
+        std::stringstream error_stream;
+        circuit.setErrorStream(&error_stream);
 
         EXPECT_STREQ("", circuit.getSourceFileName().c_str());
 
@@ -22,6 +22,7 @@ int main() {
 
         circuit.setSchematicFile("IDontExist.dat");
         EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
+        EXPECT_STRNE("", error_stream.str().c_str());
     }END;
 
     TEST(SANITY, ErrorAllitas) {
@@ -34,7 +35,7 @@ int main() {
         circuit.simulate(output);
         EXPECT_STREQ("", output.str().c_str());
 
-        const char* expectedError[5] = {
+        std::string expectedError[5] = {
             "==================================================",
             "LOADING ERROR",
             "**************************************************",
@@ -44,8 +45,10 @@ int main() {
         std::string line;
         for (size_t i = 0; i < 5; i++) {
             std::getline(error, line);
-            EXPECT_STREQ(expectedError[i], line.c_str());
+            EXPECT_STREQ(expectedError[i].c_str(), line.c_str());
         }
+
+
     }END;
 
     TEST(SANITY, Masolas) {

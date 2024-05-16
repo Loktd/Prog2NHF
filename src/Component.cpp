@@ -21,12 +21,12 @@ void Component::addToActiveQueue()
     activeQueue->put(this);
 }
 
-void Component::gotSimulated()
+void Component::setSimulated()
 {
     simulated = true;
 }
 
-bool Component::wasSimulated()
+bool Component::simulated()
 {
     return simulated;
 }

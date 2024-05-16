@@ -1,4 +1,4 @@
-# 4/1-es multiplexer jelérték bemenetei
+# 4/1-es multiplexer jelérték bemenetei (i) = i-1 sorszámú bemenet
 SOURCE: (1) (2) (3) (4)
 
 # Select jelek (MSB = (6))

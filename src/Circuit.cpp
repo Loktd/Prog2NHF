@@ -184,6 +184,7 @@ void Circuit::build()
 
         if (!line.content.empty()) {
             line.idx = 0;
+            line.type = INVALID;
             try {
                 buildLine(line);
             }
@@ -208,12 +209,12 @@ void Circuit::testForIsolatedComponent()
     while (!activeList.isEmpty()) {
         Component* current = activeList.get();
         current->executeFunction();
-        current->gotSimulated();
+        current->setSimulated();
     }
 
     for (Queue<Component>::iterator it = componentList.begin(); it != componentList.end(); it++) {
         Component* current = *it;
-        if (!current->wasSimulated()) {
+        if (!current->simulated()) {
             Node* nptr = dynamic_cast<Node*>(current);
             if (nptr != nullptr) {
                 throw UnsimulatedComponent("Node " + size_tToString(nptr->getID()) + " is unsimulated (isolated or self-referential)...\n");
@@ -501,7 +502,11 @@ void Circuit::setSchematicFile(const std::string& path)
     if (!inputfile.is_open() && inputFilePath != "") {
         inputFilePath = prev;
         inputfile.open(prev);
+        printSeparatorLine(*errorStream, '=', 50);
+        *errorStream << "LOADING ERROR\n";
+        printSeparatorLine(*errorStream, '*', 50);
         *errorStream << "There is no file with name: " << path << std::endl;
+        printSeparatorLine(*errorStream, '=', 50);
     }
     else {
         configured = false;
@@ -516,8 +521,9 @@ const std::string& Circuit::getSourceFileName() const
 
 void Circuit::simulate(std::ostream& os)
 {
-    if (!configured)
+    if (!configured) {
         configure();
+    }
 
     if (configured) {
         for (Queue<InputComponent>::iterator it = inputComponentList.begin(); it != inputComponentList.end(); it++) {

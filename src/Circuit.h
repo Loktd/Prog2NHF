@@ -66,7 +66,7 @@ class Circuit {
    */
   Queue<Lamp> lampList;
   /**
-   * @brief A csomópontok listája, melyeken keresztül kapcsolódnak az egyes áramköri elemek. Ez birtokos, azaz a csomópontok felszabadításáért ez felel.
+   * @brief A csomópontok listája, melyeken keresztül kapcsolódnak az egyes áramköri elemek.
    *
    */
   Queue<Node> nodeList;

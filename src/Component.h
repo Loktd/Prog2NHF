@@ -51,18 +51,18 @@ public:
   virtual void executeFunction() = 0;
 
   /**
-   * @brief Beállítja, hogy szimulálva volt, az elem;
-   *
-   */
-  void gotSimulated();
-
-  /**
    * @brief Visszaadja, hogy le volt-e szimulálva az elem.
    *
    * @return true = már le volt szimulálva ;
    * @return false = még nem volt leszimulálva
    */
-  bool wasSimulated();
+  bool simulated();
+
+  /**
+   * @brief Beállítja, hogy szimulálva volt, az elem;
+   *
+   */
+  void setSimulated();
 
   /**
    * @brief Reseteli a szimuláltság státuszát.

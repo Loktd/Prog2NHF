@@ -96,7 +96,7 @@ public:
   /**
    * @brief Jelzi az áramköri elem felé, hogy ezen a lábán rendelkezésre áll a jel.
    *
-   * @exception Ha nincs kapcsolt áramköri elem, akkor dob egy NonExistentConnection exception-t.
+   * @exception NonExistentConnection = Nincs kapcsolt InputComponent eleme.
    */
   void setReady();
 
@@ -138,8 +138,8 @@ public:
   /**
    * @brief Jelet küld a kapcsolt bemeneti pin-nek.
    *
-   * @exception Ha nincs kapcsolt bemeneti pin, akkor dob egy NonExistentConnection exception-t.
-   * @exception Ha már aktivált bemeneti pin-nek üzen, akkor rövidzár esetén dob egy ShortCircuit exception-t.
+   * @exception NonExistentConnection = Nincs kapcsolt bemeneti pin.
+   * @exception ShortCircuit = Már aktivált bemeneti pin-nek üzen.
    */
   void sendSignal() const;
 
