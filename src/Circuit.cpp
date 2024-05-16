@@ -187,7 +187,7 @@ void Circuit::build()
             try {
                 buildLine(line);
             }
-            catch (CommentLine& exc) {
+            catch (CommentLine& exception) {
                 continue;
             }
             catch (...) {
@@ -273,7 +273,7 @@ void Circuit::getLineType(LineContent& line)
     std::string lineType;
     for (char c = line.content[line.idx++]; c != ':' && line.idx < line.content.length(); c = line.content[line.idx++]) {
         if (line.idx == 1 && c == '#') {
-            throw CommentLine();
+            throw CommentLine("Current line is a comment, and should be ignored...");
         }
         lineType += c;
     }

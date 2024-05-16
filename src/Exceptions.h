@@ -42,7 +42,9 @@ public:
     NonExistentLineType(const std::string& msg) : MessagedException(msg) {}
 };
 
-class CommentLine {
+class CommentLine : public MessagedException {
+public:
+    CommentLine(const std::string& msg) : MessagedException(msg) {}
 };
 
 class IncorrectSyntax : public MessagedException {
