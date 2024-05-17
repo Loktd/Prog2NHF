@@ -1,8 +1,6 @@
 #include "Pin.h"
 
 
-// Pin kezdet
-
 Pin::Pin(Signal baseSignal) : ownedSignal(baseSignal) {}
 
 void Pin::setSignal(const Signal& newSignal)
@@ -21,73 +19,3 @@ void Pin::flipSignal()
 }
 
 Pin::~Pin() {}
-
-// Pin vége
-
-
-// InputPin kezdet
-
-InputPin::InputPin(Signal baseSignal) : Pin(baseSignal), component(nullptr), ready(false) {}
-
-void InputPin::connenctToComponent(InputComponent* connected)
-{
-    component = connected;
-}
-
-InputComponent* InputPin::getComponent() const
-{
-    return component;
-}
-
-bool InputPin::isReady()
-{
-    return ready;
-}
-
-void InputPin::setReady()
-{
-    if (component == nullptr) {
-        throw NonExistentConnection("An InputPin doesn't have a connected component while sending a message...");
-    }
-
-    ready = true;
-    component->activateIfReady();
-}
-
-void InputPin::resetReady()
-{
-    ready = false;
-}
-
-InputPin::~InputPin() {}
-
-// InputPin vége
-
-
-// OutputPin kezdet
-
-OutputPin::OutputPin(Signal baseSignal) : Pin(baseSignal), connectedTo(nullptr) {}
-
-void OutputPin::connectToPin(InputPin* pin)
-{
-    connectedTo = pin;
-}
-
-void OutputPin::sendSignal() const
-{
-    if (connectedTo == nullptr) {
-        throw NonExistentConnection("An OutputPin doesn't have an associated input pin when sending message...");
-    }
-    if (connectedTo->isReady()) {
-        if (connectedTo->getSignal() != ownedSignal)
-            throw ShortCircuit("Shortcircuit from looping back", connectedTo->getComponent());
-        else
-            return;
-    }
-    connectedTo->setSignal(ownedSignal);
-    connectedTo->setReady();
-}
-
-OutputPin::~OutputPin() {}
-
-// OutputPin vége

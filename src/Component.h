@@ -1,7 +1,8 @@
 #ifndef _COMPONENT_H
 #define _COMPONENT_H
 
-#include "Pin.h"
+#include "InputPin.h"
+#include "OutputPin.h"
 #include "Queue.h"
 #include "Exceptions.h"
 

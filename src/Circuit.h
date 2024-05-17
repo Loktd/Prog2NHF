@@ -4,6 +4,8 @@
 
 #include "Signal.h"
 #include "Pin.h"
+#include "InputPin.h"
+#include "OutputPin.h"
 #include "Component.h"
 #include "Queue.h"
 #include "Gate.h"
