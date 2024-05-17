@@ -7,7 +7,7 @@
 #include "InputPin.h"
 #include "OutputPin.h"
 #include "Component.h"
-#include "Queue.h"
+#include "Queue.hpp"
 #include "Gate.h"
 #include "Peripherals.h"
 

@@ -18,7 +18,7 @@ class OutputPin : public Pin {
     InputPin* connectedTo;
 public:
     /**
-     * @brief Létrhoz egy kimeneti pin-t, kapcsolt bemeneti pin-jét NULL-ra állítva.
+     * @brief Létrehoz egy kimeneti pin-t, kapcsolt bemeneti pin-jét NULL-ra állítva.
      *
      * @param baseSignal Az alapjel, ha van megadva.
      */

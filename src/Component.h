@@ -3,7 +3,7 @@
 
 #include "InputPin.h"
 #include "OutputPin.h"
-#include "Queue.h"
+#include "Queue.hpp"
 #include "Exceptions.h"
 
 
