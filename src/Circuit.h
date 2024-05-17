@@ -243,7 +243,7 @@ public:
    *
    * @param os Ahová fogja kijelezni a hibaüzeneteket.
    */
-  void setErrorStream(std::ostream* os);
+  void setErrorStream(std::ostream& os);
   /**
    * @brief Beállítja forrás file-t. (Nem konfigurálja fel!)
    *

@@ -496,9 +496,9 @@ Circuit& Circuit::operator=(const Circuit& source)
     return *this;
 }
 
-void Circuit::setErrorStream(std::ostream* os)
+void Circuit::setErrorStream(std::ostream& os)
 {
-    errorStream = os;
+    errorStream = &os;
 }
 
 void Circuit::setSchematicFile(const std::string& path)

@@ -10,7 +10,8 @@ int main() {
     TEST(SANITY, ForrasAllitas) {
         Circuit circuit;
         std::stringstream error_stream;
-        circuit.setErrorStream(&error_stream);
+
+        circuit.setErrorStream(error_stream);
 
         EXPECT_STREQ("", circuit.getSourceFileName().c_str());
 
@@ -20,35 +21,21 @@ int main() {
         circuit.setSchematicFile("Peripherals.dat");
         EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
 
-        circuit.setSchematicFile("IDontExist.dat");
+        circuit.setSchematicFile("IDONTEXIST.dat");
         EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
         EXPECT_STRNE("", error_stream.str().c_str());
     }END;
 
     TEST(SANITY, ErrorAllitas) {
         Circuit circuit;
-
         std::stringstream error;
-        circuit.setErrorStream(&error);
         std::stringstream output;
 
-        circuit.simulate(output);
+        circuit.setErrorStream(error);
+
+        EXPECT_THROW(circuit.simulate(output), ConfigurationError);
         EXPECT_STREQ("", output.str().c_str());
-
-        std::string expectedError[5] = {
-            "==================================================",
-            "LOADING ERROR",
-            "**************************************************",
-            "No file was given...",
-            "=================================================="
-        };
-        std::string line;
-        for (size_t i = 0; i < 5; i++) {
-            std::getline(error, line);
-            EXPECT_STREQ(expectedError[i].c_str(), line.c_str());
-        }
-
-
+        EXPECT_STRNE("", error.str().c_str());
     }END;
 
     TEST(SANITY, Masolas) {
@@ -81,7 +68,7 @@ int main() {
         circuit.setSchematicFile("Gates.dat");
 
         std::stringstream error;
-        circuit.setErrorStream(&error);
+        circuit.setErrorStream(error);
 
         std::stringstream output;
 
@@ -153,6 +140,7 @@ int main() {
     TEST(COMPONENT_CHECK, Periferia_Kivetelek) {
         Circuit circuit;
         std::stringstream output;
+
         circuit.setSchematicFile("Peripherals.dat");
 
         EXPECT_THROW(circuit.setSource(0, Signal(true)), MatchingComponentNotFound);
@@ -166,14 +154,12 @@ int main() {
         Circuit circuit;
         std::stringstream output;
         std::stringstream error;
-        circuit.setErrorStream(&error);
 
-        std::string FILENAMES[4] = {
-            "BadSyntax1.dat",
-            "BadSyntax2.dat",
-            "BadSyntax3.dat",
-            "BadSyntax4.dat"
-        };
+        circuit.setErrorStream(error);
+        circuit.setSchematicFile("BadSyntax.dat");
+
+        EXPECT_THROW(circuit.simulate(output), ConfigurationError);
+
         std::string EXPECTED[4] = {
             "Invalid component type: \"SOUrC\" at line 1!",
             "Incorrect syntax at: \"(1, 2, 3\"!",
@@ -182,29 +168,25 @@ int main() {
         };
 
         for (size_t i = 0; i < 4; i++) {
-            error.str("");
-            output.str("");
-            circuit.setSchematicFile(FILENAMES[i]);
-            circuit.simulate(output);
-
             std::string errorMessage;
             for (size_t i = 0; i < 4; i++)
                 std::getline(error, errorMessage);
 
             EXPECT_STREQ(EXPECTED[i].c_str(), errorMessage.c_str());
+            std::getline(error, errorMessage);
         }
     }END;
 
     TEST(ERRORS, Onhivatkozo_Elem) {
         Circuit circuit;
-        circuit.setSchematicFile("SelfRef.dat");
         std::stringstream output;
         std::stringstream error;
-        circuit.setErrorStream(&error);
-        circuit.simulate(output);
+
+        circuit.setSchematicFile("SelfRef.dat");
+        circuit.setErrorStream(error);
+        EXPECT_THROW(circuit.simulate(output), ConfigurationError);
 
         std::string EXPECTED = "Node 2 is unsimulated (isolated or self-referential)...";
-
         std::string line;
         for (size_t i = 0; i < 4; i++)
             std::getline(error, line);
@@ -213,11 +195,12 @@ int main() {
 
     TEST(ERRORS, Elszigetelt_Elem) {
         Circuit circuit;
-        circuit.setSchematicFile("Isolated.dat");
         std::stringstream output;
         std::stringstream error;
-        circuit.setErrorStream(&error);
-        circuit.simulate(output);
+
+        circuit.setSchematicFile("Isolated.dat");
+        circuit.setErrorStream(error);
+        EXPECT_THROW(circuit.simulate(output), ConfigurationError);
 
         std::string EXPECTED = "Node 8 is unsimulated (isolated or self-referential)...";
         std::string line;
@@ -228,10 +211,11 @@ int main() {
 
     TEST(ERRORS, RovidZar) {
         Circuit circuit;
-        circuit.setSchematicFile("ShortCircuit.dat");
         std::stringstream output;
         std::stringstream error;
-        circuit.setErrorStream(&error);
+
+        circuit.setSchematicFile("ShortCircuit.dat");
+        circuit.setErrorStream(error);
         circuit.simulate(output);
 
         std::string EXPECTED = "ERROR: Shortcircuit from looping back at node 1!";
@@ -243,10 +227,11 @@ int main() {
 
     TEST(COMLEX_CIRCUITS, Ot_Bemenet) {
         Circuit circuit;
-        circuit.setSchematicFile("FiveToOne.dat");
         std::stringstream error;
-        circuit.setErrorStream(&error);
         std::stringstream output;
+
+        circuit.setSchematicFile("FiveToOne.dat");
+        circuit.setErrorStream(error);
 
         bool EXPECTED_LAMP_STATE[5] = { true, true, true, true, false };
 
@@ -259,10 +244,11 @@ int main() {
 
     TEST(COMPLEX_CIRCUITS, Comparator) {
         Circuit circuit;
-        circuit.setSchematicFile("Comparator.dat");
         std::stringstream error;
-        circuit.setErrorStream(&error);
         std::stringstream output;
+
+        circuit.setSchematicFile("Comparator.dat");
+        circuit.setErrorStream(error);
 
         // 13-al vetjük össze az összes többi értéket
         circuit.setSource(1, Signal(true));
@@ -275,7 +261,6 @@ int main() {
             circuit.setSource(6, Signal(i & 2));
             circuit.setSource(7, Signal(i & 4));
             circuit.setSource(8, Signal(i & 8));
-
             circuit.simulate(output);
 
             if (i != 13) {
@@ -289,10 +274,11 @@ int main() {
 
     TEST(COMPLEX_CIRCUITS, Multiplexer) {
         Circuit circuit;
-        circuit.setSchematicFile("Multiplexer.dat");
         std::stringstream error;
-        circuit.setErrorStream(&error);
         std::stringstream output;
+
+        circuit.setSchematicFile("Multiplexer.dat");
+        circuit.setErrorStream(error);
 
         bool GIVEN_SIGNALS[4] = { true, false, false, true };
 
@@ -302,7 +288,6 @@ int main() {
         for (size_t i = 0; i < 4; i++) {
             circuit.setSource(5, Signal(i & 1));
             circuit.setSource(6, Signal(i & 2));
-
             circuit.simulate(output);
 
             EXPECT_EQ(GIVEN_SIGNALS[i], circuit.getLampSignal(15).getValue());
@@ -311,10 +296,11 @@ int main() {
 
     TEST(COMPLEX_CIRCUITS, Decoder) {
         Circuit circuit;
-        circuit.setSchematicFile("Decoder.dat");
         std::stringstream error;
-        circuit.setErrorStream(&error);
         std::stringstream output;
+
+        circuit.setSchematicFile("Decoder.dat");
+        circuit.setErrorStream(error);
 
         bool SOURCE_1_SIGNALS[4] = { false, true, false, true };
         bool SOURCE_2_SIGNALS[4] = { false, false, true, true };
@@ -322,8 +308,8 @@ int main() {
         for (size_t i = 0; i < 4; i++) {
             circuit.setSource(1, Signal(SOURCE_1_SIGNALS[i]));
             circuit.setSource(2, Signal(SOURCE_2_SIGNALS[i]));
-
             circuit.simulate(output);
+
             for (size_t j = 0; j < 4; j++) {
                 if (i == j)
                     EXPECT_EQ(true, circuit.getLampSignal(3 + j).getValue());
