@@ -3,7 +3,6 @@
 #include <ctime>
 
 // Template függvények
-
 template<typename ComponentType>
 void Circuit::create(Queue<size_t>& nodeNumbers) {
     size_t count = nodeNumbers.size();

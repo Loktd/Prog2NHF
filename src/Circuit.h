@@ -189,6 +189,7 @@ class Circuit {
    */
   template<typename ComponentType>
   void create(Queue<size_t>& nodeNumbers);
+
   /**
    * @brief Összeköt egy bemeneti pin-t egy csomóponttal. (Ha nem létezik, akkor létrehozza a csomópontot.)
    *
@@ -261,6 +262,8 @@ public:
    * @brief Leszimulálja az áramkört, és az eredményeket kiírja a megadott kimeneti stream-re.
    *
    * @param os A kimeneti stream, ahová írjuk.
+   *
+   * @exception ConfigurationError = felkonfiguráláskor volt probléma errorstream-re kiírja, hogy milyen baj történt.
    */
   void simulate(std::ostream& os);
 
@@ -269,6 +272,8 @@ public:
    *
    * @param connectedNode A csomópont, amihez a forrás kapcsolódik.
    * @param newSignal A beállítani kívánt jelszint.
+   *
+   * @exception ConfigurationError = felkonfiguráláskor volt probléma errorstream-re kiírja, hogy milyen baj történt.
    */
   void setSource(size_t connectedNode, Signal newSignal);
   /**
@@ -277,9 +282,10 @@ public:
    * @param connectedNode1 Az egyik csomópont, amihez kapcsolódik a kapcsoló.
    * @param connectedNode2 A másik csomópont, amihez kapcsolódik a kapcsoló.
    * @param closed Az új állapota. (true = zárt, false = nyitott)
+   *
+   * @exception ConfigurationError = felkonfiguráláskor volt probléma errorstream-re kiírja, hogy milyen baj történt.
    */
   void setSwitch(size_t connectedNode1, size_t connectedNode2, bool closed);
-
   /**
    * @brief Visszaadja egy megadott csomópontra csatlakozó forrás által kiadott jelszintet.
    *
@@ -287,9 +293,9 @@ public:
    * @return Signal A jelszint, amit kiad a forrás.
    *
    * @exception MatchingComponentNotFound = ha nincs az adott csomóponthoz kapcsolódó forrás.
+   * @exception ConfigurationError = felkonfiguráláskor volt probléma errorstream-re kiírja, hogy milyen baj történt.
    */
   Signal getSourceSignal(size_t connectedNode);
-
   /**
    * @brief Visszaadja két megadott csomóponra csatlakozó kapcsoló állapotát.
    *
@@ -299,14 +305,17 @@ public:
    * @return false = nyitott a kapcsolóá
    *
    * @exception MatchingComponentNotFound = ha nincs az adott csomópontokhoz kapcsolódó kapcsoló.
+   * @exception ConfigurationError = felkonfiguráláskor volt probléma errorstream-re kiírja, hogy milyen baj történt.
    */
   bool isSwitchClosed(size_t connectedNode1, size_t connectedNode2);
-
   /**
    * @brief Visszaadja egy megadott csomópontra csatlakozó lámpa állapotát, azaz a tárolt állapotát.
    *
    * @param connectedNode A csomópont, amihez kapcsolódik a lámpa.
    * @return Signal A jelszint, amivel a lámpa rendelkezik.
+   *
+   * @exception MatchingComponentNotFound = ha nincs az adott csomópontokhoz kapcsolódó kapcsoló.
+   * @exception ConfigurationError = felkonfiguráláskor volt probléma errorstream-re kiírja, hogy milyen baj történt.
    */
   Signal getLampSignal(size_t connectedNode);
 
