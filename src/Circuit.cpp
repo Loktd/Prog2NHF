@@ -12,7 +12,7 @@ void Circuit::create(Queue<size_t>& nodeNumbers) {
     IOComponent* ptr = dynamic_cast<IOComponent*>(created);
     if (ptr == nullptr) {
         delete created;
-        throw PointerConversionError("Trying to create non-IOComponent type...\n");
+        throw PointerConversionError("Trying to create non-IOComponent type...");
     }
     ptr->setActiveQueue(&activeList);
 
@@ -139,12 +139,12 @@ void Circuit::configure() {
 void Circuit::build()
 {
     if (inputFilePath == "")
-        throw FileAccessError("No file was given...\n");
+        throw FileAccessError("No file was given...");
 
     if (!inputfile.is_open()) {
         inputfile.open(inputFilePath);
         if (!inputfile.is_open()) {
-            throw FileAccessError("Input file doesn't exist or can't be opened...\n");
+            throw FileAccessError("Input file doesn't exist or can't be opened...");
         }
     }
 
@@ -196,7 +196,7 @@ void Circuit::testForIsolatedComponent()
         if (!current->simulated()) {
             Node* nptr = dynamic_cast<Node*>(current);
             if (nptr != nullptr) {
-                throw UnsimulatedComponent("Node " + size_tToString(nptr->getID()) + " is unsimulated (isolated or self-referential)...\n");
+                throw UnsimulatedComponent("Node " + size_tToString(nptr->getID()) + " is unsimulated (isolated or self-referential)...");
             }
             else {
                 std::stringstream message("Component connected to node(s): ");
@@ -293,7 +293,7 @@ void Circuit::getLineType(LineContent& line)
     }
 
     if (!valid) {
-        throw NonExistentLineType("Invalid component type: \"" + lineType + "\" at line " + size_tToString(line.lineNumber) + "!\n");
+        throw NonExistentLineType("Invalid component type: \"" + lineType + "\" at line " + size_tToString(line.lineNumber) + "!");
     }
 }
 
@@ -304,16 +304,16 @@ void Circuit::getNodeNumbers(LineContent& line, Queue<size_t>& nodeNumbers)
     std::stringstream stream(std::string(line.content.c_str() + line.idx));
     while (true) {
         if (!(stream >> read)) {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!\n");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!");
         }
         nodeNumbers.put(new size_t(read));
 
         if (!(stream >> buff)) {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!\n");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!");
         }
 
         if (buff != ',' && buff != ')') {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!\n");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!");
         }
         else if (buff == ')') {
             while (line.content[line.idx] != ')') line.idx++;
@@ -328,43 +328,43 @@ void Circuit::checkNodeCount(LineContent& line, size_t count)
     {
     case SOURCE:
         if (count != 1)
-            throw IncorrectPinCount("Incorrect pin count for SOURCE type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for SOURCE type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case LAMP:
         if (count != 1)
-            throw IncorrectPinCount("Incorrect pin count for LAMP type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for LAMP type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case SWITCH:
         if (count != 2)
-            throw IncorrectPinCount("Incorrect pin count for SWITCH type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for SWITCH type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case GATE_AND:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for AND type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for AND type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case GATE_OR:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for OR type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for OR type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case GATE_NOT:
         if (count != 2)
-            throw IncorrectPinCount("Incorrect pin count for NOT type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for NOT type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case GATE_XOR:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for XOR type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for XOR type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case GATE_NAND:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for NAND type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for NAND type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case GATE_NOR:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for NOR type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for NOR type at line " + size_tToString(line.lineNumber) + "!");
         break;
     case GATE_XNOR:
         if (count <= 2)
-            throw IncorrectPinCount("Incorrect pin count for XNOR type at line " + size_tToString(line.lineNumber) + "!\n");
+            throw IncorrectPinCount("Incorrect pin count for XNOR type at line " + size_tToString(line.lineNumber) + "!");
         break;
     default:
         throw NonExistentLineType("Not found a type...");
@@ -468,11 +468,11 @@ void Circuit::connectOutputPinWithNode(OutputComponent* component, OutputPin* pi
 
 void Circuit::printErrorMessage(std::ostream& os, const std::string& errorTypeName, const std::string& errorMessage)
 {
-    printSeparatorLine(*errorStream, '=', 50);
-    *errorStream << errorTypeName << std::endl;
-    printSeparatorLine(*errorStream, '*', 50);
-    *errorStream << errorMessage;
-    printSeparatorLine(*errorStream, '=', 50);
+    printSeparatorLine(os, '=', 50);
+    os << errorTypeName << std::endl;
+    printSeparatorLine(os, '*', 50);
+    os << errorMessage << std::endl;
+    printSeparatorLine(os, '=', 50);
 }
 
 // Publikus interfész kezdet
@@ -554,29 +554,20 @@ void Circuit::simulate(std::ostream& os)
                 current->executeFunction();
             }
             catch (ShortCircuit& err) {
-                if (!wasShortCircuit) {
-                    printSeparatorLine(os, '=', 50);
-                    os << "ERROR DURING SIMULATION!" << std::endl;
-                    printSeparatorLine(os, '=', 50);
+                wasShortCircuit = true;
 
-                    std::time_t result = std::time(nullptr);
-                    os << std::ctime(&result);
-                    printSeparatorLine(os, '*', 50);
+                std::string error_message;
+                error_message += err.exception_message();
+                Node* ptr = dynamic_cast<Node*>(err.getResimulated());
+                if (ptr != nullptr)
+                    error_message += " at node " + size_tToString(ptr->getID()) + "!";
 
-                    wasShortCircuit = true;
-                }
-                os << err.exception_message() << " at node ";
-                dynamic_cast<OutputComponent*>(current)->printConnectedOutputNodes(os);
-                os << "!" << std::endl;
+                printErrorMessage(os, "SHORTCIRCUIT!", error_message);
             }
         }
 
         if (!wasShortCircuit) {
             os << *this;
-        }
-        else {
-            printSeparatorLine(os, '=', 50);
-            os << std::endl;
         }
     }
 }
@@ -593,7 +584,7 @@ void Circuit::setSource(size_t connectedNode, Signal newSignal)
             return;
         }
     }
-    throw MatchingComponentNotFound(("No source connected to node: " + size_tToString(connectedNode) + "!\n"));
+    throw MatchingComponentNotFound(("No source connected to node: " + size_tToString(connectedNode) + "!"));
 }
 
 void Circuit::setSwitch(size_t connectedNode1, size_t connectedNode2, bool closed)
@@ -622,7 +613,7 @@ Signal Circuit::getSourceSignal(size_t connectedNode)
             return current->getOutput();
         }
     }
-    throw MatchingComponentNotFound("No source connected to node: " + size_tToString(connectedNode) + "!\n");
+    throw MatchingComponentNotFound("No source connected to node: " + size_tToString(connectedNode) + "!");
 }
 
 bool Circuit::isSwitchClosed(size_t connectedNode1, size_t connectedNode2)
@@ -650,7 +641,7 @@ Signal Circuit::getLampSignal(size_t connectedNode)
             return current->getState();
         }
     }
-    throw MatchingComponentNotFound("No lamp connected to node: " + size_tToString(connectedNode) + "!\n");
+    throw MatchingComponentNotFound("No lamp connected to node: " + size_tToString(connectedNode) + "!");
 }
 
 void Circuit::printAllSourceStates(std::ostream& os) const

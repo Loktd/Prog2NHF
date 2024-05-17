@@ -47,7 +47,7 @@ bool InputPin::isReady()
 void InputPin::setReady()
 {
     if (component == nullptr) {
-        throw NonExistentConnection("An InputPin doesn't have a connected component while sending a message...\n");
+        throw NonExistentConnection("An InputPin doesn't have a connected component while sending a message...");
     }
 
     ready = true;
@@ -76,12 +76,14 @@ void OutputPin::connectToPin(InputPin* pin)
 void OutputPin::sendSignal() const
 {
     if (connectedTo == nullptr) {
-        throw NonExistentConnection("An OutputPin doesn't have an associated input pin when sending message...\n");
+        throw NonExistentConnection("An OutputPin doesn't have an associated input pin when sending message...");
     }
     if (connectedTo->isReady()) {
-        throw ShortCircuit("Shortcircuit from looping back", connectedTo->getComponent());
+        if (connectedTo->getSignal() != ownedSignal)
+            throw ShortCircuit("Shortcircuit from looping back", connectedTo->getComponent());
+        else
+            return;
     }
-
     connectedTo->setSignal(ownedSignal);
     connectedTo->setReady();
 }

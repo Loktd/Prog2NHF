@@ -6,6 +6,16 @@
 #include "memtrace.h"
 #include "gtest_lite.h"
 
+// Segédfüggvény, csak az error message-ek kihámozására kell
+void ERROR_EXPECT_CHECK_STR(std::string& expected_error_message, std::istream& error_stream, size_t line_number) {
+    std::string error_message;
+    for (size_t i = 0; i < line_number; i++)
+        std::getline(error_stream, error_message);
+
+    EXPECT_STREQ(expected_error_message.c_str(), error_message.c_str());
+    std::getline(error_stream, error_message);
+}
+
 int main() {
     TEST(SANITY, ForrasAllitas) {
         Circuit circuit;
@@ -21,9 +31,9 @@ int main() {
         circuit.setSchematicFile("Peripherals.dat");
         EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
 
-        circuit.setSchematicFile("IDONTEXIST.dat");
-        EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
+        circuit.setSchematicFile("I_DONT_EXIST.dat");
         EXPECT_STRNE("", error_stream.str().c_str());
+        EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
     }END;
 
     TEST(SANITY, ErrorAllitas) {
@@ -72,29 +82,29 @@ int main() {
 
         std::stringstream output;
 
-        bool SOURCE_1_SIGNALS[4] = { false, true, false, true };
-        bool SOURCE_2_SIGNALS[4] = { false, false, true, true };
+        Signal SOURCE_1_SIGNALS[4] = { false, true, false, true };
+        Signal SOURCE_2_SIGNALS[4] = { false, false, true, true };
 
-        bool GATE_AND_EXPECTED_VALUES[4] = { false, false, false, true };
-        bool GATE_OR_EXPECTED_VALUES[4] = { false, true, true, true };
-        bool GATE_XOR_EXPECTED_VALUES[4] = { false, true, true, false };
-        bool GATE_NAND_EXPECTED_VALUES[4] = { true, true, true, false };
-        bool GATE_NOR_EXPECTED_VALUES[4] = { true, false, false, false };
-        bool GATE_XNOR_EXPECTED_VALUES[4] = { true, false, false, true };
-        bool GATE_NOT_EXPECTED_VALUES[4] = { true, false, true, false };
+        Signal GATE_AND_EXPECTED_VALUES[4] = { false, false, false, true };
+        Signal GATE_OR_EXPECTED_VALUES[4] = { false, true, true, true };
+        Signal GATE_XOR_EXPECTED_VALUES[4] = { false, true, true, false };
+        Signal GATE_NAND_EXPECTED_VALUES[4] = { true, true, true, false };
+        Signal GATE_NOR_EXPECTED_VALUES[4] = { true, false, false, false };
+        Signal GATE_XNOR_EXPECTED_VALUES[4] = { true, false, false, true };
+        Signal GATE_NOT_EXPECTED_VALUES[4] = { true, false, true, false };
 
         for (size_t i = 0; i < 4; i++) {
-            circuit.setSource(1, Signal(SOURCE_1_SIGNALS[i]));
-            circuit.setSource(2, Signal(SOURCE_2_SIGNALS[i]));
+            circuit.setSource(1, SOURCE_1_SIGNALS[i]);
+            circuit.setSource(2, SOURCE_2_SIGNALS[i]);
             circuit.simulate(output);
 
-            EXPECT_EQ(GATE_AND_EXPECTED_VALUES[i], circuit.getLampSignal(3).getValue());
-            EXPECT_EQ(GATE_OR_EXPECTED_VALUES[i], circuit.getLampSignal(4).getValue());
-            EXPECT_EQ(GATE_XOR_EXPECTED_VALUES[i], circuit.getLampSignal(5).getValue());
-            EXPECT_EQ(GATE_NAND_EXPECTED_VALUES[i], circuit.getLampSignal(6).getValue());
-            EXPECT_EQ(GATE_NOR_EXPECTED_VALUES[i], circuit.getLampSignal(7).getValue());
-            EXPECT_EQ(GATE_XNOR_EXPECTED_VALUES[i], circuit.getLampSignal(8).getValue());
-            EXPECT_EQ(GATE_NOT_EXPECTED_VALUES[i], circuit.getLampSignal(9).getValue());
+            EXPECT_EQ(GATE_AND_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(3).getValue());
+            EXPECT_EQ(GATE_OR_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(4).getValue());
+            EXPECT_EQ(GATE_XOR_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(5).getValue());
+            EXPECT_EQ(GATE_NAND_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(6).getValue());
+            EXPECT_EQ(GATE_NOR_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(7).getValue());
+            EXPECT_EQ(GATE_XNOR_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(8).getValue());
+            EXPECT_EQ(GATE_NOT_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(9).getValue());
         }
     }END;
 
@@ -103,21 +113,21 @@ int main() {
         std::stringstream output;
         circuit.setSchematicFile("Peripherals.dat");
 
-        bool SOURCE_1_SIGNALS[] = { true, true, true, false };
-        bool SOURCE_4_SIGNALS[] = { true, true, true, true };
+        Signal SOURCE_1_SIGNALS[] = { true, true, true, false };
+        Signal SOURCE_4_SIGNALS[] = { true, true, true, true };
 
         bool SWITCH_1_2_STATES[] = { false, false, true, true };
         bool SWITCH_1_3_STATES[] = { false, true, false, true };
         bool SWITCH_4_5_STATES[] = { false, false, true, true };
         bool SWITCH_4_6_STATES[] = { false, true, false, true };
 
-        bool LAMP_2_EXPECTED_VALUES[] = { false, false, true, false };
-        bool LAMP_3_EXPECTED_VALUES[] = { false, true, false, false };
-        bool LAMP_7_EXPECTED_VALUES[] = { false, false, false, true };
+        Signal LAMP_2_EXPECTED_VALUES[] = { false, false, true, false };
+        Signal LAMP_3_EXPECTED_VALUES[] = { false, true, false, false };
+        Signal LAMP_7_EXPECTED_VALUES[] = { false, false, false, true };
 
         for (size_t i = 0; i < 4; i++) {
-            circuit.setSource(1, Signal(SOURCE_1_SIGNALS[i]));
-            circuit.setSource(4, Signal(SOURCE_4_SIGNALS[i]));
+            circuit.setSource(1, SOURCE_1_SIGNALS[i]);
+            circuit.setSource(4, SOURCE_4_SIGNALS[i]);
 
             circuit.setSwitch(1, 2, SWITCH_1_2_STATES[i]);
             circuit.setSwitch(1, 3, SWITCH_1_3_STATES[i]);
@@ -131,16 +141,34 @@ int main() {
             EXPECT_EQ(SWITCH_4_5_STATES[i], circuit.isSwitchClosed(4, 5));
             EXPECT_EQ(SWITCH_4_6_STATES[i], circuit.isSwitchClosed(4, 6));
 
-            EXPECT_EQ(LAMP_2_EXPECTED_VALUES[i], circuit.getLampSignal(2).getValue());
-            EXPECT_EQ(LAMP_3_EXPECTED_VALUES[i], circuit.getLampSignal(3).getValue());
-            EXPECT_EQ(LAMP_7_EXPECTED_VALUES[i], circuit.getLampSignal(7).getValue());
+            EXPECT_EQ(LAMP_2_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(2).getValue());
+            EXPECT_EQ(LAMP_3_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(3).getValue());
+            EXPECT_EQ(LAMP_7_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(7).getValue());
         }
     }END;
 
-    TEST(COMPONENT_CHECK, Periferia_Kivetelek) {
+    TEST(EXCEPTIONS, Konfiguracios_Kivetelek) {
         Circuit circuit;
+        std::stringstream error_stream;
         std::stringstream output;
 
+        circuit.setErrorStream(error_stream);
+        circuit.setSchematicFile("I_DONT_EXIST.dat");
+
+        EXPECT_THROW(circuit.simulate(output), ConfigurationError);
+        EXPECT_THROW(circuit.setSource(0, Signal(true)), ConfigurationError);
+        EXPECT_THROW(circuit.setSwitch(0, 0, true), ConfigurationError);
+        EXPECT_THROW(circuit.getSourceSignal(0), ConfigurationError);
+        EXPECT_THROW(circuit.isSwitchClosed(0, 0), ConfigurationError);
+        EXPECT_THROW(circuit.getLampSignal(0), ConfigurationError);
+    }END;
+
+    TEST(EXCEPTIONS, Periferia_Kivetelek) {
+        Circuit circuit;
+        std::stringstream error_stream;
+        std::stringstream output;
+
+        circuit.setErrorStream(error_stream);
         circuit.setSchematicFile("Peripherals.dat");
 
         EXPECT_THROW(circuit.setSource(0, Signal(true)), MatchingComponentNotFound);
@@ -160,20 +188,16 @@ int main() {
 
         EXPECT_THROW(circuit.simulate(output), ConfigurationError);
 
-        std::string EXPECTED[4] = {
-            "Invalid component type: \"SOUrC\" at line 1!",
+        std::string EXPECTED[5] = {
+            "Invalid component type: \"sOUrCe\" at line 1!",
             "Incorrect syntax at: \"(1, 2, 3\"!",
             "Incorrect pin count for NOT type at line 9!",
-            "Incorrect syntax at: \"(3svs) (4) (5) (6) (7) (8) (9)\"!",
+            "Incorrect syntax at: \"(3svs) (4err) (5) (6) (7) (8) (9)\"!",
+            "Incorrect syntax at: \"(4err) (5) (6) (7) (8) (9)\"!",
         };
 
-        for (size_t i = 0; i < 4; i++) {
-            std::string errorMessage;
-            for (size_t i = 0; i < 4; i++)
-                std::getline(error, errorMessage);
-
-            EXPECT_STREQ(EXPECTED[i].c_str(), errorMessage.c_str());
-            std::getline(error, errorMessage);
+        for (size_t i = 0; i < 5; i++) {
+            ERROR_EXPECT_CHECK_STR(EXPECTED[i], error, 4);
         }
     }END;
 
@@ -186,11 +210,8 @@ int main() {
         circuit.setErrorStream(error);
         EXPECT_THROW(circuit.simulate(output), ConfigurationError);
 
-        std::string EXPECTED = "Node 2 is unsimulated (isolated or self-referential)...";
-        std::string line;
-        for (size_t i = 0; i < 4; i++)
-            std::getline(error, line);
-        EXPECT_STREQ(EXPECTED.c_str(), line.c_str());
+        std::string expected_message = "Node 2 is unsimulated (isolated or self-referential)...";
+        ERROR_EXPECT_CHECK_STR(expected_message, error, 4);
     }END;
 
     TEST(ERRORS, Elszigetelt_Elem) {
@@ -202,11 +223,8 @@ int main() {
         circuit.setErrorStream(error);
         EXPECT_THROW(circuit.simulate(output), ConfigurationError);
 
-        std::string EXPECTED = "Node 8 is unsimulated (isolated or self-referential)...";
-        std::string line;
-        for (size_t i = 0; i < 4; i++)
-            std::getline(error, line);
-        EXPECT_STREQ(EXPECTED.c_str(), line.c_str());
+        std::string expected_message = "Node 8 is unsimulated (isolated or self-referential)...";
+        ERROR_EXPECT_CHECK_STR(expected_message, error, 4);
     }END;
 
     TEST(ERRORS, RovidZar) {
@@ -216,13 +234,25 @@ int main() {
 
         circuit.setSchematicFile("ShortCircuit.dat");
         circuit.setErrorStream(error);
-        circuit.simulate(output);
 
-        std::string EXPECTED = "ERROR: Shortcircuit from looping back at node 1!";
-        std::string line;
-        for (size_t i = 0; i < 4; i++)
-            std::getline(error, line);
-        EXPECT_STREQ(EXPECTED.c_str(), line.c_str());
+        circuit.setSwitch(1, 2, true);
+        circuit.simulate(output);
+        std::string expected_message = "Shortcircuit from looping back at node 1!";
+        ERROR_EXPECT_CHECK_STR(expected_message, output, 4);
+        circuit.setSource(1, Signal(true));
+        circuit.setSwitch(1, 2, false);
+
+        Signal SOURCE_5_SIGNALS[2] = { Signal(true), Signal(false) };
+        Signal SOURCE_6_SIGNALS[2] = { Signal(false), Signal(true) };
+        size_t EXPECTED_IDS[2] = { 6, 5 };
+
+        for (size_t i = 0; i < 2; i++) {
+            circuit.setSource(5, Signal(SOURCE_5_SIGNALS[i]));
+            circuit.setSource(6, Signal(SOURCE_6_SIGNALS[i]));
+            circuit.simulate(output);
+            std::string expected = "Shortcircuit from looping back at node " + size_tToString(EXPECTED_IDS[i]) + "!";
+            ERROR_EXPECT_CHECK_STR(expected, output, 4);
+        }
     }END;
 
     TEST(COMLEX_CIRCUITS, Ot_Bemenet) {
