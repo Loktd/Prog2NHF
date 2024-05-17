@@ -1,7 +1,8 @@
 #ifndef PERIPHERALS_H_
 #define PERIPHERALS_H_
 
-#include "Component.h"
+#include "OutputComponent.h"
+#include "IOComponent.h"
 
 #include <iostream>
 

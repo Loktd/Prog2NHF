@@ -2,7 +2,7 @@
 #define INPUTPIN_H_
 
 #include "Pin.h"
-#include "Component.h"
+#include "InputComponent.h"
 #include "Exceptions.h"
 
 class InputComponent;

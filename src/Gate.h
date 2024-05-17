@@ -1,8 +1,7 @@
 #ifndef _GATE_H
 #define _GATE_H
 
-#include "Component.h"
-
+#include "IOComponent.h"
 
 class Gate : public IOComponent {
 protected:

@@ -1,7 +1,6 @@
 #ifndef _SIGNAL_H
 #define _SIGNAL_H
 
-
 class Signal {
   /**
    * @brief A tárolt jelérték.
