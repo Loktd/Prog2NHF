@@ -2,7 +2,7 @@
 #define _COMPONENT_H
 
 #include "Queue.hpp"
-#include "Exceptions.h"
+#include "Exceptions.hpp"
 
 
 class Component {

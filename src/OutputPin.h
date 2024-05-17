@@ -4,7 +4,7 @@
 #include "Pin.h"
 #include "InputPin.h"
 #include "Component.h"
-#include "Exceptions.h"
+#include "Exceptions.hpp"
 
 class InputPin;
 class OutputComponent;

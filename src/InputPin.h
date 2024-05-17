@@ -3,7 +3,7 @@
 
 #include "Pin.h"
 #include "InputComponent.h"
-#include "Exceptions.h"
+#include "Exceptions.hpp"
 
 class InputComponent;
 
