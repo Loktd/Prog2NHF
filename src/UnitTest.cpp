@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "../src/Circuit.h"
+#include "Circuit.h"
 #include "Menu.h"
 
-#include "memtrace.h"
-#include "gtest_lite.h"
+#include "../test/memtrace.h"
+#include "../test/gtest_lite.h"
 
 // Segédfüggvény, csak az error message-ek kihámozására kell
 void ERROR_EXPECT_CHECK_STR(std::string& expected_error_message, std::istream& error_stream, size_t line_number) {

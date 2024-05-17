@@ -1,4 +1,4 @@
-#include "../src/Circuit.h"
+#include "Circuit.h"
 
 class App {
     enum MenuState {
