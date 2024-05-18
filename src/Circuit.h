@@ -1,19 +1,23 @@
 #ifndef _CIRCUIT_H
 #define _CIRCUIT_H
 
-
 #include "Signal.h"
 #include "Pin.h"
 #include "InputPin.h"
 #include "OutputPin.h"
 #include "Component.h"
+#include "InputComponent.h"
+#include "OutputComponent.h"
+#include "IOComponent.h"
 #include "Queue.hpp"
 #include "Gate.h"
-#include "Peripherals.h"
+#include "Node.h"
+#include "Source.h"
+#include "Switch.h"
+#include "Lamp.h"
 
 #include <iostream>
 #include <fstream>
-#include <cstring>
 #include <sstream>
 #include <string>
 

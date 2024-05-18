@@ -29,7 +29,6 @@ class MatchingComponentNotFound : public MessagedException {
 public:
     MatchingComponentNotFound(const std::string& msg) : MessagedException(msg) {}
 };
-
 /**
  * @brief Konfiguráció soránt történt hiba, ezt dobhatja a felhasználó felé.
  *

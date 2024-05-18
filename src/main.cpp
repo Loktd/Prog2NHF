@@ -6,6 +6,8 @@
 #include "../test/memtrace.h"
 #include "../test/gtest_lite.h"
 
+#define CPORTA
+#ifdef CPORTA
 // Segédfüggvény, csak az error message-ek kihámozására kell
 void ERROR_EXPECT_CHECK_STR(std::string& expected_error_message, std::istream& error_stream, size_t line_number) {
     std::string error_message;
@@ -15,8 +17,10 @@ void ERROR_EXPECT_CHECK_STR(std::string& expected_error_message, std::istream& e
     EXPECT_STREQ(expected_error_message.c_str(), error_message.c_str());
     std::getline(error_stream, error_message);
 }
+#endif
 
 int main() {
+#ifdef CPORTA
     TEST(SANITY, ForrasAllitas) {
         Circuit circuit;
         std::stringstream error_stream;
@@ -188,7 +192,8 @@ int main() {
 
         EXPECT_THROW(circuit.simulate(output), ConfigurationError);
 
-        std::string EXPECTED[5] = {
+        const size_t error_count = 5;
+        std::string EXPECTED[error_count] = {
             "Invalid component type: \"sOUrCe\" at line 1!",
             "Incorrect syntax at: \"(1, 2, 3\"!",
             "Incorrect pin count for NOT type at line 9!",
@@ -196,7 +201,7 @@ int main() {
             "Incorrect syntax at: \"(4err) (5) (6) (7) (8) (9)\"!",
         };
 
-        for (size_t i = 0; i < 5; i++) {
+        for (size_t i = 0; i < error_count; i++) {
             ERROR_EXPECT_CHECK_STR(EXPECTED[i], error, 4);
         }
     }END;
@@ -348,7 +353,7 @@ int main() {
             }
         }
     }END;
-
+#endif
 #ifndef CPORTA
     App application;
     while (application.keepRunning()) {
