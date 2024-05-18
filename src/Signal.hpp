@@ -1,6 +1,8 @@
 #ifndef _SIGNAL_H
 #define _SIGNAL_H
 
+#include "../test/memtrace.h"
+
 class Signal {
   /**
    * @brief A tárolt jelérték.

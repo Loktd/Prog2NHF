@@ -11,9 +11,23 @@ class InputComponent;
  *
  */
 class MessagedException : public std::exception {
+    /**
+     * @brief A hordozott üzenet.
+     *
+     */
     std::string message;
 public:
+    /**
+     * @brief Konstruktor, átadható üzenettel.
+     *
+     * @param msg Az átadott üzenet.
+     */
     MessagedException(const std::string& msg) : message(msg) {}
+    /**
+     * @brief Az üzenete adja vissza, amit tárol.
+     *
+     * @return std::string Az üzenet.
+     */
     std::string exception_message() {
         return std::string(message.c_str());
     }

@@ -43,18 +43,18 @@ class Queue {
   QueueMember* last;
 
   /**
+   * @brief A tárolt elemek száma, könnyű méret olvasáshoz.
+   *
+   */
+  size_t siz;
+
+  /**
    * @brief Csak a másolás megengedett, emiatt ezt priváttal letiltjuk.
    *
    * @param source A másolás forrása, a mutatott tagokat ez a FIFO nem birtokolja.
    * @return Queue<T>& Minta szerint van csak, igazi értelme nincsen.
    */
   Queue<ComponentType>& operator=(const Queue<ComponentType>& source);
-
-  /**
-   * @brief A tárolt elemek száma, könnyű méret olvasáshoz.
-   *
-   */
-  size_t siz;
 
 public:
   /**

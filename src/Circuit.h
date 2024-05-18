@@ -1,7 +1,7 @@
 #ifndef _CIRCUIT_H
 #define _CIRCUIT_H
 
-#include "Signal.h"
+#include "Signal.hpp"
 #include "Pin.h"
 #include "InputPin.h"
 #include "OutputPin.h"
@@ -42,7 +42,7 @@ class Circuit {
   std::ifstream inputfile;
 
   /**
-   * @brief Összes áramkör elem listája, felszabadításkor ezen keresztül biztosítja, hogy minden memóriát töröl, ami nem csomópont.
+   * @brief Összes áramkör elem listája, felszabadításkor ezen keresztül biztosítja, hogy minden memóriát töröl.
    *
    */
   Queue<Component> componentList;
@@ -135,6 +135,7 @@ class Circuit {
   /**
    * @brief Felkonfigurálja az áramkört a forrás file alapján, ha hiba van, akkor jelzi a hiba stream-re.
    *
+   * @exception ConfigurationError = ha a felkonfigurálás során történt probléma.
    */
   void configure();
   /**
@@ -280,6 +281,7 @@ public:
    * @param connectedNode A csomópont, amihez a forrás kapcsolódik.
    * @param newSignal A beállítani kívánt jelszint.
    *
+   * @exception MatchingComponentNotFound = ha nincs az adott csomóponthoz kapcsolódó forrás.
    * @exception ConfigurationError = felkonfiguráláskor volt probléma errorstream-re kiírja, hogy milyen baj történt.
    */
   void setSource(size_t connectedNode, Signal newSignal);
@@ -290,6 +292,7 @@ public:
    * @param connectedNode2 A másik csomópont, amihez kapcsolódik a kapcsoló.
    * @param closed Az új állapota. (true = zárt, false = nyitott)
    *
+   * @exception MatchingComponentNotFound = ha nincs az adott csomóponthoz kapcsolódó forrás.
    * @exception ConfigurationError = felkonfiguráláskor volt probléma errorstream-re kiírja, hogy milyen baj történt.
    */
   void setSwitch(size_t connectedNode1, size_t connectedNode2, bool closed);

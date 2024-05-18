@@ -145,9 +145,17 @@ void Circuit::configure() {
         printErrorMessage(*errorStream, "GENERAL EXCEPTION", error.exception_message());
         reset();
 
+        throw ConfigurationError("There was an general error during configuration...");
+    }
+    catch (std::exception& error) {
+        std::string message = "There was some form of non-unique error during configuration, most likely out_of_range.";
+        printErrorMessage(*errorStream, "GENERAL ERROR", message);
+
         throw ConfigurationError("There was an unknown error during configuration...");
     }
+
     configured = true;
+    simulated = false;
 }
 
 void Circuit::build()
@@ -435,56 +443,46 @@ void Circuit::createBasedOnType(LineContent& info, Queue<size_t>& nodeNumbers)
 
 void Circuit::connectInputPinWithNode(InputPin* pin, size_t ID, size_t idx)
 {
-    bool found = false;
     for (Queue<Node>::iterator it = nodeList.begin(); it != nodeList.end(); it++) {
         Node* current = *it;
         if (current->getID() == ID) {
             current->addOutputPin(pin);
             pin->getComponent()->setInputNodeID(idx, ID);
-
-            found = true;
-            break;
+            return;
         }
     }
 
-    if (!found) {
-        Node* newNode = new Node(ID);
-        newNode->setActiveQueue(&activeList);
+    // Ha nem talált
+    Node* newNode = new Node(ID);
+    newNode->setActiveQueue(&activeList);
+    componentList.put(newNode);
+    inputComponentList.put(newNode);
+    nodeList.put(newNode);
 
-        newNode->addOutputPin(pin);
-        pin->getComponent()->setInputNodeID(idx, ID);
-
-        componentList.put(newNode);
-        inputComponentList.put(newNode);
-        nodeList.put(newNode);
-    }
+    newNode->addOutputPin(pin);
+    pin->getComponent()->setInputNodeID(idx, ID);
 }
 
 void Circuit::connectOutputPinWithNode(OutputComponent* component, OutputPin* pin, size_t ID, size_t idx)
 {
-    bool found = false;
     for (Queue<Node>::iterator it = nodeList.begin(); it != nodeList.end(); it++) {
         Node* current = *it;
         if (current->getID() == ID) {
             pin->connectToPin(current->getInPin());
             component->setOutputNodeID(idx, ID);
-
-            found = true;
-            break;
+            return;
         }
     }
 
-    if (!found) {
-        Node* newNode = new Node(ID);
-        newNode->setActiveQueue(&activeList);
+    // Ha nem talált
+    Node* newNode = new Node(ID);
+    newNode->setActiveQueue(&activeList);
+    componentList.put(newNode);
+    inputComponentList.put(newNode);
+    nodeList.put(newNode);
 
-        pin->connectToPin(newNode->getInPin());
-        component->setOutputNodeID(idx, ID);
-
-        componentList.put(newNode);
-        inputComponentList.put(newNode);
-        nodeList.put(newNode);
-    }
+    pin->connectToPin(newNode->getInPin());
+    component->setOutputNodeID(idx, ID);
 }
 
 void Circuit::printErrorMessage(std::ostream& os, const std::string& errorTypeName, const std::string& errorMessage)
@@ -553,6 +551,11 @@ const std::string& Circuit::getSourceFileName() const
 
 void Circuit::simulate(std::ostream& os)
 {
+    if (simulated) {
+        os << *this;
+        return;
+    }
+
     if (!configured) {
         configure();
     }
@@ -589,6 +592,7 @@ void Circuit::simulate(std::ostream& os)
 
         if (!wasShortCircuit) {
             os << *this;
+            simulated = true;
         }
     }
 }
@@ -602,6 +606,7 @@ void Circuit::setSource(size_t connectedNode, Signal newSignal)
         Source* current = *it;
         if (current->isConnectedToNodeOnOutput(connectedNode)) {
             current->setOutput(newSignal);
+            simulated = false;
             return;
         }
     }
@@ -617,6 +622,7 @@ void Circuit::setSwitch(size_t connectedNode1, size_t connectedNode2, bool close
         Switch* current = *it;
         if (current->isConnectedToNodes(connectedNode1, connectedNode2)) {
             current->setState(closed);
+            simulated = false;
             return;
         }
     }
