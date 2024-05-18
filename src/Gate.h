@@ -93,7 +93,6 @@ public:
   /**
    * @brief Létrehozza az NOT kaput.
    *
-   * @param inputCount A kapu bemeneteinek száma.
    */
   NOT();
 
@@ -199,4 +198,27 @@ public:
    */
   virtual ~XNOR();
 };
+
+class WIRE : public NOT {
+protected:
+  /**
+   * @brief Vezetéket jelvezetését hajtja végre, nem csinál semmit a jellel.
+   *
+   */
+  virtual void performLogicCalculation();
+
+public:
+  /**
+   * @brief Létrehozza az vezetéket.
+   *
+   */
+  WIRE();
+
+  /**
+   * @brief Virtuális destruktor az öröklés miatt.
+   *
+   */
+  virtual ~WIRE();
+};
+
 #endif

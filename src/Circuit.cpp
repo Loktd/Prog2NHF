@@ -43,6 +43,21 @@ void Circuit::create<NOT>(Queue<size_t>& nodeNumbers) {
 }
 
 template<>
+void Circuit::create<WIRE>(Queue<size_t>& nodeNumbers) {
+    WIRE* created = new WIRE();
+    created->setActiveQueue(&activeList);
+
+    Queue<size_t>::iterator it = nodeNumbers.begin();
+    size_t current = *(*it++);
+    connectInputPinWithNode(created->getInputPinByIndex(0), current, 0);
+    current = *(*it++);
+    connectOutputPinWithNode(created, created->getOutputPinByIndex(0), current, 0);
+
+    componentList.put(created);
+    inputComponentList.put(created);
+}
+
+template<>
 void Circuit::create<Source>(Queue<size_t>& nodeNumbers) {
     Source* created = new Source();
     created->setActiveQueue(&activeList);
@@ -269,9 +284,9 @@ void Circuit::buildLine(LineContent& line)
 
 void Circuit::getLineType(LineContent& line)
 {
-    const size_t totalTypeCount = 10;
+    const size_t totalTypeCount = 11;
     std::string validTypes[totalTypeCount] = {
-        "SOURCE", "LAMP", "SWITCH", "AND", "OR", "NOT", "XOR", "NAND", "NOR", "XNOR"
+        "SOURCE", "LAMP", "SWITCH", "AND", "OR", "NOT", "XOR", "NAND", "NOR", "XNOR", "WIRE"
     };
 
     std::string lineType;
@@ -365,6 +380,10 @@ void Circuit::checkNodeCount(LineContent& line, size_t count)
         if (count <= 2)
             throw IncorrectPinCount("Incorrect pin count for XNOR type at line " + size_tToString(line.lineNumber) + "!");
         break;
+    case GATE_WIRE:
+        if (count != 2)
+            throw IncorrectPinCount("Incorrect pin count for WIRE type line " + size_tToString(line.lineNumber) + "!");
+        break;
     default:
         throw NonExistentLineType("Not found a type...");
         break;
@@ -404,6 +423,9 @@ void Circuit::createBasedOnType(LineContent& info, Queue<size_t>& nodeNumbers)
         break;
     case GATE_XNOR:
         create<XNOR>(nodeNumbers);
+        break;
+    case GATE_WIRE:
+        create<WIRE>(nodeNumbers);
         break;
     default:
         throw NonExistentLineType("Not found a type...");

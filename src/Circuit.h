@@ -96,7 +96,8 @@ class Circuit {
    */
   enum ComponentType {
     INVALID = 0, SOURCE = 1, LAMP = 2, SWITCH = 3,
-    GATE_AND = 4, GATE_OR = 5, GATE_NOT = 6, GATE_XOR = 7, GATE_NAND = 8, GATE_NOR = 9, GATE_XNOR = 10
+    GATE_AND = 4, GATE_OR = 5, GATE_NOT = 6, GATE_XOR = 7,
+    GATE_NAND = 8, GATE_NOR = 9, GATE_XNOR = 10, GATE_WIRE = 11
   };
 
   /**

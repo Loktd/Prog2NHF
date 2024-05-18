@@ -136,3 +136,17 @@ XNOR::XNOR(size_t inputCount) : XOR(inputCount) {}
 XNOR::~XNOR() {}
 
 // XNOR vége
+
+// WIRE kezdet
+
+void WIRE::performLogicCalculation()
+{
+    NOT::performLogicCalculation();
+    outputPins[0].flipSignal();
+}
+
+WIRE::WIRE() : NOT() {}
+
+WIRE::~WIRE() {}
+
+// WIRE vége
