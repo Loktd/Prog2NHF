@@ -13,3 +13,5 @@ void IOComponent::printConnectedNodes(std::ostream& os) const
     os << " and ";
     printConnectedOutputNodes(os);
 }
+
+IOComponent::~IOComponent() {}

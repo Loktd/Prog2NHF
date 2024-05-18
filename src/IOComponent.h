@@ -41,7 +41,7 @@ public:
      * @brief Virtuális destruktor, mert öröklés.
      *
      */
-    virtual ~IOComponent() {}
+    virtual ~IOComponent();
 };
 
 

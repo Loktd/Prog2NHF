@@ -55,7 +55,7 @@ public:
      *
      * @param idx A kívánt indexű pin.
      * @return OutputPin* Az adott indexű pin.
-     * @exception Ha túlindexelünk, akkor dob std::out_of_range-t.
+     * @exception std::out_of_range = ha túlindexelünk.
      */
     OutputPin* getOutputPinByIndex(size_t idx);
 
@@ -64,7 +64,7 @@ public:
      *
      * @param at A beállított kimenet indexe.
      * @param ID A beállított csomópont ID.
-     * @exception Ha túlindexelünk, akkor dob egy std::out_of_range-t.
+     * @exception std::out_of_range = ha túlindexelünk.
      */
     void setOutputNodeID(size_t at, size_t ID);
 

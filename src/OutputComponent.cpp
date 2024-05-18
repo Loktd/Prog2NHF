@@ -10,7 +10,7 @@ OutputComponent::OutputComponent(size_t outputCount) : outputPinCount(outputCoun
 void OutputComponent::connectToInputPin(size_t outputPinIndex, InputComponent* component, size_t inputPinIndex)
 {
     if (outputPinIndex >= outputPinCount) {
-        throw std::out_of_range("Indexed out of outputPin array range...\n");
+        throw std::out_of_range("Indexed out of outputPin array range...");
     }
 
     outputPins[outputPinIndex].connectToPin(component->getInputPinByIndex(inputPinIndex));
@@ -26,7 +26,7 @@ void OutputComponent::sendOutSignals()
 OutputPin* OutputComponent::getOutputPinByIndex(size_t idx)
 {
     if (idx >= outputPinCount) {
-        throw std::out_of_range("Indexed out of outputPin array range...\n");
+        throw std::out_of_range("Indexed out of outputPin array range...");
     }
 
     return outputPins + idx;

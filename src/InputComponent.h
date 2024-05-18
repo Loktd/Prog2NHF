@@ -17,7 +17,7 @@ protected:
     size_t inputPinCount;
 
     /**
-     * @brief A bemeneti pin-ek tömbje. Az index jelentést a specifikált alkatrész adja meg.
+     * @brief A bemeneti pin-ek tömbje. Az index jelentését a specifikus alkatrész adja meg.
      *
      */
     InputPin* inputPins;
@@ -53,7 +53,7 @@ public:
      *
      * @param idx A kívánt indexű pin.
      * @return InputPin* Az adott indexű pin.
-     * @exception Ha túlindexelünk, akkor dob std::out_of_range-t.
+     * @exception std::out_of_range = ha túlindexelünk.
      */
     InputPin* getInputPinByIndex(size_t idx) const;
 
@@ -62,7 +62,7 @@ public:
      *
      * @param at A beállított bemenet indexe.
      * @param ID A beállított csomópont ID.
-     * @exception Ha túlindexelünk, akkor dob egy std::out_of_range-t.
+     * @exception std::out_of_range = ha túlindexelünk.
      */
     void setInputNodeID(size_t at, size_t ID);
 
@@ -89,7 +89,7 @@ public:
     virtual void executeFunction() = 0;
 
     /**
-     * @brief Törli a bemeneti pin-ek tömbjét.
+     * @brief Törli a bemeneti pin-ek és ID-k tömbjét.
      *
      */
     virtual ~InputComponent();

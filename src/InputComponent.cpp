@@ -30,7 +30,7 @@ void InputComponent::activateIfReady()
 InputPin* InputComponent::getInputPinByIndex(size_t idx) const
 {
     if (idx >= inputPinCount)
-        throw std::out_of_range("Indexed out of inputPin array range...\n");
+        throw std::out_of_range("Indexed out of inputPin array range...");
 
     return inputPins + idx;
 }
@@ -38,7 +38,7 @@ InputPin* InputComponent::getInputPinByIndex(size_t idx) const
 void InputComponent::setInputNodeID(size_t at, size_t ID)
 {
     if (at >= inputPinCount) {
-        throw std::out_of_range("Indexed out of inputNodeID array range...\n");
+        throw std::out_of_range("Indexed out of inputNodeID array range...");
     }
 
     inputNodeIDs[at] = ID;
