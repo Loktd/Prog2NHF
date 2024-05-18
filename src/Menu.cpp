@@ -3,139 +3,251 @@
 #include <iostream>
 #include <string>
 
+void App::stopRunning()
+{
+    run = false;
+}
+
+void App::clear_input() const
+{
+    std::cin.clear();
+    std::string clearer;
+    std::getline(std::cin, clearer);
+}
+
+void App::get_unsigned_with_check(size_t& input)
+{
+    if (!(std::cin >> input)) {
+        clear_input();
+        std::cout << "INCORRECT INPUT..." << std::endl;
+        switchToMainMenu();
+        return;
+    }
+}
+
 void App::displayWelcomeScreen() const
 {
-    for (size_t i = 0; i < 2; i++)
-        printSeparatorLine(std::cout, '=', 100);
+
+    printSeparatorLine(std::cout, '=', 100);
     std::cout << "WELCOME TO CIRCUIT SIMULATOR!" << std::endl;
-    for (size_t i = 0; i < 2; i++)
-        printSeparatorLine(std::cout, '=', 100);
+    printSeparatorLine(std::cout, '=', 100);
 }
 
 void App::displayMainMenu() const
 {
-    const size_t count = 6;
     printSeparatorLine(std::cout, '-', 100);
+
+    const size_t count = 6;
     std::string printed[count] = {
-        "MAIN MENU", "1. Simulate", "2. Load circuit from file", "3. Set input combination", "4. Set output stream", "5. Quit"
+        "MAIN MENU",
+        "1. Simulate", "2. Load circuit from file", "3. Set input combination", "4. Set output stream", "5. Quit",
     };
     for (size_t i = 0; i < count; i++) {
         std::cout << printed[i] << std::endl;
     }
+    std::cout << "Selected option: ";
 }
 
-void App::displayQuit() const
+void App::displaySimulating() const
 {
-    for (size_t i = 0; i < 2; i++)
-        printSeparatorLine(std::cout, '=', 100);
+    printSeparatorLine(std::cout, '-', 100);
+    std::cout << "SIMULATING..." << std::endl;
+}
+
+void App::displayLoading() const
+{
+    printSeparatorLine(std::cout, '-', 100);
+    std::cout << "Selected file: ";
+}
+
+void App::displaySetCombination() const
+{
+    printSeparatorLine(std::cout, '-', 100);
+
+    const size_t count = 3;
+    std::string printed[count] = {
+        "Which do you wish to change?",
+        "1. Source", "2. Switch"
+    };
+    for (size_t i = 0; i < count; i++) {
+        std::cout << printed[i] << std::endl;
+    }
+    std::cout << "Selected option: ";
+}
+
+void App::displaySetOutput() const
+{
+    printSeparatorLine(std::cout, '-', 100);
+    std::cout << "Selected output: ";
+}
+
+void App::displayQuittingScreen() const
+{
+    printSeparatorLine(std::cout, '=', 100);
     std::cout << "QUITTING..." << std::endl;
-    for (size_t i = 0; i < 2; i++)
-        printSeparatorLine(std::cout, '=', 100);
+    printSeparatorLine(std::cout, '=', 100);
+}
+
+void App::switchToMainMenu()
+{
+    state = MAIN_MENU;
 }
 
 void App::switchToSelectedMenu()
 {
     const size_t menuCount = 5;
-    std::cout << "Selected option: ";
     size_t inputted;
-    if (std::cin >> inputted) {
-        if (inputted == 0 || inputted > menuCount) {
-            std::cout << std::endl << "INCORRECT INPUT!!!" << std::endl;
-        }
-        else {
-            state = MenuState(1 + inputted);
-        }
+    if (!(std::cin >> inputted) || inputted == 0 || inputted > menuCount) {
+        printSeparatorLine(std::cout, '-', 100);
+        std::cout << "INCORRECT INPUT..." << std::endl;
+        clear_input();
+        return;
     }
-    else {
-        std::cout << std::endl << "INCORRECT INPUT!!!" << std::endl << std::endl;
-        std::cin.clear();
-        std::string clearer;
-        std::cin >> clearer;
-        std::cin.get();
+    clear_input();
+    state = MenuState(1 + inputted);
+}
+
+void App::executeSimulation()
+{
+    try {
+        circuit.simulate(*simulation_os);
     }
+    catch (ConfigurationError& error) {
+        std::cout << "CONFIGURATION FAILED" << std::endl;
+        std::cout << "SIMULATION FAILED" << std::endl;
+        switchToMainMenu();
+        return;
+    }
+    std::cout << "SIMULATION SUCCESSFUL" << std::endl;
+    switchToMainMenu();
 }
 
 void App::loadCircuitFromName()
 {
     std::string input;
-    std::cin >> input;
+    std::getline(std::cin, input);
     circuit.setSchematicFile(input);
-    state = MAIN_MENU;
+    switchToMainMenu();
 }
 
-void App::setOutStream()
+void App::setSimulationOutputStream()
 {
     std::string input;
-    std::cin >> input;
+    std::getline(std::cin, input);
+
     if (input == "cout") {
-        os = &std::cout;
+        if (output_file.is_open())
+            output_file.close();
+        simulation_os = &std::cout;
+        switchToMainMenu();
+        return;
+    }
+
+    if (output_file.is_open())
+        output_file.close();
+    output_file.open(input);
+
+    if (output_file.is_open()) {
+        simulation_os = &output_file;
     }
     else {
-        ofs.open(input);
-        if (ofs.is_open()) {
-            os = &ofs;
-        }
-        else {
-            std::cerr << "No input file with name: " << input << std::endl;
-        }
+        std::cerr << "No input file with name: " << input << std::endl;
     }
-    state = MAIN_MENU;
+    switchToMainMenu();
 }
 
-void App::getSetComboType()
+void App::getSetCombinationOption()
 {
     size_t input;
-    std::cin >> input;
+    get_unsigned_with_check(input);
+
     if (input == 0 || input > 2) {
-        std::cout << std::endl << "INCORRECT INPUT!!!" << std::endl;
-        state = MAIN_MENU;
+        std::cout << "INCORRECT INPUT..." << std::endl;
+        switchToMainMenu();
+        return;
     }
-    else if (input == 1) {
+
+    if (input == 1)
         state = SETSOURCE;
-    }
-    else {
+    else
         state = SETSWITCH;
-    }
 }
 
 void App::setSource()
 {
-    size_t input;
-    bool newValue;
+    size_t input1;
+    size_t input2;
 
     std::cout << "Connected node: ";
-    std::cin >> input;
+    get_unsigned_with_check(input1);
+
     std::cout << "New value (0 = LOW, 1 = HIGH): ";
-    std::cin >> newValue;
+    get_unsigned_with_check(input2);
 
-    circuit.setSource(input, Signal(newValue));
+    if (input2 >= 2) {
+        printSeparatorLine(std::cout, '-', 100);
+        std::cout << "INCORRECT INPUT..." << std::endl;
+        switchToMainMenu();
+        return;
+    }
 
-    state = MAIN_MENU;
+    Signal set_value = Signal(static_cast<bool>(input2));
+
+    try {
+        circuit.setSource(input1, set_value);
+    }
+    catch (ConfigurationError& error) {
+        std::cout << "SET SOURCE FAILED, CIRCUIT COULDN'T BE CONFIGURED..." << std::endl;
+    }
+    catch (MatchingComponentNotFound& error) {
+        printSeparatorLine(std::cout, '-', 100);
+        std::cout << "ERROR: ";
+        std::cout << error.exception_message() << std::endl;
+    }
+
+    switchToMainMenu();
 }
 
 void App::setSwitch()
 {
-    size_t input1, input2;
-    bool newValue;
+    size_t input[3];
+    std::string messages[3]{
+        "Connected node no.1: ", "Connected node no.2: ", "New state (0 = open, 1 = closed): "
+    };
 
-    std::cout << "Connected node no.1: ";
-    std::cin >> input1;
-    std::cout << "Connected node no.2: ";
-    std::cin >> input2;
-    std::cout << "New state (0 = open, 1 = closed): ";
-    std::cin >> newValue;
+    for (size_t i = 0; i < 3; i++) {
+        std::cout << messages[i];
+        get_unsigned_with_check(input[i]);
+    }
 
-    circuit.setSwitch(input1, input2, newValue);
+    if (input[2] >= 2) {
+        printSeparatorLine(std::cout, '-', 100);
+        std::cout << "INCORRECT INPUT..." << std::endl;
+        switchToMainMenu();
+        return;
+    }
 
-    state = MAIN_MENU;
+    bool set_value = static_cast<bool>(input[3]);
+
+    try {
+        circuit.setSwitch(input[0], input[1], set_value);
+    }
+    catch (ConfigurationError& error) {
+        std::cout << "SET SWITCH FAILED, CIRCUIT COULDN'T BE CONFIGURED..." << std::endl;
+    }
+    catch (MatchingComponentNotFound& error) {
+        printSeparatorLine(std::cout, '-', 100);
+        std::cout << "ERROR: ";
+        std::cout << error.exception_message() << std::endl;
+    }
+
+    switchToMainMenu();
 }
 
-App::App() : run(true), state(START), os(&std::cout) {}
 
-void App::stopRunning()
-{
-    run = false;
-}
+// Publikus tagfüggvények
+
+App::App() : run(true), state(START), simulation_os(&std::cout) {}
 
 bool App::keepRunning() const
 {
@@ -149,25 +261,24 @@ void App::display() const
     case START:
         displayWelcomeScreen();
         break;
+
     case MAIN_MENU:
         displayMainMenu();
         break;
     case SIMULATE:
-        std::cout << std::endl << "SIMULATING..." << std::endl << std::endl;
+        displaySimulating();
         break;
     case LOAD:
-        std::cout << "Selected file: ";
+        displayLoading();
         break;
     case SETCOMBO:
-        std::cout << "Which do you wish to change?" << std::endl;
-        std::cout << "1. Source" << std::endl << "2. Switch" << std::endl;
-        std::cout << "Selected option: ";
+        displaySetCombination();
         break;
     case SETOUTPUT:
-        std::cout << "Selected output: ";
+        displaySetOutput();
         break;
     case QUIT:
-        displayQuit();
+        displayQuittingScreen();
         break;
 
     default:
@@ -180,35 +291,34 @@ void App::handleInput()
     switch (state)
     {
     case START:
-        state = MAIN_MENU;
+        switchToMainMenu();
         break;
+
     case MAIN_MENU:
         switchToSelectedMenu();
         break;
     case SIMULATE:
-        circuit.simulate(*os);
-        std::cout << "SIMULATION DONE" << std::endl;
-        state = MAIN_MENU;
+        executeSimulation();
         break;
     case LOAD:
         loadCircuitFromName();
         break;
     case SETCOMBO:
-        getSetComboType();
+        getSetCombinationOption();
         break;
+    case SETOUTPUT:
+        setSimulationOutputStream();
+        break;
+    case QUIT:
+        stopRunning();
+        break;
+
     case SETSOURCE:
         setSource();
         break;
     case SETSWITCH:
         setSwitch();
         break;
-    case SETOUTPUT:
-        setOutStream();
-        break;
-    case QUIT:
-        stopRunning();
-        break;
-
     default:
         stopRunning();
         break;
@@ -217,7 +327,7 @@ void App::handleInput()
 
 App::~App()
 {
-    if (ofs.is_open()) {
-        ofs.close();
+    if (output_file.is_open()) {
+        output_file.close();
     }
 }
