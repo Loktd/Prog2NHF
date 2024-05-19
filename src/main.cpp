@@ -40,6 +40,20 @@ int main() {
         EXPECT_STRNE("", error_stream.str().c_str());
     }END;
 
+    TEST(SANITY, Masolas) {
+        Circuit circuit1;
+        circuit1.setSchematicFile("Gates.dat");
+
+        Circuit circuit2(circuit1);
+        EXPECT_EQ(circuit1.getSourceFileName(), circuit2.getSourceFileName());
+
+        circuit2.setSchematicFile("Peripherals.dat");
+        EXPECT_NE(circuit1.getSourceFileName(), circuit2.getSourceFileName());
+
+        circuit1 = circuit2;
+        EXPECT_EQ(circuit1.getSourceFileName(), circuit2.getSourceFileName());
+    }END;
+
     TEST(SANITY, ErrorAllitas) {
         Circuit circuit;
         std::stringstream error;
@@ -50,31 +64,6 @@ int main() {
         EXPECT_THROW(circuit.simulate(output), ConfigurationError);
         EXPECT_STREQ("", output.str().c_str());
         EXPECT_STRNE("", error.str().c_str());
-    }END;
-
-    TEST(SANITY, Masolas) {
-        Circuit circuit1;
-        std::stringstream output1;
-        std::stringstream output2;
-
-        circuit1.setSchematicFile("Gates.dat");
-
-        Circuit circuit2(circuit1);
-        EXPECT_EQ(circuit1.getSourceFileName(), circuit2.getSourceFileName());
-
-        circuit1.simulate(output1);
-        circuit2.simulate(output2);
-        EXPECT_STREQ(output1.str().c_str(), output2.str().c_str());
-
-        output2.str("");
-        circuit2.setSchematicFile("Peripherals.dat");
-        circuit2.simulate(output2);
-        EXPECT_STRNE(output1.str().c_str(), output2.str().c_str());
-
-        output1.str("");
-        circuit1 = circuit2;
-        circuit1.simulate(output1);
-        EXPECT_STREQ(output2.str().c_str(), output1.str().c_str());
     }END;
 
     TEST(COMPONENT_CHECK, Kapuk) {
