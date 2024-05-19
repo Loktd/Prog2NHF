@@ -24,6 +24,7 @@ void App::get_unsigned_with_check(size_t& input)
         switchToMainMenu();
         throw std::exception();
     }
+    clear_input();
 }
 
 void App::displayWelcomeScreen() const
@@ -139,7 +140,7 @@ void App::setSimulationOutputStream()
     std::string input;
     std::getline(std::cin, input);
 
-    if (input == "cout") {
+    if (input == "terminal") {
         if (output_file.is_open())
             output_file.close();
         simulation_os = &std::cout;
@@ -149,7 +150,7 @@ void App::setSimulationOutputStream()
 
     if (output_file.is_open())
         output_file.close();
-    output_file.open(input);
+    output_file.open(input, std::ios::app);
 
     if (output_file.is_open()) {
         simulation_os = &output_file;

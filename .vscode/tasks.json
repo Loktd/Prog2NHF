@@ -41,6 +41,47 @@
             ],
             "group": "build",
             "detail": "compiler: c:\\mingw64\\bin\\g++.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "EXPORT",
+            "command": "c:\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-DMEMTRACE",
+                "-g",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Pin.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\InputPin.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\OutputPin.cpp",
+                "",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Component.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\InputComponent.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\OutputComponent.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\IOComponent.cpp",
+                "",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Node.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Source.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Switch.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Lamp.cpp",
+                "",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Gate.cpp",
+                "",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Circuit.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\Menu.cpp",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\src\\main.cpp",
+                "",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\memtrace.cpp",
+                "-o",
+                "C:\\Users\\palin\\VSCodeProjects\\Egyetem\\2.Felev\\Prog2NHF\\test\\CircuitSimulator.exe"
+            ],
+            "options": {
+                "cwd": "c:\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: c:\\mingw64\\bin\\g++.exe"
         }
     ]
 }
