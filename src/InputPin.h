@@ -4,6 +4,8 @@
 #include "Pin.h"
 #include "InputComponent.h"
 #include "Exceptions.hpp"
+#include "../test/memtrace.h"
+
 
 class InputComponent;
 

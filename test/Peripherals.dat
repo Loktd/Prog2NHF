@@ -1,7 +1,9 @@
+# Sorba kötött kapcsolókat tesztelünk
 SOURCE: (1)
-SWITCH: (1, 2) (1, 3)
-LAMP: (2) (3)
+SWITCH: (1, 2) (2, 3)
+LAMP: (3)
 
+# AND kapu bemeneteire kapcsolt kapcsolókat tesztelünk
 SOURCE: (4)
 SWITCH: (4, 5) (4, 6)
 AND: (5, 6, 7)

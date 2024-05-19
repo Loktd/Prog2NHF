@@ -3,8 +3,9 @@
 
 #include "InputPin.h"
 #include "Component.h"
-
 #include <iostream>
+#include "../test/memtrace.h"
+
 
 class InputPin;
 

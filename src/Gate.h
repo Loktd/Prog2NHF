@@ -2,6 +2,7 @@
 #define _GATE_H
 
 #include "IOComponent.h"
+#include "../test/memtrace.h"
 
 class Gate : public IOComponent {
 protected:

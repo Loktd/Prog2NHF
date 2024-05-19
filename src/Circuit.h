@@ -16,6 +16,8 @@
 #include "Switch.h"
 #include "Lamp.h"
 
+#include "../test/memtrace.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -254,7 +256,7 @@ public:
    */
   void setErrorStream(std::ostream& os);
   /**
-   * @brief Beállítja forrás file-t. (Nem konfigurálja fel!)
+   * @brief Beállítja forrás file-t és reseteli ami korábban volt. Ha nem tudja megnyitni, akkor alapállapotba viszi (üres lesz).
    *
    * @param path A forrás file helye.
    */

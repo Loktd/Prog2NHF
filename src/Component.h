@@ -3,6 +3,7 @@
 
 #include "Queue.hpp"
 #include "Exceptions.hpp"
+#include "../test/memtrace.h"
 
 
 class Component {

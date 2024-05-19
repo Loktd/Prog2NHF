@@ -19,9 +19,10 @@ void App::get_unsigned_with_check(size_t& input)
 {
     if (!(std::cin >> input)) {
         clear_input();
+        printSeparatorLine(std::cout, '-', 100);
         std::cout << "INCORRECT INPUT..." << std::endl;
         switchToMainMenu();
-        return;
+        throw std::exception();
     }
 }
 
@@ -45,13 +46,14 @@ void App::displayMainMenu() const
     for (size_t i = 0; i < count; i++) {
         std::cout << printed[i] << std::endl;
     }
+    printSeparatorLine(std::cout, '-', 100);
     std::cout << "Selected option: ";
 }
 
 void App::displaySimulating() const
 {
     printSeparatorLine(std::cout, '-', 100);
-    std::cout << "SIMULATING..." << std::endl;
+    std::cout << "SIMULATING..." << std::endl << std::endl;
 }
 
 void App::displayLoading() const
@@ -72,6 +74,7 @@ void App::displaySetCombination() const
     for (size_t i = 0; i < count; i++) {
         std::cout << printed[i] << std::endl;
     }
+    printSeparatorLine(std::cout, '-', 100);
     std::cout << "Selected option: ";
 }
 
@@ -83,6 +86,7 @@ void App::displaySetOutput() const
 
 void App::displayQuittingScreen() const
 {
+    printSeparatorLine(std::cout, '-', 100);
     printSeparatorLine(std::cout, '=', 100);
     std::cout << "QUITTING..." << std::endl;
     printSeparatorLine(std::cout, '=', 100);
@@ -114,7 +118,7 @@ void App::executeSimulation()
     }
     catch (ConfigurationError& error) {
         std::cout << "CONFIGURATION FAILED" << std::endl;
-        std::cout << "SIMULATION FAILED" << std::endl;
+        std::cout << std::endl << "SIMULATION FAILED" << std::endl;
         switchToMainMenu();
         return;
     }
@@ -159,9 +163,11 @@ void App::setSimulationOutputStream()
 void App::getSetCombinationOption()
 {
     size_t input;
-    get_unsigned_with_check(input);
+    try { get_unsigned_with_check(input); }
+    catch (...) { return; }
 
     if (input == 0 || input > 2) {
+        printSeparatorLine(std::cout, '-', 100);
         std::cout << "INCORRECT INPUT..." << std::endl;
         switchToMainMenu();
         return;
@@ -178,11 +184,15 @@ void App::setSource()
     size_t input1;
     size_t input2;
 
+    printSeparatorLine(std::cout, '-', 100);
     std::cout << "Connected node: ";
-    get_unsigned_with_check(input1);
+    try { get_unsigned_with_check(input1); }
+    catch (...) { return; }
 
+    printSeparatorLine(std::cout, '-', 100);
     std::cout << "New value (0 = LOW, 1 = HIGH): ";
-    get_unsigned_with_check(input2);
+    try { get_unsigned_with_check(input2); }
+    catch (...) { return; }
 
     if (input2 >= 2) {
         printSeparatorLine(std::cout, '-', 100);
@@ -194,9 +204,11 @@ void App::setSource()
     Signal set_value = Signal(static_cast<bool>(input2));
 
     try {
+        printSeparatorLine(std::cout, '-', 100);
         circuit.setSource(input1, set_value);
     }
     catch (ConfigurationError& error) {
+        printSeparatorLine(std::cout, '-', 100);
         std::cout << "SET SOURCE FAILED, CIRCUIT COULDN'T BE CONFIGURED..." << std::endl;
     }
     catch (MatchingComponentNotFound& error) {
@@ -216,8 +228,10 @@ void App::setSwitch()
     };
 
     for (size_t i = 0; i < 3; i++) {
+        printSeparatorLine(std::cout, '-', 100);
         std::cout << messages[i];
-        get_unsigned_with_check(input[i]);
+        try { get_unsigned_with_check(input[i]); }
+        catch (...) { return; }
     }
 
     if (input[2] >= 2) {
@@ -230,9 +244,11 @@ void App::setSwitch()
     bool set_value = static_cast<bool>(input[3]);
 
     try {
+        printSeparatorLine(std::cout, '-', 100);
         circuit.setSwitch(input[0], input[1], set_value);
     }
     catch (ConfigurationError& error) {
+        printSeparatorLine(std::cout, '-', 100);
         std::cout << "SET SWITCH FAILED, CIRCUIT COULDN'T BE CONFIGURED..." << std::endl;
     }
     catch (MatchingComponentNotFound& error) {

@@ -3,6 +3,8 @@
 
 #include <exception>
 #include <string>
+#include "../test/memtrace.h"
+
 
 class InputComponent;
 

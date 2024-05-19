@@ -2,6 +2,7 @@
 #define _PIN_H
 
 #include "Signal.hpp"
+#include "../test/memtrace.h"
 
 
 class Pin {

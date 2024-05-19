@@ -1,4 +1,5 @@
 #include "Circuit.h"
+#include "../test/memtrace.h"
 
 class App {
     /**

@@ -3,6 +3,8 @@
 
 #include "InputComponent.h"
 #include "OutputComponent.h"
+#include "../test/memtrace.h"
+
 
 class IOComponent : public InputComponent, public OutputComponent {
 public:

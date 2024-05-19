@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <exception>
+#include "../test/memtrace.h"
 
 
 template<class ComponentType>

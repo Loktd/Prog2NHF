@@ -213,31 +213,22 @@ void Circuit::testForIsolatedComponent()
         current->setSimulated();
     }
 
+    bool was_unsimulated = false;
+
     for (Queue<Component>::iterator it = componentList.begin(); it != componentList.end(); it++) {
         Component* current = *it;
         if (!current->simulated()) {
+            was_unsimulated = true;
+
             Node* nptr = dynamic_cast<Node*>(current);
             if (nptr != nullptr) {
-                throw UnsimulatedComponent("Node " + size_tToString(nptr->getID()) + " is unsimulated (isolated or self-referential)...");
-            }
-            else {
-                std::stringstream message("Component connected to node(s): ");
-                InputComponent* iptr = dynamic_cast<InputComponent*>(current);
-                OutputComponent* optr = dynamic_cast<OutputComponent*>(current);
-                if (iptr != nullptr) {
-                    iptr->printConnectedInputNodes(message);
-                    message << " ";
-                }
-                if (optr != nullptr) {
-                    optr->printConnectedOutputNodes(message);
-                    message << " ";
-                }
-                message << " is unsimulated (isolated or self-referential)...";
-                std::string result;
-                std::getline(message, result);
-                throw UnsimulatedComponent(result);
+                printErrorMessage(*errorStream, "SEMANTIC ERROR", "Node " + size_tToString(nptr->getID()) + " is unsimulated (isolated or self-referential)...");
             }
         }
+    }
+
+    if (was_unsimulated) {
+        throw UnsimulatedComponent("There was an unsimulated component...");
     }
 
     for (Queue<InputComponent>::iterator it = inputComponentList.begin(); it != inputComponentList.end(); it++) {
@@ -326,16 +317,16 @@ void Circuit::getNodeNumbers(LineContent& line, Queue<size_t>& nodeNumbers)
     std::stringstream stream(std::string(line.content.c_str() + line.idx));
     while (true) {
         if (!(stream >> read)) {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\" at line " + size_tToString(line.lineNumber) + "!");
         }
         nodeNumbers.put(new size_t(read));
 
         if (!(stream >> buff)) {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\" at line " + size_tToString(line.lineNumber) + "!");
         }
 
         if (buff != ',' && buff != ')') {
-            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\"!");
+            throw IncorrectSyntax("Incorrect syntax at: \"(" + std::string(line.content.c_str() + line.idx) + "\" at line " + size_tToString(line.lineNumber) + "!");
         }
         else if (buff == ')') {
             while (line.content[line.idx] != ')') line.idx++;
@@ -522,8 +513,6 @@ void Circuit::setErrorStream(std::ostream& os)
 
 void Circuit::setSchematicFile(const std::string& path)
 {
-    std::string prev = inputFilePath;
-
     if (inputfile.is_open()) {
         inputfile.close();
     }
@@ -532,16 +521,13 @@ void Circuit::setSchematicFile(const std::string& path)
     inputfile.open(inputFilePath);
 
     if (!inputfile.is_open() && inputFilePath != "") {
-        inputFilePath = prev;
-        inputfile.open(prev);
+        inputFilePath = "";
 
-        std::string error_msg = "There is no file with name: " + path;
+        std::string error_msg = "Couldn't access file with name: " + path;
         printErrorMessage(*errorStream, "LOADING ERROR", error_msg);
     }
-    else {
-        configured = false;
-        simulated = false;
-    }
+
+    reset();
 }
 
 const std::string& Circuit::getSourceFileName() const
