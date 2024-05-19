@@ -518,7 +518,7 @@ void Circuit::setSchematicFile(const std::string& path)
     }
 
     inputFilePath = path;
-    inputfile.open(inputFilePath);
+    inputfile.open(inputFilePath, std::ios::in);
 
     if (!inputfile.is_open() && inputFilePath != "") {
         inputFilePath = "";
