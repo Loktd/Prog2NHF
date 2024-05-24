@@ -336,7 +336,7 @@ int main() {
                     EXPECT_EQ(false, circuit.getLampSignal(3 + j).getValue());
             }
         }
-}END;
+    }END;
 #endif
 #ifndef CPORTA
     App application;
