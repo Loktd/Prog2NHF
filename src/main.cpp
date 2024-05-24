@@ -4,7 +4,9 @@
 #include "Menu.h"
 
 #include "../test/memtrace.h"
+#ifdef CPORTA
 #include "../test/gtest_lite.h"
+#endif
 
 #ifdef CPORTA
 // Segédfüggvény, csak az error message-ek kihámozására kell
@@ -334,7 +336,7 @@ int main() {
                     EXPECT_EQ(false, circuit.getLampSignal(3 + j).getValue());
             }
         }
-    }END;
+}END;
 #endif
 #ifndef CPORTA
     App application;

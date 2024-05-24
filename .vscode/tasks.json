@@ -3,7 +3,7 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "TEST",
+            "label": "FINAL",
             "command": "c:\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
@@ -49,7 +49,6 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-DMEMTRACE",
-                "-DCPORTA",
                 "-g",
                 "Pin.cpp",
                 "InputPin.cpp",
