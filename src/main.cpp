@@ -3,14 +3,15 @@
 #include "Circuit.h"
 #include "Menu.h"
 
-#include "../test/memtrace.h"
+#include "memtrace.h"
 #ifdef CPORTA
-#include "../test/gtest_lite.h"
+#include "gtest_lite.h"
 #endif
 
 #ifdef CPORTA
 // Segédfüggvény, csak az error message-ek kihámozására kell
-void ERROR_EXPECT_CHECK_STR(std::string& expected_error_message, std::istream& error_stream, size_t line_number) {
+void ERROR_EXPECT_CHECK_STR(std::string& expected_error_message, std::istream& error_stream, size_t line_number)
+{
     std::string error_message;
     for (size_t i = 0; i < line_number; i++)
         std::getline(error_stream, error_message);
@@ -20,9 +21,21 @@ void ERROR_EXPECT_CHECK_STR(std::string& expected_error_message, std::istream& e
 }
 #endif
 
-int main() {
+int main()
+{
 #ifdef CPORTA
-    TEST(SANITY, KonfigAllitas) {
+    const char* badsyntax_path = "../test/BadSyntax.dat";
+    const char* comparator_path = "../test/Comparator.dat";
+    const char* decoder_path = "../test/Decoder.dat";
+    const char* fivetoone_path = "../test/FiveToOne.dat";
+    const char* gates_path = "../test/Gates.dat";
+    const char* isolated_path = "../test/Isolated.dat";
+    const char* multiplexer_path = "../test/Multiplexer.dat";
+    const char* peripherals_path = "../test/Peripherals.dat";
+    const char* shortcircuit_path = "../test/ShortCircuit.dat";
+
+    TEST(SANITY, KonfigAllitas)
+    {
         Circuit circuit;
         std::stringstream error_stream;
         std::stringstream output;
@@ -31,32 +44,36 @@ int main() {
 
         EXPECT_STREQ("", circuit.getSourceFileName().c_str());
 
-        circuit.setSchematicFile("Gates.dat");
-        EXPECT_STREQ("Gates.dat", circuit.getSourceFileName().c_str());
+        circuit.setSchematicFile(gates_path);
+        EXPECT_STREQ(gates_path, circuit.getSourceFileName().c_str());
 
-        circuit.setSchematicFile("Peripherals.dat");
-        EXPECT_STREQ("Peripherals.dat", circuit.getSourceFileName().c_str());
+        circuit.setSchematicFile(peripherals_path);
+        EXPECT_STREQ(peripherals_path, circuit.getSourceFileName().c_str());
 
         circuit.setSchematicFile("I_DONT_EXIST.dat");
         EXPECT_STREQ("", circuit.getSourceFileName().c_str());
         EXPECT_STRNE("", error_stream.str().c_str());
-    }END;
+    }
+    END;
 
-    TEST(SANITY, Masolas) {
+    TEST(SANITY, Masolas)
+    {
         Circuit circuit1;
-        circuit1.setSchematicFile("Gates.dat");
+        circuit1.setSchematicFile(gates_path);
 
         Circuit circuit2(circuit1);
         EXPECT_EQ(circuit1.getSourceFileName(), circuit2.getSourceFileName());
 
-        circuit2.setSchematicFile("Peripherals.dat");
+        circuit2.setSchematicFile(peripherals_path);
         EXPECT_NE(circuit1.getSourceFileName(), circuit2.getSourceFileName());
 
         circuit1 = circuit2;
         EXPECT_EQ(circuit1.getSourceFileName(), circuit2.getSourceFileName());
-    }END;
+    }
+    END;
 
-    TEST(SANITY, ErrorAllitas) {
+    TEST(SANITY, ErrorAllitas)
+    {
         Circuit circuit;
         std::stringstream error;
         std::stringstream output;
@@ -66,11 +83,13 @@ int main() {
         EXPECT_THROW(circuit.simulate(output), ConfigurationError);
         EXPECT_STREQ("", output.str().c_str());
         EXPECT_STRNE("", error.str().c_str());
-    }END;
+    }
+    END;
 
-    TEST(COMPONENT_CHECK, Kapuk) {
+    TEST(COMPONENT_CHECK, Kapuk)
+    {
         Circuit circuit;
-        circuit.setSchematicFile("Gates.dat");
+        circuit.setSchematicFile(gates_path);
 
         std::stringstream error;
         circuit.setErrorStream(error);
@@ -89,7 +108,8 @@ int main() {
         Signal GATE_NOT_EXPECTED_VALUES[4] = { true, false, true, false };
         Signal GATE_WIRE_EXPECTED_VALUES[4] = { false, false, true, true };
 
-        for (size_t i = 0; i < 4; i++) {
+        for (size_t i = 0; i < 4; i++)
+        {
             circuit.setSource(1, SOURCE_1_SIGNALS[i]);
             circuit.setSource(2, SOURCE_2_SIGNALS[i]);
             circuit.simulate(output);
@@ -103,13 +123,15 @@ int main() {
             EXPECT_EQ(GATE_NOT_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(9).getValue());
             EXPECT_EQ(GATE_WIRE_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(10).getValue());
         }
-    }END;
+    }
+    END;
 
-    TEST(COMPONENT_CHECK, Periferiak) {
+    TEST(COMPONENT_CHECK, Periferiak)
+    {
         Circuit circuit;
         std::stringstream output;
 
-        circuit.setSchematicFile("Peripherals.dat");
+        circuit.setSchematicFile(peripherals_path);
 
         Signal SOURCE_1_SIGNALS[] = { false, true, false, true };
         Signal SOURCE_4_SIGNALS[] = { true, true, true, true };
@@ -122,7 +144,8 @@ int main() {
         Signal LAMP_3_EXPECTED_VALUES[] = { false, false, false, true };
         Signal LAMP_7_EXPECTED_VALUES[] = { false, false, false, true };
 
-        for (size_t i = 0; i < 4; i++) {
+        for (size_t i = 0; i < 4; i++)
+        {
             circuit.setSource(1, SOURCE_1_SIGNALS[i]);
             circuit.setSource(4, SOURCE_4_SIGNALS[i]);
 
@@ -141,9 +164,11 @@ int main() {
             EXPECT_EQ(LAMP_3_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(3).getValue());
             EXPECT_EQ(LAMP_7_EXPECTED_VALUES[i].getValue(), circuit.getLampSignal(7).getValue());
         }
-    }END;
+    }
+    END;
 
-    TEST(EXCEPTIONS, Konfiguracios_Kivetelek) {
+    TEST(EXCEPTIONS, Konfiguracios_Kivetelek)
+    {
         Circuit circuit;
         std::stringstream error_stream;
         std::stringstream output;
@@ -157,30 +182,34 @@ int main() {
         EXPECT_THROW(circuit.getSourceSignal(0), ConfigurationError);
         EXPECT_THROW(circuit.isSwitchClosed(0, 0), ConfigurationError);
         EXPECT_THROW(circuit.getLampSignal(0), ConfigurationError);
-    }END;
+    }
+    END;
 
-    TEST(EXCEPTIONS, Periferia_Kivetelek) {
+    TEST(EXCEPTIONS, Periferia_Kivetelek)
+    {
         Circuit circuit;
         std::stringstream error_stream;
         std::stringstream output;
 
         circuit.setErrorStream(error_stream);
-        circuit.setSchematicFile("Peripherals.dat");
+        circuit.setSchematicFile(peripherals_path);
 
         EXPECT_THROW(circuit.setSource(0, Signal(true)), MatchingComponentNotFound);
         EXPECT_THROW(circuit.setSwitch(0, 0, true), MatchingComponentNotFound);
         EXPECT_THROW(circuit.getSourceSignal(0), MatchingComponentNotFound);
         EXPECT_THROW(circuit.isSwitchClosed(0, 0), MatchingComponentNotFound);
         EXPECT_THROW(circuit.getLampSignal(0), MatchingComponentNotFound);
-    }END;
+    }
+    END;
 
-    TEST(ERRORS, Helytelen_Szintaxis) {
+    TEST(ERRORS, Helytelen_Szintaxis)
+    {
         Circuit circuit;
         std::stringstream output;
         std::stringstream error;
 
         circuit.setErrorStream(error);
-        circuit.setSchematicFile("BadSyntax.dat");
+        circuit.setSchematicFile(badsyntax_path);
 
         EXPECT_THROW(circuit.simulate(output), ConfigurationError);
 
@@ -194,34 +223,40 @@ int main() {
             "Incorrect syntax at: \"(4err) (5) (6) (7) (8) (9)\" at line 15!",
         };
 
-        for (size_t i = 0; i < error_count; i++) {
+        for (size_t i = 0; i < error_count; i++)
+        {
             ERROR_EXPECT_CHECK_STR(EXPECTED[i], error, 4);
         }
-    }END;
+    }
+    END;
 
-    TEST(ERRORS, Szimulalatlan_Elemek) {
+    TEST(ERRORS, Szimulalatlan_Elemek)
+    {
         Circuit circuit;
         std::stringstream output;
         std::stringstream error;
 
-        circuit.setSchematicFile("Isolated.dat");
+        circuit.setSchematicFile(isolated_path);
         circuit.setErrorStream(error);
         EXPECT_THROW(circuit.simulate(output), ConfigurationError);
 
         const size_t expected_count = 7;
         size_t EXPECTED[expected_count] = { 2, 3, 8, 9, 10, 11, 13 };
-        for (size_t i = 0; i < expected_count; i++) {
+        for (size_t i = 0; i < expected_count; i++)
+        {
             std::string expected_message = "Node " + size_tToString(EXPECTED[i]) + " is unsimulated (isolated or self-referential)...";
             ERROR_EXPECT_CHECK_STR(expected_message, error, 4);
         }
-    }END;
+    }
+    END;
 
-    TEST(ERRORS, RovidZar) {
+    TEST(ERRORS, RovidZar)
+    {
         Circuit circuit;
         std::stringstream output;
         std::stringstream error;
 
-        circuit.setSchematicFile("ShortCircuit.dat");
+        circuit.setSchematicFile(shortcircuit_path);
         circuit.setErrorStream(error);
 
         circuit.setSwitch(1, 2, true);
@@ -235,78 +270,92 @@ int main() {
 
         circuit.setSource(1, Signal(true));
         circuit.setSwitch(1, 2, false);
-        for (size_t i = 0; i < 2; i++) {
+        for (size_t i = 0; i < 2; i++)
+        {
             circuit.setSource(5, Signal(SOURCE_5_SIGNALS[i]));
             circuit.setSource(6, Signal(SOURCE_6_SIGNALS[i]));
             circuit.simulate(output);
             std::string expected = "Shortcircuit from looping back at node " + size_tToString(EXPECTED_IDS[i]) + "!";
             ERROR_EXPECT_CHECK_STR(expected, output, 4);
         }
-    }END;
+    }
+    END;
 
-    TEST(COMLEX_CIRCUITS, Ot_Bemenet) {
+    TEST(COMLEX_CIRCUITS, Ot_Bemenet)
+    {
         Circuit circuit;
         std::stringstream error;
         std::stringstream output;
 
-        circuit.setSchematicFile("FiveToOne.dat");
+        circuit.setSchematicFile(fivetoone_path);
         circuit.setErrorStream(error);
 
         bool EXPECTED_LAMP_STATE[5] = { true, true, true, true, false };
 
-        for (size_t i = 0; i < 5; i++) {
+        for (size_t i = 0; i < 5; i++)
+        {
             circuit.setSource(i + 1, Signal(true));
             circuit.simulate(output);
             EXPECT_EQ(EXPECTED_LAMP_STATE[i], circuit.getLampSignal(6).getValue());
         }
-    }END;
+    }
+    END;
 
-    TEST(COMPLEX_CIRCUITS, Comparator) {
+    TEST(COMPLEX_CIRCUITS, Comparator)
+    {
         Circuit circuit;
         std::stringstream error;
         std::stringstream output;
 
-        circuit.setSchematicFile("Comparator.dat");
+        circuit.setSchematicFile(comparator_path);
         circuit.setErrorStream(error);
 
-        for (size_t i = 0; i < 16; i++) {
+        for (size_t i = 0; i < 16; i++)
+        {
             circuit.setSource(1, Signal(i & 1));
             circuit.setSource(2, Signal(i & 2));
             circuit.setSource(3, Signal(i & 4));
             circuit.setSource(4, Signal(i & 8));
 
-            for (size_t j = 0; j < 16; j++) {
+            for (size_t j = 0; j < 16; j++)
+            {
                 circuit.setSource(5, Signal(j & 1));
                 circuit.setSource(6, Signal(j & 2));
                 circuit.setSource(7, Signal(j & 4));
                 circuit.setSource(8, Signal(j & 8));
                 circuit.simulate(output);
 
-                if (j != i) {
+                if (j != i)
+                {
                     EXPECT_EQ(false, circuit.getLampSignal(13).getValue());
                 }
-                else {
+                else
+                {
                     EXPECT_EQ(true, circuit.getLampSignal(13).getValue());
                 }
             }
         }
-    }END;
+    }
+    END;
 
-    TEST(COMPLEX_CIRCUITS, Multiplexer) {
+    TEST(COMPLEX_CIRCUITS, Multiplexer)
+    {
         Circuit circuit;
         std::stringstream error;
         std::stringstream output;
 
-        circuit.setSchematicFile("Multiplexer.dat");
+        circuit.setSchematicFile(multiplexer_path);
         circuit.setErrorStream(error);
 
-        for (size_t i = 0; i < 16; i++) {
+        for (size_t i = 0; i < 16; i++)
+        {
             circuit.setSource(1, Signal(i & 1));
             circuit.setSource(2, Signal(i & 2));
             circuit.setSource(3, Signal(i & 4));
             circuit.setSource(4, Signal(i & 8));
 
-            for (size_t j = 0; j < 4; j++) {
+            for (size_t j = 0; j < 4; j++)
+            {
                 circuit.setSource(5, Signal(j & 1));
                 circuit.setSource(6, Signal(j & 2));
 
@@ -314,33 +363,39 @@ int main() {
                 EXPECT_EQ(circuit.getSourceSignal(j + 1).getValue(), circuit.getLampSignal(15).getValue());
             }
         }
-    }END;
+    }
+    END;
 
-    TEST(COMPLEX_CIRCUITS, Decoder) {
+    TEST(COMPLEX_CIRCUITS, Decoder)
+    {
         Circuit circuit;
         std::stringstream error;
         std::stringstream output;
 
-        circuit.setSchematicFile("Decoder.dat");
+        circuit.setSchematicFile(decoder_path);
         circuit.setErrorStream(error);
 
-        for (size_t i = 0; i < 4; i++) {
+        for (size_t i = 0; i < 4; i++)
+        {
             circuit.setSource(1, Signal(i & 1));
             circuit.setSource(2, Signal(i & 2));
             circuit.simulate(output);
 
-            for (size_t j = 0; j < 4; j++) {
+            for (size_t j = 0; j < 4; j++)
+            {
                 if (i == j)
                     EXPECT_EQ(true, circuit.getLampSignal(3 + j).getValue());
                 else
                     EXPECT_EQ(false, circuit.getLampSignal(3 + j).getValue());
             }
         }
-    }END;
+    }
+    END;
 #endif
 #ifndef CPORTA
     App application;
-    while (application.keepRunning()) {
+    while (application.keepRunning())
+    {
         application.display();
         application.handleInput();
     }

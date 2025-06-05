@@ -5,7 +5,7 @@
 #include "InputPin.h"
 #include "Component.h"
 #include "Exceptions.hpp"
-#include "../test/memtrace.h"
+#include "memtrace.h"
 
 class InputPin;
 class OutputComponent;

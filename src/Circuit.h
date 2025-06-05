@@ -16,7 +16,7 @@
 #include "Switch.h"
 #include "Lamp.h"
 
-#include "../test/memtrace.h"
+#include "memtrace.h"
 
 #include <iostream>
 #include <fstream>

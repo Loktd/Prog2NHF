@@ -264,7 +264,7 @@ void App::setSwitch()
 
 // Publikus tagfüggvények
 
-App::App() : run(true), state(START), simulation_os(&std::cout) {}
+App::App() : state(START), run(true), simulation_os(&std::cout) {}
 
 bool App::keepRunning() const
 {

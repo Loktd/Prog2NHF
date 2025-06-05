@@ -3,7 +3,7 @@
 
 #include "InputComponent.h"
 #include "OutputPin.h"
-#include "../test/memtrace.h"
+#include "memtrace.h"
 
 class Node : public InputComponent {
     /**

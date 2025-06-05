@@ -3,7 +3,7 @@
 
 #include "OutputComponent.h"
 #include <iostream>
-#include "../test/memtrace.h"
+#include "memtrace.h"
 
 
 class Source : public OutputComponent {

@@ -1,7 +1,7 @@
 #ifndef _SIGNAL_H
 #define _SIGNAL_H
 
-#include "../test/memtrace.h"
+#include "memtrace.h"
 
 class Signal {
   /**

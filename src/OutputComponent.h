@@ -4,7 +4,7 @@
 #include "OutputPin.h"
 #include "Component.h"
 #include "InputComponent.h"
-#include "../test/memtrace.h"
+#include "memtrace.h"
 
 class OutputComponent : virtual public Component {
 protected:

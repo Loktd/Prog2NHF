@@ -3,3 +3,4 @@ docs/doxyOut
 .VSCodeCounter
 export
 tmp
+build

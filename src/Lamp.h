@@ -3,7 +3,7 @@
 
 #include "InputComponent.h"
 #include <iostream>
-#include "../test/memtrace.h"
+#include "memtrace.h"
 
 
 class Lamp : public InputComponent {

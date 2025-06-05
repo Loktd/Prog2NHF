@@ -3,7 +3,7 @@
 
 #include "IOComponent.h"
 #include <iostream>
-#include "../test/memtrace.h"
+#include "memtrace.h"
 
 
 class Switch : public IOComponent {
