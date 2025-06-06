@@ -20,4 +20,4 @@ A részletes felhasználói dokumentáció a docs/DigitalSimulatorDokumentacio v
 
 ## Fordítás
 
-A fordítás CMake segítségével történik, ez szükséges fordításhoz.
+A fordítás CMake segítségével történik. A fordításhoz szükséges hogy a PATH-ben megtalálható legyen a cmake, illetve a g++ fordító.
